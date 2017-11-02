@@ -60,6 +60,14 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+            address: aurimas1rimkus@gmail.com
+            sender_name: Aurimas
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
