@@ -27,7 +27,6 @@ class User extends BaseUser
         parent::__construct();
     }
 
-
     /**
      * Get id
      *
@@ -38,4 +37,3 @@ class User extends BaseUser
         return $this->id;
     }
 }
-

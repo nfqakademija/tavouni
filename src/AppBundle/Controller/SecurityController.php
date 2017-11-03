@@ -9,13 +9,9 @@ class SecurityController extends BaseSecurityController
 {
     public function loginAction(Request $request)
     {
-        if ($this->isGranted('ROLE_USER'))
-        {
+        if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('homepage');
         }
-        else
-        {
-            return parent::loginAction($request);
-        }
+        return parent::loginAction($request);
     }
 }
