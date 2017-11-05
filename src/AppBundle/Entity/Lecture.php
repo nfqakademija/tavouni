@@ -53,6 +53,13 @@ class Lecture
      */
     private $room;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="LectureDate", mappedBy="lecture"))
+     */
+    private $lectureDates;
+
 
     /**
      * Get id

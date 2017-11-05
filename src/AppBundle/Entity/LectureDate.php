@@ -29,11 +29,12 @@ class LectureDate
     private $date;
 
     /**
-     * @var int
+     * @var Lecture
      *
-     * @ORM\Column(name="lectureId", type="integer")
+     * @ORM\ManyToOne(targetEntity="Lecture", inversedBy="lectureDates", nullable=false)
+     * @ORM\JoinColumn(name="lecture_id", referencedColumnName="id")
      */
-    private $lectureId;
+    private $lecture;
 
 
     /**
@@ -71,27 +72,18 @@ class LectureDate
     }
 
     /**
-     * Set lectureId
-     *
-     * @param integer $lectureId
-     *
-     * @return LectureDate
+     * @return Lecture
      */
-    public function setLectureId($lectureId)
+    public function getLecture()
     {
-        $this->lectureId = $lectureId;
-
-        return $this;
+        return $this->lecture;
     }
 
     /**
-     * Get lectureId
-     *
-     * @return int
+     * @param Lecture $lecture
      */
-    public function getLectureId()
+    public function setLecture($lecture)
     {
-        return $this->lectureId;
+        $this->lecture = $lecture;
     }
 }
-
