@@ -30,11 +30,12 @@ class Lecture
     private $subject;
 
     /**
-     * @var int
+     * @var Lecturer
      *
-     * @ORM\Column(name="lecturerId", type="integer")
+     * @ORM\ManyToOne(targetEntity="Lecturer", inversedBy="lectures")
+     * @ORM\JoinColumn(name="lecturer_id", referencedColumnName="id", nullable=false)
      */
-    private $lecturerId;
+    private $lecturer;
 
     /**
      * @var int
@@ -59,30 +60,6 @@ class Lecture
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set lecturerId
-     *
-     * @param integer $lecturerId
-     *
-     * @return Lecture
-     */
-    public function setLecturerId($lecturerId)
-    {
-        $this->lecturerId = $lecturerId;
-
-        return $this;
-    }
-
-    /**
-     * Get lecturerId
-     *
-     * @return int
-     */
-    public function getLecturerId()
-    {
-        return $this->lecturerId;
     }
 
     /**
@@ -147,5 +124,21 @@ class Lecture
     public function setSubject($subject)
     {
         $this->subject = $subject;
+    }
+
+    /**
+     * @return Lecturer
+     */
+    public function getLecturer()
+    {
+        return $this->lecturer;
+    }
+
+    /**
+     * @param Lecturer $lecturer
+     */
+    public function setLecturer($lecturer)
+    {
+        $this->lecturer = $lecturer;
     }
 }

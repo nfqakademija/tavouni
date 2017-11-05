@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +28,13 @@ class Lecturer
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Lecture", mappedBy="lecturer")
+     */
+    private $lectures;
 
 
     /**
@@ -61,6 +69,22 @@ class Lecturer
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLectures()
+    {
+        return $this->lectures;
+    }
+
+    /**
+     * @param ArrayCollection $lectures
+     */
+    public function setLectures($lectures)
+    {
+        $this->lectures = $lectures;
     }
 }
 
