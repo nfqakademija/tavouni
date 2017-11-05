@@ -30,11 +30,12 @@ class Room
     private $no;
 
     /**
-     * @var int
+     * @var Building
      *
-     * @ORM\Column(name="buildingId", type="integer")
+     * @ORM\ManyToOne(targetEntity="Building", inversedBy="rooms")
+     * @ORM\JoinColumn(name="building_id", referencedColumnName="id")
      */
-    private $buildingId;
+    private $building;
 
     /**
      * @var ArrayCollection
@@ -79,30 +80,6 @@ class Room
     }
 
     /**
-     * Set buildingId
-     *
-     * @param integer $buildingId
-     *
-     * @return Room
-     */
-    public function setBuildingId($buildingId)
-    {
-        $this->buildingId = $buildingId;
-
-        return $this;
-    }
-
-    /**
-     * Get buildingId
-     *
-     * @return int
-     */
-    public function getBuildingId()
-    {
-        return $this->buildingId;
-    }
-
-    /**
      * @return mixed
      */
     public function getLectures()
@@ -116,5 +93,21 @@ class Room
     public function setLectures($lectures)
     {
         $this->lectures = $lectures;
+    }
+
+    /**
+     * @return Building
+     */
+    public function getBuilding()
+    {
+        return $this->building;
+    }
+
+    /**
+     * @param Building $building
+     */
+    public function setBuilding($building)
+    {
+        $this->building = $building;
     }
 }
