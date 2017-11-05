@@ -21,6 +21,7 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "ancarebeca/full-calendar-bundle": "^5.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-migrations-bundle": "^1.3",
         "doctrine/migrations": "^1.5",

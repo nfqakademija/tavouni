@@ -4,9 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d62ef01c89a5d139939301c47e012c97",
-    "content-hash": "0697243ba35216ea40e8aa832a387df1",
+    "hash": "86af10dd95ea81d99beebbb0d387f0db",
+    "content-hash": "21c4b76923570eacf2f539b21d34c6b3",
     "packages": [
+        {
+            "name": "ancarebeca/full-calendar-bundle",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ancarebeca/FullCalendarBundle.git",
+                "reference": "12096b8fe471832b35a91764729ae9c15d97eba6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ancarebeca/FullCalendarBundle/zipball/12096b8fe471832b35a91764729ae9c15d97eba6",
+                "reference": "12096b8fe471832b35a91764729ae9c15d97eba6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/symfony": "^3.1.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "AncaRebeca\\FullCalendarBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rebeca Mora Anca",
+                    "email": "anca.rebeca@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony2 integration with the library FullCalendar.js",
+            "homepage": "https://github.com/ancarebeca/FullCalendarBundle",
+            "keywords": [
+                "calendar",
+                "fullcalendar",
+                "jquery calendar",
+                "symfony2 bundle",
+                "symfony2 calendar"
+            ],
+            "time": "2017-05-01 14:35:52"
+        },
         {
             "name": "composer/ca-bundle",
             "version": "1.0.8",
