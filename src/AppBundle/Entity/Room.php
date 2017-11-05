@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,6 +35,13 @@ class Room
      * @ORM\Column(name="buildingId", type="integer")
      */
     private $buildingId;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Lecture", mappedBy="room")
+     */
+    private $lectures;
 
 
     /**
@@ -93,5 +101,20 @@ class Room
     {
         return $this->buildingId;
     }
-}
 
+    /**
+     * @return mixed
+     */
+    public function getLectures()
+    {
+        return $this->lectures;
+    }
+
+    /**
+     * @param mixed $lectures
+     */
+    public function setLectures($lectures)
+    {
+        $this->lectures = $lectures;
+    }
+}

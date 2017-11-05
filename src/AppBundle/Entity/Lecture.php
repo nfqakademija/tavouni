@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,11 +46,12 @@ class Lecture
     private $groupId;
 
     /**
-     * @var int
+     * @var Room
      *
-     * @ORM\Column(name="roomId", type="integer")
+     * @ORM\ManyToOne(targetEntity="Room", inversedBy="lectures")
+     * @ORM\JoinColumn(name="room_id", referencedColumnName="id", nullable=false)
      */
-    private $roomId;
+    private $room;
 
 
     /**
@@ -87,30 +89,6 @@ class Lecture
     }
 
     /**
-     * Set roomId
-     *
-     * @param integer $roomId
-     *
-     * @return Lecture
-     */
-    public function setRoomId($roomId)
-    {
-        $this->roomId = $roomId;
-
-        return $this;
-    }
-
-    /**
-     * Get roomId
-     *
-     * @return int
-     */
-    public function getRoomId()
-    {
-        return $this->roomId;
-    }
-
-    /**
      * @return Subject
      */
     public function getSubject()
@@ -140,5 +118,21 @@ class Lecture
     public function setLecturer($lecturer)
     {
         $this->lecturer = $lecturer;
+    }
+
+    /**
+     * @return Room
+     */
+    public function getRoom()
+    {
+        return $this->room;
+    }
+
+    /**
+     * @param Room $room
+     */
+    public function setRoom($room)
+    {
+        $this->room = $room;
     }
 }
