@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,12 @@ class Group_
      */
     private $groupNo;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Group_", mappedBy="group")
+     */
+    private $lectures;
 
     /**
      * Get id
@@ -94,4 +101,3 @@ class Group_
         return $this->groupNo;
     }
 }
-

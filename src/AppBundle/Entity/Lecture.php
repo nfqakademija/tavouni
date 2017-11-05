@@ -39,11 +39,12 @@ class Lecture
     private $lecturer;
 
     /**
-     * @var int
+     * @var Group_
      *
-     * @ORM\Column(name="groupId", type="integer")
+     * @ORM\ManyToOne(targetEntity="Group_", inversedBy="lectures")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=false)
      */
-    private $groupId;
+    private $group;
 
     /**
      * @var Room
@@ -69,30 +70,6 @@ class Lecture
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set groupId
-     *
-     * @param integer $groupId
-     *
-     * @return Lecture
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Get groupId
-     *
-     * @return int
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
     }
 
     /**
@@ -141,5 +118,21 @@ class Lecture
     public function setRoom($room)
     {
         $this->room = $room;
+    }
+
+    /**
+     * @return Group_
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param Group_ $group
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
     }
 }
