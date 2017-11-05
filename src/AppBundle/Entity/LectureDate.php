@@ -31,8 +31,8 @@ class LectureDate
     /**
      * @var Lecture
      *
-     * @ORM\ManyToOne(targetEntity="Lecture", inversedBy="lectureDates", nullable=false)
-     * @ORM\JoinColumn(name="lecture_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Lecture", inversedBy="lectureDates")
+     * @ORM\JoinColumn(name="lecture_id", referencedColumnName="id", nullable=false)
      */
     private $lecture;
 
