@@ -44,6 +44,13 @@ class Group_
     private $lectures;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Group_", mappedBy="students")
+     */
+    private $groups;
+
+    /**
      * Get id
      *
      * @return int
@@ -99,5 +106,21 @@ class Group_
     public function getGroupNo()
     {
         return $this->groupNo;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param ArrayCollection $groups
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
     }
 }
