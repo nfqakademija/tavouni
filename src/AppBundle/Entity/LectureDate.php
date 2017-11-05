@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LectureDate
  *
- * @ORM\Table(name="lecture_date")
+ * @ORM\Table(name="lecture_dates")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LectureDateRepository")
  */
 class LectureDate

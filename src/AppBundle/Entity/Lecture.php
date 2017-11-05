@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lecture
  *
- * @ORM\Table(name="lecture")
+ * @ORM\Table(name="lectures")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LectureRepository")
  */
 class Lecture
@@ -39,9 +39,9 @@ class Lecture
     private $lecturer;
 
     /**
-     * @var Group_
+     * @var Group
      *
-     * @ORM\ManyToOne(targetEntity="Group_", inversedBy="lectures")
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="lectures")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=false)
      */
     private $group;

@@ -6,12 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Group_
+ * Group
  *
- * @ORM\Table(name="group_")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Group_Repository")
+ * @ORM\Table(name="groups")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GroupRepository")
  */
-class Group_
+class Group
 {
     /**
      * @var int
@@ -39,14 +39,14 @@ class Group_
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Group_", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="group")
      */
     private $lectures;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Group_", mappedBy="students")
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="students")
      */
     private $groups;
 
@@ -65,7 +65,7 @@ class Group_
      *
      * @param string $groupType
      *
-     * @return Group_
+     * @return Group
      */
     public function setGroupType($groupType)
     {
@@ -89,7 +89,7 @@ class Group_
      *
      * @param integer $groupNo
      *
-     * @return Group_
+     * @return Group
      */
     public function setGroupNo($groupNo)
     {

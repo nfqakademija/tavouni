@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Student
  *
- * @ORM\Table(name="student")
+ * @ORM\Table(name="students")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StudentRepository")
  */
 class Student
@@ -40,7 +40,7 @@ class Student
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Group_", inversedBy="students")
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="students")
      * @ORM\JoinTable(name="groups_students")
      */
     private $groups;
