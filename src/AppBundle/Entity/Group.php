@@ -39,16 +39,16 @@ class Group
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Group", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="Student", mappedBy="group")
      */
     private $lectures;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="students")
+     * @ORM\ManyToMany(targetEntity="Student", mappedBy="groups")
      */
-    private $groups;
+    private $students;
 
     /**
      * Get id
