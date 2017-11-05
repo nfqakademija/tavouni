@@ -23,11 +23,12 @@ class Student
     private $id;
 
     /**
-     * @var int
+     * @var User
      *
-     * @ORM\Column(name="userId", type="integer")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="student")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var string
@@ -53,30 +54,6 @@ class Student
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Student
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
     }
 
     /**
@@ -117,5 +94,21 @@ class Student
     public function setGroups($groups)
     {
         $this->groups = $groups;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }

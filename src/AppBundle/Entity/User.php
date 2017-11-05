@@ -22,6 +22,13 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var Student
+     *
+     * @ORM\OneToOne(targetEntity="Student", mappedBy="user")
+     */
+    private $student;
+
     public function __construct()
     {
         parent::__construct();
@@ -35,5 +42,21 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Student
+     */
+    public function getStudent()
+    {
+        return $this->student;
+    }
+
+    /**
+     * @param Student $student
+     */
+    public function setStudent($student)
+    {
+        $this->student = $student;
     }
 }
