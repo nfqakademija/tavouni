@@ -2,4 +2,5 @@ app:
     resource: '@AppBundle/Controller/'
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-
+ancarebeca_fullcalendar:
+    resource: "@FullCalendarBundle/Resources/config/routing.yml"
