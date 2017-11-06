@@ -7,7 +7,7 @@ $(function () {
         },
         customButtons: {
             myCustomButton: {
-                text: 'Export to .ics file',
+                text: 'Eksportuoti į .ics failą',
                 click: function() {
                     window.location.replace("./calendar/download");
                 }
