@@ -61,6 +61,12 @@ class Lecture
      */
     private $lectureDates;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lecture_type", type="string")
+     */
+    private $lectureType;
 
     /**
      * Get id
@@ -121,7 +127,7 @@ class Lecture
     }
 
     /**
-     * @return Group_
+     * @return Group
      */
     public function getGroup()
     {
@@ -129,10 +135,42 @@ class Lecture
     }
 
     /**
-     * @param Group_ $group
+     * @param Group $group
      */
     public function setGroup($group)
     {
         $this->group = $group;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLectureDates()
+    {
+        return $this->lectureDates;
+    }
+
+    /**
+     * @param ArrayCollection $lectureDates
+     */
+    public function setLectureDates($lectureDates)
+    {
+        $this->lectureDates = $lectureDates;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLectureType()
+    {
+        return $this->lectureType;
+    }
+
+    /**
+     * @param string $lectureType
+     */
+    public function setLectureType($lectureType)
+    {
+        $this->lectureType = $lectureType;
     }
 }
