@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class LectureDateRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getLectureDatesByUser($id)
+    {
+        return $this->_em->createQuery("SELECT ld
+            FROM AppBundle\Entity\LectureDate ld
+            JOIN ld.lecture l
+            JOIN l.group g
+            JOIN g.students s
+            where s.id = $id
+            ")->getResult();
+    }
 }
