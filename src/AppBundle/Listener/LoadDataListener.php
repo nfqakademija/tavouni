@@ -40,10 +40,11 @@ class LoadDataListener
         $studentLectures = $this->em->getRepository('AppBundle\Entity\LectureDate')->getLectureDatesByUser($user);
         foreach($studentLectures as $lecture)
         {
-            $data = "\n".$lecture->getLecture()->getSubject()->getName()."\n".
+            $data = $lecture->getLecture()->getSubject()->getName()." - ".
                 $lecture->getLecture()->getLectureType()."\n".
                 $lecture->getLecture()->getLecturer()->getName()."\n".
-                $lecture->getLecture()->getRoom()->getBuilding()->getName()
+                $lecture->getLecture()->getRoom()->getNo()."(".
+                $lecture->getLecture()->getRoom()->getBuilding()->getName().")"
             ;
             $event = new Event($data, $lecture->getStart());
             $event->setEndDate($lecture->getEnd());
