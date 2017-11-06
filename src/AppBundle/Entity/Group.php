@@ -39,7 +39,7 @@ class Group
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Student", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="Lecture", mappedBy="group")
      */
     private $lectures;
 
