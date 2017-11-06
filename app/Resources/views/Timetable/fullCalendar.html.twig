@@ -9,6 +9,8 @@
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/Resources/public/js/timetableLogic.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/fullCalendarOverride.js') }}"></script>
 {% endblock %}
