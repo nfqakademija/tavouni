@@ -1,11 +1,23 @@
 $(function () {
     $('#calendar-holder').fullCalendar({
         header: {
-            left: 'prev, next',
+            left: 'prev, next, myCustomButton',
             center: 'title',
             right: 'month, agendaWeek, agendaDay,'
         },
+        customButtons: {
+            myCustomButton: {
+                text: 'Export to .ics file',
+                click: function() {
+                    window.location.replace("./calendar/download");
+                }
+            }
+        },
         locale: 'lt',
+        height: 'auto',
+        minTime: "08:00:00",
+        maxTime: "20:00:00",
+        weekends: false,
         lazyFetching: true,
         defaultView: 'agendaWeek',
         selectable: true,
