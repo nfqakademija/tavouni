@@ -30,6 +30,13 @@ class Building
     private $address;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string")
+     */
+    private $name;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Room", mappedBy="building")
@@ -84,5 +91,21 @@ class Building
     public function setRooms($rooms)
     {
         $this->rooms = $rooms;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }
