@@ -24,9 +24,16 @@ class LectureDate
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="start", type="datetime")
      */
-    private $date;
+    private $start;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end", type="datetime")
+     */
+    private $end;
 
     /**
      * @var Lecture
@@ -48,30 +55,6 @@ class LectureDate
     }
 
     /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return LectureDate
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
      * @return Lecture
      */
     public function getLecture()
@@ -86,4 +69,37 @@ class LectureDate
     {
         $this->lecture = $lecture;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * @param \DateTime $start
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
+     * @param \DateTime $end
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+    }
+
 }
