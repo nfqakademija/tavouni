@@ -25,16 +25,9 @@ class Group
     /**
      * @var string
      *
-     * @ORM\Column(name="groupType", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $groupType;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="groupNo", type="integer")
-     */
-    private $groupNo;
+    private $name;
 
     /**
      * @var ArrayCollection
@@ -61,66 +54,58 @@ class Group
     }
 
     /**
-     * Set groupType
-     *
-     * @param string $groupType
-     *
-     * @return Group
-     */
-    public function setGroupType($groupType)
-    {
-        $this->groupType = $groupType;
-
-        return $this;
-    }
-
-    /**
-     * Get groupType
-     *
-     * @return string
-     */
-    public function getGroupType()
-    {
-        return $this->groupType;
-    }
-
-    /**
-     * Set groupNo
-     *
-     * @param integer $groupNo
-     *
-     * @return Group
-     */
-    public function setGroupNo($groupNo)
-    {
-        $this->groupNo = $groupNo;
-
-        return $this;
-    }
-
-    /**
-     * Get groupNo
-     *
-     * @return int
-     */
-    public function getGroupNo()
-    {
-        return $this->groupNo;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-
-    /**
      * @param ArrayCollection $groups
      */
     public function setGroups($groups)
     {
         $this->groups = $groups;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLectures()
+    {
+        return $this->lectures;
+    }
+
+    /**
+     * @param ArrayCollection $lectures
+     */
+    public function setLectures($lectures)
+    {
+        $this->lectures = $lectures;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStudents()
+    {
+        return $this->students;
+    }
+
+    /**
+     * @param ArrayCollection $students
+     */
+    public function setStudents($students)
+    {
+        $this->students = $students;
     }
 }
