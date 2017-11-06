@@ -6,12 +6,10 @@
     {% block stylesheets %}
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     {% endblock %}
-
 </head>
 <body>
-<div class="jumbotron text-center">
-    <h1>Tavo uni</h1>
-    <p>Informacinė sistema tavo universitetui</p>
+<div align="center">
+    <img src={{ asset('tavouni.jpg') }}>
 </div>
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
