@@ -1,9 +1,28 @@
+{% extends 'base.html.twig' %}
 {% block body %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Tavo uni</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ path('homepage') }}">Tvarkaraštis</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>Atsijungti</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <hr align="center">
+    <h2 align="center">Tvarkaraštis</h2>
+    <hr align="center">
     {% include '@FullCalendar/Calendar/calendar.html.twig' %}
 {% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 {% endblock %}
 
 {% block javascripts %}
