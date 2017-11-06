@@ -36,19 +36,17 @@ class LoadDataListener
      */
     public function loadData(CalendarEvent $calendarEvent)
     {
-        $date = new \DateTime();
-        $date->setDate(2017, 11, 06);
-        $date->setTime(12, 0);
-        $date2 = new \DateTime();
-        $date2->setDate(2017, 11, 06);
-        $date2->setTime(14, 0);
         $user = $this->tokenStorage->getToken()->getUser()->getId();
         $studentLectures = $this->em->getRepository('AppBundle\Entity\LectureDate')->getLectureDatesByUser($user);
         foreach($studentLectures as $lecture)
         {
-            $data = "\n".$lecture->getLecture()->getSubject()->getName()."\n".$lecture->getLecture()->getSubject()->getSubjectType()."\n".$lecture->getLecture()->getLecturer()->getName();
-            $event = new Event($data, $lecture->getDate());
-            $event->setEndDate($date2);
+            $data = "\n".$lecture->getLecture()->getSubject()->getName()."\n".
+                $lecture->getLecture()->getLectureType()."\n".
+                $lecture->getLecture()->getLecturer()->getName()."\n".
+                $lecture->getLecture()->getRoom()->getBuilding()->getName()
+            ;
+            $event = new Event($data, $lecture->getStart());
+            $event->setEndDate($lecture->getEnd());
             $event->setAllDay(false);
             $calendarEvent->addEvent($event);
         }
