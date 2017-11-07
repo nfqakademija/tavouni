@@ -9,26 +9,29 @@ namespace AppBundle\Utils;
 
 use Sabre\VObject;
 
-class CalendarFileGenerator
+class CalendarFormatter
 {
-    public function generateFile($calendarDates)
+    /**
+     * @param array $calendarDates
+     * @return string
+     */
+    public function generateContent($calendarDates)
     {
-        /** @var array $calendarDates */
-        $vcalendar = $this->generateVCalendar($calendarDates);
-        $fileName = 'test.ics';
-        $file = fopen('downloads/' . $fileName, "w");
-        fwrite($file, $vcalendar->serialize());
-        fclose($file);
-        return $fileName;
+        $vCalendar = $this->generateVCalendar($calendarDates);
+        return $vCalendar->serialize();
     }
 
+    /**
+     * @param array $calendarDates
+     * @return VObject\Component\VCalendar
+     */
     private function generateVCalendar($calendarDates)
     {
-        /** @var array $calendarDates */
-        $vcalendar = new VObject\Component\VCalendar();
-        foreach($calendarDates as $calendarDate) {
-            $vcalendar->add(
-                'VEVENT', [
+        $vCalendar = new VObject\Component\VCalendar();
+        foreach ($calendarDates as $calendarDate) {
+            $vCalendar->add(
+                'VEVENT',
+                [
                     'SUMMARY' => $calendarDate->getLecture()->getSubject()->getName(),
                     'DESCRIPTION' => $calendarDate->getLecture()->getLectureType() . "\n"
                         . $calendarDate->getLecture()->getLecturer()->getName()."\n"
@@ -38,6 +41,6 @@ class CalendarFileGenerator
                 ]
             );
         }
-        return $vcalendar;
+        return $vCalendar;
     }
 }
