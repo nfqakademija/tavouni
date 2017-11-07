@@ -112,7 +112,8 @@ class Group
     {
         $students = new ArrayCollection();
     }
-    public function addStudent(Student $student) {
+    public function addStudent(Student $student)
+    {
         $students[] = $student;
     }
 }
