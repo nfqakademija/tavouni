@@ -5,16 +5,20 @@ php:
 sudo: false
 
 services:
-  - mysql
+    - mysql
 
 env:
-  - SYMFONY_VERSION="3.0.*" DB=mysql
+    - SYMFONY_VERSION="3.0.*" DB=mysql
 
 before-install:
-  - composer self-update
+    - composer self-update
 
 install:
-  - composer install
-  - cp app/config/parameters.yml.dist app/config/parameters.yml
-  - php bin/console doctrine:database:create --env=test
-  - php bin/console doctrine:schema:create --env=test
+    - composer install
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - php bin/console doctrine:database:create --env=test
+    - php bin/console doctrine:schema:create --env=test
+
+script:
+    - vendor/bin/phpcs -p --colors --standard=PSR2 ./src
+    - vendor/bin/phpmd ./src xml cleancode
