@@ -38,8 +38,7 @@ class LoadDataListener
     {
         $user = $this->tokenStorage->getToken()->getUser()->getId();
         $studentLectures = $this->em->getRepository('AppBundle\Entity\LectureDate')->getLectureDatesByUser($user);
-        foreach($studentLectures as $lecture)
-        {
+        foreach ($studentLectures as $lecture) {
             $data = $lecture->getLecture()->getSubject()->getName()." - ".
                 $lecture->getLecture()->getLectureType()."\n".
                 $lecture->getLecture()->getLecturer()->getName()."\n".

@@ -87,4 +87,3 @@ class Lecturer
         $this->lectures = $lectures;
     }
 }
-
