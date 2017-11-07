@@ -101,5 +101,4 @@ class LectureDate
     {
         $this->end = $end;
     }
-
 }
