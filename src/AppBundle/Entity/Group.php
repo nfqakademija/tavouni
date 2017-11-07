@@ -108,4 +108,11 @@ class Group
     {
         $this->students = $students;
     }
+    public function __construct()
+    {
+        $students = new ArrayCollection();
+    }
+    public function addStudent(Student $student) {
+        $students[] = $student;
+    }
 }
