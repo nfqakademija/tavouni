@@ -17,7 +17,7 @@ class LectureDateRepository extends \Doctrine\ORM\EntityRepository
             JOIN ld.lecture l
             JOIN l.group g
             JOIN g.students s
-            where s.id = $id
-            ")->getResult();
+            where s.id = :id
+            ")->setParameter('id', $id)->getResult();
     }
 }

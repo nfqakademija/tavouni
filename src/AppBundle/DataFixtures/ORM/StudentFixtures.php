@@ -32,9 +32,9 @@ class StudentFixtures extends Fixture
     }
     public function getDependencies()
     {
-        return array(
+        return [
             UserFixtures::class,
             GroupFixtures::class
-        );
+        ];
     }
 }

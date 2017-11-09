@@ -16,7 +16,7 @@ class CalendarDownloadController extends Controller
     /**
      * @Route("/calendar/download", name="download_calendar")
      */
-    public function downloadAction(CalendarFormatter $iCalFormatter, LectureDateRepository $ldRepository )
+    public function downloadAction(CalendarFormatter $iCalFormatter, LectureDateRepository $ldRepository)
     {
         $lectureDates = $ldRepository->getLectureDatesByUser($this->getUser()->getId());
 

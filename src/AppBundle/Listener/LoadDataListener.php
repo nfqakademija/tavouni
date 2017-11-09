@@ -36,8 +36,8 @@ class LoadDataListener
      */
     public function loadData(CalendarEvent $calendarEvent)
     {
-        $user = $this->tokenStorage->getToken()->getUser()->getId();
-        $studentLectures = $this->ldRepository->getLectureDatesByUser($user);
+        $userId = $this->tokenStorage->getToken()->getUser()->getId();
+        $studentLectures = $this->ldRepository->getLectureDatesByUser($userId);
         foreach ($studentLectures as $lecture) {
             $data = $lecture->getLecture()->getSubject()->getName()." - ".
                 $lecture->getLecture()->getLectureType()."\n".

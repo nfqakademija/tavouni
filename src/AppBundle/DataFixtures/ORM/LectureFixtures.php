@@ -34,11 +34,11 @@ class LectureFixtures extends Fixture
     }
     public function getDependencies()
     {
-        return array(
+        return [
             RoomFixtures::class,
             GroupFixtures::class,
             SubjectFixtures::class,
             LecturerFixtures::class,
-        );
+        ];
     }
 }

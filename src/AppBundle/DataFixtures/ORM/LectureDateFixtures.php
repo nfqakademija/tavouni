@@ -37,8 +37,8 @@ class LectureDateFixtures extends Fixture
     }
     public function getDependencies()
     {
-        return array(
+        return [
             LectureFixtures::class,
-        );
+        ];
     }
 }

@@ -31,8 +31,8 @@ class RoomFixtures extends Fixture
     }
     public function getDependencies()
     {
-        return array(
+        return [
             BuildingFixtures::class,
-        );
+        ];
     }
 }
