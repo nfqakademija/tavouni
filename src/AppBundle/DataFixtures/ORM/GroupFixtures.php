@@ -23,16 +23,10 @@ class GroupFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $group = new Group();
-        $group->addStudent($this->getReference('StudentIgnas'));
+        //$group->addStudent($this->getReference('StudentIgnas'));
         $group->setName('PS1k');
         $manager->persist($group);
         $manager->flush();
         $this->addReference('PS1k', $group);
-    }
-    public function getDependencies()
-    {
-        return array(
-            StudentFixtures::class,
-        );
     }
 }

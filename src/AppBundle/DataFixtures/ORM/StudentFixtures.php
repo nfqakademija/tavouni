@@ -25,6 +25,7 @@ class StudentFixtures extends Fixture
         $student = new Student();
         $student->setName('Ignas');
         $student->setUser($this->getReference('UserIgnas'));
+        $student->addGroup($this->getReference('PS1k'));
         $manager->persist($student);
         $manager->flush();
         $this->addReference('StudentIgnas', $student);
@@ -33,6 +34,7 @@ class StudentFixtures extends Fixture
     {
         return array(
             UserFixtures::class,
+            GroupFixtures::class
         );
     }
 }

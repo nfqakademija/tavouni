@@ -45,6 +45,10 @@ class Student
      */
     private $groups;
 
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -94,6 +98,11 @@ class Student
     public function setGroups($groups)
     {
         $this->groups = $groups;
+    }
+
+    public function addGroup(Group $group)
+    {
+        $this->groups[] = $group;
     }
 
     /**
