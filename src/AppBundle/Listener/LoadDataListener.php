@@ -21,12 +21,12 @@ class LoadDataListener
     /**
      * @var EntityManager
      */
-    private $em;
+    private $ldRepository;
     private $tokenStorage;
 
-    public function __construct(EntityManager $em, TokenStorage $tokenStorage)
+    public function __construct(LectureDateRepository $ldRepository, TokenStorage $tokenStorage)
     {
-        $this->em = $em;
+        $this->ldRepository = $ldRepository;
         $this->tokenStorage = $tokenStorage;
     }
     /**
@@ -37,7 +37,7 @@ class LoadDataListener
     public function loadData(CalendarEvent $calendarEvent)
     {
         $user = $this->tokenStorage->getToken()->getUser()->getId();
-        $studentLectures = $this->em->getRepository('AppBundle\Entity\LectureDate')->getLectureDatesByUser($user);
+        $studentLectures = $this->ldRepository->getLectureDatesByUser($user);
         foreach ($studentLectures as $lecture) {
             $data = $lecture->getLecture()->getSubject()->getName()." - ".
                 $lecture->getLecture()->getLectureType()."\n".

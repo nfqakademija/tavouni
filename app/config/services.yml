@@ -37,3 +37,7 @@ services:
         class: AppBundle\Listener\LoadDataListener
         tags:
                 - {name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }
+    AppBundle\Repository\LectureDateRepository:
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\LectureDate
