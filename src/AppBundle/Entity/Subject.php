@@ -44,6 +44,20 @@ class Subject
     private $lectures;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="subject")
+     */
+    private $posts;
+
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
+
+
+    /**
      * @return ArrayCollection
      */
     public function getLectures()
@@ -116,5 +130,29 @@ class Subject
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param mixed $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
+    /**
+     * @param Post $post
+     */
+    public function addPost(Post $post)
+    {
+        $this->posts[] = $post;
     }
 }
