@@ -43,6 +43,14 @@ class Lecturer
      */
     private $posts;
 
+    /**
+     * @var User
+     *
+     * @ORM\OneToOne(targetEntity="User", inversedBy="lecturer")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
 
     public function __construct()
     {
@@ -122,5 +130,21 @@ class Lecturer
     public function addPost(Post $post)
     {
         $this->posts[] = $post;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }

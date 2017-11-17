@@ -29,6 +29,13 @@ class User extends BaseUser
      */
     private $student;
 
+    /**
+     * @var Lecturer
+     *
+     * @ORM\OneToOne(targetEntity="Lecturer", mappedBy="user")
+     */
+    private $lecturer;
+
     public function __construct()
     {
         parent::__construct();
@@ -58,5 +65,21 @@ class User extends BaseUser
     public function setStudent($student)
     {
         $this->student = $student;
+    }
+
+    /**
+     * @return Lecturer
+     */
+    public function getLecturer()
+    {
+        return $this->lecturer;
+    }
+
+    /**
+     * @param Lecturer $lecturer
+     */
+    public function setLecturer($lecturer)
+    {
+        $this->lecturer = $lecturer;
     }
 }
