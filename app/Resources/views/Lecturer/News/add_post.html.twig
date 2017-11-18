@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme postForm 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1>Pridėti naujieną</h1>
+
+    <div class="container">
+        {{ form_start(postForm) }}
+        {{ form_widget(postForm) }}
+        {{ form_end(postForm) }}
+    </div>
+{% endblock %}
+
