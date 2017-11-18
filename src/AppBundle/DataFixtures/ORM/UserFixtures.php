@@ -25,10 +25,21 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setUsername('Ignas');
         $user->setPlainPassword('test');
+        $user->setRoles(['ROLE_STUDENT']);
         $user->setEnabled(true);
         $user->setEmail('test@asd.asd');
         $manager->persist($user);
         $manager->flush();
         $this->addReference('UserIgnas', $user);
+
+        $user = new User();
+        $user->setUsername('lecturer');
+        $user->setPlainPassword('test');
+        $user->setRoles(['ROLE_LECTURER']);
+        $user->setEnabled(true);
+        $user->setEmail('test2@asd.asd');
+        $manager->persist($user);
+        $manager->flush();
+        $this->addReference('lecturer1', $user);
     }
 }
