@@ -24,8 +24,15 @@ class LecturerFixtures extends Fixture
     {
         $lecturer = new Lecturer();
         $lecturer->setName('Antanas Mitašiūnas');
+        $lecturer->setUser($this->getReference('lecturer1'));
         $manager->persist($lecturer);
         $manager->flush();
         $this->addReference('Mitasiunas', $lecturer);
+    }
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }
