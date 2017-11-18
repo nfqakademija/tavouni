@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Tavo uni</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ path('lecturer') }}">Pagrindinis</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>Atsijungti</a></li>
+            </ul>
+        </div>
+    </nav>
+    {% include '@FullCalendar/Calendar/calendar.html.twig' %}
+{% endblock %}
