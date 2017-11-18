@@ -13,9 +13,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if ($this->isGranted('ROLE_LECTURER')) {
+            return $this->redirectToRoute('lecturer');
+        }
+        if ($this->isGranted('ROLE_STUDENT')) {
+            return $this->redirectToRoute('student');
+        }
         // replace this example code with whatever you need
-        return $this->render(
-            'Timetable/fullCalendar.html.twig'
-        );
+//        return $this->render(
+//            'Timetable/fullCalendar.html.twig'
+//        );
     }
 }
