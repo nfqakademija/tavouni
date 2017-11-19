@@ -25,9 +25,4 @@ class PostType extends AbstractType
             'data_class' => Post::class
         ]);
     }
-
-    public function getBlockPrefix()
-    {
-        return 'app_bundle_post_type';
-    }
 }
