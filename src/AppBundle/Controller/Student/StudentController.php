@@ -22,7 +22,7 @@ class StudentController extends Controller
     public function indexAction(Request $request, TokenStorage $tokenStorage, PostRepository $postRepository)
     {
         $id = $tokenStorage->getToken()->getUser()->getId();
-        $posts = $postRepository->getPostsForStudent(21);
+        $posts = $postRepository->getPostsForStudent($id);
         // replace this example code with whatever you need
         return $this->render(
             'Student/student_homepage.html.twig', [
