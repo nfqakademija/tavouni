@@ -37,11 +37,19 @@ services:
         class: AppBundle\Listener\LoadDataListener
         tags:
                 - {name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }
+
     AppBundle\Repository\LectureDateRepository:
         factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
         arguments:
             - AppBundle\Entity\LectureDate
+
     AppBundle\Repository\PostRepository:
             factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
             arguments:
                 - AppBundle\Entity\Post
+
+    security.authentication.success_handler:
+        class:  AppBundle\Authentication\AuthenticationSuccessHandler
+        arguments:  ["@security.http_utils", {}]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
