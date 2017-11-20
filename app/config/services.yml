@@ -41,3 +41,7 @@ services:
         factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
         arguments:
             - AppBundle\Entity\LectureDate
+    AppBundle\Repository\PostRepository:
+            factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+            arguments:
+                - AppBundle\Entity\Post
