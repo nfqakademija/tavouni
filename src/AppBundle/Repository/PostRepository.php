@@ -19,4 +19,17 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             WHERE l.id = :id
             ")->setParameter('id', $lecturer->getId())->getResult();
     }
+
+    public function getPostsForStudent($id) {
+        return $this->_em->createQuery("SELECT p
+            FROM AppBundle\Entity\Post p
+            JOIN p.author a
+            JOIN p.subject su
+            JOIN su.lectures l
+            JOIN l.group g
+            JOIN g.students st
+            JOIN st.user u
+            WHERE u.id = :id
+            ")->setParameter('id', $id)->getResult();
+    }
 }
