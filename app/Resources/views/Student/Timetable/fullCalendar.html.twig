@@ -6,7 +6,10 @@
                 <a class="navbar-brand">Tavo uni</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('homepage') }}">Tvarkaraštis</a></li>
+                <li><a href="{{ path('student') }}">Pagrindinis</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ path('timetable') }}">Tvarkaraštis</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>Atsijungti</a></li>
