@@ -15,8 +15,7 @@ class PostType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('publishedAt')
-            ->add('add', SubmitType::class);
+            ->add('publishedAt');
     }
 
     public function configureOptions(OptionsResolver $resolver)
