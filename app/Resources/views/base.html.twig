@@ -12,7 +12,11 @@
 <div align="center">
     <img src={{ asset('tavouni.jpg') }}>
 </div>
-{% block body %}{% endblock %}
+{% if app.user != null %}{{ menu(app.user, app.request.get('_route')) | raw}}{% endif%}
+
+{% block body %}
+
+{% endblock %}
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

@@ -1,4 +1,4 @@
-{% extends 'Student/student_base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -7,8 +7,7 @@
 
 {% endblock %}
 
-{% set active = "student_index" %}
-{% block content %}
+{% block body %}
     <div class="container">
         <div class="row">
             <div class="col-md-8">
