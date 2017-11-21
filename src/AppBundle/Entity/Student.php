@@ -45,9 +45,18 @@ class Student
      */
     private $groups;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Post", inversedBy="seenBy")
+     * @ORM\JoinTable(name="seen_posts_students")
+     */
+    private $seenPosts;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
+        $this->seenPosts = new ArrayCollection();
     }
 
     /**
@@ -119,5 +128,21 @@ class Student
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSeenPosts(): ArrayCollection
+    {
+        return $this->seenPosts;
+    }
+
+    /**
+     * @param Post $post
+     */
+    public function addSeenPost(Post $post)
+    {
+        $this->seenPosts[] = $post;
     }
 }

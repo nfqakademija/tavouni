@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,6 +59,12 @@ class Post
      */
     private $author;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Student", mappedBy="seenPosts")
+     */
+    private $seenByStudents;
 
     /**
      * Get id
@@ -171,5 +178,21 @@ class Post
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSeenByStudents(): ArrayCollection
+    {
+        return $this->seenByStudents;
+    }
+
+    /**
+     * @param Student $student
+     */
+    public function addSeenByStudent(Student $student)
+    {
+        $this->seenByStudents[] = $student;
     }
 }
