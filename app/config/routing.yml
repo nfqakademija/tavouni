@@ -2,5 +2,8 @@ app:
     resource: '@AppBundle/Controller/'
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+fos_user_security_login:
+    path:      /
+    defaults:  { _controller: FOSUserBundle:Security:login, _method: POST }
 ancarebeca_fullcalendar:
     resource: "@FullCalendarBundle/Resources/config/routing.yml"

@@ -22,10 +22,9 @@ security:
             anonymous:    true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /_wdt/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /_profiler/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/lecturer, role: ROLE_LECTURER}
         - { path: ^/student, role: ROLE_STUDENT}
-        - { path: ^/, role: [ROLE_STUDENT, ROLE_LECTURER] }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
