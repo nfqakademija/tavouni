@@ -30,6 +30,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             JOIN g.students st
             JOIN st.user u
             WHERE u.id = :id
+            ORDER BY p.publishedAt DESC
             ")->setParameter('id', $id)->getResult();
     }
 }
