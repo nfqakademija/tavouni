@@ -62,7 +62,8 @@ class Post
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Student", mappedBy="seenPosts")
+     * @ORM\ManyToMany(targetEntity="Student")
+     * @ORM\JoinTable(name="seen_posts_students")
      */
     private $seenByStudents;
 
