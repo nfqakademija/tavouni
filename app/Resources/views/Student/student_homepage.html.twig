@@ -1,23 +1,46 @@
 {% extends 'Student/student_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
+{% endblock %}
+
 {% set active = "student" %}
 {% block content %}
-    <h2>Naujienos</h2>
-    <div class="Posts">
-    {% for post in posts %}
-        <div class="well">
-            <div class="panel-heading" >
-                <h2 class="Post-title">{{ post.title }}</h2>
-                <span class="text">{{ post.publishedAt|date('Y-m-d H:i') }}</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 align="center">Naujienos</h1>
+                <div class="Posts">
+                    {% for post in posts %}
+                        <div class="well">
+                            <div class="panel-heading" >
+                                <h2 class="Post-title">{{ post.title }}</h2>
+                                <span class="text">{{ post.publishedAt|date('Y-m-d H:i') }}</span>
+                            </div>
+                            {#<div class="text-muted"> {{ post.publishedAt|date('Y-m-d H:i') }}</div>#}
+                            <div class="well Post-content">
+                                <p class="panel-content text-primary Post-text">{{ post.content }}</p>
+                            </div>
+                            <div class="panel-footer">
+                                {{ post.subject.name }}
+                                <div> {{ post.author.name }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            {#<div class="text-muted"> {{ post.publishedAt|date('Y-m-d H:i') }}</div>#}
-            <div class="well Post-content">
-                <p class="panel-content text-primary Post-text">{{ post.content }}</p>
-            </div>
-            <div class="panel-footer">
-                {{ post.subject.name }}
-                <div> {{ post.author.name }}</div>
+            <div class="col-md-4">
+                {% include '@FullCalendar/Calendar/calendar.html.twig' %}
             </div>
         </div>
-    {% endfor %}
-</div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/oneDayCalendar.js') }}"></script>
 {% endblock %}
