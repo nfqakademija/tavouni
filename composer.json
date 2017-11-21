@@ -27,7 +27,6 @@
         "doctrine/migrations": "^1.5",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/user-bundle": "^2.0",
-        "fzaninotto/faker": "^1.7",
         "incenteev/composer-parameter-handler": "^2.0",
         "phpmd/phpmd": "^2.6",
         "sabre/vobject": "^4.1",
@@ -43,7 +42,8 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.4",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "fzaninotto/faker": "^1.7"
     },
     "scripts": {
         "symfony-scripts": [
