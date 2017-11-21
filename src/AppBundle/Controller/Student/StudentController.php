@@ -37,7 +37,7 @@ class StudentController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render(
-            'Student/Timetable/fullCalendar.html.twig'
+            'Student/Timetable/student_calendar.html.twig'
         );
     }
 }
