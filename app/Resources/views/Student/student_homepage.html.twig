@@ -15,12 +15,13 @@
                     {% for post in posts %}
                         <div class="well">
                             <div class="panel-heading" >
-                                <h2 class="Post-title">{{ post.title }}</h2>
+                                <h4 class="Post-title">
+                                    <a data-toggle="collapse" href="#post-content-{{ post.id }}">{{ post.title }}</a>
+                                </h4>
                                 <span class="text">{{ post.publishedAt|date('Y-m-d H:i') }}</span>
                             </div>
-                            {#<div class="text-muted"> {{ post.publishedAt|date('Y-m-d H:i') }}</div>#}
-                            <div class="well Post-content">
-                                <p class="panel-content text-primary Post-text">{{ post.content }}</p>
+                            <div id="post-content-{{ post.id }}" class="panel-content collapse">
+                                <p class="panel-content text-primary Post-text ">{{ post.content }}</p>
                             </div>
                             <div class="panel-footer">
                                 {{ post.subject.name }}
@@ -37,6 +38,7 @@
     </div>
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
