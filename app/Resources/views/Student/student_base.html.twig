@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% set navigation_bar = [['student', 'Pagrindinis'], ['timetable', 'Tvarkaraštis']] %}
+{% block body %}
+    {% block navigation %}
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Tavo uni</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    {% for item in navigation_bar %}
+                        <li{% if item[0] == active %} class="active"{% endif%}>
+                        <a href="{{ path(item[0]) }}">{{item[1]}}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                     <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>Atsijungti</a></li>
+                </ul>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block content %}{% endblock %}
+{% endblock %}
