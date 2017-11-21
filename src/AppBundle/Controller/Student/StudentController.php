@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 class StudentController extends Controller
 {
     /**
-     * @Route("/student", name="student")
+     * @Route("/student", name="student_index")
      */
     public function indexAction(Request $request, TokenStorage $tokenStorage, PostRepository $postRepository)
     {
@@ -31,7 +31,7 @@ class StudentController extends Controller
         );
     }
     /**
-     * @Route("/timetable", name="timetable")
+     * @Route("/student/timetable", name="student_timetable")
      */
     public function timetableAction(Request $request)
     {

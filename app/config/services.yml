@@ -53,3 +53,8 @@ services:
         arguments:  ["@security.http_utils", {}]
         tags:
             - { name: 'monolog.logger', channel: 'security' }
+
+    AppBundle\Repository\LectureRepository:
+                factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+                arguments:
+                    - AppBundle\Entity\Lecture

@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class LecturerController extends Controller
 {
     /**
-     * @Route("/lecturer", name="lecturer")
+     * @Route("/lecturer", name="lecturer_index")
      */
     public function indexAction(Request $request)
     {

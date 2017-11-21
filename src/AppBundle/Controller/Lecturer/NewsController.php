@@ -23,7 +23,7 @@ class NewsController extends Controller
     }
 
     /**
-     * @Route("/posts", name="lecturer_posts")
+     * @Route("/posts", name="lecturer_show_posts")
      */
     public function showPostsAction()
     {
@@ -31,7 +31,7 @@ class NewsController extends Controller
     }
 
     /**
-     * @Route("/posts/new", name="lecturer_new_post")
+     * @Route("/posts/new", name="lecturer_add_post")
      */
     public function addPostAction(Request $request, Subject $subject)
     {

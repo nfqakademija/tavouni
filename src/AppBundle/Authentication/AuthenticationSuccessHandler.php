@@ -21,11 +21,11 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         if ($token->getUser()->hasRole('ROLE_LECTURER')) {
-            return new RedirectResponse('lecturer');
+            return $this->httpUtils->createRedirectResponse($request, 'lecturer_index');
         }
 
         if ($token->getUser()->hasRole('ROLE_STUDENT')) {
-            return new RedirectResponse('student');
+            return $this->httpUtils->createRedirectResponse($request, 'student_index');
         }
 
         return parent::onAuthenticationSuccess($request, $token);

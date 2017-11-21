@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class CalendarDownloadController extends Controller
 {
     /**
-     * @Route("/calendar/download", name="download_calendar")
+     * @Route("/student/timetable/download", name="student_calendar_download")
      */
     public function downloadAction(CalendarFormatter $iCalFormatter, LectureDateRepository $ldRepository)
     {

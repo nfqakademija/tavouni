@@ -9,7 +9,7 @@ $(function () {
             myCustomButton: {
                 text: 'Eksportuoti į .ics failą',
                 click: function() {
-                    window.location.replace("./calendar/download");
+                    window.location.replace("./student/timetable/download");
                 }
             }
         },
