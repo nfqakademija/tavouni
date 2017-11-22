@@ -36,19 +36,36 @@ class LoadDataListener
      */
     public function loadData(CalendarEvent $calendarEvent)
     {
-        $userId = $this->tokenStorage->getToken()->getUser()->getId();
-        $studentLectures = $this->ldRepository->getLectureDatesByUser($userId);
-        foreach ($studentLectures as $lecture) {
-            $data = $lecture->getLecture()->getSubject()->getName()." - ".
-                $lecture->getLecture()->getLectureType()."\n".
-                $lecture->getLecture()->getLecturer()->getName()."\n".
-                $lecture->getLecture()->getRoom()->getNo()."(".
-                $lecture->getLecture()->getRoom()->getBuilding()->getName().")"
-            ;
-            $event = new Event($data, $lecture->getStart());
-            $event->setEndDate($lecture->getEnd());
-            $event->setAllDay(false);
-            $calendarEvent->addEvent($event);
+        if ($this->tokenStorage->getToken()->getUser()->hasRole('ROLE_STUDENT')) {
+            $userId = $this->tokenStorage->getToken()->getUser()->getId();
+            $studentLectures = $this->ldRepository->getLectureDatesByUser($userId);
+            foreach ($studentLectures as $lecture) {
+                $data = $lecture->getLecture()->getSubject()->getName()." - ".
+                    $lecture->getLecture()->getLectureType()."\n".
+                    $lecture->getLecture()->getLecturer()->getName()."\n".
+                    $lecture->getLecture()->getRoom()->getNo()."(".
+                    $lecture->getLecture()->getRoom()->getBuilding()->getName().")"
+                ;
+                $event = new Event($data, $lecture->getStart());
+                $event->setEndDate($lecture->getEnd());
+                $event->setAllDay(false);
+                $calendarEvent->addEvent($event);
+            }
+        }
+        if ($this->tokenStorage->getToken()->getUser()->hasRole('ROLE_LECTURER')) {
+            $userId = $this->tokenStorage->getToken()->getUser()->getId();
+            $studentLectures = $this->ldRepository->getLectureDatesByLecturer($userId);
+            foreach ($studentLectures as $lecture) {
+                $data = $lecture->getLecture()->getSubject()->getName()." - ".
+                    $lecture->getLecture()->getLectureType()."\n".
+                    $lecture->getLecture()->getRoom()->getNo()."(".
+                    $lecture->getLecture()->getRoom()->getBuilding()->getName().")"
+                ;
+                $event = new Event($data, $lecture->getStart());
+                $event->setEndDate($lecture->getEnd());
+                $event->setAllDay(false);
+                $calendarEvent->addEvent($event);
+            }
         }
     }
 }
