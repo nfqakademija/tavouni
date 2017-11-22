@@ -62,7 +62,7 @@ class Lecture
     private $lectureDates;
 
     /**
-     * @var string
+     * @var LectureType
      *
      * @ORM\ManyToOne(targetEntity="LectureType")
      */
@@ -159,7 +159,7 @@ class Lecture
     }
 
     /**
-     * @return string
+     * @return LectureType
      */
     public function getLectureType()
     {
@@ -167,7 +167,7 @@ class Lecture
     }
 
     /**
-     * @param string $lectureType
+     * @param LectureType $lectureType
      */
     public function setLectureType($lectureType)
     {
