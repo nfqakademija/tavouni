@@ -8,7 +8,7 @@
         <div>
             <div class="page-header">
                 <h1 id="timeline">Naujienos</h1>
-                <a href="{{ path('lecturer_add_post', {'subject_id': subject_id})}}">Pridėti naujieną</a>
+                <a class="btn btn-success" role="button" href="{{ path('lecturer_add_post', {'subject_id': subject_id})}}">Pridėti naujieną</a>
             </div>
             <ul class="timeline">
                 {% for i, post in posts %}
