@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\Student;
 
+use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
 use Sabre\VObject\Parser\Json;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -67,5 +68,20 @@ class StudentController extends Controller
             return new Response(null, Response::HTTP_OK);
         }
         return new Response(null, Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * @Route("/grades", name="student_grades")
+     */
+    public function gradesAction(Request $request, TokenStorage $tokenStorage, GradeRepository $gradeRepository)
+    {
+        $id = $tokenStorage->getToken()->getUser()->getId();
+        $grades = $gradeRepository->getStudentGrades($id);
+        // replace this example code with whatever you need
+        return $this->render(
+            'Student/student_grades.html.twig', [
+                'grades' => $grades
+            ]
+        );
     }
 }
