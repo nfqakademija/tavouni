@@ -64,7 +64,7 @@ class Lecture
     /**
      * @var string
      *
-     * @ORM\Column(name="lecture_type", type="string")
+     * @ORM\ManyToOne(targetEntity="LectureType")
      */
     private $lectureType;
 
