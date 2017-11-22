@@ -22,7 +22,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function getPostsForStudent($id) {
-        return $this->_em->createQuery("SELECT p, a, su, l, g, st, u
+        return $this->_em->createQuery("SELECT p, a, su, l, g, st, u, se
             FROM AppBundle\Entity\Post p
             JOIN p.author a
             JOIN p.subject su
@@ -30,6 +30,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             JOIN l.group g
             JOIN g.students st
             JOIN st.user u
+            LEFT JOIN p.seenByStudents se
             WHERE u.id = :id
             ORDER BY p.publishedAt DESC
             ")->setParameter('id', $id)->getResult();
