@@ -39,6 +39,7 @@ class LectureFixtures extends Fixture
             GroupFixtures::class,
             SubjectFixtures::class,
             LecturerFixtures::class,
+            LectureTypeFixtures::class,
         ];
     }
 }
