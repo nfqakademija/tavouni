@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Post;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content');
+            ->add('content', CKEditorType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
