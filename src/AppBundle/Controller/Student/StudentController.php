@@ -14,10 +14,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
+/**
+ * @Route("/student")
+ */
 class StudentController extends Controller
 {
     /**
-     * @Route("/student", name="student_index")
+     * @Route("", name="student_index")
      */
     public function indexAction(Request $request, TokenStorage $tokenStorage, PostRepository $postRepository)
     {
@@ -30,8 +33,9 @@ class StudentController extends Controller
             ]
         );
     }
+
     /**
-     * @Route("/student/timetable", name="student_timetable")
+     * @Route("/timetable", name="student_timetable")
      */
     public function timetableAction(Request $request)
     {
