@@ -11,14 +11,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-
                     <div class="page-header">
                         <h1 id="timeline">Naujienos</h1>
                     </div>
                 <ul class="timeline">
                     {% for i, post in posts %}
                         <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
-                            <div class="timeline-badge info"><i class="glyphicon glyphicon-info-sign {%  if not (app.user.student in post.seenByStudents) %}blink{% endif %}"></i></div>
+                            <div class="timeline-badge {% if not (app.user.student in post.seenByStudents) %}info{% endif %}"><i class="glyphicon glyphicon-info-sign {%  if not (app.user.student in post.seenByStudents) %}blink{% endif %}"></i></div>
                             <div id="{{ post.id }}" class="timeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
                                 <div class="timeline-heading">
                                     <h4 class="timeline-title">
