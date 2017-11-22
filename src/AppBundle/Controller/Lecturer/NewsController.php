@@ -25,7 +25,7 @@ class NewsController extends Controller
     /**
      * @Route("/posts", name="lecturer_show_posts")
      */
-    public function showPostsAction()
+    public function showPostsAction(Subject $subject)
     {
         return $this->render(':Lecturer/News:show_posts.html.twig');
     }
@@ -43,6 +43,7 @@ class NewsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setSubject($subject);
             $post->setAuthor($this->getUser()->getLecturer());
+            $post->setPublishedAt(new \DateTime());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
