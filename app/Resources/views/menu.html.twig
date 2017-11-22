@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">Tavo uni</a>
+        </div>
+        <ul class="nav navbar-nav">
+            {% for item in menuItems %}
+                {% if item.children == [] %}
+                    <li{% if item.route == active %} class="active"{% endif%}>
+                        <a href="{{ path(item.route) }}">{{item.title}}</a>
+                    </li>
+                {% else %}
+                    <li class="dropdown {% if active == 'lecturer_show_posts' or active == 'lecturer_add_post' %}active{% endif%}">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href={{ item.route }}>{{ item.title }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for child in item.children %}
+                                <li><a href="{{ path(item.route, {(child.slug_name): child.slug_value})}}">{{ child.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif%}
+            {% endfor %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>Atsijungti</a></li>
+        </ul>
+    </div>
+</nav>
