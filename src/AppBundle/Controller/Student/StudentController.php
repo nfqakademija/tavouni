@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\Student;
 
+use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
 use Sabre\VObject\Parser\Json;
@@ -77,10 +78,27 @@ class StudentController extends Controller
     {
         $id = $tokenStorage->getToken()->getUser()->getId();
         $grades = $gradeRepository->getStudentGrades($id);
+        $subjects = [];
+        //$subject = new SubjectGrades();
+        foreach($grades as $grade) {
+            $found = false;
+            foreach($subjects as $subject) {
+                if ($grade->getAssignment()->getSubject()->getName() === $subject->getSubject()) {
+                    $subject->addGrade($grade);
+                    $found = true;
+                }
+            }
+            if (!$found) {
+                $subject = new SubjectGrades();
+                $subject->setSubject($grade->getAssignment()->getSubject()->getName());
+                $subject->addGrade($grade);
+                $subjects[] = $subject;
+            }
+        }
         // replace this example code with whatever you need
         return $this->render(
             'Student/student_grades.html.twig', [
-                'grades' => $grades
+                'subjects' => $subjects
             ]
         );
     }
