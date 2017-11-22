@@ -27,7 +27,7 @@
                                     <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ post.publishedAt|date('Y-m-d H:i') }}</small></p>
                                 </div>
                                 <div id='timeline-body-{{ post.id }}' class="timeline-body collapse">
-                                    <p>{{ post.content }}</p>
+                                    <p>{{ post.content | raw}}</p>
                                 </div>
                                 <div class="timeline-body">
                                     <p><a href= '/#'><small class="text-muted">{{ post.subject.name }}</small></a></p>
