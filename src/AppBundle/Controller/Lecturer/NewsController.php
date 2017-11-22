@@ -56,6 +56,7 @@ class NewsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
+            return $this->redirectToRoute('lecturer_show_posts', ['subject_id'=>$subject->getId()]);
         }
 
         return $this->render(
