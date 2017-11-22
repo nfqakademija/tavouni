@@ -22,3 +22,7 @@
 .timeline-panel, .timeline-badge {
     transition: background 0.5s ease-in-out;
 }
+
+a {
+    outline:none;
+}
