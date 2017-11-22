@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class GradeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getStudentGrades($id)
+    {
+        return $this->_em->createQuery("SELECT g, a, s
+            FROM AppBundle\Entity\Grade g
+            JOIN g.student s
+            JOIN g.assignment a
+            JOIN a.subject s
+            JOIN s.user u
+            WHERE u.id = :id
+            ")->setParameter('id', $id)->getResult();
+    }
 }
