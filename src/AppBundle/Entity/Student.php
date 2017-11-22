@@ -45,6 +45,13 @@ class Student
      */
     private $groups;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="StudentAssignment", mappedBy="student")
+     */
+    private $studentAssignments;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -120,6 +127,22 @@ class Student
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStudentAssignments(): ArrayCollection
+    {
+        return $this->studentAssignments;
+    }
+
+    /**
+     * @param StudentAssignment $studentAssignment
+     */
+    public function addStudentAssignment(StudentAssignment $studentAssignment)
+    {
+        $this->studentAssignments[] = $studentAssignment;
     }
 
 }

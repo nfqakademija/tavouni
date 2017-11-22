@@ -50,6 +50,12 @@ class Subject
      */
     private $posts;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Assignment", mappedBy="subject")
+     */
+    private $assignments;
 
     public function __construct()
     {
@@ -154,5 +160,21 @@ class Subject
     public function addPost(Post $post)
     {
         $this->posts[] = $post;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAssignments(): ArrayCollection
+    {
+        return $this->assignments;
+    }
+
+    /**
+     * @param Assignment $assignment
+     */
+    public function addAssignment(Assignment $assignment)
+    {
+        $this->assignments[] = $assignment;
     }
 }
