@@ -58,3 +58,8 @@ services:
                 factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
                 arguments:
                     - AppBundle\Entity\Lecture
+
+    AppBundle\Repository\GradeRepository:
+                    factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+                    arguments:
+                        - AppBundle\Entity\Grade
