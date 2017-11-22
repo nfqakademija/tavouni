@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,7 +61,7 @@ class Post
     private $author;
 
     /**
-     * @var ArrayCollection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Student")
      * @ORM\JoinTable(name="seen_posts_students")
@@ -182,9 +183,9 @@ class Post
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getSeenByStudents(): ArrayCollection
+    public function getSeenByStudents(): Collection
     {
         return $this->seenByStudents;
     }
