@@ -68,4 +68,15 @@ class StudentController extends Controller
         }
         return new Response(null, Response::HTTP_FORBIDDEN);
     }
+
+    /**
+     * @Route("/grades", name="student_grades")
+     */
+    public function gradesAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render(
+            'Student/student_grades.html.twig'
+        );
+    }
 }

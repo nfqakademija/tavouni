@@ -46,6 +46,11 @@ class MenuExtension extends  \Twig_Extension
                     'route' => 'student_timetable',
                     'title' => 'Tvarkaraštis',
                     'children' => []
+                ],
+                [
+                    'route' => 'student_grades',
+                    'title' => 'Pažymiai',
+                    'children' => []
                 ]
             ];
 
