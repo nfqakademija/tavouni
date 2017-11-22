@@ -27,7 +27,7 @@ class LectureFixtures extends Fixture
         $lecture->setGroup($this->getReference('PS1k'));
         $lecture->setSubject($this->getReference('KompArch'));
         $lecture->setLecturer($this->getReference('Mitasiunas'));
-        $lecture->setLectureType('Teorija');
+        $lecture->setLectureType($this->getReference('Teorija'));
         $manager->persist($lecture);
         $manager->flush();
         $this->addReference('KompArchTeor', $lecture);

@@ -41,7 +41,7 @@ class LoadDataListener
             $studentLectures = $this->ldRepository->getLectureDatesByUser($userId);
             foreach ($studentLectures as $lecture) {
                 $data = $lecture->getLecture()->getSubject()->getName()." - ".
-                    $lecture->getLecture()->getLectureType()."\n".
+                    $lecture->getLecture()->getLectureType()->getName()."\n".
                     $lecture->getLecture()->getLecturer()->getName()."\n".
                     $lecture->getLecture()->getRoom()->getNo()."(".
                     $lecture->getLecture()->getRoom()->getBuilding()->getName().")"
@@ -57,11 +57,13 @@ class LoadDataListener
             $studentLectures = $this->ldRepository->getLectureDatesByLecturer($userId);
             foreach ($studentLectures as $lecture) {
                 $data = $lecture->getLecture()->getSubject()->getName()." - ".
-                    $lecture->getLecture()->getLectureType()."\n".
+                    $lecture->getLecture()->getLectureType()->getName()."\n".
                     $lecture->getLecture()->getRoom()->getNo()."(".
                     $lecture->getLecture()->getRoom()->getBuilding()->getName().")"
                 ;
+
                 $event = new Event($data, $lecture->getStart());
+                $event->setUrl('/lecturer/'.$lecture->getLecture()->getSubject()->getId().'/posts');
                 $event->setEndDate($lecture->getEnd());
                 $event->setAllDay(false);
                 $calendarEvent->addEvent($event);
