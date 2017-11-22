@@ -1,7 +1,6 @@
-{% extends 'Student/student_base.html.twig' %}
-{% set active = "student_timetable" %}
+{% extends 'base.html.twig' %}
 
-{% block content %}
+{% block body %}
     {% include '@FullCalendar/Calendar/calendar.html.twig' %}
 {% endblock %}
 
