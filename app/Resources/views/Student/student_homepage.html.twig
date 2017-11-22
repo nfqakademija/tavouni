@@ -19,10 +19,10 @@
                     {% for i, post in posts %}
                         <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
                             <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
-                            <div class="timeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
+                            <div id="{{ post.id }}" class="timeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
                                 <div class="timeline-heading">
                                     <h4 class="timeline-title">
-                                        <a data-toggle="collapse" href="#timeline-body-{{ post.id }}">{{ post.title }}</a>
+                                        <a class="title" data-toggle="collapse" href="#timeline-body-{{ post.id }}">{{ post.title }}</a>
                                     </h4>
                                     <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ post.publishedAt|date('Y-m-d H:i') }}</small></p>
                                 </div>
@@ -52,4 +52,5 @@
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/oneDayCalendar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/seenPost.js') }}"
 {% endblock %}

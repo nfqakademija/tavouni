@@ -9,9 +9,12 @@
 namespace AppBundle\Controller\Student;
 
 use AppBundle\Repository\PostRepository;
+use Sabre\VObject\Parser\Json;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
@@ -43,5 +46,26 @@ class StudentController extends Controller
         return $this->render(
             'Student/Timetable/student_calendar.html.twig'
         );
+    }
+
+    /**
+     * @Route("/set_post_seen", name="student_post_seen")
+     */
+    public function postSeenAction(Request $request, PostRepository $postRepository)
+    {
+        if ($this->isGranted('ROLE_STUDENT')) {
+            //echo $request->get('post_id');
+            $postId = $request->get('post_id');
+            $post = $postRepository->find((int)$postId);
+
+            if ($post === null) {
+                return new Response(null, Response::HTTP_NOT_FOUND);
+            }
+            $post->addSeenByStudent($this->getUser()->getStudent());
+            $this->getDoctrine()->getManager()->flush();
+
+            return new Response(null, Response::HTTP_OK);
+        }
+        return new Response(null, Response::HTTP_FORBIDDEN);
     }
 }
