@@ -2,7 +2,10 @@
 
 {% block body %}
     <h1>Grades</h1>
-    {% for grade in grades %}
-        {{ grade.value }}
+    {% for subject in subjects %}
+        {{ subject.subject }}
+        {% for grade in subject.grades %}
+            {{ grade.value }}
+        {% endfor %}
     {% endfor %}
 {% endblock %}
