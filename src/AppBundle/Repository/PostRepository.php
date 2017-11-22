@@ -1,7 +1,6 @@
 <?php
 
 namespace AppBundle\Repository;
-use AppBundle\Entity\Lecturer;
 
 /**
  * PostRepository
@@ -11,17 +10,19 @@ use AppBundle\Entity\Lecturer;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getPostsByLecturer(Lecturer $lecturer)
+    public function getPostsByLecturer($id)
     {
-        return $this->_em->createQuery("SELECT p, l
+        return $this->_em->createQuery("SELECT p
             FROM AppBundle\Entity\Post p
             JOIN p.author l
-            WHERE l.id = :id
-            ")->setParameter('id', $lecturer->getId())->getResult();
+            JOIN l.user u
+            WHERE u.id = :id
+            ORDER BY p.publishedAt DESC
+            ")->setParameter('id', $id)->getResult();
     }
 
     public function getPostsForStudent($id) {
-        return $this->_em->createQuery("SELECT p
+        return $this->_em->createQuery("SELECT p, a, su, l, g, st, u
             FROM AppBundle\Entity\Post p
             JOIN p.author a
             JOIN p.subject su

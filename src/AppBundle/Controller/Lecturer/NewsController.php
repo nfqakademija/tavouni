@@ -6,10 +6,13 @@ use AppBundle\Entity\Post;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\PostType;
 use AppBundle\Repository\LecturerRepository;
+use AppBundle\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
  * @Route("/lecturer/{subject_id}")
@@ -25,9 +28,14 @@ class NewsController extends Controller
     /**
      * @Route("/posts", name="lecturer_show_posts")
      */
-    public function showPostsAction()
+    public function showPostsAction(Subject $subject, TokenStorage $tokenStorage, PostRepository $postRepository)
     {
-        return $this->render(':Lecturer/News:show_posts.html.twig');
+        $id = $tokenStorage->getToken()->getUser()->getId();
+        $posts = $postRepository->getPostsByLecturer($id);
+        return $this->render(':Lecturer/News:show_posts.html.twig', [
+            'posts' => $posts,
+            'subject_id' =>$subject->getId()
+        ]);
     }
 
     /**
@@ -43,6 +51,7 @@ class NewsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setSubject($subject);
             $post->setAuthor($this->getUser()->getLecturer());
+            $post->setPublishedAt(new \DateTime());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);

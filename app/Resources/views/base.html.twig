@@ -12,7 +12,7 @@
 <div align="center">
     <img src={{ asset('tavouni.jpg') }}>
 </div>
-{% if app.user != null %}{{ menu(app.user, app.request.get('_route')) | raw}}{% endif%}
+{% if app.user != null %}{{ menu(app.user, app.request.get('_route'))}}{% endif%}
 
 {% block body %}
 
