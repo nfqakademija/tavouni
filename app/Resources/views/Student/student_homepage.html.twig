@@ -19,7 +19,7 @@
                     {% for i, post in posts %}
                         <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
                             <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
-                            <div class="timeline-panel">
+                            <div class="timeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
                                 <div class="timeline-heading">
                                     <h4 class="timeline-title">
                                         <a data-toggle="collapse" href="#timeline-body-{{ post.id }}">{{ post.title }}</a>
