@@ -30,8 +30,17 @@
                                         <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Edit</a></li>
-                                        <li><a href="#">Delete</a></li>
+                                        <div class="section">
+                                            <a href="{{ path('lecturer_edit_post', {'subject_id': subject_id, 'post_id': post.id}) }}" class="btn btn-block btn-success">
+                                                Edit
+                                            </a>
+                                        </div>
+                                        <form action="{{ url('lecturer_delete_post', {'subject_id': subject_id, 'post_id': post.id}) }}" method="post" data-confirmation="true" id="delete-form">
+                                            <button type="submit" class="btn btn-block btn-danger">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                Delete
+                                            </button>
+                                        </form>
                                     </ul>
                                 </div>
                             </div>

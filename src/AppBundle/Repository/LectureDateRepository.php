@@ -25,4 +25,18 @@ class LectureDateRepository extends \Doctrine\ORM\EntityRepository
             where u.id = :id
             ")->setParameter('id', $id)->getResult();
     }
+    public function getLectureDatesByLecturer($id)
+    {
+        return $this->_em->createQuery("SELECT ld, l, su, r, b, lr
+            FROM AppBundle\Entity\LectureDate ld
+            JOIN ld.lecture l
+            JOIN l.group g
+            JOIN l.subject su
+            JOIN l.room r
+            JOIN r.building b
+            JOIN l.lecturer lr
+            JOIN lr.user u
+            where u.id = :id
+            ")->setParameter('id', $id)->getResult();
+    }
 }
