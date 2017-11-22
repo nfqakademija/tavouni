@@ -5,18 +5,18 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * StudentAssignment
+ * Grade
  *
- * @ORM\Table(name="students_assignments")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\StudentAssignmentRepository")
+ * @ORM\Table(name="grades")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GradeRepository")
  */
-class StudentAssignment
+class Grade
 {
     /**
      * @var Assignment
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Assignment", inversedBy="studentAssignments")
+     * @ORM\ManyToOne(targetEntity="Assignment", inversedBy="grades")
      */
     private $assignment;
 
@@ -24,7 +24,7 @@ class StudentAssignment
      * @var Student
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Student", inversedBy="studentAssignments")
+     * @ORM\ManyToOne(targetEntity="Student", inversedBy="grades")
      */
     private $student;
 
@@ -33,14 +33,14 @@ class StudentAssignment
      *
      * @ORM\Column(name="grade", type="integer")
      */
-    private $grade;
+    private $value;
 
     /**
      * Set assignment
      *
      * @param Assignment $assignment
      *
-     * @return StudentAssignment
+     * @return Grade
      */
     public function setAssignment($assignment)
     {
@@ -64,7 +64,7 @@ class StudentAssignment
      *
      * @param Student $student
      *
-     * @return StudentAssignment
+     * @return Grade
      */
     public function setStudent($student)
     {
@@ -84,27 +84,27 @@ class StudentAssignment
     }
 
     /**
-     * Set grade
+     * Set value
      *
-     * @param integer $grade
+     * @param integer $value
      *
-     * @return StudentAssignment
+     * @return Grade
      */
-    public function setGrade($grade)
+    public function setValue($value)
     {
-        $this->grade = $grade;
+        $this->value = $value;
 
         return $this;
     }
 
     /**
-     * Get grade
+     * Get value
      *
      * @return int
      */
-    public function getGrade()
+    public function getValue()
     {
-        return $this->grade;
+        return $this->value;
     }
 }
 

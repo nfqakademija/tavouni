@@ -53,9 +53,9 @@ class Assignment
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="StudentAssignment", mappedBy="assignment")
+     * @ORM\OneToMany(targetEntity="Grade", mappedBy="assignment")
      */
-    private $studentAssignments;
+    private $grades;
 
 
     /**
@@ -167,17 +167,17 @@ class Assignment
     /**
      * @return ArrayCollection
      */
-    public function getStudentAssignments(): ArrayCollection
+    public function getGrades(): ArrayCollection
     {
-        return $this->studentAssignments;
+        return $this->grades;
     }
 
     /**
-     * @param StudentAssignment $studentAssignment
+     * @param Grade $grade
      */
-    public function addStudentAssignment(StudentAssignment $studentAssignment)
+    public function addGrade(Grade $grade)
     {
-        $this->studentAssignments[] = $studentAssignment;
+        $this->grades[] = $grade;
     }
 }
 
