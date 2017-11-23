@@ -21,15 +21,4 @@ class GradeRepository extends \Doctrine\ORM\EntityRepository
             WHERE u.id = :id
             ")->setParameter('id', $id)->getResult();
     }
-    public function getAssignmentsGradesAverageByStudentGroup($studentId)
-    {
-        return $this->_em->createQuery("SELECT AVG(g), a, su
-            FROM AppBundle\Entity\Grade g
-            JOIN g.student st
-            JOIN g.assignment a
-            JOIN a.subject su
-            JOIN st.user u
-            WHERE u.id = :id
-          ")->setParameter('id', $studentId)->getResult();
-    }
 }
