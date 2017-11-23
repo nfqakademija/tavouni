@@ -17,10 +17,10 @@
                 <ul class="timeline">
                     {% for i, post in posts %}
                         <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
-                            <a class="timeline-badge {% if post.seenByStudents is empty %}{% set count = count + 1 %}info{% endif %}" data-toggle="collapse" href="#timeline-body-{{ post.id }}">
-                                <i class="glyphicon glyphicon-info-sign {% if post.seenByStudents is empty %}blink{% endif %}"></i>
+                            <a class="timeline-badge {% if not (app.user.student in post.seenByStudents) %}{% set count = count + 1 %}info{% endif %}" data-toggle="collapse" href="#timeline-body-{{ post.id }}">
+                                <i class="glyphicon glyphicon-info-sign {% if not (app.user.student in post.seenByStudents) %}blink{% endif %}"></i>
                             </a>
-                            <div id="{{ post.id }}" class="timeline-panel {% if post.seenByStudents is empty %}bg-info{% endif %}">
+                            <div id="{{ post.id }}" class="timeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
                                 <div class="timeline-heading">
                                     <h4 class="timeline-title">
                                         <a class="title" data-toggle="collapse" href="#timeline-body-{{ post.id }}">{{ post.title }}</a>
