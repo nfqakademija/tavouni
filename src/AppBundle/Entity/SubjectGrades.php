@@ -13,7 +13,8 @@ class SubjectGrades
 {
     private $id;
     private $name;
-    private $sum;
+    private $gradeSum;
+    private $weightSum;
     private $grades = [];
 
     /**
@@ -71,16 +72,32 @@ class SubjectGrades
     /**
      * @return mixed
      */
-    public function getSum()
+    public function getGradeSum()
     {
-        return $this->sum;
+        return $this->gradeSum;
     }
 
     /**
-     * @param mixed $sum
+     * @param mixed $gradeSum
      */
-    public function setSum($sum)
+    public function setGradeSum($gradeSum)
     {
-        $this->sum = $sum;
+        $this->gradeSum = $gradeSum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeightSum()
+    {
+        return $this->weightSum;
+    }
+
+    /**
+     * @param mixed $weightSum
+     */
+    public function setWeightSum($weightSum)
+    {
+        $this->weightSum = $weightSum;
     }
 }

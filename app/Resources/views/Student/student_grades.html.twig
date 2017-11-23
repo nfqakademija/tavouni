@@ -24,14 +24,14 @@
                         {% for grade in subject.grades %}
                             <td>{{ grade.assignment.weight }}</td>
                         {% endfor %}
-                        <td>100</td>
+                        <td>{{ subject.weightSum }}</td>
                     </tr>
                     <tr>
                         <th>Įvertinimas:</th>
                         {% for grade in subject.grades %}
                             <td>{{ grade.value }}</td>
                         {% endfor %}
-                        <td>{{ subject.sum }}</td>
+                        <td>{{ subject.gradeSum }}</td>
                     </tr>
 
                 </table>

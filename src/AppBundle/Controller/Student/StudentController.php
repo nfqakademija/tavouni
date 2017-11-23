@@ -97,11 +97,14 @@ class StudentController extends Controller
             }
         }
         foreach($subjects as $subject) {
-            $sum = 0;
+            $gradeSum = 0;
+            $weightSum = 0;
             foreach($subject->getGrades() as $grade) {
-                $sum += $grade->getValue()*$grade->getAssignment()->getWeight()/100;
+                $gradeSum += $grade->getValue()*$grade->getAssignment()->getWeight()/100;
+                $weightSum += $grade->getAssignment()->getWeight();
             }
-            $subject->setSum($sum);
+            $subject->setGradeSum($gradeSum);
+            $subject->setWeightSum($weightSum);
         }
         // replace this example code with whatever you need
         return $this->render(
