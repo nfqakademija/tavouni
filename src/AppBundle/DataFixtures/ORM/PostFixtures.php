@@ -12,15 +12,10 @@ use AppBundle\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Faker\Generator;
 
 class PostFixtures extends Fixture
 {
-    private $generator;
-    public function __construct()
-    {
-        $this->generator = Factory::create();
-    }
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -28,13 +23,15 @@ class PostFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
+        $generator = $this->container->get(Generator::class);
+
         for ($i = 0; $i < 20; $i++) {
             $post = new Post();
             $post->setSubject($this->getReference('KompArch'));
-            $post->setTitle($this->generator->text(30));
+            $post->setTitle($generator->text(30));
             $post->setAuthor($this->getReference('Mitasiunas'));
-            $post->setContent($this->generator->text(250));
-            $post->setPublishedAt(new \DateTime($this->generator->date()));
+            $post->setContent($generator->text(250));
+            $post->setPublishedAt(new \DateTime($generator->date()));
             $manager->persist($post);
         }
         $manager->flush();
