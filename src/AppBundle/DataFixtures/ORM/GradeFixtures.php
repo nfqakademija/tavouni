@@ -25,6 +25,8 @@ class GradeFixtures extends Fixture
         $manager->persist($this->createGrade('KompArchEgz', 'StudentIgnas', '9'));
         $manager->persist($this->createGrade('KompArchKont', 'StudentIgnas', '9'));
         $manager->persist($this->createGrade('SMEgz', 'StudentIgnas', '9'));
+        $manager->persist($this->createGrade('SM1l', 'StudentIgnas', '7'));
+        $manager->persist($this->createGrade('SM2l', 'StudentIgnas', '4'));
         $manager->persist($this->createGrade('KompArchEgz', 'StudentAurimas', '7'));
         $manager->persist($this->createGrade('KompArchKont', 'StudentAurimas', '4'));
         $manager->flush();

@@ -2,6 +2,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 {% endblock %}
 {% block body %}
     <div class="container">
@@ -13,7 +14,7 @@
             <ul class="timeline">
                 {% for i, post in posts %}
                     <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
-                        <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
+                        <div class="timeline-badge info"><i class="glyphicon glyphicon-info-sign"></i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="timeline-title">

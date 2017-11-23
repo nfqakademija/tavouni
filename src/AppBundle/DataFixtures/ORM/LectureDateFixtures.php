@@ -22,18 +22,22 @@ class LectureDateFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $lectureDate = new LectureDate();
-        $lectureDate->setLecture($this->getReference('KompArchTeor'));
-        $start = new \DateTime();
-        $end = new \DateTime();
-        $start->setDate(2017, 11, 8);
-        $end->setDate(2017, 11, 8);
-        $start->setTime(14, 0);
-        $end->setTime(16, 0);
-        $lectureDate->setEnd($end);
-        $lectureDate->setStart($start);
-        $manager->persist($lectureDate);
+        $manager->persist($this->createLectureDate('KompArchTeor', new \DateTime('2017-11-23T14:00')));
+        $manager->persist($this->createLectureDate('KompArchTeor', new \DateTime('2017-11-30T14:00')));
+        $manager->persist($this->createLectureDate('KompArchTeor', new \DateTime('2017-11-16T14:00')));
+        $manager->persist($this->createLectureDate('SMTeor', new \DateTime('2017-11-30T10:00')));
+        $manager->persist($this->createLectureDate('SMTeor', new \DateTime('2017-11-16T10:00')));
+        $manager->persist($this->createLectureDate('SMTeor', new \DateTime('2017-11-23T10:00')));
         $manager->flush();
+    }
+    private function createLectureDate($lecture, $date) {
+        $lectureDate = new LectureDate();
+        $lectureDate->setLecture($this->getReference($lecture));
+        $lectureDate->setStart($date);
+        $end = clone $date;
+        $end = $end->add(new \DateInterval('PT2H'));
+        $lectureDate->setEnd($end);
+        return $lectureDate;
     }
     public function getDependencies()
     {
