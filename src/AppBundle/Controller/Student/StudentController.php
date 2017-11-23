@@ -83,17 +83,28 @@ class StudentController extends Controller
         foreach($grades as $grade) {
             $found = false;
             foreach($subjects as $subject) {
-                if ($grade->getAssignment()->getSubject()->getName() === $subject->getSubject()) {
+                if ($grade->getAssignment()->getSubject()->getName() === $subject->getName()) {
                     $subject->addGrade($grade);
                     $found = true;
                 }
             }
             if (!$found) {
                 $subject = new SubjectGrades();
-                $subject->setSubject($grade->getAssignment()->getSubject()->getName());
+                $subject->setName($grade->getAssignment()->getSubject()->getName());
+                $subject->setId($grade->getAssignment()->getSubject()->getId());
                 $subject->addGrade($grade);
                 $subjects[] = $subject;
             }
+        }
+        foreach($subjects as $subject) {
+            $gradeSum = 0;
+            $weightSum = 0;
+            foreach($subject->getGrades() as $grade) {
+                $gradeSum += $grade->getValue()*$grade->getAssignment()->getWeight()/100;
+                $weightSum += $grade->getAssignment()->getWeight();
+            }
+            $subject->setGradeSum($gradeSum);
+            $subject->setWeightSum($weightSum);
         }
         // replace this example code with whatever you need
         return $this->render(

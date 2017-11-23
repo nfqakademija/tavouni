@@ -11,23 +11,26 @@ namespace AppBundle\Entity;
 
 class SubjectGrades
 {
-    private $subject;
+    private $id;
+    private $name;
+    private $gradeSum;
+    private $weightSum;
     private $grades = [];
 
     /**
      * @return mixed
      */
-    public function getSubject()
+    public function getname()
     {
-        return $this->subject;
+        return $this->name;
     }
 
     /**
-     * @param mixed $subject
+     * @param mixed $name
      */
-    public function setSubject($subject)
+    public function setname($name)
     {
-        $this->subject = $subject;
+        $this->name = $name;
     }
 
     /**
@@ -48,5 +51,53 @@ class SubjectGrades
 
     public function addGrade($grade) {
         $this->grades[] = $grade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGradeSum()
+    {
+        return $this->gradeSum;
+    }
+
+    /**
+     * @param mixed $gradeSum
+     */
+    public function setGradeSum($gradeSum)
+    {
+        $this->gradeSum = $gradeSum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeightSum()
+    {
+        return $this->weightSum;
+    }
+
+    /**
+     * @param mixed $weightSum
+     */
+    public function setWeightSum($weightSum)
+    {
+        $this->weightSum = $weightSum;
     }
 }
