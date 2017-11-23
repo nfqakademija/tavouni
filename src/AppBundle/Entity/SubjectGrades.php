@@ -13,6 +13,7 @@ class SubjectGrades
 {
     private $id;
     private $name;
+    private $sum;
     private $grades = [];
 
     /**
@@ -65,5 +66,21 @@ class SubjectGrades
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSum()
+    {
+        return $this->sum;
+    }
+
+    /**
+     * @param mixed $sum
+     */
+    public function setSum($sum)
+    {
+        $this->sum = $sum;
     }
 }

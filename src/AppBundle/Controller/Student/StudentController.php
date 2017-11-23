@@ -96,6 +96,13 @@ class StudentController extends Controller
                 $subjects[] = $subject;
             }
         }
+        foreach($subjects as $subject) {
+            $sum = 0;
+            foreach($subject->getGrades() as $grade) {
+                $sum += $grade->getValue()*$grade->getAssignment()->getWeight()/100;
+            }
+            $subject->setSum($sum);
+        }
         // replace this example code with whatever you need
         return $this->render(
             'Student/student_grades.html.twig', [

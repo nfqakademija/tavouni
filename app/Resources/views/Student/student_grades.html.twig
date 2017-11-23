@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
     <h1>Grades</h1>
     <ul class="nav nav-tabs">
@@ -13,24 +11,27 @@
         {% for subject in subjects %}
             <div id="{{ subject.id }}" class="tab-pane fade in active">
                 <h3>{{ subject.name }}</h3>
-                <table>
+                <table class="table table-bordered">
                     <tr>
                         <th>Atsiskaitymas:</th>
                         {% for grade in subject.grades %}
                             <td>{{ grade.assignment.name }}</td>
                         {% endfor %}
+                        <td>Surinkti balai</td>
                     </tr>
                     <tr>
                         <th>Svoris:</th>
                         {% for grade in subject.grades %}
                             <td>{{ grade.assignment.weight }}</td>
                         {% endfor %}
+                        <td>100</td>
                     </tr>
                     <tr>
                         <th>Įvertinimas:</th>
                         {% for grade in subject.grades %}
                             <td>{{ grade.value }}</td>
                         {% endfor %}
+                        <td>{{ subject.sum }}</td>
                     </tr>
 
                 </table>
