@@ -1,7 +1,18 @@
-$("a.title").click(function () {
-    var panel = $(this).closest(".timeline-panel");
-    var badge = panel.prev(".timeline-badge");
-    var icon = badge.children("i");
+$("a[class *= 'title'], a[class *= 'timeline-badge']").click(function () {
+    var panel;
+    var badge;
+    var icon;
+    if ($(this).hasClass('timeline-badge')) {
+        badge = $(this);
+        panel = badge.next(".timeline-panel")
+    }
+    else {
+        panel = $(this).closest(".timeline-panel");
+        badge = panel.prev(".timeline-badge");
+    }
+
+
+    icon = badge.children("i");
     if (panel.hasClass("bg-info")) {
         panel.removeClass("bg-info");
         badge.removeClass("info");
