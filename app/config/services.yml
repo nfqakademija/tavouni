@@ -64,6 +64,11 @@ services:
                     arguments:
                         - AppBundle\Entity\Grade
 
+    AppBundle\Repository\AssignmentRepository:
+                        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+                        arguments:
+                            - AppBundle\Entity\Assignment
+
     Faker\Factory: ~
 
     Faker\Generator:
