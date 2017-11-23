@@ -26,3 +26,8 @@
 a {
     outline:none;
 }
+
+.timeline-badge:hover, .timeline-badge.info:hover {
+    background-color: #a7dfe2 !important;
+    transition: width .5s ease;
+}
