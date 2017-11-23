@@ -24,6 +24,7 @@
             {% endfor %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li><a>{% if is_granted('ROLE_STUDENT') %}{{ app.user.student.name }}{% elseif is_granted('ROLE_LECTURER')%}{{ app.user.lecturer.name }}{% endif %}</a></li>
             <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>Atsijungti</a></li>
         </ul>
     </div>
