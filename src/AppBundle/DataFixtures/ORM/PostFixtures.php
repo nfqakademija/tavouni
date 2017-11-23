@@ -36,7 +36,6 @@ class PostFixtures extends Fixture
             $post->setContent($this->generator->text(250));
             $post->setPublishedAt(new \DateTime($this->generator->date()));
             $manager->persist($post);
-            //$this->addReference('KAnebuvimas', $post);
         }
         $manager->flush();
     }

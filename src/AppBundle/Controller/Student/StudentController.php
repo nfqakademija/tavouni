@@ -11,10 +11,8 @@ namespace AppBundle\Controller\Student;
 use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
-use Sabre\VObject\Parser\Json;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -79,7 +77,7 @@ class StudentController extends Controller
         $id = $tokenStorage->getToken()->getUser()->getId();
         $grades = $gradeRepository->getStudentGrades($id);
         $subjects = [];
-        //$subject = new SubjectGrades();
+
         foreach($grades as $grade) {
             $found = false;
             foreach($subjects as $subject) {

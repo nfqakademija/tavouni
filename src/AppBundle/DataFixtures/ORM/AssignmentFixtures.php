@@ -10,7 +10,6 @@ namespace AppBundle\DataFixtures\ORM;
 
 
 use AppBundle\Entity\Assignment;
-use AppBundle\Entity\LectureType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
