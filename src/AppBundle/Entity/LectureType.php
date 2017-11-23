@@ -63,4 +63,3 @@ class LectureType
         return $this->name;
     }
 }
-

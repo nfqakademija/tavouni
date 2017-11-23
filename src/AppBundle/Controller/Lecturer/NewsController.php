@@ -70,7 +70,8 @@ class NewsController extends Controller
      * @Method("POST")
      * @ParamConverter("post", options={"mapping": {"post_id" : "id"}})
      */
-    public function deletePostAction(Request $request, Post $post, Subject $subject) {
+    public function deletePostAction(Request $request, Post $post, Subject $subject)
+    {
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
         $em->flush();

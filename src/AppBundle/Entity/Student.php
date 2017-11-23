@@ -144,5 +144,4 @@ class Student
     {
         $this->grades[] = $grade;
     }
-
 }

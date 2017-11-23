@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-
 class SubjectGrades
 {
     private $id;
@@ -49,7 +48,8 @@ class SubjectGrades
         $this->grades = $grades;
     }
 
-    public function addGrade($grade) {
+    public function addGrade($grade)
+    {
         $this->grades[] = $grade;
     }
 

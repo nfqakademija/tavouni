@@ -10,7 +10,8 @@ namespace AppBundle\Repository;
  */
 class LectureRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getLecturesForLecturer($id) {
+    public function getLecturesForLecturer($id)
+    {
         return $this->_em->createQuery("SELECT l
             FROM AppBundle\Entity\Lecture l
             JOIN l.lecturer lr

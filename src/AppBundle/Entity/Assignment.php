@@ -180,4 +180,3 @@ class Assignment
         $this->grades[] = $grade;
     }
 }
-

@@ -12,7 +12,7 @@ use AppBundle\Entity\User;
 use AppBundle\Repository\LectureRepository;
 use Twig\Environment;
 
-class MenuExtension extends  \Twig_Extension
+class MenuExtension extends \Twig_Extension
 {
     private $lectureRepository;
 
@@ -29,7 +29,11 @@ class MenuExtension extends  \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_Function('menu', [$this, 'renderMenu'], array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_Function(
+                'menu',
+                [$this, 'renderMenu'],
+                array('is_safe' => array('html'), 'needs_environment' => true)
+            ),
         );
     }
 
@@ -55,7 +59,8 @@ class MenuExtension extends  \Twig_Extension
             ];
 
             return $env->render(
-                'menu.html.twig', [
+                'menu.html.twig',
+                [
                     'menuItems' => $menuItems,
                     'active' => $route,
                 ]
@@ -65,7 +70,7 @@ class MenuExtension extends  \Twig_Extension
         if ($user->hasRole('ROLE_LECTURER')) {
             $lectures = $this->lectureRepository->getLecturesForLecturer($user->getId());
             $lectureItems = [];
-            foreach($lectures as $lecture) {
+            foreach ($lectures as $lecture) {
                 $lectureItems[] = [
                     'title' => $lecture->getSubject()->getName(),
                     'slug_name' => "subject_id",
@@ -86,7 +91,8 @@ class MenuExtension extends  \Twig_Extension
             ];
 
             return $env->render(
-                'menu.html.twig', [
+                'menu.html.twig',
+                [
                     'menuItems' => $menuItems,
                     'active' => $route,
                 ]

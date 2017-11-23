@@ -21,7 +21,8 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ")->setParameter('id', $id)->getResult();
     }
 
-    public function getPostsForStudent($id) {
+    public function getPostsForStudent($id)
+    {
         return $this->_em->createQuery("SELECT p, a, su, l, g, st, u, se, COUNT(se) AS HIDDEN seenNum
             FROM AppBundle\Entity\Post p
             JOIN p.author a

@@ -31,7 +31,8 @@ class StudentController extends Controller
         $posts = $postRepository->getPostsForStudent($id);
         // replace this example code with whatever you need
         return $this->render(
-            'Student/student_homepage.html.twig', [
+            'Student/student_homepage.html.twig',
+            [
                 'posts' =>$posts
             ]
         );
@@ -78,9 +79,9 @@ class StudentController extends Controller
         $grades = $gradeRepository->getStudentGrades($id);
         $subjects = [];
 
-        foreach($grades as $grade) {
+        foreach ($grades as $grade) {
             $found = false;
-            foreach($subjects as $subject) {
+            foreach ($subjects as $subject) {
                 if ($grade->getAssignment()->getSubject()->getName() === $subject->getName()) {
                     $subject->addGrade($grade);
                     $found = true;
@@ -94,10 +95,10 @@ class StudentController extends Controller
                 $subjects[] = $subject;
             }
         }
-        foreach($subjects as $subject) {
+        foreach ($subjects as $subject) {
             $gradeSum = 0;
             $weightSum = 0;
-            foreach($subject->getGrades() as $grade) {
+            foreach ($subject->getGrades() as $grade) {
                 $gradeSum += $grade->getValue()*$grade->getAssignment()->getWeight()/100;
                 $weightSum += $grade->getAssignment()->getWeight();
             }
@@ -106,7 +107,8 @@ class StudentController extends Controller
         }
         // replace this example code with whatever you need
         return $this->render(
-            'Student/student_grades.html.twig', [
+            'Student/student_grades.html.twig',
+            [
                 'subjects' => $subjects
             ]
         );

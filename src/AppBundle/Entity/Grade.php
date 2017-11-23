@@ -107,4 +107,3 @@ class Grade
         return $this->value;
     }
 }
-
