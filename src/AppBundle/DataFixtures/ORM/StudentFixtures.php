@@ -26,11 +26,12 @@ class StudentFixtures extends Fixture
         $manager->persist($this->createStudent('Aurimas Rimkus', 'UserAurimas', ['PS1k'], 'StudentAurimas'));
         $manager->flush();
     }
-    private function createStudent($name, $user, $groups, $reference) {
+    private function createStudent($name, $user, $groups, $reference)
+    {
         $student = new Student();
         $student->setName($name);
         $student->setUser($this->getReference($user));
-        foreach($groups as $group) {
+        foreach ($groups as $group) {
             $student->addGroup($this->getReference($group));
         }
         //$student->addGroup($this->getReference($groups));

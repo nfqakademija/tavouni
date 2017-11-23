@@ -28,7 +28,8 @@ class UserFixtures extends Fixture
         $manager->persist($this->createUser('Olga', 'ROLE_LECTURER', 'UserOlga'));
         $manager->flush();
     }
-    private function createUser($username, $role, $reference) {
+    private function createUser($username, $role, $reference)
+    {
         $user = new User();
         $user->setUsername($username);
         $user->setPlainPassword('test');

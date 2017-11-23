@@ -8,7 +8,6 @@
 
 namespace AppBundle\Utils;
 
-
 use AppBundle\Entity\Assignment;
 use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\AssignmentRepository;
@@ -25,7 +24,8 @@ class SubjectGradeParser
         $this->assignmentRepository = $assignmentRepository;
     }
 
-    public function gradesToSubjectGrades($id) {
+    public function gradesToSubjectGrades($id)
+    {
         $grades = $this->gradeRepository->getStudentGrades($id);
         $assignmentsAverages = $this->assignmentRepository->getAssignmentsGradesAverageByStudentGroup($id);
 
@@ -67,10 +67,8 @@ class SubjectGradeParser
 
     private function getAssignmentAverage(array $averages, Assignment $assignment)
     {
-        foreach($averages as $average)
-        {
-            if ($average[0] === $assignment)
-            {
+        foreach ($averages as $average) {
+            if ($average[0] === $assignment) {
                 return round($average[1], 2);
             }
         }

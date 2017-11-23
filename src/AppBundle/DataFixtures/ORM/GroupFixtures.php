@@ -26,7 +26,8 @@ class GroupFixtures extends Fixture
         $manager->persist($this->createGroup('SM', 'SM'));
         $manager->flush();
     }
-    private function createGroup($name, $reference) {
+    private function createGroup($name, $reference)
+    {
         $group = new Group();
         $group->setName($name);
         $this->addReference($reference, $group);

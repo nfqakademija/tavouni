@@ -29,7 +29,8 @@ class GradeFixtures extends Fixture
         $manager->persist($this->createGrade('KompArchKont', 'StudentAurimas', '4'));
         $manager->flush();
     }
-    private function createGrade($assignment, $student, $value) {
+    private function createGrade($assignment, $student, $value)
+    {
         $grade = new Grade();
         $grade->setAssignment($this->getReference($assignment));
         $grade->setStudent($this->getReference($student));

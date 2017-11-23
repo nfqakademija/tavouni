@@ -26,7 +26,8 @@ class LecturerFixtures extends Fixture
         $manager->persist($this->createLecturer('Antanas Mitašiūnas', 'UserAntanas', 'LecturerAntanas'));
         $manager->flush();
     }
-    private function createLecturer($name, $user, $reference) {
+    private function createLecturer($name, $user, $reference)
+    {
         $lecturer = new Lecturer();
         $lecturer->setName($name);
         $lecturer->setUser($this->getReference($user));

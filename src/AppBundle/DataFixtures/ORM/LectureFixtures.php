@@ -26,7 +26,8 @@ class LectureFixtures extends Fixture
         $manager->persist($this->createLecture('SM', 'SkaitiniaiMetodai', 'LecturerOlga', 'SMTeor'));
         $manager->flush();
     }
-    private function createLecture($group, $subject, $lecturer, $reference) {
+    private function createLecture($group, $subject, $lecturer, $reference)
+    {
         $lecture = new Lecture();
         $lecture->setRoom($this->getReference('101didl'));
         $lecture->setGroup($this->getReference($group));

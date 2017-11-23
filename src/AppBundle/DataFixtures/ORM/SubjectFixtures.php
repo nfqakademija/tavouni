@@ -27,7 +27,8 @@ class SubjectFixtures extends Fixture
         $manager->flush();
     }
 
-    private function createSubject($name, $type, $referenceName) {
+    private function createSubject($name, $type, $referenceName)
+    {
         $subject = new Subject();
         $subject->setName($name);
         $subject->setSubjectType($type);

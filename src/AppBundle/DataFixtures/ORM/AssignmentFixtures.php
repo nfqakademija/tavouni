@@ -27,7 +27,8 @@ class AssignmentFixtures extends Fixture
         $manager->persist($this->createAssignment('Egzaminas', 'SkaitiniaiMetodai', 100, 'SMEgz'));
         $manager->flush();
     }
-    private function createAssignment($name, $subject, $weight, $reference) {
+    private function createAssignment($name, $subject, $weight, $reference)
+    {
         $assignment = new Assignment();
         $assignment->setName($name);
         $assignment->setLectureType($this->getReference('Teorija'));
