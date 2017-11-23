@@ -4,10 +4,10 @@
             <a class="navbar-brand">Tavo uni</a>
         </div>
         <ul class="nav navbar-nav">
-            {% for item in menuItems %}
+            {% for i, item in menuItems %}
                 {% if item.children == [] %}
                     <li{% if item.route == active %} class="active"{% endif%}>
-                        <a href="{{ path(item.route) }}">{{item.title}}</a>
+                        <a href="{{ path(item.route) }}">{{item.title}}{% if i == 0 and count != 0 %} <span id="count" class="badge progress-bar-info blink">{{ count }}</span>{% endif %}</a>
                     </li>
                 {% else %}
                     <li class="dropdown {% if active == 'lecturer_show_posts' or active == 'lecturer_add_post' %}active{% endif%}">

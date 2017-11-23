@@ -39,14 +39,14 @@ $(function () {
 });
 
 function changeTitle() {
-    var count = $('div.counter').data('unseen-count');
-    console.log(count);
-    if (count !== 0) {
-        console.log(count);
+    var count = $('span#count').text();
+    if (count !== null) {
         document.title = '(' + count + ') ' + 'TavoUni';
+    } else {
+      document.title = 'TavoUni';
     }
 }
 function decrementCount() {
-    var count = $('div.counter').data('unseen-count');
-    $('div.counter').data('unseen-count', count - 1);
+    var count = $('span#count').text();
+    $('span#count').text(count - 1);
 }

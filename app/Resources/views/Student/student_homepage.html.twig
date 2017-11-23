@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 {% endblock %}
-{% set count = 0 %}
 {% block body %}
     <div class="container">
         <div class="row">
@@ -17,7 +16,7 @@
                 <ul class="timeline">
                     {% for i, post in posts %}
                         <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
-                            <a class="timeline-badge {% if not (app.user.student in post.seenByStudents) %}{% set count = count + 1 %}info{% endif %}" data-toggle="collapse" href="#timeline-body-{{ post.id }}">
+                            <a class="timeline-badge {% if not (app.user.student in post.seenByStudents) %}info{% endif %}" data-toggle="collapse" href="#timeline-body-{{ post.id }}">
                                 <i class="glyphicon glyphicon-info-sign {% if not (app.user.student in post.seenByStudents) %}blink{% endif %}"></i>
                             </a>
                             <div id="{{ post.id }}" class="timeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
@@ -39,7 +38,6 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="counter" data-unseen-count={{ count }}></div>
             <div class="col-md-4">
                 {% include '@FullCalendar/Calendar/calendar.html.twig' %}
             </div>
@@ -54,5 +52,4 @@
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/oneDayCalendar.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/seenPost.js') }}"></script>
 {% endblock %}

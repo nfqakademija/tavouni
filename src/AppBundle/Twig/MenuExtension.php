@@ -10,19 +10,22 @@ namespace AppBundle\Twig;
 
 use AppBundle\Entity\User;
 use AppBundle\Repository\LectureRepository;
+use AppBundle\Repository\PostRepository;
 use Twig\Environment;
 
 class MenuExtension extends \Twig_Extension
 {
     private $lectureRepository;
+    private $postRepository;
 
     /**
      * MenuExtension constructor.
      * @param $lectureRepository
      */
-    public function __construct(LectureRepository $lectureRepository)
+    public function __construct(LectureRepository $lectureRepository, PostRepository $postRepository)
     {
         $this->lectureRepository = $lectureRepository;
+        $this->postRepository = $postRepository;
     }
 
 
@@ -63,6 +66,7 @@ class MenuExtension extends \Twig_Extension
                 [
                     'menuItems' => $menuItems,
                     'active' => $route,
+                    'count' => $this->calculateUnseenCount($user->getId())
                 ]
             );
         }
@@ -95,8 +99,22 @@ class MenuExtension extends \Twig_Extension
                 [
                     'menuItems' => $menuItems,
                     'active' => $route,
+                    'count' => 0
                 ]
             );
         }
+    }
+
+    public function calculateUnseenCount($userId)
+    {
+        $posts = $this->postRepository->getPostsForStudent($userId);
+
+        $count = 0;
+        foreach ($posts as $post) {
+            if (count($post->getSeenByStudents()) === 0) {
+                $count++;
+            }
+        }
+        return $count;
     }
 }
