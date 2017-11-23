@@ -1,11 +1,40 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block body %}
     <h1>Grades</h1>
-    {% for subject in subjects %}
-        {{ subject.subject }}
-        {% for grade in subject.grades %}
-            {{ grade.value }}
+    <ul class="nav nav-tabs">
+        {% for subject in subjects %}
+            <li class="active"><a data-toggle="tab" href="#{{ subject.id }}">{{ subject.name }}</a></li>
         {% endfor %}
-    {% endfor %}
+    </ul>
+    <div class="tab-content">
+        {% for subject in subjects %}
+            <div id="{{ subject.id }}" class="tab-pane fade in active">
+                <h3>{{ subject.name }}</h3>
+                <table>
+                    <tr>
+                        <th>Atsiskaitymas:</th>
+                        {% for grade in subject.grades %}
+                            <td>{{ grade.assignment.name }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Svoris:</th>
+                        {% for grade in subject.grades %}
+                            <td>{{ grade.assignment.weight }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Įvertinimas:</th>
+                        {% for grade in subject.grades %}
+                            <td>{{ grade.value }}</td>
+                        {% endfor %}
+                    </tr>
+
+                </table>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
