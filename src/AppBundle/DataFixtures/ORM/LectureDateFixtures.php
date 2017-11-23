@@ -30,7 +30,8 @@ class LectureDateFixtures extends Fixture
         $manager->persist($this->createLectureDate('SMTeor', new \DateTime('2017-11-23T10:00')));
         $manager->flush();
     }
-    private function createLectureDate($lecture, $date) {
+    private function createLectureDate($lecture, $date)
+    {
         $lectureDate = new LectureDate();
         $lectureDate->setLecture($this->getReference($lecture));
         $lectureDate->setStart($date);
