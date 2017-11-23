@@ -22,21 +22,19 @@ class AssignmentFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $egzaminas = new Assignment();
-        $egzaminas->setName("Egzaminas");
-        $egzaminas->setLectureType($this->getReference('Teorija'));
-        $egzaminas->setSubject($this->getReference('KompArch'));
-        $egzaminas->setWeight(60);
-        $manager->persist($egzaminas);
-        $this->addReference('KompArchEgz', $egzaminas);
-        $kontrolinis = new Assignment();
-        $kontrolinis->setName("Kontrolinis");
-        $kontrolinis->setLectureType($this->getReference('Teorija'));
-        $kontrolinis->setSubject($this->getReference('KompArch'));
-        $kontrolinis->setWeight(40);
-        $manager->persist($kontrolinis);
-        $this->addReference('KompArchKont', $kontrolinis);
+        $manager->persist($this->createAssignment('Egzaminas', 'KompArch', 60, 'KompArchEgz'));
+        $manager->persist($this->createAssignment('Kontrolinis', 'KompArch', 40, 'KompArchKont'));
+        $manager->persist($this->createAssignment('Egzaminas', 'SkaitiniaiMetodai', 100, 'SMEgz'));
         $manager->flush();
+    }
+    private function createAssignment($name, $subject, $weight, $reference) {
+        $assignment = new Assignment();
+        $assignment->setName($name);
+        $assignment->setLectureType($this->getReference('Teorija'));
+        $assignment->setSubject($this->getReference($subject));
+        $assignment->setWeight($weight);
+        $this->addReference($reference, $assignment);
+        return $assignment;
     }
     public function getDependencies()
     {

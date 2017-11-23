@@ -22,11 +22,16 @@ class SubjectFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $subject = new Subject();
-        $subject->setName('Kompiuterių architektūra');
-        $subject->setSubjectType('Privalomas');
-        $manager->persist($subject);
+        $manager->persist($this->createSubject('Kompiuterių architektūra', 'Privalomas', 'KompArch'));
+        $manager->persist($this->createSubject('Skaitiniai metodai', 'Pasirenkamasis', 'SkaitiniaiMetodai'));
         $manager->flush();
-        $this->addReference('KompArch', $subject);
+    }
+
+    private function createSubject($name, $type, $referenceName) {
+        $subject = new Subject();
+        $subject->setName($name);
+        $subject->setSubjectType($type);
+        $this->addReference($referenceName, $subject);
+        return $subject;
     }
 }

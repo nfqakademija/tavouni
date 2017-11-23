@@ -29,7 +29,7 @@ class PostFixtures extends Fixture
             $post = new Post();
             $post->setSubject($this->getReference('KompArch'));
             $post->setTitle($generator->text(30));
-            $post->setAuthor($this->getReference('Mitasiunas'));
+            $post->setAuthor($this->getReference('LecturerAntanas'));
             $post->setContent($generator->text(250));
             $post->setPublishedAt(new \DateTime($generator->date()));
             $manager->persist($post);

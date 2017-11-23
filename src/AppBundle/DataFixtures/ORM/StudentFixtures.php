@@ -22,20 +22,20 @@ class StudentFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $student = new Student();
-        $student->setName('Ignas');
-        $student->setUser($this->getReference('UserIgnas'));
-        $student->addGroup($this->getReference('PS1k'));
-        $manager->persist($student);
-        $this->addReference('StudentIgnas', $student);
-
-        $student = new Student();
-        $student->setName('Aurimas');
-        $student->setUser($this->getReference('UserAurimas'));
-        $student->addGroup($this->getReference('PS1k'));
-        $manager->persist($student);
+        $manager->persist($this->createStudent('Ignas Zdanis', 'UserIgnas', ['PS1k', 'SM'], 'StudentIgnas'));
+        $manager->persist($this->createStudent('Aurimas Rimkus', 'UserAurimas', ['PS1k'], 'StudentAurimas'));
         $manager->flush();
-        $this->addReference('StudentAurimas', $student);
+    }
+    private function createStudent($name, $user, $groups, $reference) {
+        $student = new Student();
+        $student->setName($name);
+        $student->setUser($this->getReference($user));
+        foreach($groups as $group) {
+            $student->addGroup($this->getReference($group));
+        }
+        //$student->addGroup($this->getReference($groups));
+        $this->addReference($reference, $student);
+        return $student;
     }
     public function getDependencies()
     {

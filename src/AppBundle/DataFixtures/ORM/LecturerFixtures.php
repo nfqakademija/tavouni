@@ -22,12 +22,16 @@ class LecturerFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $lecturer = new Lecturer();
-        $lecturer->setName('Antanas Mitašiūnas');
-        $lecturer->setUser($this->getReference('lecturer1'));
-        $manager->persist($lecturer);
+        $manager->persist($this->createLecturer('Olga Štikonienė', 'UserOlga', 'LecturerOlga'));
+        $manager->persist($this->createLecturer('Antanas Mitašiūnas', 'UserAntanas', 'LecturerAntanas'));
         $manager->flush();
-        $this->addReference('Mitasiunas', $lecturer);
+    }
+    private function createLecturer($name, $user, $reference) {
+        $lecturer = new Lecturer();
+        $lecturer->setName($name);
+        $lecturer->setUser($this->getReference($user));
+        $this->addReference($reference, $lecturer);
+        return $lecturer;
     }
     public function getDependencies()
     {

@@ -22,15 +22,19 @@ class LectureFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
+        $manager->persist($this->createLecture('PS1k', 'KompArch', 'LecturerAntanas', 'KompArchTeor'));
+        $manager->persist($this->createLecture('SM', 'SkaitiniaiMetodai', 'LecturerOlga', 'SMTeor'));
+        $manager->flush();
+    }
+    private function createLecture($group, $subject, $lecturer, $reference) {
         $lecture = new Lecture();
         $lecture->setRoom($this->getReference('101didl'));
-        $lecture->setGroup($this->getReference('PS1k'));
-        $lecture->setSubject($this->getReference('KompArch'));
-        $lecture->setLecturer($this->getReference('Mitasiunas'));
+        $lecture->setGroup($this->getReference($group));
+        $lecture->setSubject($this->getReference($subject));
+        $lecture->setLecturer($this->getReference($lecturer));
         $lecture->setLectureType($this->getReference('Teorija'));
-        $manager->persist($lecture);
-        $manager->flush();
-        $this->addReference('KompArchTeor', $lecture);
+        $this->addReference($reference, $lecture);
+        return $lecture;
     }
     public function getDependencies()
     {

@@ -22,30 +22,19 @@ class GradeFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $egzGrade = new Grade();
-        $egzGrade->setAssignment($this->getReference('KompArchEgz'));
-        $egzGrade->setStudent($this->getReference('StudentIgnas'));
-        $egzGrade->setValue(9);
-        $manager->persist($egzGrade);
-
-        $kontGrade = new Grade();
-        $kontGrade->setAssignment($this->getReference('KompArchKont'));
-        $kontGrade->setStudent($this->getReference('StudentIgnas'));
-        $kontGrade->setValue(8);
-        $manager->persist($kontGrade);
-
-        $egzGrade = new Grade();
-        $egzGrade->setAssignment($this->getReference('KompArchEgz'));
-        $egzGrade->setStudent($this->getReference('StudentAurimas'));
-        $egzGrade->setValue(2);
-        $manager->persist($egzGrade);
-
-        $kontGrade = new Grade();
-        $kontGrade->setAssignment($this->getReference('KompArchKont'));
-        $kontGrade->setStudent($this->getReference('StudentAurimas'));
-        $kontGrade->setValue(3);
-        $manager->persist($kontGrade);
+        $manager->persist($this->createGrade('KompArchEgz', 'StudentIgnas', '9'));
+        $manager->persist($this->createGrade('KompArchKont', 'StudentIgnas', '9'));
+        $manager->persist($this->createGrade('SMEgz', 'StudentIgnas', '9'));
+        $manager->persist($this->createGrade('KompArchEgz', 'StudentAurimas', '7'));
+        $manager->persist($this->createGrade('KompArchKont', 'StudentAurimas', '4'));
         $manager->flush();
+    }
+    private function createGrade($assignment, $student, $value) {
+        $grade = new Grade();
+        $grade->setAssignment($this->getReference($assignment));
+        $grade->setStudent($this->getReference($student));
+        $grade->setValue($value);
+        return $grade;
     }
     public function getDependencies()
     {

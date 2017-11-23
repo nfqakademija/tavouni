@@ -22,10 +22,14 @@ class GroupFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $group = new Group();
-        $group->setName('PS1k');
-        $manager->persist($group);
+        $manager->persist($this->createGroup('PS1k', 'PS1k'));
+        $manager->persist($this->createGroup('SM', 'SM'));
         $manager->flush();
-        $this->addReference('PS1k', $group);
+    }
+    private function createGroup($name, $reference) {
+        $group = new Group();
+        $group->setName($name);
+        $this->addReference($reference, $group);
+        return $group;
     }
 }
