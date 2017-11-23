@@ -25,7 +25,7 @@ class PostFixtures extends Fixture
     {
         $generator = $this->container->get(Generator::class);
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $post = new Post();
             $post->setSubject($this->getReference('KompArch'));
             $post->setTitle($generator->text(30));
