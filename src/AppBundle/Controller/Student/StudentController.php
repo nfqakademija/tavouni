@@ -83,14 +83,15 @@ class StudentController extends Controller
         foreach($grades as $grade) {
             $found = false;
             foreach($subjects as $subject) {
-                if ($grade->getAssignment()->getSubject()->getName() === $subject->getSubject()) {
+                if ($grade->getAssignment()->getSubject()->getName() === $subject->getName()) {
                     $subject->addGrade($grade);
                     $found = true;
                 }
             }
             if (!$found) {
                 $subject = new SubjectGrades();
-                $subject->setSubject($grade->getAssignment()->getSubject()->getName());
+                $subject->setName($grade->getAssignment()->getSubject()->getName());
+                $subject->setId($grade->getAssignment()->getSubject()->getId());
                 $subject->addGrade($grade);
                 $subjects[] = $subject;
             }
