@@ -3,13 +3,13 @@
 {% block body %}
     <div class="container">
         <ul class="nav nav-tabs">
-            {% for subject in subjects %}
-                <li><a data-toggle="tab" href="#{{ subject.id }}">{{ subject.name }}</a></li>
+            {% for i, subject in subjects %}
+                <li class={{ i == 0 ? 'active'}}><a data-toggle="tab" href="#{{ subject.id }}">{{ subject.name }}</a></li>
             {% endfor %}
         </ul>
         <div class="tab-content">
-            {% for subject in subjects %}
-                <div id="{{ subject.id }}" class="tab-pane fade in active">
+            {% for i, subject in subjects %}
+                <div id="{{ subject.id }}" class="tab-pane {{ i == 0 ? 'fade in active'}}">
                     <h3>{{ subject.name }}</h3>
                     <table class="table table-bordered">
                         <tr>
