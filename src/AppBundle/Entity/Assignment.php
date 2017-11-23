@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Assignment
 {
+    private $average;
     /**
      * @var int
      *
@@ -178,5 +179,21 @@ class Assignment
     public function addGrade(Grade $grade)
     {
         $this->grades[] = $grade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAverage()
+    {
+        return $this->average;
+    }
+
+    /**
+     * @param mixed $average
+     */
+    public function setAverage($average)
+    {
+        $this->average = $average;
     }
 }

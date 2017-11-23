@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Grades</h1>
     <ul class="nav nav-tabs">
         {% for subject in subjects %}
             <li class="active"><a data-toggle="tab" href="#{{ subject.id }}">{{ subject.name }}</a></li>
@@ -29,9 +28,24 @@
                     <tr>
                         <th>Įvertinimas:</th>
                         {% for grade in subject.grades %}
-                            <td>{{ grade.value }}</td>
+                            <td class="
+                            {% if grade.value >= grade.assignment.average %}bg-aboveAverage{% endif %}
+                            {% if grade.value < 5 %}bg-below5
+                            {% elseif grade.value < grade.assignment.average %}bg-belowAverage{% endif %}"
+                            >{{ grade.value }}</td>
                         {% endfor %}
-                        <td>{{ subject.gradeSum }}</td>
+                        <td class="
+                                {% if subject.gradeSum > subject.average %}bg-aboveAverage{% endif %}
+                                {% if subject.gradeSum < 5 %}bg-below5
+                                {% elseif subject.gradeSum < subject.average %}bg-belowAverage{% endif %}"
+                        >{{ subject.gradeSum }}</td>
+                    </tr>
+                    <tr>
+                        <th>Vidurkis:</th>
+                        {% for grade in subject.grades %}
+                            <td>{{ grade.assignment.average }}</td>
+                        {% endfor %}
+                        <td>{{ subject.average }}</td>
                     </tr>
 
                 </table>

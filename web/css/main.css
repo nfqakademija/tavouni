@@ -18,3 +18,15 @@ a {
     background-color: #a7dfe2 !important;
     transition: width .5s ease;
 }
+
+td.bg-aboveAverage {
+    background-color: #8fdf82;
+}
+
+td.bg-below5{
+    background-color: lightpink;
+}
+
+td.bg-belowAverage{
+    background-color: #F7E5A1;
+}

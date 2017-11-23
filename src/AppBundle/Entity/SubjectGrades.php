@@ -15,6 +15,7 @@ class SubjectGrades
     private $gradeSum;
     private $weightSum;
     private $grades = [];
+    private $average;
 
     /**
      * @return mixed
@@ -99,5 +100,21 @@ class SubjectGrades
     public function setWeightSum($weightSum)
     {
         $this->weightSum = $weightSum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAverage()
+    {
+        return $this->average;
+    }
+
+    /**
+     * @param mixed $average
+     */
+    public function setAverage($average)
+    {
+        $this->average = $average;
     }
 }
