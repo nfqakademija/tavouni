@@ -28,10 +28,23 @@ class GradeFixtures extends Fixture
         $egzGrade->setStudent($this->getReference('StudentIgnas'));
         $egzGrade->setValue(9);
         $manager->persist($egzGrade);
+
         $kontGrade = new Grade();
         $kontGrade->setAssignment($this->getReference('KompArchKont'));
         $kontGrade->setStudent($this->getReference('StudentIgnas'));
         $kontGrade->setValue(8);
+        $manager->persist($kontGrade);
+
+        $egzGrade = new Grade();
+        $egzGrade->setAssignment($this->getReference('KompArchEgz'));
+        $egzGrade->setStudent($this->getReference('StudentAurimas'));
+        $egzGrade->setValue(2);
+        $manager->persist($egzGrade);
+
+        $kontGrade = new Grade();
+        $kontGrade->setAssignment($this->getReference('KompArchKont'));
+        $kontGrade->setStudent($this->getReference('StudentAurimas'));
+        $kontGrade->setValue(3);
         $manager->persist($kontGrade);
         $manager->flush();
     }

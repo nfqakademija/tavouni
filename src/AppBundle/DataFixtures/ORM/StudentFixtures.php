@@ -27,8 +27,15 @@ class StudentFixtures extends Fixture
         $student->setUser($this->getReference('UserIgnas'));
         $student->addGroup($this->getReference('PS1k'));
         $manager->persist($student);
-        $manager->flush();
         $this->addReference('StudentIgnas', $student);
+
+        $student = new Student();
+        $student->setName('Aurimas');
+        $student->setUser($this->getReference('UserAurimas'));
+        $student->addGroup($this->getReference('PS1k'));
+        $manager->persist($student);
+        $manager->flush();
+        $this->addReference('StudentAurimas', $student);
     }
     public function getDependencies()
     {
