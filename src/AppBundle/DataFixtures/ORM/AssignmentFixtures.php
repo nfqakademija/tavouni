@@ -24,7 +24,9 @@ class AssignmentFixtures extends Fixture
     {
         $manager->persist($this->createAssignment('Egzaminas', 'KompArch', 60, 'KompArchEgz'));
         $manager->persist($this->createAssignment('Kontrolinis', 'KompArch', 40, 'KompArchKont'));
-        $manager->persist($this->createAssignment('Egzaminas', 'SkaitiniaiMetodai', 100, 'SMEgz'));
+        $manager->persist($this->createAssignment('Egzaminas', 'SkaitiniaiMetodai', 60, 'SMEgz'));
+        $manager->persist($this->createAssignment('1 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM1l'));
+        $manager->persist($this->createAssignment('2 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM2l'));
         $manager->flush();
     }
     private function createAssignment($name, $subject, $weight, $reference) {
