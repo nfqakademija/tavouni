@@ -11,6 +11,7 @@ namespace AppBundle\Controller\Student;
 use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
+use AppBundle\Utils\SubjectGradeParser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +56,6 @@ class StudentController extends Controller
     public function postSeenAction(Request $request, PostRepository $postRepository)
     {
         if ($this->isGranted('ROLE_STUDENT')) {
-            //echo $request->get('post_id');
             $postId = $request->get('post_id');
             $post = $postRepository->find((int)$postId);
 
@@ -73,38 +73,10 @@ class StudentController extends Controller
     /**
      * @Route("/grades", name="student_grades")
      */
-    public function gradesAction(Request $request, TokenStorage $tokenStorage, GradeRepository $gradeRepository)
+    public function gradesAction(Request $request, TokenStorage $tokenStorage, SubjectGradeParser $subjectGradeParser)
     {
         $id = $tokenStorage->getToken()->getUser()->getId();
-        $grades = $gradeRepository->getStudentGrades($id);
-        $subjects = [];
-
-        foreach ($grades as $grade) {
-            $found = false;
-            foreach ($subjects as $subject) {
-                if ($grade->getAssignment()->getSubject()->getName() === $subject->getName()) {
-                    $subject->addGrade($grade);
-                    $found = true;
-                }
-            }
-            if (!$found) {
-                $subject = new SubjectGrades();
-                $subject->setName($grade->getAssignment()->getSubject()->getName());
-                $subject->setId($grade->getAssignment()->getSubject()->getId());
-                $subject->addGrade($grade);
-                $subjects[] = $subject;
-            }
-        }
-        foreach ($subjects as $subject) {
-            $gradeSum = 0;
-            $weightSum = 0;
-            foreach ($subject->getGrades() as $grade) {
-                $gradeSum += $grade->getValue()*$grade->getAssignment()->getWeight()/100;
-                $weightSum += $grade->getAssignment()->getWeight();
-            }
-            $subject->setGradeSum($gradeSum);
-            $subject->setWeightSum($weightSum);
-        }
+        $subjects = $subjectGradeParser->gradesToSubjectGrades($id);
         // replace this example code with whatever you need
         return $this->render(
             'Student/student_grades.html.twig',
