@@ -36,7 +36,7 @@
                                 >{{ grade.value }}</td>
                             {% endfor %}
                             <td class="
-                                {% if subject.gradeSum > subject.average %}bg-aboveAverage{% endif %}
+                                {% if subject.gradeSum >= subject.average %}bg-aboveAverage{% endif %}
                                 {% if subject.gradeSum < 5 %}bg-below5
                                 {% elseif subject.gradeSum < subject.average %}bg-belowAverage{% endif %}"
                             >{{ subject.gradeSum }}</td>
