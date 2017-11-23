@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}"
 {% endblock %}
-
+{% set count = 0 %}
 {% block body %}
     <div class="container">
         <div class="row">
@@ -17,7 +17,7 @@
                 <ul class="timeline">
                     {% for i, post in posts %}
                         <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
-                            <a class="timeline-badge {% if post.seenByStudents is empty %}info{% endif %}" data-toggle="collapse" href="#timeline-body-{{ post.id }}">
+                            <a class="timeline-badge {% if post.seenByStudents is empty %}{% set count = count + 1 %}info{% endif %}" data-toggle="collapse" href="#timeline-body-{{ post.id }}">
                                 <i class="glyphicon glyphicon-info-sign {% if post.seenByStudents is empty %}blink{% endif %}"></i>
                             </a>
                             <div id="{{ post.id }}" class="timeline-panel {% if post.seenByStudents is empty %}bg-info{% endif %}">
@@ -39,6 +39,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            <div class="counter" data-unseen-count={{ count }}></div>
             <div class="col-md-4">
                 {% include '@FullCalendar/Calendar/calendar.html.twig' %}
             </div>
