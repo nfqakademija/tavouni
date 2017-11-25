@@ -15,9 +15,15 @@ class CalendarFormatter
      * @param array $calendarDates
      * @return string
      */
-    public function generateContent($calendarDates, bool $addLecturerName = true)
+    public function generateStudentVCalendarContent($calendarDates)
     {
-        $vCalendar = $this->generateVCalendar($calendarDates, $addLecturerName);
+        $vCalendar = $this->generateVCalendar($calendarDates, true);
+        return $vCalendar->serialize();
+    }
+
+    public function generateLecturerVCalendarContent($calendarDates)
+    {
+        $vCalendar = $this->generateVCalendar($calendarDates, false);
         return $vCalendar->serialize();
     }
 

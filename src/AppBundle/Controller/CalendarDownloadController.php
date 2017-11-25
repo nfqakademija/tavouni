@@ -15,21 +15,19 @@ class CalendarDownloadController extends Controller
      */
     public function downloadAction(CalendarFormatter $iCalFormatter, LectureDateRepository $ldRepository)
     {
-        if ($this->isGranted("ROLE_STUDENT")) {
-            $lectureDates = $ldRepository->getLectureDatesByStudent($this->getUser()->getId());
-            $content = $iCalFormatter->generateContent($lectureDates);
-        }
-        else {
-            $lectureDates = $ldRepository->getLectureDatesByLecturer($this->getUser()->getId());
-            $content = $iCalFormatter->generateContent($lectureDates, false);
-        }
-
-
         $response = new Response();
         $response->headers->set('Content-Type', 'text/calendar');
         $response->headers->set('Content-Disposition', 'attachment;filename=calendar.ics');
-        $response->setContent($content);
 
+        if ($this->isGranted('ROLE_STUDENT')) {
+            $lectureDates = $ldRepository->getLectureDatesByStudent($this->getUser()->getId());
+            $content = $iCalFormatter->generateStudentVCalendarContent($lectureDates);
+            $response->setContent($content);
+            return $response;
+        }
+        $lectureDates = $ldRepository->getLectureDatesByLecturer($this->getUser()->getId());
+        $content = $iCalFormatter->generateLecturerVCalendarContent($lectureDates);
+        $response->setContent($content);
         return $response;
     }
 }
