@@ -15,9 +15,9 @@ class CalendarFormatter
      * @param array $calendarDates
      * @return string
      */
-    public function generateContent($calendarDates)
+    public function generateContent($calendarDates, bool $addLecturerName = true)
     {
-        $vCalendar = $this->generateVCalendar($calendarDates);
+        $vCalendar = $this->generateVCalendar($calendarDates, $addLecturerName);
         return $vCalendar->serialize();
     }
 
@@ -25,7 +25,7 @@ class CalendarFormatter
      * @param array $calendarDates
      * @return VObject\Component\VCalendar
      */
-    private function generateVCalendar($calendarDates)
+    private function generateVCalendar($calendarDates, bool $addLecturerName)
     {
         $vCalendar = new VObject\Component\VCalendar();
         foreach ($calendarDates as $calendarDate) {
@@ -34,7 +34,7 @@ class CalendarFormatter
                 [
                     'SUMMARY' => $calendarDate->getLecture()->getSubject()->getName(),
                     'DESCRIPTION' => $calendarDate->getLecture()->getLectureType()->getName() . "\n"
-                        . $calendarDate->getLecture()->getLecturer()->getName()."\n"
+                        . ($addLecturerName ? ($calendarDate->getLecture()->getLecturer()->getName()."\n") : '')
                         . $calendarDate->getLecture()->getRoom()->getBuilding()->getName(),
                     'DTSTART' => $calendarDate->getStart(),
                     'DTEND'   => $calendarDate->getEnd()

@@ -31,7 +31,7 @@ class LoadDataListener
     {
         if ($this->tokenStorage->getToken()->getUser()->hasRole('ROLE_STUDENT')) {
             $userId = $this->tokenStorage->getToken()->getUser()->getId();
-            $studentLectures = $this->ldRepository->getLectureDatesByUser($userId);
+            $studentLectures = $this->ldRepository->getLectureDatesByStudent($userId);
             foreach ($studentLectures as $lecture) {
                 $data = $lecture->getLecture()->getSubject()->getName()." - ".
                     $lecture->getLecture()->getLectureType()->getName()."\n".
