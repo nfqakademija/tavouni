@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\Student;
 
+use AppBundle\Entity\Post;
 use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
@@ -51,14 +52,11 @@ class StudentController extends Controller
     }
 
     /**
-     * @Route("/set_post_seen", name="student_post_seen")
+     * @Route("/set_post_seen/{id}", name="student_post_seen")
      */
-    public function postSeenAction(Request $request, PostRepository $postRepository)
+    public function postSeenAction(Request $request, Post $post)
     {
         if ($this->isGranted('ROLE_STUDENT')) {
-            $postId = $request->get('post_id');
-            $post = $postRepository->find((int)$postId);
-
             if ($post === null) {
                 return new Response(null, Response::HTTP_NOT_FOUND);
             }

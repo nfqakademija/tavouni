@@ -18,12 +18,9 @@ $("a[class *= 'title'], a[class *= 'timeline-badge']").click(function () {
         decrementCount();
         changeTitle();
         $.ajax ({
-            url: "/student/set_post_seen",
+            url: "/student/set_post_seen/" + panel.attr("id"),
             type: "POST",
             dataType: "json",
-            data: {
-                "post_id": panel.attr("id")
-            },
             async: true,
             error: function (xhr, thrownError) {
                 console.log(xhr.status);
