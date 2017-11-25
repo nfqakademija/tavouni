@@ -26,5 +26,6 @@ security:
         - { path: /_profiler/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/lecturer, role: ROLE_LECTURER}
         - { path: ^/student, role: ROLE_STUDENT}
+        - { path: ^/timetable, role: [ROLE_STUDENT, ROLE_LECTURER]}
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
