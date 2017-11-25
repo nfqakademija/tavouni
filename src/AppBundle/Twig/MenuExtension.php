@@ -66,7 +66,7 @@ class MenuExtension extends \Twig_Extension
                 [
                     'menuItems' => $menuItems,
                     'active' => $route,
-                    'count' => $this->calculateUnseenCount($user->getId())
+                    'count' => $this->calculateUnseenCount($user)
                 ]
             );
         }
@@ -105,13 +105,13 @@ class MenuExtension extends \Twig_Extension
         }
     }
 
-    public function calculateUnseenCount($userId)
+    public function calculateUnseenCount(User $user)
     {
-        $posts = $this->postRepository->getPostsForStudent($userId);
+        $posts = $this->postRepository->getPostsForStudent($user->getId());
 
         $count = 0;
         foreach ($posts as $post) {
-            if (count($post->getSeenByStudents()) === 0) {
+            if (!$post->getSeenByStudents()->contains($user->getStudent())) {
                 $count++;
             }
         }
