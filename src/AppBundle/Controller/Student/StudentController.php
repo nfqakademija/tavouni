@@ -52,7 +52,7 @@ class StudentController extends Controller
     }
 
     /**
-     * @Route("/set_post_seen/{id}", name="student_post_seen")
+     * @Route("/set-post-seen/{id}", name="student_post_seen")
      */
     public function postSeenAction(Request $request, Post $post)
     {
