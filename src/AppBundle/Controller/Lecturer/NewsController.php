@@ -42,18 +42,16 @@ class NewsController extends Controller
      */
     public function addPostAction(Request $request, Subject $subject)
     {
-        $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, null, [
+            'subject' => $subject,
+            'author' => $this->getUser()->getLecturer()
+        ]);
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $post->setSubject($subject);
-            $post->setAuthor($this->getUser()->getLecturer());
-            $post->setPublishedAt(new \DateTime());
-
             $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
+            $em->persist($form->getData());
             $em->flush();
             return $this->redirectToRoute('lecturer_show_posts', ['subject_id'=>$subject->getId()]);
         }
