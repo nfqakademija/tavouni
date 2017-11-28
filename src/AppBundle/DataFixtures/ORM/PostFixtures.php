@@ -26,12 +26,14 @@ class PostFixtures extends Fixture
         $generator = $this->container->get(Generator::class);
 
         for ($i = 0; $i < 10; $i++) {
-            $post = new Post();
-            $post->setSubject($this->getReference('KompArch'));
-            $post->setTitle($generator->text(30));
-            $post->setAuthor($this->getReference('LecturerAntanas'));
-            $post->setContent($generator->text(250));
-            $post->setPublishedAt(new \DateTime($generator->date()));
+            $post = new Post(
+                $generator->text(30),
+                $generator->text(250),
+                new \DateTime($generator->date()),
+                $this->getReference('KompArch'),
+                $this->getReference('LecturerAntanas')
+            );
+
             $manager->persist($post);
         }
         $manager->flush();
