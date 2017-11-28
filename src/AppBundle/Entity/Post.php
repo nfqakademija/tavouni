@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -66,6 +67,27 @@ class Post
      * @ORM\JoinTable(name="seen_posts_students")
      */
     private $seenByStudents;
+
+    /**
+     * Post constructor.
+     * @param int $id
+     * @param string $title
+     * @param string $content
+     * @param \DateTime $publishedAt
+     * @param Subject $subject
+     * @param Lecturer $author
+     * @param Collection $seenByStudents
+     */
+    public function __construct($title, $content, \DateTime $publishedAt, Subject $subject, Lecturer $author)
+    {
+        $this->title = $title;
+        $this->content = $content;
+        $this->publishedAt = $publishedAt;
+        $this->subject = $subject;
+        $this->author = $author;
+        $this->seenByStudents = new ArrayCollection();
+    }
+
 
     /**
      * Get id
