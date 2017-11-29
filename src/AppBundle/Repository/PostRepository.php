@@ -23,7 +23,8 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
 
     public function getPostsForStudent($id)
     {
-        return $this->_em->createQuery("SELECT p, a, su, l, g, st, u, se, COUNT(se) AS HIDDEN seenNum
+        return $this->_em->createQuery("SELECT p, a, su, l, g, st, u, se, 
+            CASE WHEN (st MEMBER OF p.seenByStudents) THEN 1 ELSE 0 END AS HIDDEN seen
             FROM AppBundle\Entity\Post p
             JOIN p.author a
             JOIN p.subject su
@@ -34,7 +35,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             LEFT JOIN p.seenByStudents se
             WHERE u.id = :id
             GROUP BY p, a, su, l, g, st, u, se
-            ORDER BY seenNum ASC, p.publishedAt DESC
+            ORDER BY seen ASC, p.publishedAt DESC
             ")->setParameter('id', $id)->getResult();
     }
 }
