@@ -30,7 +30,7 @@ class PostFixtures extends Fixture
                 $generator->text(30),
                 $generator->text(250),
                 new \DateTime($generator->date()),
-                $this->getReference('KompArch'),
+                $this->getReference('KompArchTeor'),
                 $this->getReference('LecturerAntanas')
             );
 
@@ -41,7 +41,7 @@ class PostFixtures extends Fixture
     public function getDependencies()
     {
         return [
-            SubjectFixtures::class,
+            LectureFixtures::class,
             LecturerFixtures::class,
         ];
     }

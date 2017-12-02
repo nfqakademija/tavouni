@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Lecture;
 use AppBundle\Entity\Lecturer;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Subject;
@@ -14,9 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PostType extends AbstractType
 {
     /**
-     * @var Subject
+     * @var Lecture
      */
-    private $subject;
+    private $lecture;
     /**
      * @var Lecturer
      */
@@ -24,7 +25,7 @@ class PostType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->subject = $options['subject'];
+        $this->lecture = $options['lecture'];
         $this->author = $options['author'];
 
         $builder
@@ -41,11 +42,11 @@ class PostType extends AbstractType
                     $form->get('title')->getData(),
                     $form->get('content')->getData(),
                     new \DateTime(),
-                    $this->subject,
+                    $this->lecture,
                     $this->author
                 );
             },
-            'subject' => null,
+            'lecture' => null,
             'author' => null
         ]);
     }

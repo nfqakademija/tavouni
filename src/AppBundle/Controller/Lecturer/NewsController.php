@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Lecturer;
 
+use AppBundle\Entity\Lecture;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\PostType;
@@ -14,8 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
- * @Route("/lecturer/{subject_id}")
- * @ParamConverter("subject", options={"mapping": {"subject_id" : "id"}})
+ * @Route("/lecturer/{lecture_id}")
+ * @ParamConverter("lecture", options={"mapping": {"lecture_id" : "id"}})
  */
 class NewsController extends Controller
 {
@@ -27,23 +28,23 @@ class NewsController extends Controller
     /**
      * @Route("/posts", name="lecturer_show_posts")
      */
-    public function showPostsAction(Subject $subject, TokenStorage $tokenStorage, PostRepository $postRepository)
+    public function showPostsAction(Lecture $lecture, TokenStorage $tokenStorage, PostRepository $postRepository)
     {
         $id = $tokenStorage->getToken()->getUser()->getId();
         $posts = $postRepository->getPostsByLecturer($id);
         return $this->render(':Lecturer/News:show_posts.html.twig', [
             'posts' => $posts,
-            'subject_id' =>$subject->getId()
+            'lecture_id' =>$lecture->getId()
         ]);
     }
 
     /**
      * @Route("/posts/new", name="lecturer_add_post")
      */
-    public function addPostAction(Request $request, Subject $subject)
+    public function addPostAction(Request $request, Lecture $lecture)
     {
         $form = $this->createForm(PostType::class, null, [
-            'subject' => $subject,
+            'lecture' => $lecture,
             'author' => $this->getUser()->getLecturer()
         ]);
         $form->handleRequest($request);
@@ -53,7 +54,7 @@ class NewsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($form->getData());
             $em->flush();
-            return $this->redirectToRoute('lecturer_show_posts', ['subject_id'=>$subject->getId()]);
+            return $this->redirectToRoute('lecturer_show_posts', ['lecture_id'=>$lecture->getId()]);
         }
 
         return $this->render(
@@ -68,12 +69,12 @@ class NewsController extends Controller
      * @Method("POST")
      * @ParamConverter("post", options={"mapping": {"post_id" : "id"}})
      */
-    public function deletePostAction(Request $request, Post $post, Subject $subject)
+    public function deletePostAction(Request $request, Post $post, Lecture $lecture)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
         $em->flush();
-        return $this->redirectToRoute('lecturer_show_posts', ['subject_id'=>$subject->getId()]);
+        return $this->redirectToRoute('lecturer_show_posts', ['lecture_id'=>$lecture->getId()]);
     }
 
     /**
@@ -82,7 +83,7 @@ class NewsController extends Controller
      * @Method({"GET", "POST"})
      * @ParamConverter("post", options={"mapping": {"post_id" : "id"}})
      */
-    public function editAction(Request $request, Post $post, Subject $subject)
+    public function editAction(Request $request, Post $post, Lecture $lecture)
     {
 
         $form = $this->createForm(PostType::class, $post);
@@ -90,7 +91,7 @@ class NewsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('lecturer_show_posts', ['subject_id'=>$subject->getId()]);
+            return $this->redirectToRoute('lecturer_show_posts', ['lecture_id'=>$lecture->getId()]);
         }
 
         return $this->render(':Lecturer/News:add_post.html.twig', [

@@ -67,7 +67,17 @@ class Lecture
      * @ORM\ManyToOne(targetEntity="LectureType")
      */
     private $lectureType;
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="lecture")
+     */
+    private $posts;
 
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -172,5 +182,27 @@ class Lecture
     public function setLectureType($lectureType)
     {
         $this->lectureType = $lectureType;
+    }
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param mixed $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+    /**
+     * @param Post $post
+     */
+    public function addPost(Post $post)
+    {
+        $this->posts[] = $post;
     }
 }

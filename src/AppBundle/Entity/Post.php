@@ -45,12 +45,12 @@ class Post
     private $publishedAt;
 
     /**
-     * @var Subject
+     * @var Lecture
      *
-     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="posts")
-     * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Lecture", inversedBy="posts")
+     * @ORM\JoinColumn(name="lecture_id", referencedColumnName="id")
      */
-    private $subject;
+    private $lecture;
 
     /**
      * @var Lecturer
@@ -74,16 +74,16 @@ class Post
      * @param string $title
      * @param string $content
      * @param \DateTime $publishedAt
-     * @param Subject $subject
+     * @param Lecture $lecture
      * @param Lecturer $author
      * @param Collection $seenByStudents
      */
-    public function __construct($title, $content, \DateTime $publishedAt, Subject $subject, Lecturer $author)
+    public function __construct($title, $content, \DateTime $publishedAt, Lecture $lecture, Lecturer $author)
     {
         $this->title = $title;
         $this->content = $content;
         $this->publishedAt = $publishedAt;
-        $this->subject = $subject;
+        $this->lecture = $lecture;
         $this->author = $author;
         $this->seenByStudents = new ArrayCollection();
     }
@@ -172,19 +172,19 @@ class Post
     }
 
     /**
-     * @return Subject
+     * @return Lecture
      */
-    public function getSubject()
+    public function getLecture()
     {
-        return $this->subject;
+        return $this->lecture;
     }
 
     /**
-     * @param Subject $subject
+     * @param Lecture $lecture
      */
-    public function setSubject($subject)
+    public function setLecture($lecture)
     {
-        $this->subject = $subject;
+        $this->lecture = $lecture;
     }
 
     /**
