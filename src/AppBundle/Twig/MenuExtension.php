@@ -8,6 +8,8 @@
 
 namespace AppBundle\Twig;
 
+use AppBundle\Entity\MenuChild;
+use AppBundle\Entity\MenuItem;
 use AppBundle\Entity\User;
 use AppBundle\Repository\LectureRepository;
 use AppBundle\Repository\PostRepository;
@@ -44,23 +46,19 @@ class MenuExtension extends \Twig_Extension
     {
         if ($user->hasRole('ROLE_STUDENT')) {
             $menuItems = [
-                [
-                    'route' => 'student_index',
-                    'title' => 'Pagrindinis',
-                    'children' => []
-                ],
-                [
-                    'route' => 'student_timetable',
-                    'title' => 'Tvarkaraštis',
-                    'children' => []
-                ],
-                [
-                    'route' => 'student_grades',
-                    'title' => 'Pažymiai',
-                    'children' => []
-                ]
+                new MenuItem(
+                    'student_index',
+                    'Pagrindinis'
+                ),
+                new MenuItem(
+                    'student_timetable',
+                    'Tvarkaraštis'
+                ),
+                new MenuItem(
+                    'student_grades',
+                    'Pažymiai'
+                )
             ];
-
             return $env->render(
                 'menu.html.twig',
                 [
@@ -75,25 +73,23 @@ class MenuExtension extends \Twig_Extension
             $lectures = $this->lectureRepository->getLecturesForLecturer($user->getId());
             $lectureItems = [];
             foreach ($lectures as $lecture) {
-                $lectureItems[] = [
-                    'title' => $lecture->getSubject()->getName(),
-                    'slug_name' => "lecture_id",
-                    'slug_value' => $lecture->getId()
-                ];
+                $lectureItems[] = new MenuChild(
+                    $lecture->getSubject()->getName(),
+                    'lecture_id',
+                    $lecture->getId()
+                );
             }
             $menuItems = [
-                [
-                    'route' => 'lecturer_index',
-                    'title' => 'Pagrindinis',
-                    'children' => []
-                ],
-                [
-                    'route' => 'lecturer_show_posts',
-                    'title' => 'Dėstomi dalykai',
-                    'children' => $lectureItems,
-                ]
+                new MenuItem(
+                    'lecturer_index',
+                    'Pagrindinis'
+                ),
+                new MenuItem(
+                    'lecturer_show_posts',
+                    'Dėstomi dalykai',
+                    $lectureItems
+                )
             ];
-
             return $env->render(
                 'menu.html.twig',
                 [

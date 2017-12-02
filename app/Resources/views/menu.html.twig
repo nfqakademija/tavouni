@@ -5,7 +5,7 @@
         </div>
         <ul class="nav navbar-nav">
             {% for i, item in menuItems %}
-                {% if item.children == [] %}
+                {% if not item.children  %}
                     <li{% if item.route == active %} class="active"{% endif%}>
                         <a href="{{ path(item.route) }}">{{item.title}}{% if i == 0 and count != 0 %} <span id="count" class="badge progress-bar-info blink">{{ count }}</span>{% endif %}</a>
                     </li>
@@ -16,7 +16,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {% for child in item.children %}
-                                <li><a href="{{ path(item.route, {(child.slug_name): child.slug_value})}}">{{ child.title }}</a></li>
+                                <li><a href="{{ path(item.route, {(child.slugName): child.slugValue})}}">{{ child.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>
