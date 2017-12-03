@@ -73,16 +73,15 @@ class Post
      * @param int $id
      * @param string $title
      * @param string $content
-     * @param \DateTime $publishedAt
      * @param Lecture $lecture
      * @param Lecturer $author
      * @param Collection $seenByStudents
      */
-    public function __construct($title, $content, \DateTime $publishedAt, Lecture $lecture, Lecturer $author)
+    public function __construct($title, $content, Lecture $lecture, Lecturer $author)
     {
         $this->title = $title;
         $this->content = $content;
-        $this->publishedAt = $publishedAt;
+        $this->publishedAt = new \DateTime();
         $this->lecture = $lecture;
         $this->author = $author;
         $this->seenByStudents = new ArrayCollection();

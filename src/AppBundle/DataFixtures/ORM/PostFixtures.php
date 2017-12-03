@@ -29,7 +29,6 @@ class PostFixtures extends Fixture
             $post = new Post(
                 $generator->text(30),
                 $generator->text(250),
-                new \DateTime($generator->date()),
                 $this->getReference('KompArchTeor'),
                 $this->getReference('LecturerAntanas')
             );

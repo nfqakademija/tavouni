@@ -41,7 +41,6 @@ class PostType extends AbstractType
                 return new Post(
                     $form->get('title')->getData(),
                     $form->get('content')->getData(),
-                    new \DateTime(),
                     $this->lecture,
                     $this->author
                 );
