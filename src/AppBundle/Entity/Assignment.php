@@ -58,6 +58,13 @@ class Assignment
      */
     private $grades;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deadline", type="date", nullable=true)
+     */
+    private $deadline;
+
 
     /**
      * Get id
@@ -195,5 +202,21 @@ class Assignment
     public function setAverage($average)
     {
         $this->average = $average;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeadline()
+    {
+        return $this->deadline;
+    }
+
+    /**
+     * @param \DateTime $deadline
+     */
+    public function setDeadline($deadline)
+    {
+        $this->deadline = $deadline;
     }
 }
