@@ -59,21 +59,29 @@ class Assignment
     private $grades;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deadline", type="date", nullable=true)
+     */
+    private $deadline;
+
+
+    /**
      * Assignment constructor.
      * @param Subject $subject
      * @param int $weight
      * @param string $name
      * @param LectureType $lectureType
      */
-    public function __construct(Subject $subject, $weight, $name, LectureType $lectureType)
+    public function __construct(Subject $subject, $weight, $name, LectureType $lectureType, $deadline = null)
     {
         $this->subject = $subject;
         $this->weight = $weight;
         $this->name = $name;
         $this->lectureType = $lectureType;
+        $this->deadline = $deadline;
     }
-
-
+    
     /**
      * Get id
      *
@@ -210,5 +218,21 @@ class Assignment
     public function setAverage($average)
     {
         $this->average = $average;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeadline()
+    {
+        return $this->deadline;
+    }
+
+    /**
+     * @param \DateTime $deadline
+     */
+    public function setDeadline($deadline)
+    {
+        $this->deadline = $deadline;
     }
 }
