@@ -1,14 +1,14 @@
-$("a[class *= 'title'], a[class *= 'timeline-badge']").click(function () {
+$("a[class *= 'title'], a[class *= 'vtimeline-badge']").click(function () {
     var panel;
     var badge;
     var icon;
-    if ($(this).hasClass('timeline-badge')) {
+    if ($(this).hasClass('vtimeline-badge')) {
         badge = $(this);
-        panel = badge.next(".timeline-panel")
+        panel = badge.next(".vtimeline-panel")
     }
     else {
-        panel = $(this).closest(".timeline-panel");
-        badge = panel.prev(".timeline-badge");
+        panel = $(this).closest(".vtimeline-panel");
+        badge = panel.prev(".vtimeline-badge");
     }
     icon = badge.children("i");
     if (panel.hasClass("bg-info")) {

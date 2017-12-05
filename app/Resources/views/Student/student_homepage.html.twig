@@ -62,23 +62,23 @@
                     <div class="page-header">
                         <h1 id="timeline">Naujienos</h1>
                     </div>
-                <ul class="timeline">
+                <ul class="vtimeline">
                     {% for i, post in posts %}
-                        <li {{ i % 2 == 1 ? 'class="timeline-inverted"'}}>
-                            <a class="timeline-badge {% if not (app.user.student in post.seenByStudents) %}info{% endif %}" data-toggle="collapse" href="#timeline-body-{{ post.id }}">
+                        <li {{ i % 2 == 1 ? 'class="vtimeline-inverted"'}}>
+                            <a class="vtimeline-badge {% if not (app.user.student in post.seenByStudents) %}info{% endif %}" data-toggle="collapse" href="#vtimeline-body-{{ post.id }}">
                                 <i class="glyphicon glyphicon-info-sign {% if not (app.user.student in post.seenByStudents) %}blink{% endif %}"></i>
                             </a>
-                            <div id="{{ post.id }}" class="timeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">
-                                        <a class="title" data-toggle="collapse" href="#timeline-body-{{ post.id }}">{{ post.title }}</a>
+                            <div id="{{ post.id }}" class="vtimeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
+                                <div class="vtimeline-heading">
+                                    <h4 class="vtimeline-title">
+                                        <a class="title" data-toggle="collapse" href="#vtimeline-body-{{ post.id }}">{{ post.title }}</a>
                                     </h4>
                                     <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ post.publishedAt|date('Y-m-d H:i') }}</small></p>
                                 </div>
-                                <div id='timeline-body-{{ post.id }}' class="timeline-body collapse">
+                                <div id='vtimeline-body-{{ post.id }}' class="vtimeline-body collapse">
                                     <p>{{ post.content | raw}}</p>
                                 </div>
-                                <div class="timeline-body">
+                                <div class="vtimeline-body">
                                     <p><a href= '/#'><small class="text-muted">{{ post.lecture.subject.name }}</small></a></p>
                                     <p><small class="text-muted">{{ post.author.name }}</small></p>
                                 </div>
