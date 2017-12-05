@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% form_theme postForm 'bootstrap_3_layout.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+{% endblock %}
 {% block body %}
     <center><h1>Pridėti atsiskaitymą</h1></center>
 
@@ -10,7 +13,15 @@
         {{ form_widget(postForm) }}
         <button type="submit" class="btn btn-primary">Pridėti</button>
         {{ form_end(postForm) }}
-
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $( function() {
+            $( ".js-datepicker" ).datepicker();
+        } );
+    </script>
 {% endblock %}
 

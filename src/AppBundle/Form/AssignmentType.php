@@ -15,6 +15,7 @@ use AppBundle\Entity\Subject;
 use AppBundle\Repository\LectureTypeRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -45,7 +46,17 @@ class AssignmentType extends AbstractType
                     /** @var LectureType $lectureType */
                     return ['class' => 'lectureType_'.strtolower($lectureType->getName())];
                 }
-                ]);
+                ])
+            ->add('deadline', DateType::class, array(
+                'widget' => 'single_text',
+
+                // do not render as type="date", to avoid HTML5 date pickers
+                'html5' => false,
+
+                // add a class that can be selected in JavaScript
+                'attr' => ['class' => 'js-datepicker'],
+                'format' => 'mm/dd/yyyy',
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -57,7 +68,8 @@ class AssignmentType extends AbstractType
                     $this->subject,
                     $form->get('weight')->getData(),
                     $form->get('name')->getData(),
-                    $form->get('lectureType')->getData()
+                    $form->get('lectureType')->getData(),
+                    $form->get('deadline')->getData()
                 );
             },
             'subject' => null,
