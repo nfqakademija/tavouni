@@ -8,8 +8,10 @@
 
 namespace AppBundle\Controller\Student;
 
+use AppBundle\Entity\Assignment;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\SubjectGrades;
+use AppBundle\Repository\AssignmentRepository;
 use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
 use AppBundle\Utils\SubjectGradeParser;
@@ -27,15 +29,19 @@ class StudentController extends Controller
     /**
      * @Route("", name="student_index")
      */
-    public function indexAction(Request $request, TokenStorage $tokenStorage, PostRepository $postRepository)
+    public function indexAction(TokenStorage $tokenStorage,
+                                PostRepository $postRepository,
+                                AssignmentRepository $assignmentRepository)
     {
         $id = $tokenStorage->getToken()->getUser()->getId();
         $posts = $postRepository->getPostsForStudent($id);
+        $assignments = $assignmentRepository->getAssignmentsByStudent($id);
         // replace this example code with whatever you need
         return $this->render(
             'Student/student_homepage.html.twig',
             [
-                'posts' =>$posts
+                'posts' => $posts,
+                'assignments' => $assignments
             ]
         );
     }

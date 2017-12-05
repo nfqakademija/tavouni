@@ -11,24 +11,17 @@
 {% block body %}
     <div class="container">
         <div class="row">
+
             <section class="cd-horizontal-timeline">
                 <div class="timeline">
                     <div class="events-wrapper">
                         <div class="events">
                             <ol>
-                                <li><a href="#0" data-date="16/01/2014" class="selected">01-16</a></li>
-                                <li><a href="#0" data-date="28/01/2014">01-17</a></li>
-                                <li><a href="#0" data-date="20/02/2014">02-20</a></li>
-                                <li><a href="#0" data-date="20/03/2014">03-20</a></li>
-                                <li><a href="#0" data-date="29/03/2014">03-29</a></li>
-                                <li><a href="#0" data-date="30/03/2014">03-30</a></li>
-                                <li><a href="#0" data-date="20/04/2014">04-20</a></li>
-                                <li><a href="#0" data-date="30/04/2014">04-30</a></li>
-                                <li><a href="#0" data-date="15/05/2014">05-15</a></li>
-                                <li><a href="#0" data-date="01/06/2014">06-01</a></li>
-                                <li><a href="#0" data-date="10/06/2014">06-10</a></li>
+                                <li><a href="" data-date="16/10/2017" class="selected">10-16</a></li>
+                                {% for assignment in assignments %}
+                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">{{ assignment.deadline|date('m-d') }}</a></li>
+                                {% endfor %}
                             </ol>
-
                             <span class="filling-line" aria-hidden="true"></span>
                         </div> <!-- .events -->
                     </div> <!-- .events-wrapper -->
@@ -46,6 +39,14 @@
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
                             </p>
                         </li>
+                        {% for assignment in assignments %}
+                            <li data-date="{{ assignment.deadline|date('d/m/Y') }}">
+                                <p>
+                                    {{ assignment.deadline|date('Y-m-d') }} {{ assignment.name }} {{ assignment.subject.name }}
+                                </p>
+                            </li>
+                        {% endfor %}
+
 
                         <li data-date="28/01/2014">
                             <p>

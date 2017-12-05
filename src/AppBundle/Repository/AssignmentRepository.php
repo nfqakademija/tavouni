@@ -19,7 +19,8 @@ class AssignmentRepository extends \Doctrine\ORM\EntityRepository
             JOIN l.group g
             JOIN g.students st
             JOIN st.user u
-            WHERE u.id = :id")->setParameter('id', $id)->getResult();
+            WHERE u.id = :id
+            ORDER BY a.deadline")->setParameter('id', $id)->getResult();
     }
     public function getAssignmentsGradesAverageByStudentGroup($id)
     {
