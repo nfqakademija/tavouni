@@ -21,10 +21,15 @@ class LectureTypeFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $lectureType = new LectureType();
-        $lectureType->setName("Teorija");
-        $manager->persist($lectureType);
+        $manager->persist($this->createLectureType('Teorija', 'Teorija'));
+        $manager->persist($this->createLectureType('Pratybos', 'Pratybos'));
         $manager->flush();
-        $this->addReference('Teorija', $lectureType);
+    }
+    private function createLectureType($name, $reference)
+    {
+        $lectureType = new LectureType();
+        $lectureType->setName($name);
+        $this->addReference($reference, $lectureType);
+        return $lectureType;
     }
 }

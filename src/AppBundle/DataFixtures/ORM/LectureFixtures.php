@@ -22,18 +22,20 @@ class LectureFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createLecture('PS1k', 'KompArch', 'LecturerAntanas', 'KompArchTeor'));
-        $manager->persist($this->createLecture('SM', 'SkaitiniaiMetodai', 'LecturerOlga', 'SMTeor'));
+        $manager->persist($this->createLecture('PS1k', 'KompArch', 'LecturerAntanas', 'KompArchTeor', 'Teorija'));
+        $manager->persist($this->createLecture('PS1k1g', 'KompArch', 'LecturerLinas', 'KompArch1g', 'Pratybos'));
+        $manager->persist($this->createLecture('PS1k2g', 'KompArch', 'LecturerAntanas', 'KompArch2g', 'Pratybos'));
+        $manager->persist($this->createLecture('SM', 'SkaitiniaiMetodai', 'LecturerOlga', 'SMTeor', 'Teorija'));
         $manager->flush();
     }
-    private function createLecture($group, $subject, $lecturer, $reference)
+    private function createLecture($group, $subject, $lecturer, $reference, $lectureType)
     {
         $lecture = new Lecture();
         $lecture->setRoom($this->getReference('101didl'));
         $lecture->setGroup($this->getReference($group));
         $lecture->setSubject($this->getReference($subject));
         $lecture->setLecturer($this->getReference($lecturer));
-        $lecture->setLectureType($this->getReference('Teorija'));
+        $lecture->setLectureType($this->getReference($lectureType));
         $this->addReference($reference, $lecture);
         return $lecture;
     }
