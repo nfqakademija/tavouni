@@ -1,4 +1,4 @@
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -7,9 +7,9 @@ Primary style
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-}
+/*html {*/
+  /*font-size: 62.5%;*/
+/*}*/
 
 body {
   font-size: 1.6rem;
@@ -23,9 +23,9 @@ a {
   text-decoration: none;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Main Components 
+Main Components
 
 -------------------------------- */
 .cd-horizontal-timeline {
@@ -80,7 +80,7 @@ Main Components
   position: absolute;
   z-index: 1;
   left: 0;
-  top: 49px;
+  top: 80px;
   height: 2px;
   /* width will be set using JavaScript */
   background: #dfdfdf;
