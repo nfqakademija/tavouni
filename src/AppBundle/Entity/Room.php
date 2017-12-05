@@ -44,6 +44,12 @@ class Room
      */
     private $lectures;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AssignmentEvent", mappedBy="room")
+     */
+    private $assignmentEvents;
 
     /**
      * Get id
@@ -85,6 +91,22 @@ class Room
     public function getLectures()
     {
         return $this->lectures;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAssignmentEvents(): ArrayCollection
+    {
+        return $this->assignmentEvents;
+    }
+
+    /**
+     * @param ArrayCollection $assignmentEvents
+     */
+    public function setAssignmentEvents(ArrayCollection $assignmentEvents)
+    {
+        $this->assignmentEvents = $assignmentEvents;
     }
 
     /**

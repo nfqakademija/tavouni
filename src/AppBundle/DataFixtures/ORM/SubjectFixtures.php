@@ -22,17 +22,24 @@ class SubjectFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createSubject('Kompiuterių architektūra', 'Privalomas', 'KompArch'));
-        $manager->persist($this->createSubject('Skaitiniai metodai', 'Pasirenkamasis', 'SkaitiniaiMetodai'));
+        $manager->persist($this->createSubject('Kompiuterių architektūra', 'Privalomas', 'KompArch', 'LecturerAntanas'));
+        $manager->persist($this->createSubject('Skaitiniai metodai', 'Pasirenkamasis', 'SkaitiniaiMetodai', 'LecturerOlga'));
         $manager->flush();
     }
 
-    private function createSubject($name, $type, $referenceName)
+    private function createSubject($name, $type, $referenceName, $coordinator)
     {
         $subject = new Subject();
         $subject->setName($name);
         $subject->setSubjectType($type);
+        $subject->setCoordinator($this->getReference($coordinator));
         $this->addReference($referenceName, $subject);
         return $subject;
+    }
+    public function getDependencies()
+    {
+        return [
+            LecturerFixtures::class,
+        ];
     }
 }

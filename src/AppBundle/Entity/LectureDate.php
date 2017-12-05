@@ -43,13 +43,6 @@ class LectureDate
      */
     private $lecture;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", nullable=true)
-     */
-    private $type;
-
 
     /**
      * Get id
@@ -107,21 +100,5 @@ class LectureDate
     public function setEnd($end)
     {
         $this->end = $end;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
     }
 }

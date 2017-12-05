@@ -50,6 +50,13 @@ class Subject
      */
     private $assignments;
 
+    /**
+     * @var Lecturer
+     *
+     * @ORM\ManyToOne(targetEntity="Lecturer", inversedBy="subjects")
+     * @ORM\JoinColumn(name="lecturer_id", referencedColumnName="id", nullable=false)
+     */
+    private $coordinator;
 
     /**
      * @return ArrayCollection
@@ -66,7 +73,6 @@ class Subject
     {
         $this->lectures = $lectures;
     }
-
 
     /**
      * Get id
@@ -124,6 +130,22 @@ class Subject
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Lecturer
+     */
+    public function getCoordinator(): Lecturer
+    {
+        return $this->coordinator;
+    }
+
+    /**
+     * @param Lecturer $coordinator
+     */
+    public function setCoordinator(Lecturer $coordinator)
+    {
+        $this->coordinator = $coordinator;
     }
 
     /**

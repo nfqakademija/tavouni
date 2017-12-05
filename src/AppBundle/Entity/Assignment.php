@@ -65,7 +65,13 @@ class Assignment
      */
     private $deadline;
 
-
+    /**
+     * @var AssignmentEvent
+     *
+     * @ORM\OneToOne(targetEntity="AssignmentEvent", inversedBy="assignment")
+     * @ORM\JoinColumn(name="assignment_event_id", referencedColumnName="id")
+     */
+    private $assignmentEvent;
     /**
      * Assignment constructor.
      * @param Subject $subject
@@ -73,13 +79,14 @@ class Assignment
      * @param string $name
      * @param LectureType $lectureType
      */
-    public function __construct(Subject $subject, $weight, $name, LectureType $lectureType, $deadline = null)
+    public function __construct(Subject $subject, $weight, $name, LectureType $lectureType, $deadline = null, $assignMentEvent = null)
     {
         $this->subject = $subject;
         $this->weight = $weight;
         $this->name = $name;
         $this->lectureType = $lectureType;
         $this->deadline = $deadline;
+        $this->assignmentEvent = $assignMentEvent;
     }
     
     /**
@@ -234,5 +241,21 @@ class Assignment
     public function setDeadline($deadline)
     {
         $this->deadline = $deadline;
+    }
+
+    /**
+     * @return AssignmentEvent
+     */
+    public function getAssignmentEvent(): AssignmentEvent
+    {
+        return $this->assignmentEvent;
+    }
+
+    /**
+     * @param AssignmentEvent $assignmentEvent
+     */
+    public function setAssignmentEvent(AssignmentEvent $assignmentEvent)
+    {
+        $this->assignmentEvent = $assignmentEvent;
     }
 }

@@ -14,8 +14,10 @@ use AppBundle\Entity\LectureType;
 use AppBundle\Entity\Subject;
 use AppBundle\Repository\LectureTypeRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,6 +58,17 @@ class AssignmentType extends AbstractType
                 // add a class that can be selected in JavaScript
                 'attr' => ['class' => 'js-datepicker'],
                 'format' => 'mm/dd/yyyy',
+            ))
+            ->add('protected', CheckboxType::class, array(
+                'attr' => ['class' => 'checkboxInput', 'checked' => false],
+                'label' => 'Pridėti tikslų laiką',
+                'required' => false,
+                'mapped' => false
+            ))
+            ->add('password', PasswordType::class, array(
+                'label' => 'Mot de passe',
+                'required' => false,
+                'attr' => ['style' => 'display:none;', 'class' => 'password']
             ));
     }
 

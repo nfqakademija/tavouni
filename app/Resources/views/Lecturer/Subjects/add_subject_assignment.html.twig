@@ -22,6 +22,12 @@
         $( function() {
             $( ".js-datepicker" ).datepicker();
         } );
+        $('.checkboxInput').click(function() {
+            if (this.checked) $('.password').show();
+            else $('.password').hide();
+            console.log(this.checked);
+        });
     </script>
+
 {% endblock %}
 
