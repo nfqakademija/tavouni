@@ -5,9 +5,58 @@
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/horizontal-timeline/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/horizontal-timeline/reset.css') }}">
 {% endblock %}
 {% block body %}
     <div class="container">
+        <div class="row">
+            <section class="cd-horizontal-timeline">
+                <div class="timeline">
+                    <div class="events-wrapper">
+                        <div class="events">
+                            <ol>
+                                <li><a href="#0" data-date="16/01/2014" class="selected">01-16</a></li>
+                                <li><a href="#0" data-date="28/01/2014">01-17</a></li>
+                                <li><a href="#0" data-date="20/02/2014">02-20</a></li>
+                                <li><a href="#0" data-date="20/03/2014">03-20</a></li>
+                                <li><a href="#0" data-date="29/03/2014">03-29</a></li>
+                                <li><a href="#0" data-date="30/03/2014">03-30</a></li>
+                                <li><a href="#0" data-date="20/04/2014">04-20</a></li>
+                                <li><a href="#0" data-date="30/04/2014">04-30</a></li>
+                                <li><a href="#0" data-date="15/05/2014">05-15</a></li>
+                                <li><a href="#0" data-date="01/06/2014">06-01</a></li>
+                                <li><a href="#0" data-date="10/06/2014">06-10</a></li>
+                            </ol>
+
+                            <span class="filling-line" aria-hidden="true"></span>
+                        </div> <!-- .events -->
+                    </div> <!-- .events-wrapper -->
+
+                    <ul class="cd-timeline-navigation">
+                        <li><a href="#0" class="prev inactive">Prev</a></li>
+                        <li><a href="#0" class="next">Next</a></li>
+                    </ul> <!-- .cd-timeline-navigation -->
+                </div> <!-- .timeline -->
+
+                <div class="events-content">
+                    <ol>
+                        <li class="selected" data-date="16/01/2014">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                            </p>
+                        </li>
+
+                        <li data-date="28/01/2014">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                            </p>
+                        </li>
+                    </ol>
+                </div> <!-- .events-content -->
+            </section>
+
+        </div>
         <div class="row">
             <div class="col-md-8">
                     <div class="page-header">
@@ -52,4 +101,5 @@
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/oneDayCalendar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/horizontal-timeline.js') }}"></script>
 {% endblock %}
