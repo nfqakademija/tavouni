@@ -19,7 +19,11 @@
                             <ol>
                                 <li><a href="" data-date="16/10/2017" class="selected">10-16</a></li>
                                 {% for assignment in assignments %}
-                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">{{ assignment.deadline|date('m-d') }}</a></li>
+                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
+                                            <p>{{ assignment.subject.name }}</p>
+                                            <p>{{ assignment.name }}</p>
+                                            {{ assignment.deadline|date('m-d') }}
+                                        </a></li>
                                 {% endfor %}
                             </ol>
                             <span class="filling-line" aria-hidden="true"></span>
@@ -32,29 +36,6 @@
                     </ul> <!-- .cd-timeline-navigation -->
                 </div> <!-- .timeline -->
 
-                <div class="events-content">
-                    <ol>
-                        <li class="selected" data-date="16/01/2014">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                            </p>
-                        </li>
-                        {% for assignment in assignments %}
-                            <li data-date="{{ assignment.deadline|date('d/m/Y') }}">
-                                <p>
-                                    {{ assignment.deadline|date('Y-m-d') }} {{ assignment.name }} {{ assignment.subject.name }}
-                                </p>
-                            </li>
-                        {% endfor %}
-
-
-                        <li data-date="28/01/2014">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                            </p>
-                        </li>
-                    </ol>
-                </div> <!-- .events-content -->
             </section>
 
         </div>
