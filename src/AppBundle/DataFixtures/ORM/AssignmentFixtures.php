@@ -22,20 +22,16 @@ class AssignmentFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createAssignment('Egzaminas', 'KompArch', 60, 'KompArchEgz'));
-        $manager->persist($this->createAssignment('Kontrolinis', 'KompArch', 40, 'KompArchKont'));
-        $manager->persist($this->createAssignment('Egzaminas', 'SkaitiniaiMetodai', 60, 'SMEgz'));
-        $manager->persist($this->createAssignment('1 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM1l'));
-        $manager->persist($this->createAssignment('2 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM2l'));
+        $manager->persist($this->createAssignment('Egzaminas', 'KompArch', 60, 'KompArchEgz', new \DateTime('2017-12-07')));
+        $manager->persist($this->createAssignment('Kontrolinis', 'KompArch', 40, 'KompArchKont', new \DateTime('2017-12-10')));
+        $manager->persist($this->createAssignment('Egzaminas', 'SkaitiniaiMetodai', 60, 'SMEgz', new \DateTime('2017-12-15')));
+        $manager->persist($this->createAssignment('1 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM1l', new \DateTime('2017-12-20')));
+        $manager->persist($this->createAssignment('2 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM2l', new \DateTime('2017-12-22')));
         $manager->flush();
     }
-    private function createAssignment($name, $subject, $weight, $reference)
+    private function createAssignment($name, $subject, $weight, $reference, $date)
     {
-        $assignment = new Assignment();
-        $assignment->setName($name);
-        $assignment->setLectureType($this->getReference('Teorija'));
-        $assignment->setSubject($this->getReference($subject));
-        $assignment->setWeight($weight);
+        $assignment = new Assignment($this->getReference($subject), $weight, $name, $this->getReference('Teorija'), $date);
         $this->addReference($reference, $assignment);
         return $assignment;
     }
