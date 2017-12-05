@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
- * @Route("/lecturer/{lecture_id}")
+ * @Route("/lecturer/lecture/{lecture_id}")
  * @ParamConverter("lecture", options={"mapping": {"lecture_id" : "id"}})
  */
 class NewsController extends Controller
@@ -31,10 +31,16 @@ class NewsController extends Controller
     public function showPostsAction(Lecture $lecture, TokenStorage $tokenStorage, PostRepository $postRepository)
     {
         $id = $tokenStorage->getToken()->getUser()->getId();
+        $isMainLecture = false;
+        if ($lecture->getLectureType()->getName() === 'Teorija') {
+            $isMainLecture = true;
+        }
         $posts = $postRepository->getPostsByLecturer($id);
         return $this->render(':Lecturer/News:show_posts.html.twig', [
             'posts' => $posts,
-            'lecture_id' =>$lecture->getId()
+            'lecture_id' =>$lecture->getId(),
+            'isMainLecture' => $isMainLecture,
+            'subject_id' => $lecture->getSubject()->getId(),
         ]);
     }
 

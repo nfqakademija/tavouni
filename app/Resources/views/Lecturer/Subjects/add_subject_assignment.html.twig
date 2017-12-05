@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme postForm 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <center><h1>Pridėti atsiskaitymą</h1></center>
+
+    <div class="container">
+        {{ form_start(postForm) }}
+        {{ form_widget(postForm) }}
+        <button type="submit" class="btn btn-primary">Pridėti</button>
+        {{ form_end(postForm) }}
+
+    </div>
+{% endblock %}
+

@@ -58,6 +58,21 @@ class Assignment
      */
     private $grades;
 
+    /**
+     * Assignment constructor.
+     * @param Subject $subject
+     * @param int $weight
+     * @param string $name
+     * @param LectureType $lectureType
+     */
+    public function __construct(Subject $subject, $weight, $name, LectureType $lectureType)
+    {
+        $this->subject = $subject;
+        $this->weight = $weight;
+        $this->name = $name;
+        $this->lectureType = $lectureType;
+    }
+
 
     /**
      * Get id

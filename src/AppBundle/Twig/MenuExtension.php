@@ -74,7 +74,7 @@ class MenuExtension extends \Twig_Extension
             $lectureItems = [];
             foreach ($lectures as $lecture) {
                 $lectureItems[] = new MenuChild(
-                    $lecture->getSubject()->getName(),
+                    $lecture->getSubject()->getName().' - '.$lecture->getLectureType()->getName(),
                     'lecture_id',
                     $lecture->getId()
                 );
