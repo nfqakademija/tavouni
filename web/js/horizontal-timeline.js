@@ -71,6 +71,7 @@ jQuery(document).ready(function($){
 
 	function addTodayEvent(timelineComponents) {
 		var today = new Date();
+		today.setHours(0,0,0,0);
         var year = today.getFullYear();
 
         var month = (1 + today.getMonth()).toString();
@@ -78,8 +79,13 @@ jQuery(document).ready(function($){
 
         var day = today.getDate().toString();
         day = day.length > 1 ? day : '0' + day;
-
 		for(var i = 0; i < timelineComponents['timelineDates'].length; i++) {
+			if (today.getTime() === timelineComponents['timelineDates'][i].getTime()) {
+				// console.log('===');
+				timelineComponents['timelineEvents'].eq(i).addClass('selected');
+				timelineComponents['timelineEvents'].eq(i).children('.deadline-date').css('font-weight', 'bold');
+                break;
+			}
 			if (today < timelineComponents['timelineDates'][i]) {
 				timelineComponents['timelineEvents'].eq(i).parent()
 					.before('<li><a class="selected" href="" data-date="' + day + '/' + month + '/' + year + '" style="left: 8550px;">' +

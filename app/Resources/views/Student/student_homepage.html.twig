@@ -21,7 +21,7 @@
                                     <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
                                             <p>{{ assignment.subject.name }}</p>
                                             <p>{{ assignment.name }}</p>
-                                            {{ assignment.deadline|date('m-d') }}
+                                            <span class="deadline-date">{{ assignment.deadline|date('m-d') }}
                                         </a></li>
                                 {% endfor %}
                             </ol>
