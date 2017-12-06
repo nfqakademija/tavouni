@@ -11,8 +11,8 @@ $("a[class *= 'title'], a[class *= 'vtimeline-badge']").click(function () {
         badge = panel.prev(".vtimeline-badge");
     }
     icon = badge.children("i");
-    if (panel.hasClass("bg-info")) {
-        panel.removeClass("bg-info");
+    if (panel.hasClass("post-content-unseen")) {
+        panel.removeClass("post-content-unseen");
         badge.removeClass("info");
         icon.removeClass("blink");
         decrementCount();

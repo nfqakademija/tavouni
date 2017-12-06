@@ -53,7 +53,7 @@
                             <a class="vtimeline-badge {% if not (app.user.student in post.seenByStudents) %}info{% endif %}" data-toggle="collapse" href="#vtimeline-body-{{ post.id }}">
                                 <i class="glyphicon glyphicon-info-sign {% if not (app.user.student in post.seenByStudents) %}blink{% endif %}"></i>
                             </a>
-                            <div id="{{ post.id }}" class="vtimeline-panel {% if not (app.user.student in post.seenByStudents) %}bg-info{% endif %}">
+                            <div id="{{ post.id }}" class="vtimeline-panel {% if not (app.user.student in post.seenByStudents) %}post-content-unseen{% endif %}">
                                 <div class="vtimeline-heading">
                                     <h4 class="vtimeline-title">
                                         <a class="title" data-toggle="collapse" href="#vtimeline-body-{{ post.id }}">{{ post.title }}</a>

@@ -27,12 +27,21 @@
 .deadline-subject {
     margin-bottom: 5px;
 }
+
 /*---------------------------*/
 
 /* vertical-timeline */
 
 .vtimeline-body > p {
     margin-bottom: 5px;
+}
+
+.post-content-unseen {
+    background-color: #d9edf7;
+}
+
+.post-content-unseen::after {
+    border-left-color: #d9edf7 !important;
 }
 
 /*---------------------------*/
