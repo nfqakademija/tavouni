@@ -30,6 +30,13 @@ class AssignmentFixtures extends Fixture
             new \DateTime('2017-10-16')
         ));
         $manager->persist($this->createAssignment(
+            'Kontrolinis',
+            'KompArch',
+            40,
+            'KompArchKont',
+            new \DateTime('2017-12-06')
+        ));
+        $manager->persist($this->createAssignment(
             'Egzaminas',
             'KompArch',
             60,
@@ -37,32 +44,32 @@ class AssignmentFixtures extends Fixture
             new \DateTime('2017-12-07')
         ));
         $manager->persist($this->createAssignment(
-            'Kontrolinis',
-            'KompArch',
-            40,
-            'KompArchKont',
-            new \DateTime('2017-12-10')
-        ));
-        $manager->persist($this->createAssignment(
             'Egzaminas',
             'SkaitiniaiMetodai',
             60,
             'SMEgz',
-            new \DateTime('2017-12-15')
+            new \DateTime('2017-12-07')
         ));
         $manager->persist($this->createAssignment(
             '2 laboratorinis darbas',
             'SkaitiniaiMetodai',
             20,
             'SM2l',
-            new \DateTime('2017-12-21')
+            new \DateTime('2017-12-07')
         ));
         $manager->persist($this->createAssignment(
             '3 laboratorinis darbas',
             'SkaitiniaiMetodai',
             20,
             'SM3l',
-            new \DateTime('2017-12-22')
+            new \DateTime('2017-12-08')
+        ));
+        $manager->persist($this->createAssignment(
+            '4 laboratorinis darbas',
+            'SkaitiniaiMetodai',
+            20,
+            'SM4l',
+            new \DateTime('2017-12-20')
         ));
         $manager->flush();
     }
