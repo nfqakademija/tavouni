@@ -11,6 +11,10 @@
     bottom: 20px;
 }
 
+.cd-horizontal-timeline .events-wrapper::before, .cd-horizontal-timeline .events-wrapper::after {
+    background-image: none;
+}
+
 .cd-timeline-navigation a {
     top: auto;
     bottom: -10px; !important;
@@ -25,6 +29,13 @@
 }
 /*---------------------------*/
 
+/* vertical-timeline */
+
+.vtimeline-body > p {
+    margin-bottom: 5px;
+}
+
+/*---------------------------*/
 .blink {
     animation: blinker 0.5s linear infinite;
 }
