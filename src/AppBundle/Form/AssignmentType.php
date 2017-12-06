@@ -143,7 +143,8 @@ class AssignmentType extends AbstractType
             'rooms' => null,
         ]);
     }
-    private function timeToDate($time, $datetime) {
+    private function timeToDate($time, $datetime)
+    {
         $interval = new DateInterval('PT'.$time->format('H').'H'.$time->format('i').'M');
         $date = clone $datetime;
         return $date->add($interval);
