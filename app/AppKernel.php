@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new \FOS\UserBundle\FOSUserBundle(),
             new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Sg\DatatablesBundle\SgDatatablesBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
