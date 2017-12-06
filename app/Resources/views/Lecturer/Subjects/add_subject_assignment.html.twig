@@ -58,7 +58,7 @@
                             roomDiv = roomDiv + "<option value="+'{{ i }}'+" class='lectureType_"+ roomName.toLowerCase() +"'>"+ roomName +"</option>";
                         {% endfor %}
                         roomDiv = roomDiv + "</select></div>";
-                        var start = "<div class='form-group'><label class='control-label required' for='assignment_start'>Start</label><input id='assignment_start' name='assignment[start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'></div>"
+                        var start = "<div class='form-group' id='start'><label class='control-label required' for='assignment_start'>Start</label><input id='assignment_start' name='assignment[start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'></div>"
                         $("#assignment").append(roomDiv);
                         $("#assignment").append(start);
                         //$('#start').timepicker({ 'timeFormat': 'H:i', 'step': 15 });

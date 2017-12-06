@@ -14,6 +14,7 @@ use AppBundle\Entity\LectureType;
 use AppBundle\Entity\Room;
 use AppBundle\Entity\Subject;
 use AppBundle\Repository\LectureTypeRepository;
+use DateInterval;
 use Ivory\CKEditorBundle\Exception\Exception;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\AbstractType;
@@ -66,7 +67,7 @@ class AssignmentType extends AbstractType
 
                 // add a class that can be selected in JavaScript
                 'attr' => ['class' => 'js-datepicker'],
-                'format' => 'mm/dd/yyyy',
+                'format' => 'MM/dd/yyyy',
             ))
             ->add('moreOptions', CheckboxType::class, array(
                 'attr' => ['checked' => false],
@@ -121,17 +122,25 @@ class AssignmentType extends AbstractType
                 if ($checked) {
                     //echo($form->get('start')->getData());
                     //throw new \Exception();
+                    $start = $form->get('start')->getData();
+
+                    $minutes = $start->format('i');
+                    $asd = new DateInterval('PT'.$start->format('H').'H'.$minutes.'M');
+                    echo $start->format('i');
                     $room = $form->get('rooms')->getData();
+                    //throw new Exception();
+                    $deadline = $form->get('deadline')->getData();
                     $assignmentEvent = new AssignmentEvent();
                     $assignmentEvent->setRoom($room);
-                    $assignmentEvent->setStart(new \DateTime());
+                    $assignmentEvent->setStart($deadline->add($asd));
                     $assignmentEvent->setEnd(new \DateTime());
+                    //$assignmentEvent->setStart(new \DateTime());
                     return new Assignment(
                         $this->subject,
                         $form->get('weight')->getData(),
                         $form->get('name')->getData(),
                         $form->get('lectureType')->getData(),
-                        $form->get('deadline')->getData(),
+                        $deadline,
                         $assignmentEvent
                     );
                 }
