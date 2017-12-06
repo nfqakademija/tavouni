@@ -14,6 +14,7 @@ use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\AssignmentRepository;
 use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
+use AppBundle\Utils\AssignmentsGroupFactory;
 use AppBundle\Utils\SubjectGradeParser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,18 +33,20 @@ class StudentController extends Controller
     public function indexAction(
         TokenStorage $tokenStorage,
         PostRepository $postRepository,
-        AssignmentRepository $assignmentRepository
+        AssignmentRepository $assignmentRepository,
+        AssignmentsGroupFactory $assignmentsGroupFactory
     ) {
     
         $id = $tokenStorage->getToken()->getUser()->getId();
         $posts = $postRepository->getPostsForStudent($id);
         $assignments = $assignmentRepository->getAssignmentsByStudent($id);
+        $assignmentsGroups = $assignmentsGroupFactory->createAssignmentsGroupCollection($assignments);
         // replace this example code with whatever you need
         return $this->render(
             'Student/student_homepage.html.twig',
             [
                 'posts' => $posts,
-                'assignments' => $assignments
+                'assignmentsGroups' => $assignmentsGroups
             ]
         );
     }

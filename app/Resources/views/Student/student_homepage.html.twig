@@ -17,12 +17,15 @@
                     <div class="events-wrapper">
                         <div class="events">
                             <ol>
-                                {% for i, assignment in assignments %}
-                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
-                                            <p>{{ assignment.subject.name }}</p>
-                                            <p>{{ assignment.name }}</p>
-                                            <span class="deadline-date">{{ assignment.deadline|date('m-d') }}
-                                        </a></li>
+                                {% for i, assignmentsGroup in assignmentsGroups %}
+                                    <li><a href="" data-date="{{ assignmentsGroup.date|date('d/m/Y') }}">
+                                            {% for assignment in assignmentsGroup.assignments %}
+                                                <p>{{ assignment.subject.name }}</p>
+                                                {#<p>{{ assignment.name }}</p>#}
+                                            {% endfor %}
+                                            <span class="deadline-date">{{ assignmentsGroup.date|date('m-d') }}</span>
+                                        </a>
+                                    </li>
                                 {% endfor %}
                             </ol>
                             <span class="filling-line" aria-hidden="true"></span>
