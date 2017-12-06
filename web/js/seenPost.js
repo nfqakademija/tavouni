@@ -37,13 +37,21 @@ $(function () {
 
 function changeTitle() {
     var count = $('span#count').text();
-    if (count !== null) {
+    console.log(count);
+    if (count > 0) {
         document.title = '(' + count + ') ' + 'TavoUni';
     } else {
       document.title = 'TavoUni';
     }
 }
+
 function decrementCount() {
     var count = $('span#count').text();
-    $('span#count').text(count - 1);
+
+    if (count > 1) {
+        $('span#count').text(count - 1);
+    } else {
+        console.log('remove');
+        $('span#count').remove();
+    }
 }
