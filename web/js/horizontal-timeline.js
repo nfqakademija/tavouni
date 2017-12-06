@@ -84,14 +84,14 @@ jQuery(document).ready(function($){
                 translateValue = translateValue > 0 ? 0 : translateValue;
                 translateTimeline(timelineComponents, translateValue);
             }
-			slide = !isAnyVisibleDates(timelineComponents, translateValue);
+			slide = !isAnyVisibleDates(timelineComponents, translateValue, wrapperWidth - eventsMinDistance);
 		}
 	}
 
-    function isAnyVisibleDates(timelineComponents, value) {
+    function isAnyVisibleDates(timelineComponents, value, range) {
         for (i = 0; i < timelineComponents['timelineEvents'].length; i++) {
             var position = Number(timelineComponents['timelineEvents'].eq(i).css('left').replace('px', ''));
-            if (position > -value && position < -value + 940) {
+            if (position > -value && position < -value + range) {
                 return true;
             }
         }
