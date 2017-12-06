@@ -75,11 +75,12 @@ jQuery(document).ready(function($){
 		while (slide) {
             if (string == 'next') {
                 translateValue = translateValue - wrapperWidth + eventsMinDistance;
+                //do not translate more than timeline width
                 translateValue = translateValue < wrapperWidth - timelineTotWidth ? wrapperWidth - timelineTotWidth : translateValue;
-
                 translateTimeline(timelineComponents, translateValue, wrapperWidth - timelineTotWidth)
             } else {
             	translateValue = translateValue + wrapperWidth - eventsMinDistance;
+                //only negative translate value
                 translateValue = translateValue > 0 ? 0 : translateValue;
                 translateTimeline(timelineComponents, translateValue);
             }
@@ -130,8 +131,8 @@ jQuery(document).ready(function($){
 
 	function translateTimeline(timelineComponents, value, totWidth) {
 		var eventsWrapper = timelineComponents['eventsWrapper'].get(0);
-		value = (value > 0) ? 0 : value; //only negative translate value
-		value = ( !(typeof totWidth === 'undefined') &&  value < totWidth ) ? totWidth : value; //do not translate more than timeline width
+		value = (value > 0) ? 0 : value;
+		value = ( !(typeof totWidth === 'undefined') &&  value < totWidth ) ? totWidth : value;
 		setTransformValue(eventsWrapper, 'translateX', value+'px');
 		//update navigation arrows visibility
 		(value == 0 ) ? timelineComponents['timelineNavigation'].find('.prev').addClass('inactive') : timelineComponents['timelineNavigation'].find('.prev').removeClass('inactive');
