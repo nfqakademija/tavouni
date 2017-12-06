@@ -1,6 +1,6 @@
 jQuery(document).ready(function($){
 	var timelines = $('.cd-horizontal-timeline'),
-		eventsMinDistance = 10;
+		eventsMinDistance = 150;
 
 	(timelines.length > 0) && initTimeline(timelines);
 
@@ -14,9 +14,11 @@ jQuery(document).ready(function($){
 			timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
 			timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
 			timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
-			timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
+			addTodayEvent(timelineComponents);
+            timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
 			timelineComponents['timelineNavigation'] = timeline.find('.cd-timeline-navigation');
 			timelineComponents['eventsContent'] = timeline.children('.events-content');
+
 
 			//assign a left postion to the single events along the timeline
 			setDatePosition(timelineComponents, eventsMinDistance);
@@ -63,18 +65,76 @@ jQuery(document).ready(function($){
 					showNewContent(timelineComponents, timelineTotWidth, 'next');
 				}
 			});
+            translateToToday(timelineComponents);
 		});
+	}
+
+	function addTodayEvent(timelineComponents) {
+		var today = new Date();
+		today.setHours(0,0,0,0);
+        var year = today.getFullYear();
+
+        var month = (1 + today.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+
+        var day = today.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+		for(var i = 0; i < timelineComponents['timelineDates'].length; i++) {
+			if (today.getTime() === timelineComponents['timelineDates'][i].getTime()) {
+				// console.log('===');
+				timelineComponents['timelineEvents'].eq(i).addClass('selected');
+				timelineComponents['timelineEvents'].eq(i).children('.deadline-date').css('font-weight', 'bold');
+                break;
+			}
+			if (today < timelineComponents['timelineDates'][i]) {
+				timelineComponents['timelineEvents'].eq(i).parent()
+					.before('<li><a class="selected" href="" data-date="' + day + '/' + month + '/' + year + '" style="left: 8550px;">' +
+						'<p>' + 'Šiandien' + '</p>' +
+						'<strong>' + month + '-' + day + '</strong>' +
+						'</a></li>');
+				break;
+			}
+		}
+        timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
+        timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
+	}
+
+	function translateToToday(timelineComponents) {
+		todayPx = Number(timelineComponents['eventsWrapper'].find('.selected').css('left').replace('px', ''));
+		translateTimeline(timelineComponents, -todayPx + eventsMinDistance);
 	}
 
 	function updateSlide(timelineComponents, timelineTotWidth, string) {
 		//retrieve translateX value of timelineComponents['eventsWrapper']
 		var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
 			wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
-		//translate the timeline to the left('next')/right('prev') 
-		(string == 'next') 
-			? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
-			: translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
+		//translate the timeline to the left('next')/right('prev')
+		var slide = true;
+		while (slide) {
+            if (string == 'next') {
+                translateValue = translateValue - wrapperWidth + eventsMinDistance;
+                //do not translate more than timeline width
+                translateValue = translateValue < wrapperWidth - timelineTotWidth ? wrapperWidth - timelineTotWidth : translateValue;
+                translateTimeline(timelineComponents, translateValue, wrapperWidth - timelineTotWidth)
+            } else {
+            	translateValue = translateValue + wrapperWidth - eventsMinDistance;
+                //only negative translate value
+                translateValue = translateValue > 0 ? 0 : translateValue;
+                translateTimeline(timelineComponents, translateValue);
+            }
+			slide = !isAnyVisibleDates(timelineComponents, translateValue, wrapperWidth - eventsMinDistance);
+		}
 	}
+
+    function isAnyVisibleDates(timelineComponents, value, range) {
+        for (i = 0; i < timelineComponents['timelineEvents'].length; i++) {
+            var position = Number(timelineComponents['timelineEvents'].eq(i).css('left').replace('px', ''));
+            if (position > -value && position < -value + range) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	function showNewContent(timelineComponents, timelineTotWidth, string) {
 		//go from one event to the next/previous one
@@ -109,8 +169,8 @@ jQuery(document).ready(function($){
 
 	function translateTimeline(timelineComponents, value, totWidth) {
 		var eventsWrapper = timelineComponents['eventsWrapper'].get(0);
-		value = (value > 0) ? 0 : value; //only negative translate value
-		value = ( !(typeof totWidth === 'undefined') &&  value < totWidth ) ? totWidth : value; //do not translate more than timeline width
+		value = (value > 0) ? 0 : value;
+		value = ( !(typeof totWidth === 'undefined') &&  value < totWidth ) ? totWidth : value;
 		setTransformValue(eventsWrapper, 'translateX', value+'px');
 		//update navigation arrows visibility
 		(value == 0 ) ? timelineComponents['timelineNavigation'].find('.prev').addClass('inactive') : timelineComponents['timelineNavigation'].find('.prev').removeClass('inactive');
@@ -128,7 +188,7 @@ jQuery(document).ready(function($){
 	}
 
 	function setDatePosition(timelineComponents, min) {
-		for (i = 0; i < timelineComponents['timelineDates'].length; i++) { 
+		for (i = 0; i < timelineComponents['timelineDates'].length; i++) {
 		    var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
 		    	distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
 		    timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
@@ -230,11 +290,12 @@ jQuery(document).ready(function($){
 	function minLapse(dates) {
 		//determine the minimum distance among events
 		var dateDistances = [];
-		for (i = 1; i < dates.length; i++) { 
+		for (i = 1; i < dates.length; i++) {
 		    var distance = daydiff(dates[i-1], dates[i]);
 		    dateDistances.push(distance);
 		}
-		return Math.min.apply(null, dateDistances);
+		var days = 1;
+		return days * 86400000;
 	}
 
 	/*

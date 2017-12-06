@@ -4,9 +4,9 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/horizontal-timeline/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/horizontal-timeline/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 {% endblock %}
 {% block body %}
     <div class="container">
@@ -17,9 +17,12 @@
                     <div class="events-wrapper">
                         <div class="events">
                             <ol>
-                                <li><a href="" data-date="16/10/2017" class="selected">10-16</a></li>
-                                {% for assignment in assignments %}
-                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">{{ assignment.deadline|date('m-d') }}</a></li>
+                                {% for i, assignment in assignments %}
+                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
+                                            <p>{{ assignment.subject.name }}</p>
+                                            <p>{{ assignment.name }}</p>
+                                            <span class="deadline-date">{{ assignment.deadline|date('m-d') }}
+                                        </a></li>
                                 {% endfor %}
                             </ol>
                             <span class="filling-line" aria-hidden="true"></span>
@@ -32,29 +35,6 @@
                     </ul> <!-- .cd-timeline-navigation -->
                 </div> <!-- .timeline -->
 
-                <div class="events-content">
-                    <ol>
-                        <li class="selected" data-date="16/01/2014">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                            </p>
-                        </li>
-                        {% for assignment in assignments %}
-                            <li data-date="{{ assignment.deadline|date('d/m/Y') }}">
-                                <p>
-                                    {{ assignment.deadline|date('Y-m-d') }} {{ assignment.name }} {{ assignment.subject.name }}
-                                </p>
-                            </li>
-                        {% endfor %}
-
-
-                        <li data-date="28/01/2014">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                            </p>
-                        </li>
-                    </ol>
-                </div> <!-- .events-content -->
             </section>
 
         </div>
