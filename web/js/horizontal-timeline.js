@@ -85,16 +85,11 @@ jQuery(document).ready(function($){
             }
 			slide = !isAnyVisibleDates(timelineComponents, translateValue);
 		}
-		console.log('getTranlateValue=' + getTranslateValue(timelineComponents['eventsWrapper']));
-		// if (!isAnyVisibleDates(timelineComponents, newTranslateValue)) {
-		// 	updateSlide(timelineComponents, timelineTotWidth, string);
-		// }
 	}
 
     function isAnyVisibleDates(timelineComponents, value) {
         for (i = 0; i < timelineComponents['timelineEvents'].length; i++) {
             var position = Number(timelineComponents['timelineEvents'].eq(i).css('left').replace('px', ''));
-            console.log('position=' + position);
             if (position > -value && position < -value + 940) {
                 return true;
             }
