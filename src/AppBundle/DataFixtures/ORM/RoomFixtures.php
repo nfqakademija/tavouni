@@ -26,7 +26,8 @@ class RoomFixtures extends Fixture
         $manager->persist($this->createRoom('101', 'Didl', '101didl'));
         $manager->flush();
     }
-    private function createRoom($no, $building, $ref) {
+    private function createRoom($no, $building, $ref)
+    {
         $room = new Room();
         $room->setNo($no);
         $room->setBuilding($this->getReference($building));

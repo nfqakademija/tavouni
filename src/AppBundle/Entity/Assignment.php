@@ -79,8 +79,14 @@ class Assignment
      * @param string $name
      * @param LectureType $lectureType
      */
-    public function __construct(Subject $subject, $weight, $name, LectureType $lectureType, $deadline = null, $assignmentEvent = null)
-    {
+    public function __construct(
+        Subject $subject,
+        $weight,
+        $name,
+        LectureType $lectureType,
+        $deadline = null,
+        $assignmentEvent = null
+    ) {
         $this->subject = $subject;
         $this->weight = $weight;
         $this->name = $name;

@@ -8,7 +8,6 @@
 
 namespace AppBundle\Controller\Lecturer;
 
-
 use AppBundle\Entity\Subject;
 use AppBundle\Form\AssignmentType;
 use AppBundle\Repository\LectureTypeRepository;

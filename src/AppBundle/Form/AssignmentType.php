@@ -8,7 +8,6 @@
 
 namespace AppBundle\Form;
 
-
 use AppBundle\Entity\Assignment;
 use AppBundle\Entity\AssignmentEvent;
 use AppBundle\Entity\LectureType;

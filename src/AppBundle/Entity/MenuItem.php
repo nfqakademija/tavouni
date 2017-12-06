@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-
 class MenuItem
 {
     private $route;

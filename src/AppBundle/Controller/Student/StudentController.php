@@ -29,10 +29,12 @@ class StudentController extends Controller
     /**
      * @Route("", name="student_index")
      */
-    public function indexAction(TokenStorage $tokenStorage,
-                                PostRepository $postRepository,
-                                AssignmentRepository $assignmentRepository)
-    {
+    public function indexAction(
+        TokenStorage $tokenStorage,
+        PostRepository $postRepository,
+        AssignmentRepository $assignmentRepository
+    ) {
+    
         $id = $tokenStorage->getToken()->getUser()->getId();
         $posts = $postRepository->getPostsForStudent($id);
         $assignments = $assignmentRepository->getAssignmentsByStudent($id);

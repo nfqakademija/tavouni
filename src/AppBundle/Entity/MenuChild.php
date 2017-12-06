@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-
 class MenuChild
 {
     private $title;

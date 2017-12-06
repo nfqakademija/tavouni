@@ -123,4 +123,3 @@ class AssignmentEvent
         $this->assignment = $assignment;
     }
 }
-

@@ -22,17 +22,59 @@ class AssignmentFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createAssignment('1 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM1l', new \DateTime('2017-10-16')));
-        $manager->persist($this->createAssignment('Egzaminas', 'KompArch', 60, 'KompArchEgz', new \DateTime('2017-12-07')));
-        $manager->persist($this->createAssignment('Kontrolinis', 'KompArch', 40, 'KompArchKont', new \DateTime('2017-12-10')));
-        $manager->persist($this->createAssignment('Egzaminas', 'SkaitiniaiMetodai', 60, 'SMEgz', new \DateTime('2017-12-15')));
-        $manager->persist($this->createAssignment('2 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM2l', new \DateTime('2017-12-21')));
-        $manager->persist($this->createAssignment('3 laboratorinis darbas', 'SkaitiniaiMetodai', 20, 'SM3l', new \DateTime('2017-12-22')));
+        $manager->persist($this->createAssignment(
+            '1 laboratorinis darbas',
+            'SkaitiniaiMetodai',
+            20,
+            'SM1l',
+            new \DateTime('2017-10-16')
+        ));
+        $manager->persist($this->createAssignment(
+            'Egzaminas',
+            'KompArch',
+            60,
+            'KompArchEgz',
+            new \DateTime('2017-12-07')
+        ));
+        $manager->persist($this->createAssignment(
+            'Kontrolinis',
+            'KompArch',
+            40,
+            'KompArchKont',
+            new \DateTime('2017-12-10')
+        ));
+        $manager->persist($this->createAssignment(
+            'Egzaminas',
+            'SkaitiniaiMetodai',
+            60,
+            'SMEgz',
+            new \DateTime('2017-12-15')
+        ));
+        $manager->persist($this->createAssignment(
+            '2 laboratorinis darbas',
+            'SkaitiniaiMetodai',
+            20,
+            'SM2l',
+            new \DateTime('2017-12-21')
+        ));
+        $manager->persist($this->createAssignment(
+            '3 laboratorinis darbas',
+            'SkaitiniaiMetodai',
+            20,
+            'SM3l',
+            new \DateTime('2017-12-22')
+        ));
         $manager->flush();
     }
     private function createAssignment($name, $subject, $weight, $reference, $date)
     {
-        $assignment = new Assignment($this->getReference($subject), $weight, $name, $this->getReference('Teorija'), $date);
+        $assignment = new Assignment(
+            $this->getReference($subject),
+            $weight,
+            $name,
+            $this->getReference('Teorija'),
+            $date
+        );
         $this->addReference($reference, $assignment);
         return $assignment;
     }

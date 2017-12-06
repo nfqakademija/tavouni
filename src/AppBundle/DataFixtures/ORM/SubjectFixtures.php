@@ -22,8 +22,18 @@ class SubjectFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createSubject('Kompiuterių architektūra', 'Privalomas', 'KompArch', 'LecturerAntanas'));
-        $manager->persist($this->createSubject('Skaitiniai metodai', 'Pasirenkamasis', 'SkaitiniaiMetodai', 'LecturerOlga'));
+        $manager->persist($this->createSubject(
+            'Kompiuterių architektūra',
+            'Privalomas',
+            'KompArch',
+            'LecturerAntanas'
+        ));
+        $manager->persist($this->createSubject(
+            'Skaitiniai metodai',
+            'Pasirenkamasis',
+            'SkaitiniaiMetodai',
+            'LecturerOlga'
+        ));
         $manager->flush();
     }
 
