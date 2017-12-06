@@ -17,9 +17,8 @@
                     <div class="events-wrapper">
                         <div class="events">
                             <ol>
-                                <li><a href="" data-date="16/10/2017" class="selected">10-16</a></li>
-                                {% for assignment in assignments %}
-                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
+                                {% for i, assignment in assignments %}
+                                    <li><a {{ i == 0 ? 'class="selected"' : '' }}href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
                                             <p>{{ assignment.subject.name }}</p>
                                             <p>{{ assignment.name }}</p>
                                             {{ assignment.deadline|date('m-d') }}
