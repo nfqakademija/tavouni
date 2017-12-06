@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\Common\Collections\Collection;
 
 class AssignmentsGroup
