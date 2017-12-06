@@ -89,3 +89,7 @@ services:
     Faker\Generator:
         factory: 'Faker\Factory:create'
         public: true
+
+#    app.datatable.assignment:
+#        class: AppBundle\Datatables\AssignmentDatatable
+#        parent: sg_datatables.datatable.abstract
