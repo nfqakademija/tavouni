@@ -59,8 +59,10 @@
                         {% endfor %}
                         roomDiv = roomDiv + "</select></div>";
                         var start = "<div class='form-group' id='start'><label class='control-label required' for='assignment_start'>Start</label><input id='assignment_start' name='assignment[start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'></div>"
+                        var end = "<div class='form-group' id='end'><label class='control-label required' for='assignment_end'>End</label><input id='assignment_end' name='assignment[end]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'></div>"
                         $("#assignment").append(roomDiv);
                         $("#assignment").append(start);
+                        $("#assignment").append(end);
                         //$('#start').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
                         $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
                     }
@@ -68,6 +70,8 @@
                         var item = document.getElementById("room");
                         item.parentNode.removeChild(item);
                         var item = document.getElementById("start");
+                        item.parentNode.removeChild(item);
+                        var item = document.getElementById("end");
                         item.parentNode.removeChild(item);
                     }
                 }

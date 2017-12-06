@@ -50,8 +50,22 @@ class AssignmentEvent
     private $assignment;
 
     /**
+     * AssignmentEvent constructor.
+     * @param \DateTime $start
+     * @param \DateTime $end
+     * @param Room $room
+     */
+    public function __construct(\DateTime $start, \DateTime $end, Room $room)
+    {
+        $this->start = $start;
+        $this->end = $end;
+        $this->room = $room;
+    }
+
+    /**
      * @return \DateTime
      */
+
     public function getStart(): \DateTime
     {
         return $this->start;
