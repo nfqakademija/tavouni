@@ -4,6 +4,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.css">
 {% endblock %}
 {% block body %}
     <center><h1>Pridėti atsiskaitymą</h1></center>
@@ -18,14 +19,59 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js"></script>
     <script>
         $( function() {
             $( ".js-datepicker" ).datepicker();
         } );
-        $('.checkboxInput').click(function() {
-            if (this.checked) $('.password').show();
-            else $('.password').hide();
-            console.log(this.checked);
+        $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+//        $('.checkboxInput').click(function() {
+//            if (this.checked) $('.password').show();
+//            else $('.password').hide();
+//            console.log(this.checked);
+//        });
+        var $checkboxInput = $('#assignment_moreOptions');
+        // When sport gets selected ...
+        $checkboxInput.change(function() {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('postForm');
+            var checked = this.checked;
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            //data[$checkboxInput.attr('name')] = $checkboxInput.val();
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+
+                success: function(html) {
+
+                    if (checked) {
+
+                        var roomDiv = "<div class='form-group' id='room'>"+
+                            "<label class='control-label required' for='assignment_rooms'>Rooms</label>"+
+                            "<select id='assignment_rooms' name='assignment[rooms]' class='form-control'>";
+                        //roomDiv = roomDiv + "<option value='0' class='lectureType_101'>101</option>";
+                        {% for i, room in rooms %}
+                            var roomName = '{{ room.no }}'+' '+'{{ room.building.name }}';
+                            roomDiv = roomDiv + "<option value="+'{{ i }}'+" class='lectureType_"+ roomName.toLowerCase() +"'>"+ roomName +"</option>";
+                        {% endfor %}
+                        roomDiv = roomDiv + "</select></div>";
+                        var start = "<div class='form-group'><label class='control-label required' for='assignment_start'>Start</label><input id='assignment_start' name='assignment[start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'></div>"
+                        $("#assignment").append(roomDiv);
+                        $("#assignment").append(start);
+                        //$('#start').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+                        $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+                    }
+                    else {
+                        var item = document.getElementById("room");
+                        item.parentNode.removeChild(item);
+                        var item = document.getElementById("start");
+                        item.parentNode.removeChild(item);
+                    }
+                }
+            });
         });
     </script>
 

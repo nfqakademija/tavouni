@@ -22,12 +22,16 @@ class RoomFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $room = new Room();
-        $room->setNo('101');
-        $room->setBuilding($this->getReference('Didl'));
-        $manager->persist($room);
+        $manager->persist($this->createRoom('102', 'Didl', '102didl'));
+        $manager->persist($this->createRoom('101', 'Didl', '101didl'));
         $manager->flush();
-        $this->addReference('101didl', $room);
+    }
+    private function createRoom($no, $building, $ref) {
+        $room = new Room();
+        $room->setNo($no);
+        $room->setBuilding($this->getReference($building));
+        $this->addReference($ref, $room);
+        return $room;
     }
     public function getDependencies()
     {

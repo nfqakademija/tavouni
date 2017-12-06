@@ -74,6 +74,11 @@ services:
                             arguments:
                                 - AppBundle\Entity\LectureType
 
+    AppBundle\Repository\RoomRepository:
+                                factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+                                arguments:
+                                    - AppBundle\Entity\Room
+
     Faker\Factory: ~
 
     Faker\Generator:

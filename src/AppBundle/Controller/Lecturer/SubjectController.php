@@ -12,6 +12,7 @@ namespace AppBundle\Controller\Lecturer;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\AssignmentType;
 use AppBundle\Repository\LectureTypeRepository;
+use AppBundle\Repository\RoomRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,12 +39,15 @@ class SubjectController extends Controller
     public function addAssignmentAction(
         Request $request,
         Subject $subject,
-        LectureTypeRepository $lectureTypeRepository
+        LectureTypeRepository $lectureTypeRepository,
+        RoomRepository $roomRepository
     ) {
         $lectureTypes = $lectureTypeRepository->findAll();
+        $rooms = $roomRepository->findAll();
         $form = $this->createForm(AssignmentType::class, null, [
             'subject' => $subject,
-            'lectureTypes' => $lectureTypes
+            'lectureTypes' => $lectureTypes,
+            'rooms' => $rooms,
         ]);
         $form->handleRequest($request);
 
@@ -58,7 +62,8 @@ class SubjectController extends Controller
         return $this->render(
             'Lecturer/Subjects/add_subject_assignment.html.twig',
             [
-                'postForm' => $form->createView()
+                'postForm' => $form->createView(),
+                'rooms' => $rooms,
             ]
         );
     }
