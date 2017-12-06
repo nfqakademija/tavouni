@@ -38,4 +38,11 @@ class AssignmentRepository extends \Doctrine\ORM\EntityRepository
             GROUP BY a1
           ")->setParameter('id', $id)->getResult();
     }
+    public function getSubjectAssignments($id)
+    {
+        return $this->_em->createQuery("SELECT a
+            FROM AppBundle\Entity\Assignment a
+            JOIN a.subject s
+            WHERE s.id = :id")->setParameter('id', $id)->getResult();
+    }
 }
