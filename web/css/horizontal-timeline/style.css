@@ -80,7 +80,7 @@ Main Components
   position: absolute;
   z-index: 1;
   left: 0;
-  top: 80px;
+  top: 49px;
   height: 2px;
   /* width will be set using JavaScript */
   background: #dfdfdf;

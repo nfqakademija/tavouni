@@ -15,6 +15,7 @@ jQuery(document).ready(function($){
 			timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
 			timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
 			addTodayEvent(timelineComponents);
+			changeTimelineHeight(timelineComponents['eventsWrapper']);
             timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
 			timelineComponents['timelineNavigation'] = timeline.find('.cd-timeline-navigation');
 			timelineComponents['eventsContent'] = timeline.children('.events-content');
@@ -102,6 +103,18 @@ jQuery(document).ready(function($){
 	function translateToToday(timelineComponents) {
 		todayPx = Number(timelineComponents['eventsWrapper'].find('.selected').css('left').replace('px', ''));
 		translateTimeline(timelineComponents, -todayPx + eventsMinDistance);
+	}
+
+	function changeTimelineHeight(eventWrapper) {
+		var lis = eventWrapper.find('li');
+		var most = 1;
+		for(var i = 0; i < lis.length; i++) {
+			var count = lis.eq(i).attr('data-count')
+			if (count > most) {
+				most = count;
+			}
+		}
+		timelines.eq(0).find('.timeline').css('height', 55 + 16 * most + 'px')
 	}
 
 	function updateSlide(timelineComponents, timelineTotWidth, string) {
