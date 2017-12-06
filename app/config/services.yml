@@ -79,6 +79,11 @@ services:
                                 arguments:
                                     - AppBundle\Entity\Room
 
+    AppBundle\Repository\AssignmentEventRepository:
+                                    factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+                                    arguments:
+                                        - AppBundle\Entity\AssignmentEvent
+
     Faker\Factory: ~
 
     Faker\Generator:

@@ -14,6 +14,7 @@ use AppBundle\Entity\LectureType;
 use AppBundle\Entity\Room;
 use AppBundle\Entity\Subject;
 use AppBundle\Repository\LectureTypeRepository;
+use DateInterval;
 use Ivory\CKEditorBundle\Exception\Exception;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\AbstractType;
@@ -60,13 +61,9 @@ class AssignmentType extends AbstractType
                 ])
             ->add('deadline', DateType::class, array(
                 'widget' => 'single_text',
-
-                // do not render as type="date", to avoid HTML5 date pickers
                 'html5' => false,
-
-                // add a class that can be selected in JavaScript
                 'attr' => ['class' => 'js-datepicker'],
-                'format' => 'mm/dd/yyyy',
+                'format' => 'MM/dd/yyyy',
             ))
             ->add('moreOptions', CheckboxType::class, array(
                 'attr' => ['checked' => false],
@@ -74,13 +71,6 @@ class AssignmentType extends AbstractType
                 'required' => false,
                 'mapped' => false
             ));
-
-
-//            ->add('password', PasswordType::class, array(
-//                'label' => 'Mot de passe',
-//                'required' => false,
-//                'attr' => ['style' => 'display:none;', 'class' => 'password']
-//            ));
 
         $builder->get('moreOptions')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $checked = $event->getData();
@@ -103,8 +93,12 @@ class AssignmentType extends AbstractType
                         'input'  => 'datetime',
                         'widget' => 'single_text',
                         'html5' => false,
-
-                        // add a class that can be selected in JavaScript
+                        'attr' => ['class' => 'js-timepicker'],
+                        'mapped' => false,
+                    ))->add('end', TimeType::class, array(
+                        'input'  => 'datetime',
+                        'widget' => 'single_text',
+                        'html5' => false,
                         'attr' => ['class' => 'js-timepicker'],
                         'mapped' => false,
                     ));
@@ -119,20 +113,21 @@ class AssignmentType extends AbstractType
             'empty_data' => function (FormInterface $form) {
                 $checked = $form->get('moreOptions')->getData();
                 if ($checked) {
-                    //echo($form->get('start')->getData());
-                    //throw new \Exception();
+                    $start = $form->get('start')->getData();
+                    $end = $form->get('end')->getData();
                     $room = $form->get('rooms')->getData();
-                    $assignmentEvent = new AssignmentEvent();
-                    $assignmentEvent->setRoom($room);
-                    $assignmentEvent->setStart(new \DateTime());
-                    $assignmentEvent->setEnd(new \DateTime());
+                    $deadline = $form->get('deadline')->getData();
                     return new Assignment(
                         $this->subject,
                         $form->get('weight')->getData(),
                         $form->get('name')->getData(),
                         $form->get('lectureType')->getData(),
-                        $form->get('deadline')->getData(),
-                        $assignmentEvent
+                        $deadline,
+                        new AssignmentEvent(
+                            $this->timeToDate($start, $deadline),
+                            $this->timeToDate($end, $deadline),
+                            $room
+                        )
                     );
                 }
                 return new Assignment(
@@ -147,5 +142,11 @@ class AssignmentType extends AbstractType
             'lectureTypes' => null,
             'rooms' => null,
         ]);
+    }
+    private function timeToDate($time, $datetime)
+    {
+        $interval = new DateInterval('PT'.$time->format('H').'H'.$time->format('i').'M');
+        $date = clone $datetime;
+        return $date->add($interval);
     }
 }

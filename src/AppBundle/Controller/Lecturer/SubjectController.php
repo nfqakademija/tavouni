@@ -8,10 +8,13 @@
 
 namespace AppBundle\Controller\Lecturer;
 
+use AppBundle\Entity\Assignment;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\AssignmentType;
+use AppBundle\Repository\AssignmentRepository;
 use AppBundle\Repository\LectureTypeRepository;
 use AppBundle\Repository\RoomRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,10 +29,12 @@ class SubjectController extends Controller
     /**
      * @Route("/assignments", name="lecturer_assignments")
      */
-    public function showAssignmentsAction(Subject $subject)
+    public function showAssignmentsAction(Subject $subject, AssignmentRepository $assignmentRepository)
     {
+        $assignments = $assignmentRepository->getSubjectAssignments($subject->getId());
         return $this->render('Lecturer/Subjects/show_subject_assignments.html.twig', [
-            'subject_id' => $subject->getId(),
+            'subject' => $subject,
+            'assignments' => $assignments,
         ]);
     }
     /**
