@@ -18,7 +18,7 @@
                         <div class="events">
                             <ol>
                                 {% for i, assignment in assignments %}
-                                    <li><a {{ i == 0 ? 'class="selected"' : '' }}href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
+                                    <li><a href="" data-date="{{ assignment.deadline|date('d/m/Y') }}">
                                             <p>{{ assignment.subject.name }}</p>
                                             <p>{{ assignment.name }}</p>
                                             {{ assignment.deadline|date('m-d') }}

@@ -14,9 +14,11 @@ jQuery(document).ready(function($){
 			timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
 			timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
 			timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
-			timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
+			addTodayEvent(timelineComponents);
+            timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
 			timelineComponents['timelineNavigation'] = timeline.find('.cd-timeline-navigation');
 			timelineComponents['eventsContent'] = timeline.children('.events-content');
+
 
 			//assign a left postion to the single events along the timeline
 			setDatePosition(timelineComponents, eventsMinDistance);
@@ -63,7 +65,37 @@ jQuery(document).ready(function($){
 					showNewContent(timelineComponents, timelineTotWidth, 'next');
 				}
 			});
+            translateToToday(timelineComponents);
 		});
+	}
+
+	function addTodayEvent(timelineComponents) {
+		var today = new Date();
+        var year = today.getFullYear();
+
+        var month = (1 + today.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+
+        var day = today.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+
+		for(var i = 0; i < timelineComponents['timelineDates'].length; i++) {
+			if (today < timelineComponents['timelineDates'][i]) {
+				timelineComponents['timelineEvents'].eq(i).parent()
+					.before('<li><a class="selected" href="" data-date="' + day + '/' + month + '/' + year + '" style="left: 8550px;">' +
+						'<p>' + 'Šiandien' + '</p>' +
+						'<strong>' + month + '-' + day + '</strong>' +
+						'</a></li>');
+				break;
+			}
+		}
+        timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
+        timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
+	}
+
+	function translateToToday(timelineComponents) {
+		todayPx = Number(timelineComponents['eventsWrapper'].find('.selected').css('left').replace('px', ''));
+		translateTimeline(timelineComponents, -todayPx + eventsMinDistance);
 	}
 
 	function updateSlide(timelineComponents, timelineTotWidth, string) {
