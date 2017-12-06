@@ -1,3 +1,7 @@
+.events a {
+    text-decoration: none;
+}
+
 .blink {
     animation: blinker 0.5s linear infinite;
 }
