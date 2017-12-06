@@ -38,14 +38,14 @@ class AssignmentEvent
     /**
      * @var Room
      *
-     * @ORM\ManyToOne(targetEntity="Room", inversedBy="assignment_events")
+     * @ORM\ManyToOne(targetEntity="Room", inversedBy="assignmentEvents")
      * @ORM\JoinColumn(name="room_id", referencedColumnName="id", nullable=false)
      */
     private $room;
     /**
      * @var Assignment
      *
-     * @ORM\OneToOne(targetEntity="Assignment", mappedBy="assignment")
+     * @ORM\OneToOne(targetEntity="Assignment", mappedBy="assignmentEvent")
      */
     private $assignment;
 

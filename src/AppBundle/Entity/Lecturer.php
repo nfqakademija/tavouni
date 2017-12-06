@@ -51,6 +51,28 @@ class Lecturer
      */
     private $user;
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getSubjects(): ArrayCollection
+    {
+        return $this->subjects;
+    }
+
+    /**
+     * @param ArrayCollection $subjects
+     */
+    public function setSubjects(ArrayCollection $subjects)
+    {
+        $this->subjects = $subjects;
+    }
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Subject", mappedBy="coordinator")
+     */
+    private $subjects;
 
     public function __construct()
     {
