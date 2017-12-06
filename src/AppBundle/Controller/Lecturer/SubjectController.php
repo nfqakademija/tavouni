@@ -9,11 +9,13 @@
 namespace AppBundle\Controller\Lecturer;
 
 use AppBundle\Entity\Assignment;
+use AppBundle\Entity\Grade;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\AssignmentType;
 use AppBundle\Repository\AssignmentRepository;
 use AppBundle\Repository\LectureTypeRepository;
 use AppBundle\Repository\RoomRepository;
+use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -44,7 +46,8 @@ class SubjectController extends Controller
         Request $request,
         Subject $subject,
         LectureTypeRepository $lectureTypeRepository,
-        RoomRepository $roomRepository
+        RoomRepository $roomRepository,
+        StudentRepository $studentRepository
     ) {
         $lectureTypes = $lectureTypeRepository->findAll();
         $rooms = $roomRepository->findAll();
@@ -57,8 +60,17 @@ class SubjectController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $assignment = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($form->getData());
+            $em->persist($assignment);
+            $students = $studentRepository->getSubjectStudents($assignment->getSubject()->getId());
+            foreach ($students as $student) {
+                $em->persist(new Grade(
+                    $assignment,
+                    $student,
+                    0
+                ));
+            }
             $em->flush();
             return $this->redirectToRoute('lecturer_assignments', ['subject_id'=>$subject->getId()]);
         }

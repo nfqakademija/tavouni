@@ -36,6 +36,19 @@ class Grade
     private $value;
 
     /**
+     * Grade constructor.
+     * @param Assignment $assignment
+     * @param Student $student
+     * @param int $value
+     */
+    public function __construct(Assignment $assignment, Student $student, $value)
+    {
+        $this->assignment = $assignment;
+        $this->student = $student;
+        $this->value = $value;
+    }
+
+    /**
      * Set assignment
      *
      * @param Assignment $assignment

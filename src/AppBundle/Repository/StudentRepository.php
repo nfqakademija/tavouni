@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class StudentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getSubjectStudents($id)
+    {
+        return $this->_em->createQuery("SELECT st
+            FROM AppBundle\Entity\Student st
+            JOIN st.groups g
+            JOIN g.lectures l
+            JOIN l.subject su
+            where su.id = :id
+            ")->setParameter('id', $id)->getResult();
+    }
 }
