@@ -70,11 +70,37 @@ jQuery(document).ready(function($){
 		//retrieve translateX value of timelineComponents['eventsWrapper']
 		var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
 			wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
-		//translate the timeline to the left('next')/right('prev') 
-		(string == 'next') 
-			? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
-			: translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
+		//translate the timeline to the left('next')/right('prev')
+		var slide = true;
+		while (slide) {
+            if (string == 'next') {
+                translateValue = translateValue - wrapperWidth + eventsMinDistance;
+                translateValue = translateValue < wrapperWidth - timelineTotWidth ? wrapperWidth - timelineTotWidth : translateValue;
+
+                translateTimeline(timelineComponents, translateValue, wrapperWidth - timelineTotWidth)
+            } else {
+            	translateValue = translateValue + wrapperWidth - eventsMinDistance;
+                translateValue = translateValue > 0 ? 0 : translateValue;
+                translateTimeline(timelineComponents, translateValue);
+            }
+			slide = !isAnyVisibleDates(timelineComponents, translateValue);
+		}
+		console.log('getTranlateValue=' + getTranslateValue(timelineComponents['eventsWrapper']));
+		// if (!isAnyVisibleDates(timelineComponents, newTranslateValue)) {
+		// 	updateSlide(timelineComponents, timelineTotWidth, string);
+		// }
 	}
+
+    function isAnyVisibleDates(timelineComponents, value) {
+        for (i = 0; i < timelineComponents['timelineEvents'].length; i++) {
+            var position = Number(timelineComponents['timelineEvents'].eq(i).css('left').replace('px', ''));
+            console.log('position=' + position);
+            if (position > -value && position < -value + 940) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	function showNewContent(timelineComponents, timelineTotWidth, string) {
 		//go from one event to the next/previous one
