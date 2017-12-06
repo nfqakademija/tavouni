@@ -18,13 +18,14 @@
                         <div class="events">
                             <ol>
                                 {% for i, assignmentsGroup in assignmentsGroups %}
-                                    <li data-count="{{ assignmentsGroup.assignments|length }}"><a href="" data-date="{{ assignmentsGroup.date|date('d/m/Y') }}">
+                                    <li data-count="{{ assignmentsGroup.assignments|length }}">
+                                        <div class="event-content" href="" data-date="{{ assignmentsGroup.date|date('d/m/Y') }}">
                                             {% for assignment in assignmentsGroup.assignments %}
-                                                <p class="deadline-subject">{{ assignment.subject.name }}</p>
+                                                <p href="" title="{{ assignment.subject.name }}<br>{{ assignment.name }}" class="deadline-subject"><a href="">{{ assignment.subject.name }}</a></p>
                                                 {#<p>{{ assignment.name }}</p>#}
                                             {% endfor %}
                                             <span class="deadline-date">{{ assignmentsGroup.date|date('m-d') }}</span>
-                                        </a>
+                                        </div>
                                     </li>
                                 {% endfor %}
                             </ol>
@@ -79,11 +80,12 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+    {#<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>#}
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/oneDayCalendar.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/horizontal-timeline.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/deadlinehover.js') }}"></script>
 {% endblock %}

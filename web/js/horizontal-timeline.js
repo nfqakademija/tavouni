@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
 			timelineComponents['timelineWrapper'] = timeline.find('.events-wrapper');
 			timelineComponents['eventsWrapper'] = timelineComponents['timelineWrapper'].children('.events');
 			timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
-			timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
+			timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('div.event-content');
 			timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
 			addTodayEvent(timelineComponents);
 			changeTimelineHeight(timelineComponents['eventsWrapper']);
@@ -39,7 +39,7 @@ jQuery(document).ready(function($){
 				updateSlide(timelineComponents, timelineTotWidth, 'prev');
 			});
 			//detect click on the a single event - show new event content
-			timelineComponents['eventsWrapper'].on('click', 'a', function(event){
+			timelineComponents['eventsWrapper'].on('click', 'div.event-content', function(event){
 				event.preventDefault();
 				timelineComponents['timelineEvents'].removeClass('selected');
 				$(this).addClass('selected');
@@ -89,14 +89,14 @@ jQuery(document).ready(function($){
 			}
 			if (today < timelineComponents['timelineDates'][i]) {
 				timelineComponents['timelineEvents'].eq(i).parent()
-					.before('<li><a class="selected" href="" data-date="' + day + '/' + month + '/' + year + '" style="left: 8550px;">' +
+					.before('<li><div class="event-content selected" href="" data-date="' + day + '/' + month + '/' + year + '" style="left: 8550px;">' +
 						'<p>' + 'Šiandien' + '</p>' +
 						'<strong>' + month + '-' + day + '</strong>' +
-						'</a></li>');
+						'</div></li>');
 				break;
 			}
 		}
-        timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
+        timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('div.event-content');
         timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
 	}
 
@@ -109,7 +109,7 @@ jQuery(document).ready(function($){
 		var lis = eventWrapper.find('li');
 		var most = 1;
 		for(var i = 0; i < lis.length; i++) {
-			var count = lis.eq(i).attr('data-count')
+			var count = lis.eq(i).attr('data-count');
 			if (count > most) {
 				most = count;
 			}
@@ -156,7 +156,7 @@ jQuery(document).ready(function($){
 
 		if ( newContent.length > 0 ) { //if there's a next/prev event - show it
 			var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
-				newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
+				newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('div.event-content') : selectedDate.parent('li').prev('li').children('div.event-content');
 			
 			updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
 			updateVisibleContent(newEvent, timelineComponents['eventsContent']);
@@ -214,8 +214,8 @@ jQuery(document).ready(function($){
 			timeSpanNorm = Math.round(timeSpanNorm) + 4,
 			totalWidth = timeSpanNorm*width;
 		timelineComponents['eventsWrapper'].css('width', totalWidth+'px');
-		updateFilling(timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents['fillingLine'], totalWidth);
-		updateTimelinePosition('next', timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents);
+		updateFilling(timelineComponents['eventsWrapper'].find('div.event-content.selected'), timelineComponents['fillingLine'], totalWidth);
+		updateTimelinePosition('next', timelineComponents['eventsWrapper'].find('div.event-content.selected'), timelineComponents);
 	
 		return totalWidth;
 	}
@@ -243,7 +243,7 @@ jQuery(document).ready(function($){
 	}
 
 	function updateOlderEvents(event) {
-		event.parent('li').prevAll('li').children('a').addClass('older-event').end().end().nextAll('li').children('a').removeClass('older-event');
+		event.parent('li').prevAll('li').children('div.event-content').addClass('older-event').end().end().nextAll('li').children('div.event-content').removeClass('older-event');
 	}
 
 	function getTranslateValue(timeline) {

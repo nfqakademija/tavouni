@@ -19,7 +19,7 @@ body {
 }
 
 a {
-  color: #7b9d6f;
+  /*color: #7b9d6f;*/
   text-decoration: none;
 }
 
@@ -111,7 +111,7 @@ Main Components
   -moz-transition: -moz-transform 0.3s;
   transition: transform 0.3s;
 }
-.cd-horizontal-timeline .events a {
+.cd-horizontal-timeline .events div.event-content {
   position: absolute;
   bottom: 0;
   z-index: 2;
@@ -126,7 +126,7 @@ Main Components
   -o-transform: translateZ(0);
   transform: translateZ(0);
 }
-.cd-horizontal-timeline .events a::after {
+.cd-horizontal-timeline .events div.event-content::after {
   /* this is used to create the event spot */
   content: '';
   position: absolute;
@@ -147,18 +147,18 @@ Main Components
   -moz-transition: background-color 0.3s, border-color 0.3s;
   transition: background-color 0.3s, border-color 0.3s;
 }
-.no-touch .cd-horizontal-timeline .events a:hover::after {
+.no-touch .cd-horizontal-timeline .events div.event-content:hover::after {
   background-color: #7b9d6f;
   border-color: #7b9d6f;
 }
-.cd-horizontal-timeline .events a.selected {
-  pointer-events: none;
+.cd-horizontal-timeline .events div.event-content.selected {
+  /*pointer-events: none;*/
 }
-.cd-horizontal-timeline .events a.selected::after {
+.cd-horizontal-timeline .events div.event-content.selected::after {
   background-color: #7b9d6f;
   border-color: #7b9d6f;
 }
-.cd-horizontal-timeline .events a.older-event::after {
+.cd-horizontal-timeline .events div.event-content.older-event::after {
   border-color: #7b9d6f;
 }
 @media only screen and (min-width: 1100px) {
