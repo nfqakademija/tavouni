@@ -43,6 +43,7 @@ class AssignmentRepository extends \Doctrine\ORM\EntityRepository
         return $this->_em->createQuery("SELECT a
             FROM AppBundle\Entity\Assignment a
             JOIN a.subject s
-            WHERE s.id = :id")->setParameter('id', $id)->getResult();
+            WHERE s.id = :id
+            ORDER BY a.deadline")->setParameter('id', $id)->getResult();
     }
 }
