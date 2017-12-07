@@ -3,19 +3,33 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Grade
  *
- * @ORM\Table(name="grades")
+ * @ORM\Table(name="grades",
+ *     uniqueConstraints={
+ *        @UniqueConstraint(name="grade_unique",
+ *            columns={"assignment_id", "student_id"})
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="AppBundle\Repository\GradeRepository")
  */
 class Grade
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var Assignment
      *
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Assignment", inversedBy="grades")
      */
     private $assignment;
@@ -23,7 +37,6 @@ class Grade
     /**
      * @var Student
      *
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Student", inversedBy="grades")
      */
     private $student;
@@ -118,5 +131,13 @@ class Grade
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 }
