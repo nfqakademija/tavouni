@@ -47,20 +47,4 @@ class AssignmentRepository extends \Doctrine\ORM\EntityRepository
             WHERE s.id = :id
             ORDER BY a.deadline")->setParameter('id', $id)->getResult();
     }
-
-    public function getAssignmentsByLecture($lectureId)
-    {
-        return $this->_em->createQuery("SELECT a, g, st, gr, l, lt, ltl
-            FROM AppBundle\Entity\Assignment a
-            JOIN a.grades g
-            JOIN g.student st
-            JOIN st.groups gr
-            JOIN gr.lectures l
-            JOIN l.subject sl
-            JOIN a.subject sa
-            JOIN a.lectureType lt
-            JOIN l.lectureType ltl
-            WHERE l.id = :lectureId AND lt.id = ltl.id AND sl.id = sa.id
-            ")->setParameter('lectureId', $lectureId)->getResult();
-    }
 }
