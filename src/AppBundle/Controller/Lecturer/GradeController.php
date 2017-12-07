@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Lecturer;
 use AppBundle\Entity\Assignment;
 use AppBundle\Entity\Lecture;
 use AppBundle\Repository\AssignmentRepository;
+use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,14 +31,14 @@ class GradeController extends Controller
      *
      * @return Response
      */
-    public function indexAction(Request $request, AssignmentRepository $assignmentRepository, Lecture $lecture)
+    public function indexAction(Request $request, StudentRepository $studentRepository, Lecture $lecture)
     {
-        $assignments = $assignmentRepository->getAssignmentsByLecture($lecture->getId());
+        $students = $studentRepository->getStudentsWithGradesByLecture($lecture->getId());
 
-        dump($assignments);
+        dump($students);
 
         return $this->render(':Lecturer/Grades:show_grades.html.twig', [
-            'assignments' => $assignments
+            'students' => $students
         ]);
     }
 }

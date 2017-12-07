@@ -3,5 +3,57 @@
 {% block body %}
 
     <h2>Grades</h2>
+    <table class="table table-bordered">
+
+        <tr>
+            <th>Studentas</th>
+            {% for grade in students[0].grades %}
+            <th>{{ grade.assignment.name }}</th>
+            {#{% for grade in subject.grades %}#}
+                {#<td>{{ grade.assignment.name }}</td>#}
+            {#{% endfor %}#}
+            {#<td>Surinkti balai</td>#}
+            {% endfor %}
+        </tr>
+
+        {% for student in students %}
+            <tr>
+            <td>{{ student.name }}</td>
+            {% for grade in student.grades %}
+                <td>{{ grade.value }}</td>
+
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        {#<tr>#}
+            {#<th>Svoris:</th>#}
+            {#{% for grade in subject.grades %}#}
+                {#<td>{{ grade.assignment.weight }}</td>#}
+            {#{% endfor %}#}
+            {#<td>{{ subject.weightSum }}</td>#}
+        {#</tr>#}
+        {#<tr>#}
+            {#<th>Įvertinimas:</th>#}
+            {#{% for grade in subject.grades %}#}
+                {#<td class="#}
+                            {#{% if grade.value >= grade.assignment.average %}bg-aboveAverage{% endif %}#}
+                            {#{% if grade.value < 5 %}bg-below5#}
+                            {#{% elseif grade.value < grade.assignment.average %}bg-belowAverage{% endif %}"#}
+                {#>{{ grade.value }}</td>#}
+            {#{% endfor %}#}
+            {#<td class="#}
+                                {#{% if subject.gradeSum >= subject.average %}bg-aboveAverage{% endif %}#}
+                                {#{% if subject.gradeSum < 5 %}bg-below5#}
+                                {#{% elseif subject.gradeSum < subject.average %}bg-belowAverage{% endif %}"#}
+            {#>{{ subject.gradeSum }}</td>#}
+        {#</tr>#}
+        {#<tr>#}
+            {#<th>Vidurkis:</th>#}
+            {#{% for grade in subject.grades %}#}
+                {#<td>{{ grade.assignment.average }}</td>#}
+            {#{% endfor %}#}
+            {#<td>{{ subject.average }}</td>#}
+        {#</tr>#}
+    </table>
 
 {% endblock %}
