@@ -22,7 +22,7 @@ class StudentFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createStudent('Ignas Zdanis', 'UserIgnas', ['PS1k', 'SM'], 'StudentIgnas'));
+        $manager->persist($this->createStudent('Ignas Zdanis', 'UserIgnas', ['PS1k', 'SM', 'PS1k2g'], 'StudentIgnas'));
         $manager->persist($this->createStudent('Aurimas Rimkus', 'UserAurimas', ['PS1k', 'PS1k1g'], 'StudentAurimas'));
         $manager->flush();
     }
@@ -34,7 +34,6 @@ class StudentFixtures extends Fixture
         foreach ($groups as $group) {
             $student->addGroup($this->getReference($group));
         }
-        //$student->addGroup($this->getReference($groups));
         $this->addReference($reference, $student);
         return $student;
     }

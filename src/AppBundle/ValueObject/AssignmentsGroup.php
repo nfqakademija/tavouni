@@ -6,7 +6,7 @@
  * Time: 15.12
  */
 
-namespace AppBundle\Entity;
+namespace AppBundle\ValueObject;
 
 use Doctrine\Common\Collections\Collection;
 

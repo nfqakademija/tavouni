@@ -8,7 +8,7 @@
 
 namespace AppBundle\Utils;
 
-use AppBundle\Entity\AssignmentsGroup;
+use AppBundle\ValueObject\AssignmentsGroup;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

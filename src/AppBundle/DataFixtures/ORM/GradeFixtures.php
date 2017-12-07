@@ -33,10 +33,11 @@ class GradeFixtures extends Fixture
     }
     private function createGrade($assignment, $student, $value)
     {
-        $grade = new Grade();
-        $grade->setAssignment($this->getReference($assignment));
-        $grade->setStudent($this->getReference($student));
-        $grade->setValue($value);
+        $grade = new Grade(
+            $this->getReference($assignment),
+            $this->getReference($student),
+            $value
+        );
         return $grade;
     }
     public function getDependencies()

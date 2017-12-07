@@ -44,33 +44,32 @@ class AssignmentType extends AbstractType
         $this->subject = $options['subject'];
         $this->lectureTypes = $options['lectureTypes'];
         $this->rooms = $options['rooms'];
-
         $builder
             ->add('weight')
             ->add('name')
             ->add('lectureType', ChoiceType::class, [
                 'choices' => $this->lectureTypes,
                 'choice_label' => function ($lectureType, $key, $index) {
-                /** @var LectureType $lectureType */
+                    /** @var LectureType $lectureType */
                     return $lectureType->getName();
                 },
                 'choice_attr' => function ($lectureType, $key, $index) {
                     /** @var LectureType $lectureType */
-                    return ['class' => 'lectureType_'.strtolower($lectureType->getName())];
+                    return ['class' => 'lectureType_' . strtolower($lectureType->getName())];
                 }
-                ])
-            ->add('deadline', DateType::class, array(
+            ])
+            ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'js-datepicker'],
                 'format' => 'MM/dd/yyyy',
-            ))
-            ->add('moreOptions', CheckboxType::class, array(
+            ])
+            ->add('moreOptions', CheckboxType::class, [
                 'attr' => ['checked' => false],
                 'label' => 'Pridėti tikslų laiką',
                 'required' => false,
                 'mapped' => false
-            ));
+            ]);
 
         $builder->get('moreOptions')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $checked = $event->getData();
@@ -80,28 +79,28 @@ class AssignmentType extends AbstractType
                     'choices' => $this->rooms,
                     'choice_label' => function ($room, $key, $index) {
                         /** @var Room $room */
-                        return $room->getNo().' '.$room->getBuilding()->getName();
+                        return $room->getNo() . ' ' . $room->getBuilding()->getName();
                     },
                     'choice_attr' => function ($room, $key, $index) {
                         /** @var Room $room */
-                        $roomName = $room->getNo().' '.$room->getBuilding()->getName();
-                        return ['class' => 'lectureType_'.strtolower($roomName)];
+                        $roomName = $room->getNo() . ' ' . $room->getBuilding()->getName();
+
+                        return ['class' => 'lectureType_' . strtolower($roomName)];
                     },
                     'mapped' =>false
-                ])
-                    ->add('start', TimeType::class, array(
+                    ])->add('start', TimeType::class, [
                         'input'  => 'datetime',
                         'widget' => 'single_text',
                         'html5' => false,
                         'attr' => ['class' => 'js-timepicker'],
                         'mapped' => false,
-                    ))->add('end', TimeType::class, array(
+                    ])->add('end', TimeType::class, [
                         'input'  => 'datetime',
                         'widget' => 'single_text',
                         'html5' => false,
                         'attr' => ['class' => 'js-timepicker'],
                         'mapped' => false,
-                    ));
+                    ]);
             }
         });
     }
@@ -112,41 +111,36 @@ class AssignmentType extends AbstractType
             'data_class' => Assignment::class,
             'empty_data' => function (FormInterface $form) {
                 $checked = $form->get('moreOptions')->getData();
+                $assignmentEvent = null;
                 if ($checked) {
                     $start = $form->get('start')->getData();
                     $end = $form->get('end')->getData();
                     $room = $form->get('rooms')->getData();
                     $deadline = $form->get('deadline')->getData();
-                    return new Assignment(
-                        $this->subject,
-                        $form->get('weight')->getData(),
-                        $form->get('name')->getData(),
-                        $form->get('lectureType')->getData(),
-                        $deadline,
-                        new AssignmentEvent(
-                            $this->timeToDate($start, $deadline),
-                            $this->timeToDate($end, $deadline),
-                            $room
-                        )
+                    $assignmentEvent = new AssignmentEvent(
+                        $this->timeToDate($start, $deadline),
+                        $this->timeToDate($end, $deadline),
+                        $room
                     );
                 }
+
                 return new Assignment(
                     $this->subject,
                     $form->get('weight')->getData(),
                     $form->get('name')->getData(),
                     $form->get('lectureType')->getData(),
-                    $form->get('deadline')->getData()
+                    $form->get('deadline')->getData(),
+                    $assignmentEvent
                 );
-            },
-            'subject' => null,
-            'lectureTypes' => null,
-            'rooms' => null,
+            }
         ]);
+        $resolver->setRequired(['subject', 'lectureTypes', 'rooms']);
     }
     private function timeToDate($time, $datetime)
     {
-        $interval = new DateInterval('PT'.$time->format('H').'H'.$time->format('i').'M');
+        $interval = new DateInterval('PT' . $time->format('H') . 'H'.$time->format('i') . 'M');
         $date = clone $datetime;
+
         return $date->add($interval);
     }
 }

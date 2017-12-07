@@ -9,7 +9,7 @@
 namespace AppBundle\Utils;
 
 use AppBundle\Entity\Assignment;
-use AppBundle\Entity\SubjectGrades;
+use AppBundle\ValueObject\SubjectGrades;
 use AppBundle\Repository\AssignmentRepository;
 use AppBundle\Repository\GradeRepository;
 
