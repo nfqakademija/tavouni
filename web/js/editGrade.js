@@ -22,6 +22,10 @@ function callGradeAjax(gradeId, gradeValue, input) {
         async: true,
         success: function () {
             input.attr('value', gradeValue);
+            $(".alert").show();
+            $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+                $(".alert-success").slideUp(500);
+            });
         },
         error: function (xhr, thrownError) {
             console.log(xhr.status);
@@ -34,3 +38,4 @@ function callGradeAjax(gradeId, gradeValue, input) {
 $(":input").bind('click keyup', function () {
     $(this).focus();
 });
+

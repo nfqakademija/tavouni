@@ -12,12 +12,17 @@
         {% for student in students %}
             <tr>
                 <td>{{ student.name }}</td>
+
                 {% for grade in student.grades %}
                     <td id="{{ grade.id }}"><input type="number" min="0" max="10" class="grade-value" value="{{ grade.value }}"></td>
                 {% endfor %}
             </tr>
         {% endfor %}
     </table>
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        Pažymys sėkmingai išsaugotas
+    </div>
 {% endblock %}
 
 {% block javascripts %}
