@@ -19,6 +19,7 @@ class GradeRepository extends \Doctrine\ORM\EntityRepository
             JOIN a.subject su
             JOIN st.user u
             WHERE u.id = :id
+            ORDER BY a.deadline
             ")->setParameter('id', $id)->getResult();
     }
 }
