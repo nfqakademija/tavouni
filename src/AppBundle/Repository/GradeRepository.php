@@ -21,20 +21,4 @@ class GradeRepository extends \Doctrine\ORM\EntityRepository
             WHERE u.id = :id
             ")->setParameter('id', $id)->getResult();
     }
-
-    public function getStudentsGradesByLecture($lectureId)
-    {
-        return $this->_em->createQuery("SELECT g, st, a, gr, l, lt, ltl
-            FROM AppBundle\Entity\Grade g
-            JOIN g.student st
-            JOIN g.assignment a
-            JOIN st.groups gr
-            JOIN gr.lectures l
-            JOIN l.subject sl
-            JOIN a.subject sa
-            JOIN a.lectureType lt
-            JOIN l.lectureType ltl
-            WHERE l.id = :lectureId AND lt.id = ltl.id AND sl.id = sa.id
-            ")->setParameter('lectureId', $lectureId)->getResult();
-    }
 }
