@@ -6,7 +6,7 @@
  * Time: 01.08
  */
 
-namespace AppBundle\Entity;
+namespace AppBundle\ValueObject;
 
 class SubjectGrades
 {

@@ -6,7 +6,7 @@
  * Time: 01.18
  */
 
-namespace AppBundle\Entity;
+namespace AppBundle\ValueObject;
 
 class MenuItem
 {

@@ -8,8 +8,8 @@
 
 namespace AppBundle\Twig;
 
-use AppBundle\Entity\MenuChild;
-use AppBundle\Entity\MenuItem;
+use AppBundle\ValueObject\MenuChild;
+use AppBundle\ValueObject\MenuItem;
 use AppBundle\Entity\User;
 use AppBundle\Repository\LectureRepository;
 use AppBundle\Repository\PostRepository;
