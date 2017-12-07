@@ -9,6 +9,7 @@
         <div class="page-header">
             <h1 id="timeline">Naujienos</h1>
             <a class="btn btn-success" role="button" href="{{ path('lecturer_add_post', {'lecture_id': lecture_id})}}">Pridėti naujieną</a>
+            <a class="btn btn-success" role="button" href="{{ path('lecturer_grade_index', {'lecture_id': lecture_id})}}">Pažymiai</a>
             {% if isMainLecture %}
             <a class="btn btn-success" role="button" href="{{ path('lecturer_assignments', {'subject_id': subject_id})}}">Atsiskaitymai</a>
             {% endif%}
