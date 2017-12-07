@@ -44,20 +44,17 @@ class AssignmentType extends AbstractType
         $this->subject = $options['subject'];
         $this->lectureTypes = $options['lectureTypes'];
         $this->rooms = $options['rooms'];
-
         $builder
             ->add('weight')
             ->add('name')
             ->add('lectureType', ChoiceType::class, [
                 'choices' => $this->lectureTypes,
                 'choice_label' => function ($lectureType, $key, $index) {
-                /** @var LectureType $lectureType */
-
+                    /** @var LectureType $lectureType */
                     return $lectureType->getName();
                 },
                 'choice_attr' => function ($lectureType, $key, $index) {
                     /** @var LectureType $lectureType */
-
                     return ['class' => 'lectureType_' . strtolower($lectureType->getName())];
                 }
             ])
@@ -82,7 +79,6 @@ class AssignmentType extends AbstractType
                     'choices' => $this->rooms,
                     'choice_label' => function ($room, $key, $index) {
                         /** @var Room $room */
-
                         return $room->getNo() . ' ' . $room->getBuilding()->getName();
                     },
                     'choice_attr' => function ($room, $key, $index) {
@@ -136,11 +132,9 @@ class AssignmentType extends AbstractType
                     $form->get('deadline')->getData(),
                     $assignmentEvent
                 );
-            },
-            'subject' => null,
-            'lectureTypes' => 'required',
-            'rooms' => 'required',
+            }
         ]);
+        $resolver->setRequired(['subject', 'lectureTypes', 'rooms']);
     }
     private function timeToDate($time, $datetime)
     {
