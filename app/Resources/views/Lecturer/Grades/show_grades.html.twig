@@ -13,9 +13,14 @@
             <tr>
                 <td>{{ student.name }}</td>
                 {% for grade in student.grades %}
-                    <td>{{ grade.value }}</td>
+                    <td id="{{ grade.id }}"><input class="grade-value" value="{{ grade.value }}"></td>
                 {% endfor %}
             </tr>
         {% endfor %}
     </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/editGrade.js') }}"></script>
 {% endblock %}
