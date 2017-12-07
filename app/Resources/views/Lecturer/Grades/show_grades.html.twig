@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ student.name }}</td>
                 {% for grade in student.grades %}
-                    <td id="{{ grade.id }}"><input class="grade-value" value="{{ grade.value }}"></td>
+                    <td id="{{ grade.id }}"><input type="number" min="0" max="10" class="grade-value" value="{{ grade.value }}"></td>
                 {% endfor %}
             </tr>
         {% endfor %}

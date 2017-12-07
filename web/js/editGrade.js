@@ -31,3 +31,6 @@ function callGradeAjax(gradeId, gradeValue, input) {
         }
     });
 }
+$(":input").bind('click keyup', function () {
+    $(this).focus();
+});
