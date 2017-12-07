@@ -101,7 +101,7 @@ class MenuExtension extends \Twig_Extension
         }
     }
 
-    public function calculateUnseenCount(User $user)
+    private function calculateUnseenCount(User $user)
     {
         $posts = $this->postRepository->getPostsForStudent($user->getId());
 
