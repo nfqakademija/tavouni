@@ -15,16 +15,24 @@
                         <tr>
                             <th>Atsiskaitymas:</th>
                             {% for grade in subject.grades %}
-                                <td>{{ grade.assignment.name }}</td>
+                                <th>{{ grade.assignment.name }}</th>
                             {% endfor %}
-                            <td>Surinkti balai</td>
+                            <th rowspan="3" class="th3rows">Viso</th>
+
+                        </tr>
+                        <tr>
+                            <th>Terminas:</th>
+                            {% for grade in subject.grades %}
+                                <td>{{ grade.assignment.deadline | date('Y-m-d') }}</td>
+                            {% endfor %}
                         </tr>
                         <tr>
                             <th>Svoris:</th>
                             {% for grade in subject.grades %}
                                 <td>{{ grade.assignment.weight }}</td>
                             {% endfor %}
-                            <td>{{ subject.weightSum }}</td>
+
+                            {#<td>{{ subject.weightSum }}</td>#}
                         </tr>
                         <tr>
                             <th>Įvertinimas:</th>
