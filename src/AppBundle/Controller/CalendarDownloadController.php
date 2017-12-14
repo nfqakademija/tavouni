@@ -13,7 +13,7 @@ class CalendarDownloadController extends Controller
     /**
      * @Route("/timetable/download", name="calendar_download")
      */
-    public function downloadAction(CalendarFormatter $iCalFormatter, LectureDateRepository $ldRepository)
+    public function downloadAction(CalendarFormatter $iCalFormatter, LectureDateRepository $ldRepository): Response
     {
         $response = new Response();
         $response->headers->set('Content-Type', 'text/calendar');
@@ -23,11 +23,13 @@ class CalendarDownloadController extends Controller
             $lectureDates = $ldRepository->getLectureDatesByStudent($this->getUser()->getId());
             $content = $iCalFormatter->generateStudentVCalendarContent($lectureDates);
             $response->setContent($content);
+
             return $response;
         }
         $lectureDates = $ldRepository->getLectureDatesByLecturer($this->getUser()->getId());
         $content = $iCalFormatter->generateLecturerVCalendarContent($lectureDates);
         $response->setContent($content);
+
         return $response;
     }
 }

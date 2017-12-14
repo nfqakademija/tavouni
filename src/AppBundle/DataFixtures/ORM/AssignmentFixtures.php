@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.22
- * Time: 23.58
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -14,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class AssignmentFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -80,19 +73,28 @@ class AssignmentFixtures extends Fixture
         ));
         $manager->flush();
     }
-    private function createAssignment($name, $subject, $weight, $reference, $date, $type)
-    {
+
+    private function createAssignment(
+        string $name,
+        string $subjectRef,
+        int $weight,
+        string $reference,
+        \DateTime $date,
+        string $typeRef
+    ): Assignment {
         $assignment = new Assignment(
-            $this->getReference($subject),
+            $this->getReference($subjectRef),
             $weight,
             $name,
-            $this->getReference($type),
+            $this->getReference($typeRef),
             $date
         );
         $this->addReference($reference, $assignment);
+
         return $assignment;
     }
-    public function getDependencies()
+
+    public function getDependencies(): array
     {
         return [
             LectureTypeFixtures::class,

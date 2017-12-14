@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.12.4
- * Time: 21.46
- */
 
 namespace AppBundle\Controller\Lecturer;
 
-use AppBundle\Entity\Assignment;
 use AppBundle\Entity\Grade;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\AssignmentType;
@@ -16,10 +9,10 @@ use AppBundle\Repository\AssignmentRepository;
 use AppBundle\Repository\LectureTypeRepository;
 use AppBundle\Repository\RoomRepository;
 use AppBundle\Repository\StudentRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -31,14 +24,16 @@ class SubjectController extends Controller
     /**
      * @Route("/assignments", name="lecturer_assignments")
      */
-    public function showAssignmentsAction(Subject $subject, AssignmentRepository $assignmentRepository)
+    public function showAssignmentsAction(Subject $subject, AssignmentRepository $assignmentRepository): Response
     {
         $assignments = $assignmentRepository->getSubjectAssignments($subject->getId());
+
         return $this->render('Lecturer/Subjects/show_subject_assignments.html.twig', [
             'subject' => $subject,
             'assignments' => $assignments,
         ]);
     }
+
     /**
      * @Route("/assignments/new", name="lecturer_new_assignment")
      */
@@ -48,7 +43,7 @@ class SubjectController extends Controller
         LectureTypeRepository $lectureTypeRepository,
         RoomRepository $roomRepository,
         StudentRepository $studentRepository
-    ) {
+    ): Response {
         $lectureTypes = $lectureTypeRepository->findAll();
         $rooms = $roomRepository->findAll();
         $form = $this->createForm(AssignmentType::class, null, [
@@ -57,7 +52,6 @@ class SubjectController extends Controller
             'rooms' => $rooms,
         ]);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $assignment = $form->getData();
@@ -72,6 +66,7 @@ class SubjectController extends Controller
                 ));
             }
             $em->flush();
+
             return $this->redirectToRoute('lecturer_assignments', ['subject_id'=>$subject->getId()]);
         }
 

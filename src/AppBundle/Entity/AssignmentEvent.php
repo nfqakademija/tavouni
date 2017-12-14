@@ -42,6 +42,7 @@ class AssignmentEvent
      * @ORM\JoinColumn(name="room_id", referencedColumnName="id", nullable=false)
      */
     private $room;
+
     /**
      * @var Assignment
      *
@@ -63,6 +64,16 @@ class AssignmentEvent
     }
 
     /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * @return \DateTime
      */
 
@@ -73,10 +84,14 @@ class AssignmentEvent
 
     /**
      * @param \DateTime $start
+     *
+     * @return AssignmentEvent
      */
-    public function setStart(\DateTime $start)
+    public function setStart(\DateTime $start): AssignmentEvent
     {
         $this->start = $start;
+
+        return $this;
     }
 
     /**
@@ -89,10 +104,14 @@ class AssignmentEvent
 
     /**
      * @param \DateTime $end
+     *
+     * @return AssignmentEvent
      */
-    public function setEnd(\DateTime $end)
+    public function setEnd(\DateTime $end): AssignmentEvent
     {
         $this->end = $end;
+
+        return $this;
     }
 
     /**
@@ -105,20 +124,14 @@ class AssignmentEvent
 
     /**
      * @param Room $room
+     *
+     * @return AssignmentEvent
      */
-    public function setRoom(Room $room)
+    public function setRoom(Room $room): AssignmentEvent
     {
         $this->room = $room;
-    }
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this;
     }
 
     /**
@@ -131,9 +144,13 @@ class AssignmentEvent
 
     /**
      * @param Assignment $assignment
+     *
+     * @return AssignmentEvent
      */
-    public function setAssignment(Assignment $assignment)
+    public function setAssignment(Assignment $assignment): AssignmentEvent
     {
         $this->assignment = $assignment;
+
+        return $this;
     }
 }

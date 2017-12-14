@@ -54,7 +54,7 @@ class Grade
      * @param Student $student
      * @param int $value
      */
-    public function __construct(Assignment $assignment, Student $student, $value)
+    public function __construct(Assignment $assignment, Student $student, int $value)
     {
         $this->assignment = $assignment;
         $this->student = $student;
@@ -68,7 +68,7 @@ class Grade
      *
      * @return Grade
      */
-    public function setAssignment($assignment)
+    public function setAssignment(Assignment $assignment): Grade
     {
         $this->assignment = $assignment;
 
@@ -80,7 +80,7 @@ class Grade
      *
      * @return Assignment
      */
-    public function getAssignment()
+    public function getAssignment(): Assignment
     {
         return $this->assignment;
     }
@@ -92,7 +92,7 @@ class Grade
      *
      * @return Grade
      */
-    public function setStudent($student)
+    public function setStudent(Student $student): Grade
     {
         $this->student = $student;
 
@@ -104,7 +104,7 @@ class Grade
      *
      * @return Student
      */
-    public function getStudent()
+    public function getStudent(): Student
     {
         return $this->student;
     }
@@ -112,11 +112,11 @@ class Grade
     /**
      * Set value
      *
-     * @param integer $value
+     * @param int $value
      *
      * @return Grade
      */
-    public function setValue($value)
+    public function setValue(int $value): Grade
     {
         $this->value = $value;
 
@@ -128,7 +128,7 @@ class Grade
      *
      * @return int
      */
-    public function getValue()
+    public function getValue(): int
     {
         return $this->value;
     }

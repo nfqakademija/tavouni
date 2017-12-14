@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.7
- * Time: 13.55
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -14,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LecturerFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -27,15 +20,18 @@ class LecturerFixtures extends Fixture
         $manager->persist($this->createLecturer('Linas Litvinas', 'UserLinas', 'LecturerLinas'));
         $manager->flush();
     }
-    private function createLecturer($name, $user, $reference)
+
+    private function createLecturer(string $name, string $userRef, string $reference): Lecturer
     {
         $lecturer = new Lecturer();
         $lecturer->setName($name);
-        $lecturer->setUser($this->getReference($user));
+        $lecturer->setUser($this->getReference($userRef));
         $this->addReference($reference, $lecturer);
+
         return $lecturer;
     }
-    public function getDependencies()
+
+    public function getDependencies(): array
     {
         return [
             UserFixtures::class

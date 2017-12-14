@@ -8,17 +8,14 @@
 
 namespace AppBundle\Controller\Student;
 
-use AppBundle\Entity\Assignment;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\AssignmentRepository;
-use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\PostRepository;
 use AppBundle\Utils\AssignmentsGroupFactory;
 use AppBundle\Utils\SubjectGradeParser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -35,7 +32,7 @@ class StudentController extends Controller
         PostRepository $postRepository,
         AssignmentRepository $assignmentRepository,
         AssignmentsGroupFactory $assignmentsGroupFactory
-    ) {
+    ): Response {
     
         $id = $tokenStorage->getToken()->getUser()->getId();
         $posts = $postRepository->getPostsForStudent($id);
@@ -54,7 +51,7 @@ class StudentController extends Controller
     /**
      * @Route("/timetable", name="student_timetable")
      */
-    public function timetableAction(Request $request)
+    public function timetableAction(): Response
     {
         // replace this example code with whatever you need
         return $this->render(
@@ -65,7 +62,7 @@ class StudentController extends Controller
     /**
      * @Route("/set-post-seen/{id}", name="student_post_seen")
      */
-    public function postSeenAction(Request $request, Post $post)
+    public function postSeenAction(Post $post): Response
     {
         if ($this->isGranted('ROLE_STUDENT')) {
             if ($post === null) {
@@ -82,8 +79,10 @@ class StudentController extends Controller
     /**
      * @Route("/grades", name="student_grades")
      */
-    public function gradesAction(Request $request, TokenStorage $tokenStorage, SubjectGradeParser $subjectGradeParser)
-    {
+    public function gradesAction(
+        TokenStorage $tokenStorage,
+        SubjectGradeParser $subjectGradeParser
+    ): Response {
         $id = $tokenStorage->getToken()->getUser()->getId();
         $subjects = $subjectGradeParser->gradesToSubjectGrades($id);
         // replace this example code with whatever you need

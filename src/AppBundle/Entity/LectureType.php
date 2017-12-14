@@ -28,13 +28,12 @@ class LectureType
      */
     private $name;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -46,7 +45,7 @@ class LectureType
      *
      * @return LectureType
      */
-    public function setName($name)
+    public function setName(string $name): LectureType
     {
         $this->name = $name;
 
@@ -58,7 +57,7 @@ class LectureType
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

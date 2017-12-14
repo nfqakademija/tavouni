@@ -43,13 +43,12 @@ class LectureDate
      */
     private $lecture;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -57,48 +56,60 @@ class LectureDate
     /**
      * @return Lecture
      */
-    public function getLecture()
+    public function getLecture(): Lecture
     {
         return $this->lecture;
     }
 
     /**
      * @param Lecture $lecture
+     *
+     * @return LectureDate
      */
-    public function setLecture($lecture)
+    public function setLecture(Lecture $lecture): LectureDate
     {
         $this->lecture = $lecture;
+
+        return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getStart()
+    public function getStart(): \DateTime
     {
         return $this->start;
     }
 
     /**
      * @param \DateTime $start
+     *
+     * @return LectureDate
      */
-    public function setStart($start)
+    public function setStart($start): LectureDate
     {
         $this->start = $start;
+
+        return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getEnd()
+    public function getEnd(): \DateTime
     {
         return $this->end;
     }
 
     /**
      * @param \DateTime $end
+     *
+     * @return LectureDate
      */
-    public function setEnd($end)
+    public function setEnd($end): LectureDate
     {
         $this->end = $end;
+
+        return $this;
     }
 }

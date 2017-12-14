@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.7
- * Time: 13.40
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -14,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class BuildingFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *

@@ -52,22 +52,6 @@ class Lecturer
     private $user;
 
     /**
-     * @return ArrayCollection
-     */
-    public function getSubjects(): ArrayCollection
-    {
-        return $this->subjects;
-    }
-
-    /**
-     * @param ArrayCollection $subjects
-     */
-    public function setSubjects(ArrayCollection $subjects)
-    {
-        $this->subjects = $subjects;
-    }
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="coordinator")
@@ -76,18 +60,29 @@ class Lecturer
 
     public function __construct()
     {
+        $this->lectures = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->subjects = new ArrayCollection();
     }
-
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**
@@ -97,7 +92,7 @@ class Lecturer
      *
      * @return Lecturer
      */
-    public function setName($name)
+    public function setName(string $name): Lecturer
     {
         $this->name = $name;
 
@@ -105,68 +100,58 @@ class Lecturer
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * @return ArrayCollection
      */
-    public function getName()
+    public function getSubjects(): ArrayCollection
     {
-        return $this->name;
+        return $this->subjects;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getLectures()
+    public function getLectures(): ArrayCollection
     {
         return $this->lectures;
     }
 
     /**
-     * @param ArrayCollection $lectures
-     */
-    public function setLectures($lectures)
-    {
-        $this->lectures = $lectures;
-    }
-
-    /**
      * @return ArrayCollection
      */
-    public function getPosts()
+    public function getPosts(): ArrayCollection
     {
         return $this->posts;
     }
 
     /**
-     * @param ArrayCollection $posts
-     */
-    public function setPosts($posts)
-    {
-        $this->posts = $posts;
-    }
-
-    /**
      * @param Post $post
+     *
+     * @return Lecturer
      */
-    public function addPost(Post $post)
+    public function addPost(Post $post): Lecturer
     {
         $this->posts[] = $post;
+
+        return $this;
     }
 
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
      * @param User $user
+     *
+     * @return Lecturer
      */
-    public function setUser($user)
+    public function setUser(User $user): Lecturer
     {
         $this->user = $user;
+
+        return $this;
     }
 }

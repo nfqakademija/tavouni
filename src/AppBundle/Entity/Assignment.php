@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Assignment
 {
-    private $average;
     /**
      * @var int
      *
@@ -73,6 +72,12 @@ class Assignment
      * @ORM\JoinColumn(name="assignment_event_id", referencedColumnName="id")
      */
     private $assignmentEvent;
+
+    /**
+     * @var float
+     */
+    private $average;
+
     /**
      * Assignment constructor.
      * @param Subject $subject
@@ -94,6 +99,7 @@ class Assignment
         $this->lectureType = $lectureType;
         $this->deadline = $deadline;
         $this->assignmentEvent = $assignmentEvent;
+        $this->grades = new ArrayCollection();
     }
     
     /**
@@ -109,11 +115,11 @@ class Assignment
     /**
      * Set subject
      *
-     * @param string $subject
+     * @param Subject $subject
      *
      * @return Assignment
      */
-    public function setSubject($subject)
+    public function setSubject(Subject $subject): Assignment
     {
         $this->subject = $subject;
 
@@ -123,9 +129,9 @@ class Assignment
     /**
      * Get subject
      *
-     * @return string
+     * @return Subject
      */
-    public function getSubject()
+    public function getSubject(): Subject
     {
         return $this->subject;
     }
@@ -133,11 +139,11 @@ class Assignment
     /**
      * Set weight
      *
-     * @param integer $weight
+     * @param int $weight
      *
      * @return Assignment
      */
-    public function setWeight($weight)
+    public function setWeight(int $weight): Assignment
     {
         $this->weight = $weight;
 
@@ -149,7 +155,7 @@ class Assignment
      *
      * @return int
      */
-    public function getWeight()
+    public function getWeight(): int
     {
         return $this->weight;
     }
@@ -161,7 +167,7 @@ class Assignment
      *
      * @return Assignment
      */
-    public function setName($name)
+    public function setName(string $name): Assignment
     {
         $this->name = $name;
 
@@ -173,7 +179,7 @@ class Assignment
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -185,7 +191,7 @@ class Assignment
      *
      * @return Assignment
      */
-    public function setLectureType($lectureType)
+    public function setLectureType(LectureType $lectureType): Assignment
     {
         $this->lectureType = $lectureType;
 
@@ -197,7 +203,7 @@ class Assignment
      *
      * @return LectureType
      */
-    public function getLectureType()
+    public function getLectureType(): LectureType
     {
         return $this->lectureType;
     }
@@ -212,42 +218,54 @@ class Assignment
 
     /**
      * @param Grade $grade
+     *
+     * @return Assignment
      */
-    public function addGrade(Grade $grade)
+    public function addGrade(Grade $grade): Assignment
     {
-        $this->grades[] = $grade;
+        $this->grades->add($grade);
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getAverage()
+    public function getAverage(): float
     {
         return $this->average;
     }
 
     /**
-     * @param mixed $average
+     * @param float $average
+     *
+     * @return Assignment
      */
-    public function setAverage($average)
+    public function setAverage(float $average): Assignment
     {
         $this->average = $average;
+
+        return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getDeadline()
+    public function getDeadline(): \DateTime
     {
         return $this->deadline;
     }
 
     /**
      * @param \DateTime $deadline
+     *
+     * @return Assignment
      */
-    public function setDeadline($deadline)
+    public function setDeadline(\DateTime $deadline): Assignment
     {
         $this->deadline = $deadline;
+
+        return $this;
     }
 
     /**
@@ -260,9 +278,13 @@ class Assignment
 
     /**
      * @param AssignmentEvent $assignmentEvent
+     *
+     * @return Assignment
      */
-    public function setAssignmentEvent(AssignmentEvent $assignmentEvent)
+    public function setAssignmentEvent(AssignmentEvent $assignmentEvent): Assignment
     {
         $this->assignmentEvent = $assignmentEvent;
+
+        return $this;
     }
 }

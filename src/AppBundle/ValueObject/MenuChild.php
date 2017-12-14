@@ -1,26 +1,32 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.12.2
- * Time: 12.18
- */
 
 namespace AppBundle\ValueObject;
 
 class MenuChild
 {
+    /**
+     * @var string
+     */
     private $title;
+
+    /**
+     * @var string
+     */
     private $slugName;
+
+    /**
+     * @var string
+     */
     private $slugValue;
 
     /**
-     * MenuChild constructor.
-     * @param $title
-     * @param $slugName
-     * @param $slugValue
+     * MenuChild constructor
+     *
+     * @param string $title
+     * @param string $slugName
+     * @param string $slugValue
      */
-    public function __construct($title, $slugName, $slugValue)
+    public function __construct(string $title, string $slugName, string $slugValue)
     {
         $this->title = $title;
         $this->slugName = $slugName;
@@ -28,50 +34,50 @@ class MenuChild
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getSlugValue()
-    {
-        return $this->slugValue;
-    }
-
-    /**
-     * @param mixed $slugValue
-     */
-    public function setSlugValue($slugValue)
-    {
-        $this->slugValue = $slugValue;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getSlugName()
+    public function getSlugName(): string
     {
         return $this->slugName;
     }
 
     /**
-     * @param mixed $slugName
+     * @param string $slugName
      */
-    public function setSlugName($slugName)
+    public function setSlugName(string $slugName)
     {
         $this->slugName = $slugName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlugValue(): string
+    {
+        return $this->slugValue;
+    }
+
+    /**
+     * @param string $slugValue
+     */
+    public function setSlugValue(string $slugValue)
+    {
+        $this->slugValue = $slugValue;
     }
 }

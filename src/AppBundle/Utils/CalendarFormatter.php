@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aurimas
- * Date: 17.11.6
- * Time: 21.04
- */
+
 namespace AppBundle\Utils;
 
-use Sabre\VObject;
+use Sabre\VObject\Component\VCalendar;
 
 class CalendarFormatter
 {
@@ -15,25 +10,32 @@ class CalendarFormatter
      * @param array $calendarDates
      * @return string
      */
-    public function generateStudentVCalendarContent($calendarDates)
+    public function generateStudentVCalendarContent(array $calendarDates): string
     {
         $vCalendar = $this->generateVCalendar($calendarDates, true);
-        return $vCalendar->serialize();
-    }
 
-    public function generateLecturerVCalendarContent($calendarDates)
-    {
-        $vCalendar = $this->generateVCalendar($calendarDates, false);
         return $vCalendar->serialize();
     }
 
     /**
      * @param array $calendarDates
-     * @return VObject\Component\VCalendar
+     * @return string
      */
-    private function generateVCalendar($calendarDates, bool $addLecturerName)
+    public function generateLecturerVCalendarContent(array $calendarDates): string
     {
-        $vCalendar = new VObject\Component\VCalendar();
+        $vCalendar = $this->generateVCalendar($calendarDates, false);
+
+        return $vCalendar->serialize();
+    }
+
+    /**
+     * @param array $calendarDates
+     * @param bool $addLecturerName
+     * @return VCalendar
+     */
+    private function generateVCalendar(array $calendarDates, bool $addLecturerName): VCalendar
+    {
+        $vCalendar = new VCalendar();
         foreach ($calendarDates as $calendarDate) {
             $vCalendar->add(
                 'VEVENT',
@@ -47,6 +49,7 @@ class CalendarFormatter
                 ]
             );
         }
+
         return $vCalendar;
     }
 }

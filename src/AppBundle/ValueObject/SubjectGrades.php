@@ -1,42 +1,109 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.23
- * Time: 01.08
- */
 
 namespace AppBundle\ValueObject;
 
+use AppBundle\Entity\Grade;
+
 class SubjectGrades
 {
+    /**
+     * @var int
+     */
     private $id;
+
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var int
+     */
     private $gradeSum;
+
+    /**
+     * @var int
+     */
     private $weightSum;
+
+    /**
+     * @var array
+     */
     private $grades = [];
+
+    /**
+     * @var float
+     */
     private $average;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getname()
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
-    public function setname($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
     /**
+     * @return int
+     */
+    public function getGradeSum(): int
+    {
+        return $this->gradeSum;
+    }
+
+    /**
+     * @param int $gradeSum
+     */
+    public function setGradeSum(int $gradeSum)
+    {
+        $this->gradeSum = $gradeSum;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeightSum(): int
+    {
+        return $this->weightSum;
+    }
+
+    /**
+     * @param int $weightSum
+     */
+    public function setWeightSum(int $weightSum)
+    {
+        $this->weightSum = $weightSum;
+    }
+
+    /**
      * @return array
      */
-    public function getGrades()
+    public function getGrades(): array
     {
         return $this->grades;
     }
@@ -44,76 +111,31 @@ class SubjectGrades
     /**
      * @param array $grades
      */
-    public function setGrades($grades)
+    public function setGrades(array $grades)
     {
         $this->grades = $grades;
     }
 
-    public function addGrade($grade)
+    /**
+     * @param Grade $grade
+     */
+    public function addGrade(Grade $grade)
     {
         $this->grades[] = $grade;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGradeSum()
-    {
-        return $this->gradeSum;
-    }
-
-    /**
-     * @param mixed $gradeSum
-     */
-    public function setGradeSum($gradeSum)
-    {
-        $this->gradeSum = $gradeSum;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWeightSum()
-    {
-        return $this->weightSum;
-    }
-
-    /**
-     * @param mixed $weightSum
-     */
-    public function setWeightSum($weightSum)
-    {
-        $this->weightSum = $weightSum;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAverage()
+    public function getAverage(): float
     {
         return $this->average;
     }
 
     /**
-     * @param mixed $average
+     * @param float $average
      */
-    public function setAverage($average)
+    public function setAverage(float $average)
     {
         $this->average = $average;
     }

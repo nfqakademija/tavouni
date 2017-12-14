@@ -59,29 +59,21 @@ class Subject
     private $coordinator;
 
     /**
-     * @return ArrayCollection
-     */
-    public function getLectures()
-    {
-        return $this->lectures;
-    }
-
-    /**
-     * @param ArrayCollection $lectures
-     */
-    public function setLectures($lectures)
-    {
-        $this->lectures = $lectures;
-    }
-
-    /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLectures(): ArrayCollection
+    {
+        return $this->lectures;
     }
 
     /**
@@ -91,7 +83,7 @@ class Subject
      *
      * @return Subject
      */
-    public function setSubjectType($subjectType)
+    public function setSubjectType(string $subjectType): Subject
     {
         $this->subjectType = $subjectType;
 
@@ -103,7 +95,7 @@ class Subject
      *
      * @return string
      */
-    public function getSubjectType()
+    public function getSubjectType(): string
     {
         return $this->subjectType;
     }
@@ -115,7 +107,7 @@ class Subject
      *
      * @return Subject
      */
-    public function setName($name)
+    public function setName(string $name): Subject
     {
         $this->name = $name;
 
@@ -127,7 +119,7 @@ class Subject
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -142,10 +134,14 @@ class Subject
 
     /**
      * @param Lecturer $coordinator
+     *
+     * @return Subject
      */
-    public function setCoordinator(Lecturer $coordinator)
+    public function setCoordinator(Lecturer $coordinator): Subject
     {
         $this->coordinator = $coordinator;
+
+        return $this;
     }
 
     /**
@@ -158,9 +154,13 @@ class Subject
 
     /**
      * @param Assignment $assignment
+     *
+     * @return Subject
      */
-    public function addAssignment(Assignment $assignment)
+    public function addAssignment(Assignment $assignment): Subject
     {
         $this->assignments[] = $assignment;
+
+        return $this;
     }
 }

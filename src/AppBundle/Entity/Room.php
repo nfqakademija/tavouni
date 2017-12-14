@@ -51,12 +51,18 @@ class Room
      */
     private $assignmentEvents;
 
+    public function __construct()
+    {
+        $this->lectures = new ArrayCollection();
+        $this->assignmentEvents = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -68,7 +74,7 @@ class Room
      *
      * @return Room
      */
-    public function setNo($no)
+    public function setNo(string $no): Room
     {
         $this->no = $no;
 
@@ -80,15 +86,15 @@ class Room
      *
      * @return string
      */
-    public function getNo()
+    public function getNo(): string
     {
         return $this->no;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getLectures()
+    public function getLectures(): ArrayCollection
     {
         return $this->lectures;
     }
@@ -102,34 +108,22 @@ class Room
     }
 
     /**
-     * @param ArrayCollection $assignmentEvents
-     */
-    public function setAssignmentEvents(ArrayCollection $assignmentEvents)
-    {
-        $this->assignmentEvents = $assignmentEvents;
-    }
-
-    /**
-     * @param mixed $lectures
-     */
-    public function setLectures($lectures)
-    {
-        $this->lectures = $lectures;
-    }
-
-    /**
      * @return Building
      */
-    public function getBuilding()
+    public function getBuilding(): Building
     {
         return $this->building;
     }
 
     /**
      * @param Building $building
+     *
+     * @return Room
      */
-    public function setBuilding($building)
+    public function setBuilding(Building $building): Room
     {
         $this->building = $building;
+
+        return $this;
     }
 }

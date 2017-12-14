@@ -43,12 +43,17 @@ class Building
      */
     private $rooms;
 
+    public function __construct()
+    {
+        $this->rooms = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -60,7 +65,7 @@ class Building
      *
      * @return Building
      */
-    public function setAddress($address)
+    public function setAddress(string $address): Building
     {
         $this->address = $address;
 
@@ -72,40 +77,48 @@ class Building
      *
      * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getRooms()
+    public function getRooms(): ArrayCollection
     {
         return $this->rooms;
     }
 
     /**
-     * @param mixed $rooms
+     * @param Room $room
+     *
+     * @return Building
      */
-    public function setRooms($rooms)
+    public function addRoom(Room $room): Building
     {
-        $this->rooms = $rooms;
+        $this->rooms->add($room);
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
+     *
+     * @return Building
      */
-    public function setName($name)
+    public function setName(string $name): Building
     {
         $this->name = $name;
+
+        return $this;
     }
 }

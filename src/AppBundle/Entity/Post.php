@@ -70,30 +70,28 @@ class Post
 
     /**
      * Post constructor.
-     * @param int $id
+     *
      * @param string $title
      * @param string $content
      * @param Lecture $lecture
      * @param Lecturer $author
-     * @param Collection $seenByStudents
      */
-    public function __construct($title, $content, Lecture $lecture, Lecturer $author)
+    public function __construct(string $title, string $content, Lecture $lecture, Lecturer $author)
     {
         $this->title = $title;
         $this->content = $content;
-        $this->publishedAt = new \DateTime();
         $this->lecture = $lecture;
         $this->author = $author;
+        $this->publishedAt = new \DateTime();
         $this->seenByStudents = new ArrayCollection();
     }
-
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -105,7 +103,7 @@ class Post
      *
      * @return Post
      */
-    public function setTitle($title)
+    public function setTitle(string $title): Post
     {
         $this->title = $title;
 
@@ -117,7 +115,7 @@ class Post
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -129,7 +127,7 @@ class Post
      *
      * @return Post
      */
-    public function setContent($content)
+    public function setContent(string $content): Post
     {
         $this->content = $content;
 
@@ -141,7 +139,7 @@ class Post
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -153,7 +151,7 @@ class Post
      *
      * @return Post
      */
-    public function setPublishedAt($publishedAt)
+    public function setPublishedAt(\DateTime $publishedAt): Post
     {
         $this->publishedAt = $publishedAt;
 
@@ -165,7 +163,7 @@ class Post
      *
      * @return \DateTime
      */
-    public function getPublishedAt()
+    public function getPublishedAt(): \DateTime
     {
         return $this->publishedAt;
     }
@@ -173,33 +171,41 @@ class Post
     /**
      * @return Lecture
      */
-    public function getLecture()
+    public function getLecture(): Lecture
     {
         return $this->lecture;
     }
 
     /**
      * @param Lecture $lecture
+     *
+     * @return Post
      */
-    public function setLecture($lecture)
+    public function setLecture(Lecture $lecture): Post
     {
         $this->lecture = $lecture;
+
+        return $this;
     }
 
     /**
      * @return Lecturer
      */
-    public function getAuthor()
+    public function getAuthor(): Lecturer
     {
         return $this->author;
     }
 
     /**
      * @param Lecturer $author
+     *
+     * @return Post
      */
-    public function setAuthor($author)
+    public function setAuthor(Lecturer $author): Post
     {
         $this->author = $author;
+
+        return $this;
     }
 
     /**
@@ -212,9 +218,13 @@ class Post
 
     /**
      * @param Student $student
+     *
+     * @return Post
      */
-    public function addSeenByStudent(Student $student)
+    public function addSeenByStudent(Student $student): Post
     {
         $this->seenByStudents[] = $student;
+
+        return $this;
     }
 }

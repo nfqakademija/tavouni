@@ -43,77 +43,67 @@ class Group
      */
     private $students;
 
+    public function __construct()
+    {
+        $this->lectures = new ArrayCollection();
+        $this->students = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param ArrayCollection $groups
-     */
-    public function setGroups($groups)
-    {
-        $this->groups = $groups;
-    }
-
-    /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * @param string $name
+     *
+     * @return Group
      */
-    public function setName($name)
+    public function setName(string $name): Group
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getLectures()
+    public function getLectures(): ArrayCollection
     {
         return $this->lectures;
     }
 
     /**
-     * @param ArrayCollection $lectures
-     */
-    public function setLectures($lectures)
-    {
-        $this->lectures = $lectures;
-    }
-
-    /**
      * @return ArrayCollection
      */
-    public function getStudents()
+    public function getStudents(): ArrayCollection
     {
         return $this->students;
     }
 
     /**
-     * @param ArrayCollection $students
+     * @param Student $student
+     *
+     * @return Group
      */
-    public function setStudents($students)
+    public function addStudent(Student $student): Group
     {
-        $this->students = $students;
-    }
-    public function __construct()
-    {
-        $students = new ArrayCollection();
-    }
-    public function addStudent(Student $student)
-    {
-        $students[] = $student;
+        $this->students->add($student);
+
+        return $this;
     }
 }

@@ -1,28 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.21
- * Time: 21.51
- */
 
 namespace AppBundle\Twig;
 
-use AppBundle\ValueObject\MenuChild;
-use AppBundle\ValueObject\MenuItem;
 use AppBundle\Entity\User;
 use AppBundle\Repository\LectureRepository;
 use AppBundle\Repository\PostRepository;
+use AppBundle\ValueObject\MenuChild;
+use AppBundle\ValueObject\MenuItem;
 use Twig\Environment;
 
 class MenuExtension extends \Twig_Extension
 {
+    /**
+     * @var LectureRepository
+     */
     private $lectureRepository;
+
+    /**
+     * @var PostRepository
+     */
     private $postRepository;
 
     /**
      * MenuExtension constructor.
-     * @param $lectureRepository
+     *
+     * @param LectureRepository $lectureRepository
+     * @param PostRepository $postRepository
      */
     public function __construct(LectureRepository $lectureRepository, PostRepository $postRepository)
     {
@@ -30,8 +33,7 @@ class MenuExtension extends \Twig_Extension
         $this->postRepository = $postRepository;
     }
 
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return array(
             new \Twig_Function(
@@ -42,7 +44,7 @@ class MenuExtension extends \Twig_Extension
         );
     }
 
-    public function renderMenu(Environment $env, User $user, $route)
+    public function renderMenu(Environment $env, User $user, string $route): string
     {
         if ($user->hasRole('ROLE_STUDENT')) {
             $menuItems = [
@@ -59,6 +61,7 @@ class MenuExtension extends \Twig_Extension
                     'Pažymiai'
                 )
             ];
+
             return $env->render(
                 'menu.html.twig',
                 [
@@ -90,6 +93,7 @@ class MenuExtension extends \Twig_Extension
                     $lectureItems
                 )
             ];
+
             return $env->render(
                 'menu.html.twig',
                 [
@@ -101,7 +105,7 @@ class MenuExtension extends \Twig_Extension
         }
     }
 
-    private function calculateUnseenCount(User $user)
+    private function calculateUnseenCount(User $user): int
     {
         $posts = $this->postRepository->getPostsForStudent($user->getId());
 
@@ -111,6 +115,7 @@ class MenuExtension extends \Twig_Extension
                 $count++;
             }
         }
+
         return $count;
     }
 }

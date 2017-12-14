@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.12.4
- * Time: 23.18
- */
 
 namespace AppBundle\Form;
 
@@ -12,29 +6,20 @@ use AppBundle\Entity\Assignment;
 use AppBundle\Entity\AssignmentEvent;
 use AppBundle\Entity\LectureType;
 use AppBundle\Entity\Room;
-use AppBundle\Entity\Subject;
-use AppBundle\Repository\LectureTypeRepository;
 use DateInterval;
-use Ivory\CKEditorBundle\Exception\Exception;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AssignmentType extends AbstractType
 {
-    /**
-     * @var Subject
-     */
     private $subject;
     private $lectureTypes;
     private $rooms;
@@ -49,11 +34,11 @@ class AssignmentType extends AbstractType
             ->add('name')
             ->add('lectureType', ChoiceType::class, [
                 'choices' => $this->lectureTypes,
-                'choice_label' => function ($lectureType, $key, $index) {
+                'choice_label' => function ($lectureType) {
                     /** @var LectureType $lectureType */
                     return $lectureType->getName();
                 },
-                'choice_attr' => function ($lectureType, $key, $index) {
+                'choice_attr' => function ($lectureType) {
                     /** @var LectureType $lectureType */
                     return ['class' => 'lectureType_' . strtolower($lectureType->getName())];
                 }
@@ -77,11 +62,11 @@ class AssignmentType extends AbstractType
                 $form = $event->getForm()->getParent();
                 $form->add('rooms', ChoiceType::class, [
                     'choices' => $this->rooms,
-                    'choice_label' => function ($room, $key, $index) {
+                    'choice_label' => function ($room) {
                         /** @var Room $room */
                         return $room->getNo() . ' ' . $room->getBuilding()->getName();
                     },
-                    'choice_attr' => function ($room, $key, $index) {
+                    'choice_attr' => function ($room) {
                         /** @var Room $room */
                         $roomName = $room->getNo() . ' ' . $room->getBuilding()->getName();
 
@@ -136,9 +121,10 @@ class AssignmentType extends AbstractType
         ]);
         $resolver->setRequired(['subject', 'lectureTypes', 'rooms']);
     }
-    private function timeToDate($time, $datetime)
+
+    private function timeToDate(\DateTime $time, \DateTime $datetime): \DateTime
     {
-        $interval = new DateInterval('PT' . $time->format('H') . 'H'.$time->format('i') . 'M');
+        $interval = new DateInterval('PT' . $time->format('H') . 'H' . $time->format('i') . 'M');
         $date = clone $datetime;
 
         return $date->add($interval);

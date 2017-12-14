@@ -67,6 +67,7 @@ class Lecture
      * @ORM\ManyToOne(targetEntity="LectureType")
      */
     private $lectureType;
+
     /**
      * @var ArrayCollection
      *
@@ -76,14 +77,16 @@ class Lecture
 
     public function __construct()
     {
+        $this->lectureDates = new ArrayCollection();
         $this->posts = new ArrayCollection();
     }
+
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -91,118 +94,128 @@ class Lecture
     /**
      * @return Subject
      */
-    public function getSubject()
+    public function getSubject(): Subject
     {
         return $this->subject;
     }
 
     /**
      * @param Subject $subject
+     *
+     * @return Lecture
      */
-    public function setSubject($subject)
+    public function setSubject(Subject $subject): Lecture
     {
         $this->subject = $subject;
+
+        return $this;
     }
 
     /**
      * @return Lecturer
      */
-    public function getLecturer()
+    public function getLecturer(): Lecturer
     {
         return $this->lecturer;
     }
 
     /**
      * @param Lecturer $lecturer
+     *
+     * @return Lecture
      */
-    public function setLecturer($lecturer)
+    public function setLecturer(Lecturer $lecturer): Lecture
     {
         $this->lecturer = $lecturer;
+
+        return $this;
     }
 
     /**
      * @return Room
      */
-    public function getRoom()
+    public function getRoom(): Room
     {
         return $this->room;
     }
 
     /**
      * @param Room $room
+     *
+     * @return Lecture
      */
-    public function setRoom($room)
+    public function setRoom(Room $room): Lecture
     {
         $this->room = $room;
+
+        return $this;
     }
 
     /**
      * @return Group
      */
-    public function getGroup()
+    public function getGroup(): Group
     {
         return $this->group;
     }
 
     /**
      * @param Group $group
+     *
+     * @return Lecture
      */
-    public function setGroup($group)
+    public function setGroup(Group $group): Lecture
     {
         $this->group = $group;
+
+        return $this;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getLectureDates()
+    public function getLectureDates(): ArrayCollection
     {
         return $this->lectureDates;
     }
 
     /**
-     * @param ArrayCollection $lectureDates
-     */
-    public function setLectureDates($lectureDates)
-    {
-        $this->lectureDates = $lectureDates;
-    }
-
-    /**
      * @return LectureType
      */
-    public function getLectureType()
+    public function getLectureType(): LectureType
     {
         return $this->lectureType;
     }
 
     /**
      * @param LectureType $lectureType
+     *
+     * @return Lecture
      */
-    public function setLectureType($lectureType)
+    public function setLectureType(LectureType $lectureType): Lecture
     {
         $this->lectureType = $lectureType;
+
+        return $this;
     }
+
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getPosts()
+    public function getPosts(): ArrayCollection
     {
         return $this->posts;
     }
 
     /**
-     * @param mixed $posts
-     */
-    public function setPosts($posts)
-    {
-        $this->posts = $posts;
-    }
-    /**
      * @param Post $post
+     *
+     * @return Lecture
      */
-    public function addPost(Post $post)
+    public function addPost(Post $post): Lecture
     {
         $this->posts[] = $post;
+
+        return $this;
     }
 }

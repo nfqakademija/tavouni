@@ -14,7 +14,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class GroupFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -28,11 +27,13 @@ class GroupFixtures extends Fixture
         $manager->persist($this->createGroup('PS1k2g', 'PS1k2g'));
         $manager->flush();
     }
-    private function createGroup($name, $reference)
+
+    private function createGroup(string $name, string $reference): Group
     {
         $group = new Group();
         $group->setName($name);
         $this->addReference($reference, $group);
+
         return $group;
     }
 }

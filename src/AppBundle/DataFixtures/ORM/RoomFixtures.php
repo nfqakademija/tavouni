@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.7
- * Time: 13.49
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -14,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class RoomFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -26,14 +19,17 @@ class RoomFixtures extends Fixture
         $manager->persist($this->createRoom('101', 'Didl', '101didl'));
         $manager->flush();
     }
-    private function createRoom($no, $building, $ref)
+
+    private function createRoom(string $no, string $buildingRef, string $reference): Room
     {
         $room = new Room();
         $room->setNo($no);
-        $room->setBuilding($this->getReference($building));
-        $this->addReference($ref, $room);
+        $room->setBuilding($this->getReference($buildingRef));
+        $this->addReference($reference, $room);
+
         return $room;
     }
+
     public function getDependencies()
     {
         return [

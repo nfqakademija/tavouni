@@ -1,17 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.12.2
- * Time: 01.18
- */
 
 namespace AppBundle\ValueObject;
 
 class MenuItem
 {
+    /**
+     * @var string
+     */
     private $route;
+
+    /**
+     * @var string
+     */
     private $title;
+
+    /**
+     * @var array
+     */
     private $children;
 
     /**
@@ -20,7 +25,7 @@ class MenuItem
      * @param $title
      * @param $children
      */
-    public function __construct($route, $title, $children = [])
+    public function __construct(string $route, string $title, array $children = [])
     {
         $this->route = $route;
         $this->title = $title;
@@ -28,49 +33,49 @@ class MenuItem
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getRoute()
+    public function getRoute(): string
     {
         return $this->route;
     }
 
     /**
-     * @param mixed $route
+     * @param string $route
      */
-    public function setRoute($route)
+    public function setRoute(string $route)
     {
         $this->route = $route;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
 
     /**
-     * @param mixed $children
+     * @param array $children
      */
-    public function setChildren($children)
+    public function setChildren(array $children)
     {
         $this->children = $children;
     }

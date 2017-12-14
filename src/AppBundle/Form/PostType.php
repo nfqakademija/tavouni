@@ -5,7 +5,6 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Lecture;
 use AppBundle\Entity\Lecturer;
 use AppBundle\Entity\Post;
-use AppBundle\Entity\Subject;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +17,7 @@ class PostType extends AbstractType
      * @var Lecture
      */
     private $lecture;
+
     /**
      * @var Lecturer
      */

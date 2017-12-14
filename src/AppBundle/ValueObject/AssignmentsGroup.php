@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aurimas
- * Date: 17.12.6
- * Time: 15.12
- */
 
 namespace AppBundle\ValueObject;
 
@@ -12,7 +6,14 @@ use Doctrine\Common\Collections\Collection;
 
 class AssignmentsGroup
 {
+    /**
+     * @var Collection
+     */
     private $assignments;
+
+    /**
+     * @var \DateTime
+     */
     private $date;
 
     /**
@@ -29,7 +30,7 @@ class AssignmentsGroup
     /**
      * @return Collection
      */
-    public function getAssignments()
+    public function getAssignments(): Collection
     {
         return $this->assignments;
     }
@@ -37,7 +38,7 @@ class AssignmentsGroup
     /**
      * @return \DateTime
      */
-    public function getDate()
+    public function getDate(): \DateTime
     {
         return $this->date;
     }

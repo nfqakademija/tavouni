@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.7
- * Time: 14.01
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -14,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -29,7 +22,8 @@ class UserFixtures extends Fixture
         $manager->persist($this->createUser('Linas', 'ROLE_LECTURER', 'UserLinas'));
         $manager->flush();
     }
-    private function createUser($username, $role, $reference)
+
+    private function createUser(string $username, string $role, string $reference): User
     {
         $user = new User();
         $user->setUsername($username);
@@ -38,6 +32,7 @@ class UserFixtures extends Fixture
         $user->setEnabled(true);
         $user->setEmail($username.'@asd.asd');
         $this->addReference($reference, $user);
+
         return $user;
     }
 }

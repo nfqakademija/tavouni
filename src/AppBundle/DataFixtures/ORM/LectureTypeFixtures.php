@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.22
- * Time: 23.16
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -25,11 +19,13 @@ class LectureTypeFixtures extends Fixture
         $manager->persist($this->createLectureType('Pratybos', 'Pratybos'));
         $manager->flush();
     }
-    private function createLectureType($name, $reference)
+
+    private function createLectureType(string $name, string $reference): LectureType
     {
         $lectureType = new LectureType();
         $lectureType->setName($name);
         $this->addReference($reference, $lectureType);
+
         return $lectureType;
     }
 }

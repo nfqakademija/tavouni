@@ -46,7 +46,7 @@ class User extends BaseUser
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -54,32 +54,40 @@ class User extends BaseUser
     /**
      * @return Student
      */
-    public function getStudent()
+    public function getStudent(): Student
     {
         return $this->student;
     }
 
     /**
      * @param Student $student
+     *
+     * @return User
      */
-    public function setStudent($student)
+    public function setStudent($student): User
     {
         $this->student = $student;
+
+        return $this;
     }
 
     /**
      * @return Lecturer
      */
-    public function getLecturer()
+    public function getLecturer(): Lecturer
     {
         return $this->lecturer;
     }
 
     /**
      * @param Lecturer $lecturer
+     *
+     * @return User
      */
-    public function setLecturer($lecturer)
+    public function setLecturer($lecturer): User
     {
         $this->lecturer = $lecturer;
+
+        return $this;
     }
 }

@@ -47,7 +47,7 @@ class Student
     private $groups;
 
     /**
-     * @var ArrayCollection
+     * @var Collection
      *
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="student")
      */
@@ -56,7 +56,7 @@ class Student
     public function __construct()
     {
         $this->groups = new ArrayCollection();
-        $this->seenPosts = new ArrayCollection();
+        $this->grades = new ArrayCollection();
     }
 
     /**
@@ -64,7 +64,7 @@ class Student
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -76,7 +76,7 @@ class Student
      *
      * @return Student
      */
-    public function setName($name)
+    public function setName(string $name): Student
     {
         $this->name = $name;
 
@@ -88,46 +88,49 @@ class Student
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getGroups()
+    public function getGroups(): ArrayCollection
     {
         return $this->groups;
     }
 
     /**
-     * @param mixed $groups
+     * @param Group $group
+     *
+     * @return Student
      */
-    public function setGroups($groups)
-    {
-        $this->groups = $groups;
-    }
-
-    public function addGroup(Group $group)
+    public function addGroup(Group $group): Student
     {
         $this->groups[] = $group;
+
+        return $this;
     }
 
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
      * @param User $user
+     *
+     * @return Student
      */
-    public function setUser($user)
+    public function setUser($user): Student
     {
         $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -140,9 +143,13 @@ class Student
 
     /**
      * @param Grade $grade
+     *
+     * @return Student
      */
-    public function addGrade(Grade $grade)
+    public function addGrade(Grade $grade): Student
     {
         $this->grades[] = $grade;
+
+        return $this;
     }
 }

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.7
- * Time: 13.57
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -14,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LectureFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -28,18 +21,26 @@ class LectureFixtures extends Fixture
         $manager->persist($this->createLecture('SM', 'SkaitiniaiMetodai', 'LecturerOlga', 'SMTeor', 'Teorija'));
         $manager->flush();
     }
-    private function createLecture($group, $subject, $lecturer, $reference, $lectureType)
-    {
+
+    private function createLecture(
+        string $groupRef,
+        string $subjectRef,
+        string $lecturerRef,
+        string $reference,
+        string $lectureTypeRef
+    ): Lecture {
         $lecture = new Lecture();
         $lecture->setRoom($this->getReference('101didl'));
-        $lecture->setGroup($this->getReference($group));
-        $lecture->setSubject($this->getReference($subject));
-        $lecture->setLecturer($this->getReference($lecturer));
-        $lecture->setLectureType($this->getReference($lectureType));
+        $lecture->setGroup($this->getReference($groupRef));
+        $lecture->setSubject($this->getReference($subjectRef));
+        $lecture->setLecturer($this->getReference($lecturerRef));
+        $lecture->setLectureType($this->getReference($lectureTypeRef));
         $this->addReference($reference, $lecture);
+
         return $lecture;
     }
-    public function getDependencies()
+
+    public function getDependencies(): array
     {
         return [
             RoomFixtures::class,

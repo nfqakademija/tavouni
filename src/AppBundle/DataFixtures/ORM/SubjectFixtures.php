@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.7
- * Time: 13.54
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -14,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class SubjectFixtures extends Fixture
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -37,16 +30,22 @@ class SubjectFixtures extends Fixture
         $manager->flush();
     }
 
-    private function createSubject($name, $type, $referenceName, $coordinator)
-    {
+    private function createSubject(
+        string $name,
+        string $type,
+        string $reference,
+        string $coordinatorRef
+    ): Subject {
         $subject = new Subject();
         $subject->setName($name);
         $subject->setSubjectType($type);
-        $subject->setCoordinator($this->getReference($coordinator));
-        $this->addReference($referenceName, $subject);
+        $subject->setCoordinator($this->getReference($coordinatorRef));
+        $this->addReference($reference, $subject);
+
         return $subject;
     }
-    public function getDependencies()
+
+    public function getDependencies(): array
     {
         return [
             LecturerFixtures::class,

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aurimas
- * Date: 17.12.6
- * Time: 15.17
- */
 
 namespace AppBundle\Utils;
 
@@ -27,6 +21,7 @@ class AssignmentsGroupFactory
             $assignmentsGroups->add(new AssignmentsGroup($assignmentsByDate, $date));
             $i = $j;
         }
+
         return $assignmentsGroups;
     }
 }
