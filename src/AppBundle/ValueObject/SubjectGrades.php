@@ -17,11 +17,6 @@ class SubjectGrades
     private $gradeSum;
 
     /**
-     * @var int
-     */
-    private $weightSum;
-
-    /**
      * @var array
      */
     private $grades = [];
@@ -60,22 +55,6 @@ class SubjectGrades
     public function setGradeSum(int $gradeSum)
     {
         $this->gradeSum = $gradeSum;
-    }
-
-    /**
-     * @return int
-     */
-    public function getWeightSum(): int
-    {
-        return $this->weightSum;
-    }
-
-    /**
-     * @param int $weightSum
-     */
-    public function setWeightSum(int $weightSum)
-    {
-        $this->weightSum = $weightSum;
     }
 
     /**

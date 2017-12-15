@@ -9,11 +9,10 @@
 namespace AppBundle\Controller\Student;
 
 use AppBundle\Entity\Post;
-use AppBundle\Entity\SubjectGrades;
 use AppBundle\Repository\AssignmentRepository;
 use AppBundle\Repository\PostRepository;
 use AppBundle\Utils\AssignmentsGroupFactory;
-use AppBundle\Utils\SubjectGradeParser;
+use AppBundle\Utils\SubjectGradeFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +37,7 @@ class StudentController extends Controller
         $posts = $postRepository->getPostsForStudent($id);
         $assignments = $assignmentRepository->getAssignmentsByStudent($id);
         $assignmentsGroups = $assignmentsGroupFactory->createAssignmentsGroupCollection($assignments);
-        // replace this example code with whatever you need
+
         return $this->render(
             'Student/student_homepage.html.twig',
             [
@@ -53,7 +52,6 @@ class StudentController extends Controller
      */
     public function timetableAction(): Response
     {
-        // replace this example code with whatever you need
         return $this->render(
             'Student/Timetable/student_calendar.html.twig'
         );
@@ -73,6 +71,7 @@ class StudentController extends Controller
 
             return new Response(null, Response::HTTP_OK);
         }
+
         return new Response(null, Response::HTTP_FORBIDDEN);
     }
 
@@ -81,11 +80,11 @@ class StudentController extends Controller
      */
     public function gradesAction(
         TokenStorage $tokenStorage,
-        SubjectGradeParser $subjectGradeParser
+        SubjectGradeFactory $subjectGradeFactory
     ): Response {
         $id = $tokenStorage->getToken()->getUser()->getId();
-        $subjects = $subjectGradeParser->gradesToSubjectGrades($id);
-        // replace this example code with whatever you need
+        $subjects = $subjectGradeFactory->createSubjectGradeCollection($id);
+
         return $this->render(
             'Student/student_grades.html.twig',
             [
