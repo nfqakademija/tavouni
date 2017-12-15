@@ -42,7 +42,6 @@ class SubjectGradeParser
             if (!$found) {
                 $subject = new SubjectGrades();
                 $subject->setName($grade->getAssignment()->getSubject()->getName());
-                $subject->setId($grade->getAssignment()->getSubject()->getId());
                 $subject->addGrade($grade);
                 $subjects[] = $subject;
             }

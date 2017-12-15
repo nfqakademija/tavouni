@@ -7,11 +7,6 @@ use AppBundle\Entity\Grade;
 class SubjectGrades
 {
     /**
-     * @var int
-     */
-    private $id;
-
-    /**
      * @var string
      */
     private $name;
@@ -35,23 +30,6 @@ class SubjectGrades
      * @var float
      */
     private $average;
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-    }
-
     /**
      * @return string
      */
