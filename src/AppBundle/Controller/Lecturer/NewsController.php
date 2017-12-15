@@ -20,11 +20,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
  */
 class NewsController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
-
     /**
      * @Route("/posts", name="lecturer_show_posts")
      */
