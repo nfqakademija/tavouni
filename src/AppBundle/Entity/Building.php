@@ -43,9 +43,11 @@ class Building
      */
     private $rooms;
 
-    public function __construct()
+    public function __construct(string $name, string $address)
     {
         $this->rooms = new ArrayCollection();
+        $this->name = $name;
+        $this->address = $address;
     }
 
     /**

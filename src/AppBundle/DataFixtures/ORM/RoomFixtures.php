@@ -17,6 +17,7 @@ class RoomFixtures extends Fixture
     {
         $manager->persist($this->createRoom('102', 'Didl', '102didl'));
         $manager->persist($this->createRoom('101', 'Didl', '101didl'));
+        $manager->persist($this->createRoom('101', 'Naug', '101naug'));
         $manager->flush();
     }
 

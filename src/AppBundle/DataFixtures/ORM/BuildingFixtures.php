@@ -15,16 +15,16 @@ class BuildingFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $building = new Building();
-        $building->setName("MIF-Naug");
-        $building->setAddress("Naugarduko g. 24");
-        $manager->persist($building);
-        $building2 = new Building();
-        $building2->setName("MIF-Didl");
-        $building2->setAddress("Didlaukio g. 47");
-        $manager->persist($building2);
+        $manager->persist($this->createBuilding('MIF-Naug', 'Naugarduko g. 24', 'Naug'));
+        $manager->persist($this->createBuilding('MIF-Didl', 'Didlaukio g. 47', 'Didl'));
         $manager->flush();
-        $this->addReference('Naug', $building);
-        $this->addReference('Didl', $building2);
+    }
+
+    private function createBuilding(string $name, string $adress, string $ref): Building
+    {
+        $building = new Building($name, $adress);
+        $this->addReference($ref, $building);
+
+        return $building;
     }
 }

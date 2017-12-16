@@ -44,9 +44,9 @@ services:
             - AppBundle\Entity\LectureDate
 
     AppBundle\Repository\PostRepository:
-            factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
-            arguments:
-                - AppBundle\Entity\Post
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\Post
 
     security.authentication.success_handler:
         class:  AppBundle\Authentication\AuthenticationSuccessHandler
@@ -55,34 +55,39 @@ services:
             - { name: 'monolog.logger', channel: 'security' }
 
     AppBundle\Repository\LectureRepository:
-                factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
-                arguments:
-                    - AppBundle\Entity\Lecture
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\Lecture
 
     AppBundle\Repository\GradeRepository:
-                    factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
-                    arguments:
-                        - AppBundle\Entity\Grade
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\Grade
 
     AppBundle\Repository\AssignmentRepository:
-                        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
-                        arguments:
-                            - AppBundle\Entity\Assignment
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\Assignment
 
     AppBundle\Repository\RoomRepository:
-                                factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
-                                arguments:
-                                    - AppBundle\Entity\Room
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\Room
 
     AppBundle\Repository\AssignmentEventRepository:
-                                    factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
-                                    arguments:
-                                        - AppBundle\Entity\AssignmentEvent
-    AppBundle\Repository\StudentRepository:
-                                        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
-                                        arguments:
-                                            - AppBundle\Entity\Student
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\AssignmentEvent
 
+    AppBundle\Repository\StudentRepository:
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\Student
+
+    AppBundle\Repository\BuildingRepository:
+            factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+            arguments:
+                - AppBundle\Entity\Building
 
     Faker\Factory: ~
 
