@@ -25,11 +25,9 @@ class NewsController extends Controller
      */
     public function showPostsAction(
         Lecture $lecture,
-        TokenStorage $tokenStorage,
         PostRepository $postRepository
     ): Response {
-        $id = $tokenStorage->getToken()->getUser()->getId();
-        $posts = $postRepository->getPostsByLecturer($id);
+        $posts = $postRepository->getLecturePosts($lecture->getId());
 
         return $this->render(':Lecturer/News:show_posts.html.twig', [
             'posts' => $posts,

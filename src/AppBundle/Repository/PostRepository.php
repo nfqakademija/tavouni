@@ -4,15 +4,14 @@ namespace AppBundle\Repository;
 
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getPostsByLecturer(int $userId)
+    public function getLecturePosts(int $lectureId)
     {
         return $this->_em->createQuery("SELECT p
             FROM AppBundle\Entity\Post p
-            JOIN p.author l
-            JOIN l.user u
-            WHERE u.id = :userId
+            JOIN p.lecture l
+            WHERE l.id = :lectureId
             ORDER BY p.publishedAt DESC
-            ")->setParameter('userId', $userId)->getResult();
+            ")->setParameter('lectureId', $lectureId)->getResult();
     }
 
     public function getPostsForStudent(int $userId)
