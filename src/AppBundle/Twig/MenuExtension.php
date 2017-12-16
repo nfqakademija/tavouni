@@ -73,7 +73,7 @@ class MenuExtension extends \Twig_Extension
                 'menu.html.twig',
                 [
                     'menuItems' => $menuItems,
-                    'active' => 'asd',
+                    'active' => $route,
                     'count' => $this->calculateUnseenCount($user)
                 ]
             );
@@ -85,7 +85,8 @@ class MenuExtension extends \Twig_Extension
             foreach ($lectures as $lecture) {
                 $lectureItems[] = new MenuItem(
                     $this->router->generate('lecturer_show_posts', ['lecture_id' => $lecture->getId()]),
-                    $lecture->getSubject()->getName().' - '.$lecture->getLectureType()->getName()
+                    $lecture->getSubject()->getName() . ' - ' . $lecture->getLectureType() . ' ' .
+                    ($lecture->getLectureType() !== 'Teorija' ? $lecture->getGroup()->getNumber() . ' grupė' : '')
                 );
             }
             $menuItems = [

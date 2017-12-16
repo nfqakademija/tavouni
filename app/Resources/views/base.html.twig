@@ -11,7 +11,7 @@
     {% endblock %}
 </head>
 <body>
-{% if app.user != null %}{{ menu(app.user, app.request.get('_route'))}}{% endif%}
+{% if app.user != null %}{{ menu(app.user, app.request.pathinfo)}}{% endif%}
 
 {% block body %}
 
