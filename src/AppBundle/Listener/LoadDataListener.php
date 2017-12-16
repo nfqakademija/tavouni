@@ -49,51 +49,56 @@ class LoadDataListener
      */
     public function loadData(CalendarEvent $calendarEvent)
     {
-        if ($this->tokenStorage->getToken()->getUser()->hasRole('ROLE_STUDENT')) {
-            $userId = $this->tokenStorage->getToken()->getUser()->getId();
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_STUDENT')) {
+            $userId = $user->getId();
             $studentLectures = $this->ldRepository->getLectureDatesByStudent($userId);
             $assignmentEvents = $this->aeRepository->getAssignmentEventsForStudent($userId);
-            foreach ($studentLectures as $lecture) {
-                $data = $lecture->getLecture()->getSubject()->getName() . " - ".
-                    $lecture->getLecture()->getLectureType()->getName() . "\n".
-                    $lecture->getLecture()->getLecturer()->getName() . "\n" .
-                    $lecture->getLecture()->getRoom()->getNo() . "(" .
-                    $lecture->getLecture()->getRoom()->getBuilding()->getName() . ")"
-                ;
-                $event = new Event($data, $lecture->getStart());
-                $event->setEndDate($lecture->getEnd());
-                $event->setAllDay(false);
-                $calendarEvent->addEvent($event);
-            }
-            foreach ($assignmentEvents as $assignment) {
-                $data = $assignment->getAssignment()->getName() . "\n" .
-                    $assignment->getAssignment()->getSubject()->getName() . "\n".
-                    $assignment->getAssignment()->getSubject()->getCoordinator()->getName() . "\n" .
-                    $assignment->getRoom()->getNo() . '(' .
-                    $assignment->getRoom()->getBuilding()->getName() . ')';
-                $event = new Event($data, $assignment->getStart());
-                $event->setEndDate($assignment->getEnd());
-                $event->setAllDay(false);
-                $event->setBackgroundColor('Tomato');
-                $calendarEvent->addEvent($event);
-            }
+            $this->addCalendarEvents($studentLectures, $calendarEvent, true);
+            $this->addAssignmentEvents($assignmentEvents, $calendarEvent);
         }
-        if ($this->tokenStorage->getToken()->getUser()->hasRole('ROLE_LECTURER')) {
-            $userId = $this->tokenStorage->getToken()->getUser()->getId();
-            $studentLectures = $this->ldRepository->getLectureDatesByLecturer($userId);
-            foreach ($studentLectures as $lecture) {
-                $data = $lecture->getLecture()->getSubject()->getName() . " - " .
-                    $lecture->getLecture()->getLectureType()->getName() . "\n" .
-                    $lecture->getLecture()->getRoom()->getNo() . "(" .
-                    $lecture->getLecture()->getRoom()->getBuilding()->getName() . ")"
-                ;
+        if ($user->hasRole('ROLE_LECTURER')) {
+            $userId = $user->getId();
+            $lectures = $this->ldRepository->getLectureDatesByLecturer($userId);
+            $this->addCalendarEvents($lectures, $calendarEvent, false);
+        }
+    }
+    private function addCalendarEvents(array $lectures, CalendarEvent $calendarEvent, bool $isStudent): CalendarEvent
+    {
+        foreach ($lectures as $lecture) {
+            $data = $lecture->getLecture()->getSubject()->getName() . ' - '.
+                $lecture->getLecture()->getLectureType()->getName() . "\n".
+                ($isStudent ? ($lecture->getLecture()->getLecturer()->getName() . "\n") : '') .
+                $lecture->getLecture()->getRoom()->getNo() . '(' .
+                $lecture->getLecture()->getRoom()->getBuilding()->getName() . ')'
+            ;
+            $event = new Event($data, $lecture->getStart());
+            if (!$isStudent) {
+                $event->setUrl('/lecturer/lecture/'.$lecture->getLecture()->getSubject()->getId() . '/posts');
+            }
+            $event->setEndDate($lecture->getEnd());
+            $event->setAllDay(false);
+            $calendarEvent->addEvent($event);
+        }
 
-                $event = new Event($data, $lecture->getStart());
-                $event->setUrl('/lecturer/'.$lecture->getLecture()->getSubject()->getId() . '/posts');
-                $event->setEndDate($lecture->getEnd());
-                $event->setAllDay(false);
-                $calendarEvent->addEvent($event);
-            }
+        return $calendarEvent;
+    }
+
+    private function addAssignmentEvents(array $assignmentEvents, CalendarEvent $calendarEvent): CalendarEvent
+    {
+        foreach ($assignmentEvents as $assignment) {
+            $data = $assignment->getAssignment()->getName() . "\n" .
+                $assignment->getAssignment()->getSubject()->getName() . "\n".
+                $assignment->getAssignment()->getSubject()->getCoordinator()->getName() . "\n" .
+                $assignment->getRoom()->getNo() . '(' .
+                $assignment->getRoom()->getBuilding()->getName() . ')';
+            $event = new Event($data, $assignment->getStart());
+            $event->setEndDate($assignment->getEnd());
+            $event->setAllDay(false);
+            $event->setBackgroundColor('Tomato');
+            $calendarEvent->addEvent($event);
         }
+
+        return $calendarEvent;
     }
 }
