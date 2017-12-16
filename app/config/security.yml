@@ -11,8 +11,16 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        api_key:
+            id: AppBundle\Security\ApiKeyUserProvider
 
     firewalls:
+        calendar:
+            pattern: ^/timetable
+            stateless: true
+            simple_preauth:
+                authenticator: AppBundle\Security\ApiKeyAuthenticator
+                provider: api_key
         main:
             pattern: ^/
             form_login:
