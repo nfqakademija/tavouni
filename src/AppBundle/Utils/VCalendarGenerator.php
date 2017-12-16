@@ -20,7 +20,7 @@ class VCalendarGenerator
                 'VEVENT',
                 [
                     'SUMMARY' => $calendarDate->getLecture()->getSubject()->getName(),
-                    'DESCRIPTION' => $calendarDate->getLecture()->getLectureType()->getName() . "\n"
+                    'DESCRIPTION' => $calendarDate->getLecture()->getLectureType() . "\n"
                         . ($addLecturerName ? ($calendarDate->getLecture()->getLecturer()->getName() ."\n") : '')
                         . $calendarDate->getLecture()->getRoom()->getBuilding()->getName(),
                     'DTSTART' => $calendarDate->getStart(),
