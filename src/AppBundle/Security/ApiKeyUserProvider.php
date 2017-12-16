@@ -17,7 +17,6 @@ class ApiKeyUserProvider implements UserProviderInterface
     private $userRepository;
 
     /**
-     * ApiKeyUserProvider constructor.
      * @param UserRepository $userRepository
      */
     public function __construct(UserRepository $userRepository)
@@ -34,30 +33,18 @@ class ApiKeyUserProvider implements UserProviderInterface
     }
 
     /**
-     * Loads the user for the given username.
-     *
-     * This method must throw UsernameNotFoundException if the user is not
-     * found.
-     *
      * @param string $username The username
      *
      * @return UserInterface
      *
      * @throws UsernameNotFoundException if the user is not found
      */
-    public function loadUserByUsername($username): User
+    public function loadUserByUsername($username): UserInterface
     {
         return $this->userRepository->findOneBy(['username' => $username]);
     }
 
     /**
-     * Refreshes the user.
-     *
-     * It is up to the implementation to decide if the user data should be
-     * totally reloaded (e.g. from the database), or if the UserInterface
-     * object can just be merged into some internal array of users / identity
-     * map.
-     *
      * @return UserInterface
      *
      * @throws UnsupportedUserException if the user is not supported
@@ -68,8 +55,6 @@ class ApiKeyUserProvider implements UserProviderInterface
     }
 
     /**
-     * Whether this provider supports the given user class.
-     *
      * @param string $class
      *
      * @return bool

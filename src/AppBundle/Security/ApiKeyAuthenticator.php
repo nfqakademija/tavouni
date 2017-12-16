@@ -15,8 +15,11 @@ use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterfa
 
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
-    {
+    public function authenticateToken(
+        TokenInterface $token,
+        UserProviderInterface $userProvider,
+        $providerKey
+    ): PreAuthenticatedToken {
         if (!$userProvider instanceof ApiKeyUserProvider) {
             throw new \InvalidArgumentException(
                 sprintf(
@@ -45,12 +48,12 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
         );
     }
 
-    public function supportsToken(TokenInterface $token, $providerKey)
+    public function supportsToken(TokenInterface $token, $providerKey): bool
     {
         return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
     }
 
-    public function createToken(Request $request, $providerKey)
+    public function createToken(Request $request, $providerKey): PreAuthenticatedToken
     {
         $apiKey = $request->query->get('apikey');
 
@@ -66,13 +69,9 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     }
 
     /**
-     * This is called when an interactive authentication attempt fails. This is
-     * called by authentication listeners inheriting from
-     * AbstractAuthenticationListener.
-     *
      * @return Response The response to return, never null
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         // TODO: Implement onAuthenticationFailure() method.
     }
