@@ -35,12 +35,10 @@ class AssignmentType extends AbstractType
             ->add('lectureType', ChoiceType::class, [
                 'choices' => $this->lectureTypes,
                 'choice_label' => function ($lectureType) {
-                    /** @var LectureType $lectureType */
-                    return $lectureType->getName();
+                    return $lectureType;
                 },
                 'choice_attr' => function ($lectureType) {
-                    /** @var LectureType $lectureType */
-                    return ['class' => 'lectureType_' . strtolower($lectureType->getName())];
+                    return ['class' => 'lectureType_' . strtolower($lectureType)];
                 }
             ])
             ->add('deadline', DateType::class, [

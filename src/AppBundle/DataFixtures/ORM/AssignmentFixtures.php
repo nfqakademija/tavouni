@@ -86,7 +86,7 @@ class AssignmentFixtures extends Fixture
             $this->getReference($subjectRef),
             $weight,
             $name,
-            $this->getReference($typeRef),
+            $typeRef,
             $date
         );
         $this->addReference($reference, $assignment);
@@ -97,7 +97,6 @@ class AssignmentFixtures extends Fixture
     public function getDependencies(): array
     {
         return [
-            LectureTypeFixtures::class,
             SubjectFixtures::class,
         ];
     }

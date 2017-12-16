@@ -17,7 +17,7 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
 
     public function getStudentsWithGradesByLecture(int $lectureId): array
     {
-        return $this->_em->createQuery("SELECT st, a, g,  gr, l, lt, ltl
+        return $this->_em->createQuery("SELECT st, a, g,  gr, l
             FROM AppBundle\Entity\Student st
             JOIN st.grades g
             JOIN g.assignment a
@@ -25,9 +25,7 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
             JOIN gr.lectures l
             JOIN l.subject sl
             JOIN a.subject sa
-            JOIN a.lectureType lt
-            JOIN l.lectureType ltl
-            WHERE l.id = :lectureId AND lt.id = ltl.id AND sl.id = sa.id
+            WHERE l.id = :lectureId AND a.lectureType = l.lectureType AND sl.id = sa.id
             ")->setParameter('lectureId', $lectureId)->getResult();
     }
 }

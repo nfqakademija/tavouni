@@ -21,16 +21,16 @@ class GroupFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createGroup('PS1k', 'PS1k'));
-        $manager->persist($this->createGroup('SM', 'SM'));
-        $manager->persist($this->createGroup('PS1k1g', 'PS1k1g'));
-        $manager->persist($this->createGroup('PS1k2g', 'PS1k2g'));
+        $manager->persist($this->createGroup('PS1k', 0, 'PS1k'));
+        $manager->persist($this->createGroup('SM', 0, 'SM'));
+        $manager->persist($this->createGroup('PS1k1g', 1, 'PS1k1g'));
+        $manager->persist($this->createGroup('PS1k2g', 2, 'PS1k2g'));
         $manager->flush();
     }
 
-    private function createGroup(string $name, string $reference): Group
+    private function createGroup(string $name, int $number, string $reference): Group
     {
-        $group = new Group();
+        $group = new Group($name, $number);
         $group->setName($name);
         $this->addReference($reference, $group);
 

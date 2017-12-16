@@ -45,9 +45,9 @@ class Assignment
     private $name;
 
     /**
-     * @var LectureType
+     * @var String
      *
-     * @ORM\ManyToOne(targetEntity="LectureType")
+     * @ORM\Column(name="lecture_type", type="string", length=255)
      */
     private $lectureType;
 
@@ -83,13 +83,13 @@ class Assignment
      * @param Subject $subject
      * @param int $weight
      * @param string $name
-     * @param LectureType $lectureType
+     * @param string $lectureType
      */
     public function __construct(
         Subject $subject,
         $weight,
         $name,
-        LectureType $lectureType,
+        string $lectureType,
         $deadline = null,
         $assignmentEvent = null
     ) {
@@ -187,11 +187,11 @@ class Assignment
     /**
      * Set lectureType
      *
-     * @param LectureType $lectureType
+     * @param string $lectureType
      *
      * @return Assignment
      */
-    public function setLectureType(LectureType $lectureType): Assignment
+    public function setLectureType(string $lectureType): Assignment
     {
         $this->lectureType = $lectureType;
 
@@ -201,9 +201,9 @@ class Assignment
     /**
      * Get lectureType
      *
-     * @return LectureType
+     * @return string
      */
-    public function getLectureType(): LectureType
+    public function getLectureType(): string
     {
         return $this->lectureType;
     }

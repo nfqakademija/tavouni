@@ -67,7 +67,7 @@ class LoadDataListener
     {
         foreach ($lectures as $lecture) {
             $data = $lecture->getLecture()->getSubject()->getName() . ' - '.
-                $lecture->getLecture()->getLectureType()->getName() . "\n".
+                $lecture->getLecture()->getLectureType() . "\n".
                 ($isStudent ? ($lecture->getLecture()->getLecturer()->getName() . "\n") : '') .
                 $lecture->getLecture()->getRoom()->getNo() . '(' .
                 $lecture->getLecture()->getRoom()->getBuilding()->getName() . ')'

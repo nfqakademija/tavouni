@@ -30,6 +30,12 @@ class Group
     private $name;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="number", type="integer")
+     */
+    private $number;
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Lecture", mappedBy="group")
@@ -43,10 +49,12 @@ class Group
      */
     private $students;
 
-    public function __construct()
+    public function __construct(string $name, int $number)
     {
         $this->lectures = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->name = $name;
+        $this->number = $number;
     }
 
     /**
@@ -85,6 +93,26 @@ class Group
     public function getLectures(): ArrayCollection
     {
         return $this->lectures;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumber(): int
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param int $number
+     *
+     * @return Group
+     */
+    public function setNumber(int $number): Group
+    {
+        $this->number = $number;
+
+        return $this;
     }
 
     /**

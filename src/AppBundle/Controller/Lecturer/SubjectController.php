@@ -6,7 +6,6 @@ use AppBundle\Entity\Grade;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\AssignmentType;
 use AppBundle\Repository\AssignmentRepository;
-use AppBundle\Repository\LectureTypeRepository;
 use AppBundle\Repository\RoomRepository;
 use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -40,15 +39,13 @@ class SubjectController extends Controller
     public function addAssignmentAction(
         Request $request,
         Subject $subject,
-        LectureTypeRepository $lectureTypeRepository,
         RoomRepository $roomRepository,
         StudentRepository $studentRepository
     ): Response {
-        $lectureTypes = $lectureTypeRepository->findAll();
         $rooms = $roomRepository->findAll();
         $form = $this->createForm(AssignmentType::class, null, [
             'subject' => $subject,
-            'lectureTypes' => $lectureTypes,
+            'lectureTypes' => ['Teorija', 'Pratybos'],
             'rooms' => $rooms,
         ]);
         $form->handleRequest($request);

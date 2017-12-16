@@ -34,7 +34,7 @@ class LectureFixtures extends Fixture
         $lecture->setGroup($this->getReference($groupRef));
         $lecture->setSubject($this->getReference($subjectRef));
         $lecture->setLecturer($this->getReference($lecturerRef));
-        $lecture->setLectureType($this->getReference($lectureTypeRef));
+        $lecture->setLectureType($lectureTypeRef);
         $this->addReference($reference, $lecture);
 
         return $lecture;
@@ -47,7 +47,6 @@ class LectureFixtures extends Fixture
             GroupFixtures::class,
             SubjectFixtures::class,
             LecturerFixtures::class,
-            LectureTypeFixtures::class,
         ];
     }
 }
