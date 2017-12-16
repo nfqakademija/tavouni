@@ -9,7 +9,7 @@ $(function () {
             exportIcs: {
                 text: 'Eksportuoti į .ics failą',
                 click: function() {
-                    window.location.replace("/timetable/download");
+                    window.location.replace("/calendar");
                 }
             },
             showLink: {
