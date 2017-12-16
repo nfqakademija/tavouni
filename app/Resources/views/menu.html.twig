@@ -7,7 +7,7 @@
             {% for i, item in menuItems %}
                 {% if not item.children  %}
                     <li{% if item.route == active %} class="active"{% endif%}>
-                        <a href="{{ path(item.route) }}">{{item.title}}{% if i == 0 and count != 0 %} <span id="count" class="badge progress-bar-info blink">{{ count }}</span>{% endif %}</a>
+                        <a href="{{ item.route }}">{{item.title}}{% if i == 0 and count != 0 %} <span id="count" class="badge progress-bar-info blink">{{ count }}</span>{% endif %}</a>
                     </li>
                 {% else %}
                     <li class="dropdown {% if active == 'lecturer_show_posts' or active == 'lecturer_add_post' %}active{% endif%}">
@@ -16,7 +16,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {% for child in item.children %}
-                                <li><a href="{{ path(item.route, {(child.slugName): child.slugValue})}}">{{ child.title }}</a></li>
+                                <li><a href="{{ child.route}}">{{ child.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>

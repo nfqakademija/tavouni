@@ -41,14 +41,6 @@ class MenuItem
     }
 
     /**
-     * @param string $route
-     */
-    public function setRoute(string $route)
-    {
-        $this->route = $route;
-    }
-
-    /**
      * @return string
      */
     public function getTitle(): string
@@ -57,26 +49,10 @@ class MenuItem
     }
 
     /**
-     * @param string $title
-     */
-    public function setTitle(string $title)
-    {
-        $this->title = $title;
-    }
-
-    /**
      * @return array
      */
     public function getChildren(): array
     {
         return $this->children;
-    }
-
-    /**
-     * @param array $children
-     */
-    public function setChildren(array $children)
-    {
-        $this->children = $children;
     }
 }

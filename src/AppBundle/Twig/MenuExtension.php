@@ -7,6 +7,7 @@ use AppBundle\Repository\LectureRepository;
 use AppBundle\Repository\PostRepository;
 use AppBundle\ValueObject\MenuChild;
 use AppBundle\ValueObject\MenuItem;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 class MenuExtension extends \Twig_Extension
@@ -15,22 +16,28 @@ class MenuExtension extends \Twig_Extension
      * @var LectureRepository
      */
     private $lectureRepository;
-
     /**
      * @var PostRepository
      */
     private $postRepository;
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $router;
 
     /**
-     * MenuExtension constructor.
-     *
      * @param LectureRepository $lectureRepository
      * @param PostRepository $postRepository
+     * @param UrlGeneratorInterface $router
      */
-    public function __construct(LectureRepository $lectureRepository, PostRepository $postRepository)
-    {
+    public function __construct(
+        LectureRepository $lectureRepository,
+        PostRepository $postRepository,
+        UrlGeneratorInterface $router
+    ) {
         $this->lectureRepository = $lectureRepository;
         $this->postRepository = $postRepository;
+        $this->router = $router;
     }
 
     public function getFunctions(): array
@@ -49,15 +56,15 @@ class MenuExtension extends \Twig_Extension
         if ($user->hasRole('ROLE_STUDENT')) {
             $menuItems = [
                 new MenuItem(
-                    'student_index',
+                    $this->router->generate('student_index'),
                     'Pagrindinis'
                 ),
                 new MenuItem(
-                    'student_timetable',
+                    $this->router->generate('student_timetable'),
                     'Tvarkaraštis'
                 ),
                 new MenuItem(
-                    'student_grades',
+                    $this->router->generate('student_grades'),
                     'Pažymiai'
                 )
             ];
@@ -66,7 +73,7 @@ class MenuExtension extends \Twig_Extension
                 'menu.html.twig',
                 [
                     'menuItems' => $menuItems,
-                    'active' => $route,
+                    'active' => 'asd',
                     'count' => $this->calculateUnseenCount($user)
                 ]
             );
@@ -76,19 +83,18 @@ class MenuExtension extends \Twig_Extension
             $lectures = $this->lectureRepository->getLecturesForLecturer($user->getId());
             $lectureItems = [];
             foreach ($lectures as $lecture) {
-                $lectureItems[] = new MenuChild(
-                    $lecture->getSubject()->getName().' - '.$lecture->getLectureType()->getName(),
-                    'lecture_id',
-                    $lecture->getId()
+                $lectureItems[] = new MenuItem(
+                    $this->router->generate('lecturer_show_posts', ['lecture_id' => $lecture->getId()]),
+                    $lecture->getSubject()->getName().' - '.$lecture->getLectureType()->getName()
                 );
             }
             $menuItems = [
                 new MenuItem(
-                    'lecturer_index',
+                    $this->router->generate('lecturer_index'),
                     'Pagrindinis'
                 ),
                 new MenuItem(
-                    'lecturer_show_posts',
+                    $this->router->generate('lecturer_index'),
                     'Dėstomi dalykai',
                     $lectureItems
                 )
@@ -108,7 +114,6 @@ class MenuExtension extends \Twig_Extension
     private function calculateUnseenCount(User $user): int
     {
         $posts = $this->postRepository->getPostsForStudent($user->getId());
-
         $count = 0;
         foreach ($posts as $post) {
             if (!$post->getSeenByStudents()->contains($user->getStudent())) {
