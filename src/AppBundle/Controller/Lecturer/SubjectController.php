@@ -45,7 +45,6 @@ class SubjectController extends Controller
         $rooms = $roomRepository->findAll();
         $form = $this->createForm(AssignmentType::class, null, [
             'subject' => $subject,
-            'lectureTypes' => ['Teorija', 'Pratybos'],
             'rooms' => $rooms,
         ]);
         $form->handleRequest($request);

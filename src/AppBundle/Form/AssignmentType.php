@@ -21,25 +21,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AssignmentType extends AbstractType
 {
     private $subject;
-    private $lectureTypes;
     private $rooms;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->subject = $options['subject'];
-        $this->lectureTypes = $options['lectureTypes'];
         $this->rooms = $options['rooms'];
         $builder
             ->add('weight')
             ->add('name')
             ->add('lectureType', ChoiceType::class, [
-                'choices' => $this->lectureTypes,
-                'choice_label' => function ($lectureType) {
-                    return $lectureType;
-                },
-                'choice_attr' => function ($lectureType) {
-                    return ['class' => 'lectureType_' . strtolower($lectureType)];
-                }
+                'choices' => [
+                    'Teorija' => 'Teorija',
+                    'Pratybos' => 'Pratybos'
+                ]
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
@@ -53,37 +48,14 @@ class AssignmentType extends AbstractType
                 'required' => false,
                 'mapped' => false
             ]);
-
         $builder->get('moreOptions')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $checked = $event->getData();
             if ($checked) {
                 $form = $event->getForm()->getParent();
-                $form->add('rooms', ChoiceType::class, [
-                    'choices' => $this->rooms,
-                    'choice_label' => function ($room) {
-                        /** @var Room $room */
-                        return $room->getNo() . ' ' . $room->getBuilding()->getName();
-                    },
-                    'choice_attr' => function ($room) {
-                        /** @var Room $room */
-                        $roomName = $room->getNo() . ' ' . $room->getBuilding()->getName();
-
-                        return ['class' => 'lectureType_' . strtolower($roomName)];
-                    },
-                    'mapped' =>false
-                    ])->add('start', TimeType::class, [
-                        'input'  => 'datetime',
-                        'widget' => 'single_text',
-                        'html5' => false,
-                        'attr' => ['class' => 'js-timepicker'],
-                        'mapped' => false,
-                    ])->add('end', TimeType::class, [
-                        'input'  => 'datetime',
-                        'widget' => 'single_text',
-                        'html5' => false,
-                        'attr' => ['class' => 'js-timepicker'],
-                        'mapped' => false,
-                    ]);
+                $form->add('assignmentEvent', AssignmentEventType::class, [
+                    'rooms' => $this->rooms,
+                    'deadline' => $form->get('deadline')->getData(),
+                ]);
             }
         });
     }
@@ -96,15 +68,7 @@ class AssignmentType extends AbstractType
                 $checked = $form->get('moreOptions')->getData();
                 $assignmentEvent = null;
                 if ($checked) {
-                    $start = $form->get('start')->getData();
-                    $end = $form->get('end')->getData();
-                    $room = $form->get('rooms')->getData();
-                    $deadline = $form->get('deadline')->getData();
-                    $assignmentEvent = new AssignmentEvent(
-                        $this->timeToDate($start, $deadline),
-                        $this->timeToDate($end, $deadline),
-                        $room
-                    );
+                    $assignmentEvent = $form->get('assignmentEvent')->getData();
                 }
 
                 return new Assignment(
@@ -117,14 +81,6 @@ class AssignmentType extends AbstractType
                 );
             }
         ]);
-        $resolver->setRequired(['subject', 'lectureTypes', 'rooms']);
-    }
-
-    private function timeToDate(\DateTime $time, \DateTime $datetime): \DateTime
-    {
-        $interval = new DateInterval('PT' . $time->format('H') . 'H' . $time->format('i') . 'M');
-        $date = clone $datetime;
-
-        return $date->add($interval);
+        $resolver->setRequired(['subject', 'rooms']);
     }
 }
