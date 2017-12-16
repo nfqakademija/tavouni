@@ -15,22 +15,23 @@ class UserFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createUser('Ignas', 'ROLE_STUDENT', 'UserIgnas'));
-        $manager->persist($this->createUser('Aurimas', 'ROLE_STUDENT', 'UserAurimas'));
-        $manager->persist($this->createUser('Antanas', 'ROLE_LECTURER', 'UserAntanas'));
-        $manager->persist($this->createUser('Olga', 'ROLE_LECTURER', 'UserOlga'));
-        $manager->persist($this->createUser('Linas', 'ROLE_LECTURER', 'UserLinas'));
+        $manager->persist($this->createUser('Ignas', 'ROLE_STUDENT', 'UserIgnas', 'ignas'));
+        $manager->persist($this->createUser('Aurimas', 'ROLE_STUDENT', 'UserAurimas', 'aurimas'));
+        $manager->persist($this->createUser('Antanas', 'ROLE_LECTURER', 'UserAntanas', 'antanas'));
+        $manager->persist($this->createUser('Olga', 'ROLE_LECTURER', 'UserOlga', 'olga'));
+        $manager->persist($this->createUser('Linas', 'ROLE_LECTURER', 'UserLinas', 'linas'));
         $manager->flush();
     }
 
-    private function createUser(string $username, string $role, string $reference): User
+    private function createUser(string $username, string $role, string $reference, string $apiKey): User
     {
         $user = new User();
         $user->setUsername($username);
         $user->setPlainPassword('test');
         $user->setRoles([$role]);
         $user->setEnabled(true);
-        $user->setEmail($username.'@asd.asd');
+        $user->setEmail($username . '@asd.asd');
+        $user->setApiKey($apiKey);
         $this->addReference($reference, $user);
 
         return $user;

@@ -36,6 +36,13 @@ class User extends BaseUser
      */
     private $lecturer;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="api_key", type="string", unique=true)
+     */
+    private $apiKey;
+
     public function __construct()
     {
         parent::__construct();
@@ -89,5 +96,21 @@ class User extends BaseUser
         $this->lecturer = $lecturer;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiKey(): string
+    {
+        return $this->apiKey;
+    }
+
+    /**
+     * @param string $apiKey
+     */
+    public function setApiKey(string $apiKey)
+    {
+        $this->apiKey = $apiKey;
     }
 }
