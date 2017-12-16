@@ -16,7 +16,7 @@ security:
 
     firewalls:
         calendar:
-            pattern: ^/timetable
+            pattern: ^/api
             stateless: true
             simple_preauth:
                 authenticator: AppBundle\Security\ApiKeyAuthenticator
