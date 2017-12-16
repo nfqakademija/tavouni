@@ -43,7 +43,7 @@ class GradeController extends Controller
         $id = $tokenStorage->getToken()->getUser()->getId();
         if ($this->isGranted('ROLE_LECTURER') && $lecture->getLecturer()->getUser()->getId() === $id) {
             if ($grade === null || !($value >= 0 && $value <= 10)) {
-                return new Response(null, Response::HTTP_NOT_FOUND);
+                return new Response(null, Response::HTTP_BAD_REQUEST);
             }
             $grade->setValue($value);
             $this->getDoctrine()->getManager()->flush();
