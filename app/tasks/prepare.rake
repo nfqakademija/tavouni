@@ -17,6 +17,16 @@ namespace :symfony do
        end
    end
 
+   desc 'Install CKEditor'
+      task :install_ckeditor do
+          on roles :web do
+              within release_path do
+                  execute :php, 'bin/console', 'ckeditor:install', '--no-interaction'
+              end
+          end
+      end
+
    after 'deploy:updated', 'symfony:migrations'
    after 'deploy:updated', 'symfony:load_fixtures'
+   after 'deploy:updated', 'symfony:install_ckeditor'
 end
