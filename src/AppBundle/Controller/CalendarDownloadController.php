@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 class CalendarDownloadController extends Controller
 {
     /**
-     * @Route("/timetable/download", name="calendar_download")
+     * @Route("/api/calendar", name="api_calendar_download")
+     * @Route("/calendar", name="calendar_download")
      */
     public function downloadAction(
         VCalendarGenerator $vCalendarGenerator,
