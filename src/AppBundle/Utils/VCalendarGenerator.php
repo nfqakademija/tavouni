@@ -5,6 +5,7 @@ namespace AppBundle\Utils;
 use AppBundle\Entity\AssignmentEvent;
 use Sabre\VObject\Component\VCalendar;
 use AppBundle\Entity\LectureDate;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class VCalendarGenerator
 {
@@ -18,9 +19,10 @@ class VCalendarGenerator
     public function generateVCalendarContent(array $lectureEvents, array $assignmentEvents, bool $forStudent): string
     {
         $vCalendar = new VCalendar();
-        $vCalendar->add('X-WR-CALNAME', 'TavoUni events');
+        $vCalendar->add('NAME', 'TavoUni events');
         $this->addLectureEvents($vCalendar, $lectureEvents, $forStudent);
         $this->addAssignmentEvents($vCalendar, $assignmentEvents, $forStudent);
+
         return $vCalendar->serialize();
     }
 
