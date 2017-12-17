@@ -34,6 +34,7 @@ class VCalendarGenerator
                     'DESCRIPTION' => $event->getLecture()->getLectureType() . "\n"
                         . ($addLecturerName ? ($event->getLecture()->getLecturer()->getName() . "\n") : '')
                         . $event->getLecture()->getRoom()->getBuilding()->getName(),
+                    'LOCATION' => $event->getLecture()->getRoom()->getBuilding()->getAddress(),
                     'DTSTART' => $event->getStart(),
                     'DTEND'   => $event->getEnd()
                 ]
@@ -53,6 +54,7 @@ class VCalendarGenerator
                             ($event->getAssignment()->getSubject()->getCoordinator()->getName() . "\n") : '')
                         . $event->getRoom()->getNo() . '('
                         . $event->getRoom()->getBuilding()->getName() . ')',
+                    'LOCATION' => $event->getRoom()->getBuilding()->getAddress(),
                     'DTSTART' => $event->getStart(),
                     'DTEND'   => $event->getEnd()
                 ]
