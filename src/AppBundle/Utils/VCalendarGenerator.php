@@ -32,12 +32,13 @@ class VCalendarGenerator
                 'VEVENT',
                 [
                     'SUMMARY' => $event->getLecture()->getSubject()->getName(),
+                    'LOCATION' => $event->getLecture()->getRoom()->getBuilding()->getAddress(),
                     'DESCRIPTION' => $event->getLecture()->getLectureType() . "\n"
                         . ($addLecturerName ? ($event->getLecture()->getLecturer()->getName() . "\n") : '')
-                        . $event->getLecture()->getRoom()->getBuilding()->getName(),
-                    'LOCATION' => $event->getLecture()->getRoom()->getBuilding()->getAddress(),
+                        . $event->getLecture()->getRoom()->getNo() . ' ('
+                        . $event->getLecture()->getRoom()->getBuilding()->getName() . ')',
                     'DTSTART' => $event->getStart(),
-                    'DTEND'   => $event->getEnd()
+                    'DTEND' => $event->getEnd()
                 ]
             );
         }
@@ -50,14 +51,14 @@ class VCalendarGenerator
                 'VEVENT',
                 [
                     'SUMMARY' => $event->getAssignment()->getSubject()->getName(),
+                    'LOCATION' => $event->getRoom()->getBuilding()->getAddress(),
                     'DESCRIPTION' => $event->getAssignment()->getName() . "\n"
                         . ($addLecturerName ?
                             ($event->getAssignment()->getSubject()->getCoordinator()->getName() . "\n") : '')
-                        . $event->getRoom()->getNo() . '('
+                        . $event->getRoom()->getNo() . ' ('
                         . $event->getRoom()->getBuilding()->getName() . ')',
-                    'LOCATION' => $event->getRoom()->getBuilding()->getAddress(),
                     'DTSTART' => $event->getStart(),
-                    'DTEND'   => $event->getEnd()
+                    'DTEND' => $event->getEnd()
                 ]
             );
         }
