@@ -18,6 +18,7 @@ class VCalendarGenerator
     public function generateVCalendarContent(array $lectureEvents, array $assignmentEvents, bool $forStudent): string
     {
         $vCalendar = new VCalendar();
+        $vCalendar->add('X-WR-CALNAME', 'TavoUni events');
         $this->addLectureEvents($vCalendar, $lectureEvents, $forStudent);
         $this->addAssignmentEvents($vCalendar, $assignmentEvents, $forStudent);
         return $vCalendar->serialize();
