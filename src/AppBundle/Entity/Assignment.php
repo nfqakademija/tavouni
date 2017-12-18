@@ -15,8 +15,8 @@ class Assignment
     const LECTURE_TYPES = [
         'Teorija' => 'Teorija',
         'Pratybos' => 'Pratybos',
-        'Praktykumas' => 'Praktykumas',
-        'Labaratoriniai darbai' => 'Laboratoriniai darbai',
+        'Praktikumas' => 'Praktikumas',
+        'Laboratoriniai darbai' => 'Laboratoriniai darbai',
         'Seminaras' => 'Seminaras',
     ];
     /**
