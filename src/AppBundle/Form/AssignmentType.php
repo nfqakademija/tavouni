@@ -12,6 +12,14 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Range;
 
 class AssignmentType extends AbstractType
 {
@@ -25,16 +33,34 @@ class AssignmentType extends AbstractType
         $this->rooms = $options['rooms'];
         $this->buildings = $options['buildings'];
         $builder
-            ->add('weight')
-            ->add('name')
+            ->add('weight', null, [
+                'constraints' => [
+                    new Range(['min' => 0, 'max' => 100]),
+                    new NotNull(),
+                    new NotBlank(),
+                ],
+                //'empty_data' => 'x',
+            ])
+            ->add('name', null, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 3]),
+                ]
+            ])
             ->add('lectureType', ChoiceType::class, [
                 'choices' => Assignment::LECTURE_TYPES,
+                'constraints' => new Choice(array_values(Assignment::LECTURE_TYPES)),
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'js-datepicker'],
                 'format' => 'MM/dd/yyyy',
+                'required' => true,
+                'constraints' => [
+                    new DateTime(),
+                    new NotBlank(),
+                ]
             ])
             ->add('moreOptions', CheckboxType::class, [
                 'attr' => ['checked' => false],
