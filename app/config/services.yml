@@ -89,6 +89,11 @@ services:
             arguments:
                 - AppBundle\Entity\Building
 
+    AppBundle\Repository\UserRepository:
+                factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+                arguments:
+                    - AppBundle\Entity\User
+
     Faker\Factory: ~
 
     Faker\Generator:
