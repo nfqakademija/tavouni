@@ -55,19 +55,22 @@ class LoadDataListener
             $studentLectures = $this->ldRepository->getLectureDatesByStudent($userId);
             $assignmentEvents = $this->aeRepository->getAssignmentEventsForStudent($userId);
             $this->addCalendarEvents($studentLectures, $calendarEvent, true);
-            $this->addAssignmentEvents($assignmentEvents, $calendarEvent);
+            $this->addAssignmentEvents($assignmentEvents, $calendarEvent, true);
         }
         if ($user->hasRole('ROLE_LECTURER')) {
             $userId = $user->getId();
             $lectures = $this->ldRepository->getLectureDatesByLecturer($userId);
+            $assignmentEvents = $this->aeRepository->getAssignmentEventsForLecturer($userId);
             $this->addCalendarEvents($lectures, $calendarEvent, false);
+            $this->addAssignmentEvents($assignmentEvents, $calendarEvent, false);
         }
     }
+
     private function addCalendarEvents(array $lectures, CalendarEvent $calendarEvent, bool $isStudent): CalendarEvent
     {
         foreach ($lectures as $lecture) {
-            $data = $lecture->getLecture()->getSubject()->getName() . ' - '.
-                $lecture->getLecture()->getLectureType() . "\n".
+            $data = $lecture->getLecture()->getSubject()->getName() . ' - ' .
+                $lecture->getLecture()->getLectureType() . "\n" .
                 ($isStudent ? ($lecture->getLecture()->getLecturer()->getName() . "\n") : '') .
                 $lecture->getLecture()->getRoom()->getNo() . '(' .
                 $lecture->getLecture()->getRoom()->getBuilding()->getName() . ')'
@@ -84,12 +87,15 @@ class LoadDataListener
         return $calendarEvent;
     }
 
-    private function addAssignmentEvents(array $assignmentEvents, CalendarEvent $calendarEvent): CalendarEvent
-    {
+    private function addAssignmentEvents(
+        array $assignmentEvents,
+        CalendarEvent $calendarEvent,
+        bool $isStudent
+    ): CalendarEvent {
         foreach ($assignmentEvents as $assignment) {
             $data = $assignment->getAssignment()->getName() . "\n" .
-                $assignment->getAssignment()->getSubject()->getName() . "\n".
-                $assignment->getAssignment()->getSubject()->getCoordinator()->getName() . "\n" .
+                $assignment->getAssignment()->getSubject()->getName() . "\n" .
+                ($isStudent ? ($assignment->getAssignment()->getSubject()->getCoordinator()->getName() . "\n") : '') .
                 $assignment->getRoom()->getNo() . '(' .
                 $assignment->getRoom()->getBuilding()->getName() . ')';
             $event = new Event($data, $assignment->getStart());

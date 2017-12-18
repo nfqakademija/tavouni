@@ -2,32 +2,67 @@
 
 namespace AppBundle\Utils;
 
+use AppBundle\Entity\AssignmentEvent;
 use Sabre\VObject\Component\VCalendar;
+use AppBundle\Entity\LectureDate;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class VCalendarGenerator
 {
     /**
-     * @param array $calendarDates
-     * @param bool $addLecturerName
+     * @param array $lectureEvents
+     * @param array $assignmentEvents
+     * @param bool $forStudent
      *
      * @return string
      */
-    public function generateVCalendarContent(array $calendarDates, bool $addLecturerName): string
+    public function generateVCalendarContent(array $lectureEvents, array $assignmentEvents, bool $forStudent): string
     {
         $vCalendar = new VCalendar();
-        foreach ($calendarDates as $calendarDate) {
+        $vCalendar->add('NAME', 'TavoUni events');
+        $this->addLectureEvents($vCalendar, $lectureEvents, $forStudent);
+        $this->addAssignmentEvents($vCalendar, $assignmentEvents, $forStudent);
+
+        return $vCalendar->serialize();
+    }
+
+    private function addLectureEvents(VCalendar $vCalendar, array $lectureEvents, bool $addLecturerName): void
+    {
+        /** @var LectureDate $event */
+        foreach ($lectureEvents as $event) {
             $vCalendar->add(
                 'VEVENT',
                 [
-                    'SUMMARY' => $calendarDate->getLecture()->getSubject()->getName(),
-                    'DESCRIPTION' => $calendarDate->getLecture()->getLectureType() . "\n"
-                        . ($addLecturerName ? ($calendarDate->getLecture()->getLecturer()->getName() ."\n") : '')
-                        . $calendarDate->getLecture()->getRoom()->getBuilding()->getName(),
-                    'DTSTART' => $calendarDate->getStart(),
-                    'DTEND'   => $calendarDate->getEnd()
+                    'SUMMARY' => $event->getLecture()->getSubject()->getName(),
+                    'LOCATION' => $event->getLecture()->getRoom()->getBuilding()->getAddress(),
+                    'DESCRIPTION' => $event->getLecture()->getLectureType() . "\n"
+                        . ($addLecturerName ? ($event->getLecture()->getLecturer()->getName() . "\n") : '')
+                        . $event->getLecture()->getRoom()->getNo() . ' ('
+                        . $event->getLecture()->getRoom()->getBuilding()->getName() . ')',
+                    'DTSTART' => $event->getStart(),
+                    'DTEND' => $event->getEnd()
                 ]
             );
         }
-        return $vCalendar->serialize();
+    }
+    private function addAssignmentEvents(VCalendar $vCalendar, array $assignmentEvents, bool $addLecturerName): void
+    {
+        /** @var AssignmentEvent $event */
+        foreach ($assignmentEvents as $event) {
+            $vCalendar->add(
+                'VEVENT',
+                [
+                    'SUMMARY' => $event->getAssignment()->getSubject()->getName(),
+                    'LOCATION' => $event->getRoom()->getBuilding()->getAddress(),
+                    'DESCRIPTION' => $event->getAssignment()->getName() . "\n"
+                        . ($addLecturerName ?
+                            ($event->getAssignment()->getSubject()->getCoordinator()->getName() . "\n") : '')
+                        . $event->getRoom()->getNo() . ' ('
+                        . $event->getRoom()->getBuilding()->getName() . ')',
+                    'DTSTART' => $event->getStart(),
+                    'DTEND' => $event->getEnd()
+                ]
+            );
+        }
     }
 }
