@@ -26,7 +26,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             JOIN st.user u
             LEFT JOIN p.seenByStudents se
             WHERE u.id = :userId
-            GROUP BY p, a, l, g, st, u, se
+            GROUP BY p.id, a.id, l.id, g.id, st.id, u.id, se.id
             ORDER BY seen ASC, p.publishedAt DESC
             ")->setParameter('userId', $userId)->setMaxResults(5)->getResult();
     }
