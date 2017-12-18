@@ -28,10 +28,7 @@ class AssignmentType extends AbstractType
             ->add('weight')
             ->add('name')
             ->add('lectureType', ChoiceType::class, [
-                'choices' => [
-                    'Teorija' => 'Teorija',
-                    'Pratybos' => 'Pratybos'
-                ]
+                'choices' => Assignment::LECTURE_TYPES,
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',

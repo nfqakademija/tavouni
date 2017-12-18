@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Assignment
 {
+    const LECTURE_TYPES = [
+        'Teorija' => 'Teorija',
+        'Pratybos' => 'Pratybos',
+        'Praktykumas' => 'Praktykumas',
+        'Labaratoriniai darbai' => 'Laboratoriniai darbai',
+        'Seminaras' => 'Seminaras',
+    ];
     /**
      * @var int
      *
