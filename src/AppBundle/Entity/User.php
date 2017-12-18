@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * User
- *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
@@ -49,8 +47,6 @@ class User extends BaseUser
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int

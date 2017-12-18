@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Assignment
- *
  * @ORM\Table(name="assignments")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AssignmentRepository")
  */
@@ -79,7 +77,6 @@ class Assignment
     private $average;
 
     /**
-     * Assignment constructor.
      * @param Subject $subject
      * @param int $weight
      * @param string $name
@@ -103,8 +100,6 @@ class Assignment
     }
     
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -113,8 +108,6 @@ class Assignment
     }
 
     /**
-     * Set subject
-     *
      * @param Subject $subject
      *
      * @return Assignment
@@ -127,8 +120,6 @@ class Assignment
     }
 
     /**
-     * Get subject
-     *
      * @return Subject
      */
     public function getSubject(): Subject
@@ -137,8 +128,6 @@ class Assignment
     }
 
     /**
-     * Set weight
-     *
      * @param int $weight
      *
      * @return Assignment
@@ -151,8 +140,6 @@ class Assignment
     }
 
     /**
-     * Get weight
-     *
      * @return int
      */
     public function getWeight(): int
@@ -161,8 +148,6 @@ class Assignment
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Assignment
@@ -175,8 +160,6 @@ class Assignment
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName(): string
@@ -185,8 +168,6 @@ class Assignment
     }
 
     /**
-     * Set lectureType
-     *
      * @param string $lectureType
      *
      * @return Assignment
@@ -199,8 +180,6 @@ class Assignment
     }
 
     /**
-     * Get lectureType
-     *
      * @return string
      */
     public function getLectureType(): string

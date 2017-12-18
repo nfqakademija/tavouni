@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Lecture
- *
  * @ORM\Table(name="lectures")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LectureRepository")
  */
@@ -82,8 +80,6 @@ class Lecture
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int

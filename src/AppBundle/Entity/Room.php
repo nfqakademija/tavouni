@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Room
- *
  * @ORM\Table(name="rooms")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RoomRepository")
  */
@@ -58,8 +56,6 @@ class Room
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int
@@ -68,8 +64,6 @@ class Room
     }
 
     /**
-     * Set no
-     *
      * @param string $no
      *
      * @return Room
@@ -82,8 +76,6 @@ class Room
     }
 
     /**
-     * Get no
-     *
      * @return string
      */
     public function getNo(): string

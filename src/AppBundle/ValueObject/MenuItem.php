@@ -20,7 +20,6 @@ class MenuItem
     private $children;
 
     /**
-     * MenuItem constructor.
      * @param $route
      * @param $title
      * @param $children

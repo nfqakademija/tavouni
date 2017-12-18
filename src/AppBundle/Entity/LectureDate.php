@@ -5,8 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * LectureDate
- *
  * @ORM\Table(name="lecture_dates")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LectureDateRepository")
  */
@@ -44,8 +42,6 @@ class LectureDate
     private $lecture;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int

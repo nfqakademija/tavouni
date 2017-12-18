@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Building
- *
  * @ORM\Table(name="buildings")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BuildingRepository")
  */
@@ -52,8 +50,6 @@ class Building
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int
@@ -62,8 +58,6 @@ class Building
     }
 
     /**
-     * Set address
-     *
      * @param string $address
      *
      * @return Building
@@ -76,8 +70,6 @@ class Building
     }
 
     /**
-     * Get address
-     *
      * @return string
      */
     public function getAddress(): string

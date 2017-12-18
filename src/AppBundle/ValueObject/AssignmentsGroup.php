@@ -17,7 +17,6 @@ class AssignmentsGroup
     private $date;
 
     /**
-     * AssignmentGroup constructor.
      * @param $assignments
      * @param $date
      */

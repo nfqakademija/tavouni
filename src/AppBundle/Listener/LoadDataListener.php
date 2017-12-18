@@ -4,7 +4,6 @@ namespace AppBundle\Listener;
 
 use AncaRebeca\FullCalendarBundle\Event\CalendarEvent;
 use AncaRebeca\FullCalendarBundle\Model\Event;
-use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
 use AppBundle\Repository\AssignmentEventRepository;
 use AppBundle\Repository\LectureDateRepository;
 use Doctrine\ORM\EntityManager;
@@ -28,8 +27,6 @@ class LoadDataListener
     private $aeRepository;
 
     /**
-     * LoadDataListener constructor.
-     *
      * @param LectureDateRepository $ldRepository
      * @param TokenStorage $tokenStorage
      * @param AssignmentEventRepository $aeRepository

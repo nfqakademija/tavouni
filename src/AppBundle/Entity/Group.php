@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Group
- *
  * @ORM\Table(name="groups")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\GroupRepository")
  */
@@ -58,8 +56,6 @@ class Group
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int

@@ -5,8 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * AssignmentEvent
- *
  * @ORM\Table(name="assignment_events")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AssignmentEventRepository")
  */
@@ -51,7 +49,6 @@ class AssignmentEvent
     private $assignment;
 
     /**
-     * AssignmentEvent constructor.
      * @param \DateTime $start
      * @param \DateTime $end
      * @param Room $room
@@ -64,8 +61,6 @@ class AssignmentEvent
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int

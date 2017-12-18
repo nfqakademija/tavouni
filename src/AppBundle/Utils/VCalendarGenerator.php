@@ -3,9 +3,8 @@
 namespace AppBundle\Utils;
 
 use AppBundle\Entity\AssignmentEvent;
-use Sabre\VObject\Component\VCalendar;
 use AppBundle\Entity\LectureDate;
-use Symfony\Component\Config\Definition\Exception\Exception;
+use Sabre\VObject\Component\VCalendar;
 
 class VCalendarGenerator
 {

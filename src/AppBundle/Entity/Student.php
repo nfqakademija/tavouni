@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Student
- *
  * @ORM\Table(name="students")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StudentRepository")
  */
@@ -60,8 +58,6 @@ class Student
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int
@@ -70,8 +66,6 @@ class Student
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Student
@@ -84,8 +78,6 @@ class Student
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName(): string

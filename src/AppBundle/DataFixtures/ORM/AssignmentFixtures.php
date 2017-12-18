@@ -9,8 +9,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 class AssignmentFixtures extends Fixture
 {
     /**
-     * Load data fixtures with the passed EntityManager
-     *
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)

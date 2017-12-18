@@ -10,8 +10,6 @@ use Faker\Generator;
 class PostFixtures extends Fixture
 {
     /**
-     * Load data fixtures with the passed EntityManager
-     *
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)

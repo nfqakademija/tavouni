@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Post
- *
  * @ORM\Table(name="posts")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
  */
@@ -69,8 +67,6 @@ class Post
     private $seenByStudents;
 
     /**
-     * Post constructor.
-     *
      * @param string $title
      * @param string $content
      * @param Lecture $lecture
@@ -87,8 +83,6 @@ class Post
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int
@@ -97,8 +91,6 @@ class Post
     }
 
     /**
-     * Set title
-     *
      * @param string $title
      *
      * @return Post
@@ -111,8 +103,6 @@ class Post
     }
 
     /**
-     * Get title
-     *
      * @return string
      */
     public function getTitle(): string
@@ -121,8 +111,6 @@ class Post
     }
 
     /**
-     * Set content
-     *
      * @param string $content
      *
      * @return Post
@@ -135,8 +123,6 @@ class Post
     }
 
     /**
-     * Get content
-     *
      * @return string
      */
     public function getContent(): string
@@ -145,8 +131,6 @@ class Post
     }
 
     /**
-     * Set publishedAt
-     *
      * @param \DateTime $publishedAt
      *
      * @return Post
@@ -159,8 +143,6 @@ class Post
     }
 
     /**
-     * Get publishedAt
-     *
      * @return \DateTime
      */
     public function getPublishedAt(): \DateTime

@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * Grade
- *
  * @ORM\Table(name="grades",
  *     uniqueConstraints={
  *        @UniqueConstraint(name="grade_unique",
@@ -49,7 +47,6 @@ class Grade
     private $value;
 
     /**
-     * Grade constructor.
      * @param Assignment $assignment
      * @param Student $student
      * @param int $value
@@ -62,8 +59,6 @@ class Grade
     }
 
     /**
-     * Set assignment
-     *
      * @param Assignment $assignment
      *
      * @return Grade
@@ -76,8 +71,6 @@ class Grade
     }
 
     /**
-     * Get assignment
-     *
      * @return Assignment
      */
     public function getAssignment(): Assignment
@@ -86,8 +79,6 @@ class Grade
     }
 
     /**
-     * Set student
-     *
      * @param Student $student
      *
      * @return Grade
@@ -100,8 +91,6 @@ class Grade
     }
 
     /**
-     * Get student
-     *
      * @return Student
      */
     public function getStudent(): Student
@@ -110,8 +99,6 @@ class Grade
     }
 
     /**
-     * Set value
-     *
      * @param int $value
      *
      * @return Grade
@@ -124,8 +111,6 @@ class Grade
     }
 
     /**
-     * Get value
-     *
      * @return int
      */
     public function getValue(): int

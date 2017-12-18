@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.12.16
- * Time: 21.56
- */
 
 namespace AppBundle\Form;
 
@@ -12,7 +6,6 @@ use AppBundle\Entity\AssignmentEvent;
 use AppBundle\Entity\Building;
 use AppBundle\Entity\Room;
 use DateInterval;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;

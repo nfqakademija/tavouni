@@ -3,16 +3,10 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Assignment;
-use AppBundle\Entity\AssignmentEvent;
-use AppBundle\Entity\LectureType;
-use AppBundle\Entity\Room;
-use DateInterval;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -51,11 +45,6 @@ class AssignmentType extends AbstractType
                 'required' => false,
                 'mapped' => false
             ]);
-//            ->add('assignmentEvent', AssignmentEventType::class, [
-//                'rooms' => $this->rooms,
-//                'deadline' => new \DateTime(),
-//                'buildings' => $this->buildings
-//            ]);
         $builder->get('moreOptions')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $checked = $event->getData();
             if ($checked) {

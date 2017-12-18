@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Subject
- *
  * @ORM\Table(name="subjects")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SubjectRepository")
  */
@@ -59,8 +57,6 @@ class Subject
     private $coordinator;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId(): int
@@ -77,8 +73,6 @@ class Subject
     }
 
     /**
-     * Set subjectType
-     *
      * @param string $subjectType
      *
      * @return Subject
@@ -91,8 +85,6 @@ class Subject
     }
 
     /**
-     * Get subjectType
-     *
      * @return string
      */
     public function getSubjectType(): string
@@ -101,8 +93,6 @@ class Subject
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Subject
@@ -115,8 +105,6 @@ class Subject
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName(): string

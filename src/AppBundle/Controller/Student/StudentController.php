@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.18
- * Time: 13.48
- */
 
 namespace AppBundle\Controller\Student;
 

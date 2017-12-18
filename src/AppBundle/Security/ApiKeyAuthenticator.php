@@ -69,7 +69,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     }
 
     /**
-     * @return Response The response to return, never null
+     * @return Response
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
