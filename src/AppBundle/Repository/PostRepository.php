@@ -28,6 +28,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             WHERE u.id = :userId
             GROUP BY p, a, l, g, st, u, se
             ORDER BY seen ASC, p.publishedAt DESC
-            ")->setParameter('userId', $userId)->getResult();
+            ")->setParameter('userId', $userId)->setMaxResults(5)->getResult();
     }
 }
