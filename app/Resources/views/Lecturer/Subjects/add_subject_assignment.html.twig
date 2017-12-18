@@ -20,53 +20,70 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js"></script>
     <script>
+        var $building = null;
         $( function() {
             $( ".js-datepicker" ).datepicker();
         } );
         $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
         var $checkboxInput = $('#assignment_moreOptions');
         $checkboxInput.change(function() {
-            var $form = $(this).closest('postForm');
-            var checked = this.checked;
-            var data = {};
-            $.ajax({
-                url : $form.attr('action'),
-                type: $form.attr('method'),
-                data : data,
-                success: function(html) {
-                    if (checked) {
-                        var assignmentEvent =
-                            "<div class='form-group' id='assignmentEvent'>" +
-                                "<div id='assignment_assignmentEvent'>" +
-                                    "<div class='form-group'>" +
-                                        "<label class='control-label required' for='assignment_assignmentEvent_rooms'>Rooms</label>" +
-                                        "<select id='assignment_assignmentEvent_rooms' name='assignment[assignmentEvent][rooms]' class='form-control'>";
-                                        {% for i, room in rooms %}
-                                            var roomName = '{{ room.no }}'+' '+'{{ room.building.name }}';
-                                            assignmentEvent = assignmentEvent + "<option value="+'{{ i }}'+" class='room_"+ roomName.toLowerCase() +"'>"+ roomName +"</option>";
+            if (this.checked) {
+                var assignmentEvent =
+                    "<div class='form-group' id='assignmentEvent'>" +
+                        "<div id='assignment_assignmentEvent'>" +
+                            "<div class='form-group'>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_building'>Building</label>" +
+                                "<select id='assignment_assignmentEvent_building' name='assignment[assignmentEvent][building]' class='form-control'>";
+                                        {% for i, building in buildings %}
+                                            var buildingName = '{{ building.name }}';
+                                            assignmentEvent = assignmentEvent + "<option value="+'{{ i }}'+" class='building_"+ buildingName.toLowerCase() +"'>"+ buildingName +"</option>";
                                         {% endfor %}
-                                        assignmentEvent += "</select>" +
-                                    "</div>" +
-                                    "<div class='form-group'>" +
-                                        "<label class='control-label required' for='assignment_assignmentEvent_start'>Start</label>" +
-                                        "<input id='assignment_assignmentEvent_start' name='assignment[assignmentEvent][start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
-                                    "</div>" +
-                                    "<div class='form-group'>" +
-                                        "<label class='control-label required' for='assignment_assignmentEvent_end'>End</label>" +
-                                        "<input id='assignment_assignmentEvent_end' name='assignment[assignmentEvent][end]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
-                                    "</div>" +
-                                "</div>" +
-                            "</div>";
-                        $("#assignment").append(assignmentEvent);
-                        $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15, 'minTime': '8:00am', 'maxTime': '8:00pm' });
-                    }
-                    else {
-                        var item = document.getElementById("assignmentEvent");
-                        item.parentNode.removeChild(item);
-                    }
-                }
-            });
+                                    assignmentEvent += "</select>" +
+                            "</div>"+
+                            "<div class='form-group'>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_room'>Room</label>" +
+                                "<select id='assignment_assignmentEvent_room' name='assignment[assignmentEvent][room]' class='form-control'>"+
+                                "</select>" +
+                            "</div>" +
+                            "<div class='form-group'>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_start'>Start</label>" +
+                                "<input id='assignment_assignmentEvent_start' name='assignment[assignmentEvent][start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
+                            "</div>" +
+                            "<div class='form-group'>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_end'>End</label>" +
+                                "<input id='assignment_assignmentEvent_end' name='assignment[assignmentEvent][end]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>";
+                $("#assignment").append(assignmentEvent);
+                addRooms();
+                $building = $('#assignment_assignmentEvent_building');
+                $building.change(function() {
+                    $("#assignment_assignmentEvent_room").empty();
+                    addRooms();
+                });
+                $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15, 'minTime': '8:00am', 'maxTime': '8:00pm' });
+            }
+            else {
+                var item = document.getElementById("assignmentEvent");
+                item.parentNode.removeChild(item);
+            }
         });
+        function addRooms() {
+            $building = $('#assignment_assignmentEvent_building');
+            //var buildingName = ;
+            {% for i, building in buildings %}
+                //var building = '{{ building.name }}';
+                if ($("#assignment_assignmentEvent_building :selected").text() == '{{ building.name }}')
+                {
+                    {% for i, room in building.rooms %}
+                    //alert('{{ room.no }}');
+                    var roomName = '{{ room.no }}'+' '+'{{ room.building.name }}';
+                    $("#assignment_assignmentEvent_room").append("<option value="+'{{ i }}'+" class='room_"+ roomName.toLowerCase() +"'>"+ roomName +"</option>");
+                    {% endfor %}
+                }
+                {% endfor %}
+        }
     </script>
 {% endblock %}
 

@@ -7,6 +7,7 @@ use AppBundle\Entity\AssignmentEvent;
 use AppBundle\Entity\LectureType;
 use AppBundle\Entity\Room;
 use DateInterval;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -22,11 +23,13 @@ class AssignmentType extends AbstractType
 {
     private $subject;
     private $rooms;
+    private $buildings;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->subject = $options['subject'];
         $this->rooms = $options['rooms'];
+        $this->buildings = $options['buildings'];
         $builder
             ->add('weight')
             ->add('name')
@@ -48,6 +51,11 @@ class AssignmentType extends AbstractType
                 'required' => false,
                 'mapped' => false
             ]);
+//            ->add('assignmentEvent', AssignmentEventType::class, [
+//                'rooms' => $this->rooms,
+//                'deadline' => new \DateTime(),
+//                'buildings' => $this->buildings
+//            ]);
         $builder->get('moreOptions')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $checked = $event->getData();
             if ($checked) {
@@ -55,6 +63,7 @@ class AssignmentType extends AbstractType
                 $form->add('assignmentEvent', AssignmentEventType::class, [
                     'rooms' => $this->rooms,
                     'deadline' => $form->get('deadline')->getData(),
+                    'buildings' => $this->buildings
                 ]);
             }
         });
@@ -81,6 +90,6 @@ class AssignmentType extends AbstractType
                 );
             }
         ]);
-        $resolver->setRequired(['subject', 'rooms']);
+        $resolver->setRequired(['subject', 'rooms', 'buildings']);
     }
 }

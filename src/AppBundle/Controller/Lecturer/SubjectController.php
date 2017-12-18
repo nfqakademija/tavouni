@@ -6,6 +6,7 @@ use AppBundle\Entity\Grade;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\AssignmentType;
 use AppBundle\Repository\AssignmentRepository;
+use AppBundle\Repository\BuildingRepository;
 use AppBundle\Repository\RoomRepository;
 use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -40,12 +41,15 @@ class SubjectController extends Controller
         Request $request,
         Subject $subject,
         RoomRepository $roomRepository,
-        StudentRepository $studentRepository
+        StudentRepository $studentRepository,
+        BuildingRepository $buildingRepository
     ): Response {
         $rooms = $roomRepository->findAll();
+        $buildings = $buildingRepository->findAll();
         $form = $this->createForm(AssignmentType::class, null, [
             'subject' => $subject,
             'rooms' => $rooms,
+            'buildings' => $buildings,
         ]);
         $form->handleRequest($request);
 
@@ -71,6 +75,7 @@ class SubjectController extends Controller
             [
                 'postForm' => $form->createView(),
                 'rooms' => $rooms,
+                'buildings' => $buildings,
             ]
         );
     }
