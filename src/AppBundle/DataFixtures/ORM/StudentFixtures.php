@@ -13,8 +13,18 @@ class StudentFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createStudent('UserIgnas', 'Ignas Zdanis', ['PS1k', 'SM', 'PS1k2g'], 'StudentIgnas'));
-        $manager->persist($this->createStudent('UserAurimas', 'Aurimas Rimkus', ['PS1k', 'PS1k1g'], 'StudentAurimas'));
+        $manager->persist($this->createStudent(
+            'USIgnasZdanis',
+            'Ignas Zdanis',
+            ['PS1k', 'SM', 'PS1k2g'],
+            'StudentIgnas'
+        ));
+        $manager->persist($this->createStudent(
+            'USAurimasRimkus',
+            'Aurimas Rimkus',
+            ['PS1k', 'PS1k1g'],
+            'StudentAurimas'
+        ));
         $manager->flush();
     }
 
