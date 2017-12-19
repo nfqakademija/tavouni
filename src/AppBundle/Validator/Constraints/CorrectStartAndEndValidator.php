@@ -9,7 +9,7 @@ class CorrectStartAndEndValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        if ($value !== null && $value->getStart() > $value->getEnd()) {
+        if ($value !== null && $value->getStart() >= $value->getEnd()) {
             $this->context->buildViolation($constraint->message)
                 ->addViolation();
         }

@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Time;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class AssignmentEventType extends AbstractType
 {
@@ -39,9 +38,10 @@ class AssignmentEventType extends AbstractType
                 'attr' => ['class' => 'js-timepicker'],
                 'mapped' => false,
                 'constraints' => [
-                    new NotBlank(),
-                    new Time(),
-                ]
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
+                    new Time(['message' => 'Šis laukas privalo būti laikas']),
+                ],
+                'label' => 'Pradžios laikas',
              ])
             ->add('end', TimeType::class, [
                 'input'  => 'datetime',
@@ -50,14 +50,15 @@ class AssignmentEventType extends AbstractType
                 'attr' => ['class' => 'js-timepicker'],
                 'mapped' => false,
                 'constraints' => [
-                    new NotBlank(),
-                    new Time(),
-                ]
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
+                    new Time(['message' => 'Šis laukas privalo būti laikas']),
+                ],
+                'label' => 'Pabaigos laikas',
             ])->add('building', ChoiceType::class, [
                 'choices' => $this->buildings,
                 'choice_label' => function ($building) {
                     /** @var Building $building */
-                    return $building->getName();
+                    return $building->getAddress();
                 },
                 'choice_attr' => function ($building) {
                     /** @var Building $building */
@@ -66,6 +67,7 @@ class AssignmentEventType extends AbstractType
                 'mapped' =>false,
                 'required' => false,
                 'placeholder' => false,
+                'label' => 'Pastatas',
             ]);
         $builder->get('building')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $form = $event->getForm()->getParent();
@@ -83,22 +85,12 @@ class AssignmentEventType extends AbstractType
                 },
                 'mapped' =>false,
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
                     new Choice(array_values($this->rooms)),
-                ]
+                ],
+                'label' => 'Kabinetas',
             ]);
         });
-    }
-    public function validateInterval($value, ExecutionContextInterface $context)
-    {
-        $form = $context->getRoot();
-        $data = $form->getData();
-
-        if ($data['start'] >= $value) {
-            $context
-                ->buildViolation('The end value has to be higher than the start value')
-                ->addViolation();
-        }
     }
     public function configureOptions(OptionsResolver $resolver)
     {

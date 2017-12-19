@@ -33,19 +33,27 @@ class AssignmentType extends AbstractType
         $builder
             ->add('weight', null, [
                 'constraints' => [
-                    new Range(['min' => 0, 'max' => 100]),
-                    new NotBlank(),
+                    new Range([
+                        'min' => 0,
+                        'max' => 100,
+                        'minMessage' => 'Svoris turi būti didesnis už 0',
+                        'maxMessage' => 'Svoris turi būti mažesnis arba lygus 100',
+                    ]),
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
                 ],
+                'label' => 'Svoris',
             ])
             ->add('name', null, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
                     new Length(['min' => 3, 'max' => 20]),
-                ]
+                ],
+                'label' => 'Pavadinimas',
             ])
             ->add('lectureType', ChoiceType::class, [
                 'choices' => Assignment::LECTURE_TYPES,
                 'constraints' => new Choice(array_values(Assignment::LECTURE_TYPES)),
+                'label' => 'Tipas',
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
@@ -54,9 +62,10 @@ class AssignmentType extends AbstractType
                 'format' => 'MM/dd/yyyy',
                 'required' => true,
                 'constraints' => [
-                    new DateTime(),
-                    new NotBlank(),
-                ]
+                    new DateTime(['message' => 'Šis laukas privalo būti data']),
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
+                ],
+                'label' => 'Terminas',
             ])
             ->add('moreOptions', CheckboxType::class, [
                 'attr' => ['checked' => false],

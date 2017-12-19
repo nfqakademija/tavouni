@@ -33,24 +33,24 @@
                     "<div class='form-group' id='assignmentEvent'>" +
                         "<div id='assignment_assignmentEvent'>" +
                             "<div class='form-group'>" +
-                                "<label class='control-label required' for='assignment_assignmentEvent_start'>Start</label>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_start'>Pradžios laikas</label>" +
                                 "<input id='assignment_assignmentEvent_start' name='assignment[assignmentEvent][start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
                             "</div>" +
                             "<div class='form-group'>" +
-                                "<label class='control-label required' for='assignment_assignmentEvent_end'>End</label>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_end'>Pabaigos laikas</label>" +
                                 "<input id='assignment_assignmentEvent_end' name='assignment[assignmentEvent][end]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
                             "</div>" +
                             "<div class='form-group'>" +
-                                "<label class='control-label required' for='assignment_assignmentEvent_building'>Building</label>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_building'>Pastatas</label>" +
                                 "<select id='assignment_assignmentEvent_building' name='assignment[assignmentEvent][building]' class='form-control'>";
                                         {% for i, building in buildings %}
-                                            var buildingName = '{{ building.name }}';
+                                            var buildingName = '{{ building.address }}';
                                             assignmentEvent = assignmentEvent + "<option value="+'{{ i }}'+" class='building_"+ buildingName.toLowerCase() +"'>"+ buildingName +"</option>";
                                         {% endfor %}
                                     assignmentEvent += "</select>" +
                             "</div>"+
                             "<div class='form-group'>" +
-                                "<label class='control-label required' for='assignment_assignmentEvent_room'>Room</label>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_room'>Kabinetas</label>" +
                                 "<select id='assignment_assignmentEvent_room' name='assignment[assignmentEvent][room]' class='form-control'>"+
                                 "</select>" +
                             "</div>" +
@@ -74,7 +74,7 @@
             //var buildingName = ;
             {% for i, building in buildings %}
                 //var building = '{{ building.name }}';
-                if ($("#assignment_assignmentEvent_building :selected").text() == '{{ building.name }}')
+                if ($("#assignment_assignmentEvent_building :selected").text() == '{{ building.address }}')
                 {
                     {% for i, room in building.rooms %}
                     //alert('{{ room.no }}');

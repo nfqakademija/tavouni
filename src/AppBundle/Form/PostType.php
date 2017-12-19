@@ -33,14 +33,21 @@ class PostType extends AbstractType
         $builder
             ->add('title', null, [
                 'constraints' => [
-                    new NotBlank(),
-                    new Length(['min' => 3, 'max' => 20]),
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
+                    new Length([
+                        'min' => 3,
+                        'max' => 20,
+                        'minMessage' => 'Pavadinimą turi sudaryti bent 3 simboliai',
+                        'maxMessage' => 'Pavadinimas negali būti ilgesnis nei 20 simbolių'
+                    ]),
                 ],
+                'label' => 'Pavadinimas',
             ])
             ->add('content', CKEditorType::class, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'Šis laukas privalomas']),
                 ],
+                'label' => 'Turinys',
             ]);
     }
 
