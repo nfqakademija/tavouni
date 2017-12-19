@@ -1,14 +1,21 @@
 {% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+{% endblock %}
 
 {% block body %}
     <h2>Grades</h2>
     <table class="table table-bordered">
-        <tr>
-            <th>Studentas</th>
-            {% for grade in students[0].grades %}
-                <th>{{ grade.assignment.name }}</th>
-            {% endfor %}
-        </tr>
+        <thead>
+            <tr>
+                <th>Studentas</th>
+                {% for grade in students[0].grades %}
+                    <th>{{ grade.assignment.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
         {% for student in students %}
             <tr>
                 <td>{{ student.name }}</td>
@@ -18,14 +25,22 @@
                 {% endfor %}
             </tr>
         {% endfor %}
+        </tbody>
     </table>
+    <button id="grade-submit" class="btn btn-default" disabled>Submit</button>
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        Pažymys sėkmingai išsaugotas
+        Pažymiai sėkmingai išsaugoti
+    </div>
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        Pažymių išsaugoti nepavyko
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('js/editGrade.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.js') }}"></script>
 {% endblock %}

@@ -1,41 +1,58 @@
-var input = $("input[class *= 'grade-value']");
+var changed = [];
 
-input.keypress(function (event) {
-    if (event.keyCode === 13) {
-        $(this).blur();
-    }
+$("input[class *= 'grade-value']").change(function() {
+    $("#grade-submit").attr("disabled", false);
+
+    var id = $(this).parent().attr("id");
+    if (jQuery.inArray(id, changed) === -1) {
+       changed.push(id);
+   }
 });
 
-input.focusout(function () {
-    var gradeValue = $(this).val();
-    if (gradeValue !== $(this).attr('value')) {
-        var gradeId = $(this).parent().attr('id');
-        callGradeAjax(gradeId, gradeValue, $(this));
-    }
+$('#grade-submit').click(function() {
+   callGradeAjax();
 });
 
-function callGradeAjax(gradeId, gradeValue, input) {
+function callGradeAjax() {
     var current = window.location.pathname;
-    $.ajax ({
-        url: current + "/edit/" + gradeId + "/" + gradeValue,
-        type: "POST",
-        async: true,
-        success: function () {
-            input.attr('value', gradeValue);
-            $(".alert").show();
-            $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
-                $(".alert-success").slideUp(500);
-            });
-        },
-        error: function (xhr, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
-            console.log(xhr.responseText);
-            input.val(input.attr('value'));
-        }
+    var grades = [];
+    changed.forEach(function(gradeId) {
+           grades.push(
+               {
+                   gradeId: gradeId,
+                   gradeValue: $("#" + gradeId).find("input").val()
+               }
+           )
+    });
+
+    if (grades.length !== 0) {
+        $.ajax ({
+            url: current + "/edit",
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify(grades),
+            contentType:"application/json; charset=utf-8",
+            async: true,
+            success: function () {
+                showMessage($(".alert-success"));
+                changed = [];
+                $("#grade-submit").attr("disabled", true);
+            },
+            error: function (xhr, thrownError) {
+                showMessage($(".alert-danger"));
+                console.log(xhr.status);
+                console.log(thrownError);
+                console.log(xhr.responseText);
+            }
+        });
+    } else {
+      showMessage($(".alert-danger"));
+    }
+}
+
+function showMessage(alert) {
+    alert.show();
+    alert.fadeTo(3000, 500).slideUp(500, function(){
+        $(".alert-success").slideUp(500);
     });
 }
-$(":input").bind('click keyup', function () {
-    $(this).focus();
-});
-
