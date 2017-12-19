@@ -4,7 +4,6 @@ namespace AppBundle\Controller\Lecturer;
 
 use AppBundle\Entity\Grade;
 use AppBundle\Entity\Lecture;
-use AppBundle\Repository\GradeRepository;
 use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -13,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
  * @Route("/lecturer/lecture/{lecture_id}")
@@ -40,9 +38,9 @@ class GradeController extends Controller
      * @Route("/grades/edit", name="lecturer_edit_grade")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Lecture $lecture, TokenStorage $tokenStorage): Response
+    public function editAction(Request $request, Lecture $lecture): Response
     {
-        $id = $tokenStorage->getToken()->getUser()->getId();
+        $id = $this->getUser()->getId();
         if ($this->isGranted('ROLE_LECTURER') && $lecture->getLecturer()->getUser()->getId() === $id) {
             $content = $request->getContent();
             if (!empty($content)) {

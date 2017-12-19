@@ -26,6 +26,9 @@ class NewsController extends Controller
         Lecture $lecture,
         PostRepository $postRepository
     ): Response {
+        if ($this->getUser()->getId() !== $lecture->getLecturer()->getUser()->getId()) {
+            return new Response(null, Response::HTTP_FORBIDDEN);
+        }
         $posts = $postRepository->getLecturePosts($lecture->getId());
 
         return $this->render(':Lecturer/News:show_posts.html.twig', [
@@ -40,6 +43,9 @@ class NewsController extends Controller
      */
     public function addPostAction(Request $request, Lecture $lecture): Response
     {
+        if ($this->getUser()->getId() !== $lecture->getLecturer()->getUser()->getId()) {
+            return new Response(null, Response::HTTP_FORBIDDEN);
+        }
         $form = $this->createForm(PostType::class, null, [
             'lecture' => $lecture,
             'author' => $this->getUser()->getLecturer()
@@ -69,6 +75,9 @@ class NewsController extends Controller
      */
     public function deletePostAction(Post $post, Lecture $lecture): Response
     {
+        if ($this->getUser()->getId() !== $lecture->getLecturer()->getUser()->getId()) {
+            return new Response(null, Response::HTTP_FORBIDDEN);
+        }
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
         $em->flush();
@@ -84,6 +93,9 @@ class NewsController extends Controller
      */
     public function editAction(Request $request, Post $post, Lecture $lecture): Response
     {
+        if ($this->getUser()->getId() !== $lecture->getLecturer()->getUser()->getId()) {
+            return new Response(null, Response::HTTP_FORBIDDEN);
+        }
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 

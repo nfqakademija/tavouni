@@ -24,8 +24,13 @@ class SubjectController extends Controller
     /**
      * @Route("/assignments", name="lecturer_assignments")
      */
-    public function showAssignmentsAction(Subject $subject, AssignmentRepository $assignmentRepository): Response
-    {
+    public function showAssignmentsAction(
+        Subject $subject,
+        AssignmentRepository $assignmentRepository
+    ): Response {
+        if ($this->getUser()->getId() !== $subject->getCoordinator()->getUser()->getId()) {
+            return new Response(null, Response::HTTP_FORBIDDEN);
+        }
         $assignments = $assignmentRepository->getSubjectAssignments($subject->getId());
 
         return $this->render('Lecturer/Subjects/show_subject_assignments.html.twig', [
@@ -44,6 +49,9 @@ class SubjectController extends Controller
         StudentRepository $studentRepository,
         BuildingRepository $buildingRepository
     ): Response {
+        if ($this->getUser()->getId() !== $subject->getCoordinator()->getUser()->getId()) {
+            return new Response(null, Response::HTTP_FORBIDDEN);
+        }
         $rooms = $roomRepository->findAll();
         $buildings = $buildingRepository->findAll();
         $form = $this->createForm(AssignmentType::class, null, [

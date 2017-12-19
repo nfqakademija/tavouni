@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Assignment;
+use AppBundle\Validator\Constraints\CorrectStartAndEnd;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -71,6 +72,9 @@ class AssignmentType extends AbstractType
                     'rooms' => $this->rooms,
                     'deadline' => $form->get('deadline')->getData(),
                     'buildings' => $this->buildings,
+                    'constraints' => [
+                        new CorrectStartAndEnd(),
+                    ],
                     'label' => false,
                 ]);
             }
