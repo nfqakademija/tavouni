@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.css">
 {% endblock %}
 {% block body %}
+    {{ wo_render_breadcrumbs() }}
     <center><h1>Pridėti atsiskaitymą</h1></center>
     <div class="container">
         {{ form_start(postForm) }}

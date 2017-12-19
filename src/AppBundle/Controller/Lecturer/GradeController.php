@@ -27,6 +27,16 @@ class GradeController extends Controller
      */
     public function indexAction(StudentRepository $studentRepository, Lecture $lecture): Response
     {
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addRouteItem('Pagrindinis', 'lecturer_index');
+        $lectureName = ($lecture->getGroup()->getNumber() !== 0) ?
+            $lecture->getSubject()->getName() . ' ' . $lecture->getGroup()->getNumber() . ' grupė' :
+            $lecture->getSubject()->getName()
+        ;
+        $breadcrumbs->addRouteItem($lectureName, 'lecturer_show_posts', [
+            'lecture_id' => $lecture->getId()
+        ]);
+        $breadcrumbs->addItem('Pažymiai');
         $students = $studentRepository->getStudentsWithGradesByLecture($lecture->getId());
 
         return $this->render(':Lecturer/Grades:show_grades.html.twig', [

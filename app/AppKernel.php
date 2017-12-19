@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new \FOS\UserBundle\FOSUserBundle(),
             new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

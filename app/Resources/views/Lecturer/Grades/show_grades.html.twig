@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Grades</h2>
+    {{ wo_render_breadcrumbs() }}
     {% if students == null %}
         <h4>Šioje grupėje nėra studentų</h4>
     {% else %}
