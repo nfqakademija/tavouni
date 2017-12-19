@@ -146,8 +146,7 @@ class StudentFixtures extends Fixture
     }
     private function persistStudents(array $studentsWithGroups, ObjectManager $manager)
     {
-        foreach($studentsWithGroups as $student)
-        {
+        foreach ($studentsWithGroups as $student) {
             $manager->persist($this->createStudent(
                 'US' . $student['firstName'] . $student['lastName'],
                 $student['firstName'] . ' ' . $student['lastName'],

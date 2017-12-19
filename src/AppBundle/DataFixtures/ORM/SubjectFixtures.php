@@ -76,7 +76,7 @@ class SubjectFixtures extends Fixture
             ]
         ];
 
-        foreach ($subjects as $subject){
+        foreach ($subjects as $subject) {
             $manager->persist($this->createSubject(
                 $subject['name'],
                 $subject['type'],
@@ -84,18 +84,6 @@ class SubjectFixtures extends Fixture
                 $subject['coordinatorRef']
             ));
         }
-//        $manager->persist($this->createSubject(
-//            'Kompiuterių architektūra',
-//            'Privalomas',
-//            'KompArch',
-//            'LecturerAntanas'
-//        ));
-//        $manager->persist($this->createSubject(
-//            'Skaitiniai metodai',
-//            'Pasirenkamasis',
-//            'SkaitiniaiMetodai',
-//            'LecturerOlga'
-//        ));
         $manager->flush();
     }
 
