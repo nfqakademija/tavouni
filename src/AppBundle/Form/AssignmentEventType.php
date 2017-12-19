@@ -14,6 +14,10 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Time;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class AssignmentEventType extends AbstractType
 {
@@ -26,6 +30,7 @@ class AssignmentEventType extends AbstractType
         $this->rooms = $options['rooms'];
         $this->deadline = $options['deadline'];
         $this->buildings = $options['buildings'];
+
         $builder
             ->add('start', TimeType::class, [
                 'input'  => 'datetime',
@@ -33,12 +38,21 @@ class AssignmentEventType extends AbstractType
                 'html5' => false,
                 'attr' => ['class' => 'js-timepicker'],
                 'mapped' => false,
-            ])->add('end', TimeType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Time(),
+                ]
+             ])
+            ->add('end', TimeType::class, [
                 'input'  => 'datetime',
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'js-timepicker'],
                 'mapped' => false,
+                'constraints' => [
+                    new NotBlank(),
+                    new Time(),
+                ]
             ])->add('building', ChoiceType::class, [
                 'choices' => $this->buildings,
                 'choice_label' => function ($building) {
@@ -67,16 +81,35 @@ class AssignmentEventType extends AbstractType
 
                     return ['class' => 'room_' . strtolower($roomName)];
                 },
-                'mapped' =>false
+                'mapped' =>false,
+                'constraints' => [
+                    new NotBlank(),
+                    new Choice(array_values($this->rooms)),
+                ]
             ]);
         });
     }
+    public function validateInterval($value, ExecutionContextInterface $context)
+    {
+        $form = $context->getRoot();
+        $data = $form->getData();
 
+        if ($data['start'] >= $value) {
+            $context
+                ->buildViolation('The end value has to be higher than the start value')
+                ->addViolation();
+        }
+    }
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => AssignmentEvent::class,
             'empty_data' => function (FormInterface $form) {
+                if (!$form->get('start')->getData() ||
+                    !$form->get('end')->getData() ||
+                    !$form->get('room')->getData()) {
+                    return null;
+                }
                 $start = $form->get('start')->getData();
                 $end = $form->get('end')->getData();
                 $room = $form->get('room')->getData();

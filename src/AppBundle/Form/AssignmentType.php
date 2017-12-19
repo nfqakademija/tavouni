@@ -13,12 +13,9 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Choice;
-use Symfony\Component\Validator\Constraints\Collection;
-use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Range;
 
 class AssignmentType extends AbstractType
@@ -36,15 +33,13 @@ class AssignmentType extends AbstractType
             ->add('weight', null, [
                 'constraints' => [
                     new Range(['min' => 0, 'max' => 100]),
-                    new NotNull(),
                     new NotBlank(),
                 ],
-                //'empty_data' => 'x',
             ])
             ->add('name', null, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 3]),
+                    new Length(['min' => 3, 'max' => 20]),
                 ]
             ])
             ->add('lectureType', ChoiceType::class, [
@@ -75,7 +70,8 @@ class AssignmentType extends AbstractType
                 $form->add('assignmentEvent', AssignmentEventType::class, [
                     'rooms' => $this->rooms,
                     'deadline' => $form->get('deadline')->getData(),
-                    'buildings' => $this->buildings
+                    'buildings' => $this->buildings,
+                    'label' => false,
                 ]);
             }
         });
@@ -84,12 +80,21 @@ class AssignmentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'attr' => ['novalidate'=>'novalidate'],
             'data_class' => Assignment::class,
             'empty_data' => function (FormInterface $form) {
+                if (!$form->get('weight')->getData() ||
+                    !$form->get('name')->getData() ||
+                    !$form->get('deadline')->getData()) {
+                    return null;
+                }
                 $checked = $form->get('moreOptions')->getData();
                 $assignmentEvent = null;
                 if ($checked) {
                     $assignmentEvent = $form->get('assignmentEvent')->getData();
+                    if (!$form->get('assignmentEvent')->getData()) {
+                        return null;
+                    }
                 }
 
                 return new Assignment(
