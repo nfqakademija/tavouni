@@ -47,18 +47,22 @@ class GradeController extends Controller
             $content = $request->getContent();
             if (!empty($content)) {
                 $json = json_decode($content);
-                foreach ($json as $elem) {
-                    $grade = $this->getDoctrine()->getRepository(Grade::class)->findOneBy(['id' => $elem->gradeId]);
-                    $value = $elem->gradeValue;
-                    if ($grade === null || !($value >= 0 && $value <= 10)) {
-                        return new Response(null, Response::HTTP_BAD_REQUEST);
+                if ($json !== null) {
+                    foreach ($json as $elem) {
+                        $grade = $this->getDoctrine()->getRepository(Grade::class)->findOneBy(['id' => $elem->gradeId]);
+                        $value = $elem->gradeValue;
+                        if ($grade === null || !($value >= 0 && $value <= 10)) {
+                            return new Response(null, Response::HTTP_BAD_REQUEST);
+                        }
+                        $grade->setValue($value);
+                        $this->getDoctrine()->getManager()->flush();
                     }
-                    $grade->setValue($value);
-                    $this->getDoctrine()->getManager()->flush();
-                }
-            }
 
-            return new JsonResponse(null, Response::HTTP_OK);
+                    return new JsonResponse(null, Response::HTTP_OK);
+                }
+
+                return new Response(null, Response::HTTP_BAD_REQUEST);
+            }
         }
 
         return new Response(null, Response::HTTP_FORBIDDEN);
