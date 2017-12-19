@@ -20,7 +20,7 @@ class GroupFixtures extends Fixture
         $manager->persist($this->createGroup('Skaitiniai metodai 1 grupė', 1, 'SM1g'));
         $manager->persist($this->createGroup('PS testavimas 1 grupė', 0, 'PST'));
         $manager->persist($this->createGroup('PS testavimas 1 grupė', 1, 'PST1g'));
-        $manager->persist($this->createGroup('PS testavimas 2 grupė', 1, 'PST2g'));
+        $manager->persist($this->createGroup('PS testavimas 2 grupė', 2, 'PST2g'));
         $manager->persist($this->createGroup('Appsai', 0, 'APP'));
         $manager->persist($this->createGroup('Appsai 1 grupė', 1, 'APP1g'));
         $manager->persist($this->createGroup('Appsai 2 grupė', 2, 'APP2g'));
