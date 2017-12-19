@@ -57,6 +57,21 @@ class Subject
     private $coordinator;
 
     /**
+     * @param string $subjectType
+     * @param string $name
+     * @param Lecturer $coordinator
+     */
+    public function __construct(string $subjectType, string $name, Lecturer $coordinator)
+    {
+        $this->subjectType = $subjectType;
+        $this->name = $name;
+        $this->coordinator = $coordinator;
+        $this->lectures = new ArrayCollection();
+        $this->assignments = new ArrayCollection();
+    }
+
+
+    /**
      * @return int
      */
     public function getId(): int

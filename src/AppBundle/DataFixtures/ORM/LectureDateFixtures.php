@@ -22,14 +22,13 @@ class LectureDateFixtures extends Fixture
         $manager->flush();
     }
 
-    private function createLectureDate(string $lectureRef, \DateTime $date): LectureDate
+    private function createLectureDate(string $lectureRef, \DateTime $start): LectureDate
     {
-        $lectureDate = new LectureDate();
-        $lectureDate->setLecture($this->getReference($lectureRef));
-        $lectureDate->setStart($date);
-        $end = clone $date;
-        $end = $end->add(new \DateInterval('PT2H'));
-        $lectureDate->setEnd($end);
+        $lectureDate = new LectureDate(
+            $start,
+            (clone $start)->add(new \DateInterval('PT2H')),
+            $this->getReference($lectureRef)
+        );
 
         return $lectureDate;
     }

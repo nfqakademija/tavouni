@@ -41,9 +41,29 @@ class User extends BaseUser
      */
     private $apiKey;
 
-    public function __construct()
-    {
+    /**
+     * @param string $username
+     * @param string $plainPassword
+     * @param array $roles
+     * @param bool $enabled
+     * @param string $email
+     * @param string $apiKey
+     */
+    public function __construct(
+        string $username,
+        string $plainPassword,
+        array $roles,
+        bool $enabled,
+        string $email,
+        string $apiKey
+    ) {
         parent::__construct();
+        $this->username = $username;
+        $this->plainPassword = $plainPassword;
+        $this->roles = $roles;
+        $this->enabled = $enabled;
+        $this->email = $email;
+        $this->apiKey = $apiKey;
     }
 
     /**

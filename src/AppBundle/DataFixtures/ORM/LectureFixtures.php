@@ -25,14 +25,15 @@ class LectureFixtures extends Fixture
         string $subjectRef,
         string $lecturerRef,
         string $reference,
-        string $lectureTypeRef
+        string $lectureType
     ): Lecture {
-        $lecture = new Lecture();
-        $lecture->setRoom($this->getReference('101didl'));
-        $lecture->setGroup($this->getReference($groupRef));
-        $lecture->setSubject($this->getReference($subjectRef));
-        $lecture->setLecturer($this->getReference($lecturerRef));
-        $lecture->setLectureType($lectureTypeRef);
+        $lecture = new Lecture(
+            $this->getReference($subjectRef),
+            $this->getReference($lecturerRef),
+            $this->getReference($groupRef),
+            $this->getReference('101didl'),
+            $lectureType
+        );
         $this->addReference($reference, $lecture);
 
         return $lecture;
