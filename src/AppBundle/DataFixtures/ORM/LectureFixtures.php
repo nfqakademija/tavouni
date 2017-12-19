@@ -50,7 +50,7 @@ class LectureFixtures extends Fixture
                 'lectureType' => 'Laboratorinai darbai'
             ],
             [
-                'groupRef' => 'PST',
+                'groupRef' => 'PS3k',
                 'subjectRef' => 'SPST',
                 'lecturerRef' => 'LVytautasValaitis',
                 'reference' => 'LPST',
