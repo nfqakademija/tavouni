@@ -21,9 +21,6 @@ class LecturerFixtures extends Fixture
             ));
         }
 
-//        $manager->persist($this->createLecturer('Olga Štikonienė', 'UserOlga', 'LecturerOlga'));
-//        $manager->persist($this->createLecturer('Antanas Mitašiūnas', 'UserAntanas', 'LecturerAntanas'));
-//        $manager->persist($this->createLecturer('Linas Litvinas', 'UserLinas', 'LecturerLinas'));
         $manager->flush();
     }
 

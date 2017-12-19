@@ -13,9 +13,6 @@ class RoomFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-//        $manager->persist($this->createRoom('102', 'Didl'));
-//        $manager->persist($this->createRoom('101', 'Didl'));
-//        $manager->persist($this->createRoom('101', 'Naug'));
         $this->createRooms('didl', $manager);
         $this->createRooms('naug', $manager);
         $this->createRooms('CH', $manager);

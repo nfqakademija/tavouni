@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 class UserFixtures extends Fixture
 {
     public static $lecturers;
+    
     /**
      * @param ObjectManager $manager
      */

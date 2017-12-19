@@ -2,7 +2,6 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Lecture;
 use AppBundle\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,7 +16,6 @@ class PostFixtures extends Fixture
     {
         $generator = $this->container->get(Generator::class);
         $references = $this->referenceRepository->getReferences();
-//        $referenceNames = $this->referenceRepository->getReferenceNames();
 
         foreach (LectureFixtures::$lectures as $lecture) {
             for ($i = 0; $i < 5; $i++) {

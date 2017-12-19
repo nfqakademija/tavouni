@@ -13,7 +13,6 @@ class LectureDateFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        //$manager->persist($this->createLectureDate('KompArchTeor', new \DateTime('2017-11-23T14:00')));
         $this->createEachWeek('LSM', new \DateTime('2017-09-04T12:00'), $manager, 16);
         $this->createEachWeek('LPST', new \DateTime('2017-09-06T10:00'), $manager, 16);
         $this->createEachWeek('LŽKS', new \DateTime('2017-09-08T12:00'), $manager, 16);
@@ -26,12 +25,7 @@ class LectureDateFixtures extends Fixture
         $this->createEachWeek('LPSTL2g', new \DateTime('2017-09-06T12:00'), $manager, 16);
         $this->createEachWeek('LŽKSL3g', new \DateTime('2017-09-08T14:00'), $manager, 16);
         $this->createEachWeek('LITL3g', new \DateTime('2017-09-08T16:00'), $manager, 16);
-        //$this->createEachWeek('LPSP', new \DateTime('2017-09-07T14:00'), $manager, 16);
-//        $manager->persist($this->createLectureDate('KompArchTeor', new \DateTime('2017-11-30T14:00')));
-//        $manager->persist($this->createLectureDate('KompArchTeor', new \DateTime('2017-11-16T14:00')));
-//        $manager->persist($this->createLectureDate('SMTeor', new \DateTime('2017-11-30T10:00')));
-//        $manager->persist($this->createLectureDate('SMTeor', new \DateTime('2017-11-16T10:00')));
-//        $manager->persist($this->createLectureDate('SMTeor', new \DateTime('2017-11-23T10:00')));
+
         $manager->flush();
     }
 
