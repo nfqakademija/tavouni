@@ -49,8 +49,14 @@ class Room
      */
     private $assignmentEvents;
 
-    public function __construct()
+    /**
+     * @param string $no
+     * @param Building $building
+     */
+    public function __construct(string $no, Building $building)
     {
+        $this->no = $no;
+        $this->building = $building;
         $this->lectures = new ArrayCollection();
         $this->assignmentEvents = new ArrayCollection();
     }

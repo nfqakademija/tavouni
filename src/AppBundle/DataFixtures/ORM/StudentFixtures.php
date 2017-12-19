@@ -13,16 +13,14 @@ class StudentFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createStudent('Ignas Zdanis', 'UserIgnas', ['PS1k', 'SM', 'PS1k2g'], 'StudentIgnas'));
-        $manager->persist($this->createStudent('Aurimas Rimkus', 'UserAurimas', ['PS1k', 'PS1k1g'], 'StudentAurimas'));
+        $manager->persist($this->createStudent('UserIgnas', 'Ignas Zdanis', ['PS1k', 'SM', 'PS1k2g'], 'StudentIgnas'));
+        $manager->persist($this->createStudent('UserAurimas', 'Aurimas Rimkus', ['PS1k', 'PS1k1g'], 'StudentAurimas'));
         $manager->flush();
     }
 
-    private function createStudent(string $name, string $userRef, array $groupsRefs, string $reference): Student
+    private function createStudent(string $userRef, string $name, array $groupsRefs, string $reference): Student
     {
-        $student = new Student();
-        $student->setName($name);
-        $student->setUser($this->getReference($userRef));
+        $student = new Student($this->getReference($userRef), $name);
         foreach ($groupsRefs as $groupRef) {
             $student->addGroup($this->getReference($groupRef));
         }

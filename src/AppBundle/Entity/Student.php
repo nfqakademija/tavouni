@@ -51,8 +51,14 @@ class Student
      */
     private $grades;
 
-    public function __construct()
+    /**
+     * @param User $user
+     * @param string $name
+     */
+    public function __construct(User $user, $name)
     {
+        $this->user = $user;
+        $this->name = $name;
         $this->groups = new ArrayCollection();
         $this->grades = new ArrayCollection();
     }

@@ -42,6 +42,19 @@ class LectureDate
     private $lecture;
 
     /**
+     * @param \DateTime $start
+     * @param \DateTime $end
+     * @param Lecture $lecture
+     */
+    public function __construct(\DateTime $start, \DateTime $end, Lecture $lecture)
+    {
+        $this->start = $start;
+        $this->end = $end;
+        $this->lecture = $lecture;
+    }
+
+
+    /**
      * @return int
      */
     public function getId(): int

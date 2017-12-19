@@ -21,9 +21,7 @@ class RoomFixtures extends Fixture
 
     private function createRoom(string $no, string $buildingRef, string $reference): Room
     {
-        $room = new Room();
-        $room->setNo($no);
-        $room->setBuilding($this->getReference($buildingRef));
+        $room = new Room($no, $this->getReference($buildingRef));
         $this->addReference($reference, $room);
 
         return $room;

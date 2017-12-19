@@ -56,8 +56,14 @@ class Lecturer
      */
     private $subjects;
 
-    public function __construct()
+    /**
+     * @param string $name
+     * @param User $user
+     */
+    public function __construct(string $name, User $user)
     {
+        $this->name = $name;
+        $this->user = $user;
         $this->lectures = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->subjects = new ArrayCollection();

@@ -34,10 +34,7 @@ class SubjectFixtures extends Fixture
         string $reference,
         string $coordinatorRef
     ): Subject {
-        $subject = new Subject();
-        $subject->setName($name);
-        $subject->setSubjectType($type);
-        $subject->setCoordinator($this->getReference($coordinatorRef));
+        $subject = new Subject($type, $name, $this->getReference($coordinatorRef));
         $this->addReference($reference, $subject);
 
         return $subject;

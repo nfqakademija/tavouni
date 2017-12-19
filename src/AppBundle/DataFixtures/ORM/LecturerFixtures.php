@@ -21,9 +21,7 @@ class LecturerFixtures extends Fixture
 
     private function createLecturer(string $name, string $userRef, string $reference): Lecturer
     {
-        $lecturer = new Lecturer();
-        $lecturer->setName($name);
-        $lecturer->setUser($this->getReference($userRef));
+        $lecturer = new Lecturer($name, $this->getReference($userRef));
         $this->addReference($reference, $lecturer);
 
         return $lecturer;

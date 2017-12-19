@@ -60,7 +60,7 @@ class Lecture
     private $lectureDates;
 
     /**
-     * @var String
+     * @var string
      *
      * @ORM\Column(name="lecture_type", type="string", length=255)
      */
@@ -73,8 +73,20 @@ class Lecture
      */
     private $posts;
 
-    public function __construct()
+    /**
+     * @param Subject $subject
+     * @param Lecturer $lecturer
+     * @param Group $group
+     * @param Room $room
+     * @param string $lectureType
+     */
+    public function __construct(Subject $subject, Lecturer $lecturer, Group $group, Room $room, string $lectureType)
     {
+        $this->subject = $subject;
+        $this->lecturer = $lecturer;
+        $this->group = $group;
+        $this->room = $room;
+        $this->lectureType = $lectureType;
         $this->lectureDates = new ArrayCollection();
         $this->posts = new ArrayCollection();
     }

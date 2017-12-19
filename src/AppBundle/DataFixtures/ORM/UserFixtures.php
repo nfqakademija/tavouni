@@ -23,13 +23,14 @@ class UserFixtures extends Fixture
 
     private function createUser(string $username, string $role, string $reference, string $apiKey): User
     {
-        $user = new User();
-        $user->setUsername($username);
-        $user->setPlainPassword('test');
-        $user->setRoles([$role]);
-        $user->setEnabled(true);
-        $user->setEmail($username . '@asd.asd');
-        $user->setApiKey($apiKey);
+        $user = new User(
+            $username,
+            'test',
+            [$role],
+            true,
+            $username,
+            $apiKey
+        );
         $this->addReference($reference, $user);
 
         return $user;
