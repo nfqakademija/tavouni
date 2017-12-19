@@ -74,7 +74,7 @@ class LoadDataListener
             ;
             $event = new Event($data, $lecture->getStart());
             if (!$isStudent) {
-                $event->setUrl('/lecturer/lecture/'.$lecture->getLecture()->getSubject()->getId() . '/posts');
+                $event->setUrl('/lecturer/lecture/'.$lecture->getLecture()->getId() . '/posts');
             }
             $event->setEndDate($lecture->getEnd());
             $event->setAllDay(false);
