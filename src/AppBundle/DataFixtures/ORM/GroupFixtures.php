@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ignas
- * Date: 17.11.7
- * Time: 14.06
- */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -19,10 +13,20 @@ class GroupFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createGroup('PS1k', 0, 'PS1k'));
-        $manager->persist($this->createGroup('SM', 0, 'SM'));
-        $manager->persist($this->createGroup('PS1k1g', 1, 'PS1k1g'));
-        $manager->persist($this->createGroup('PS1k2g', 2, 'PS1k2g'));
+        $manager->persist($this->createGroup('PS 3 kursas', 0, 'PS3k'));
+        $manager->persist($this->createGroup('PS 3 kursas 3 grupė', 3, 'PS3k3g'));
+        $manager->persist($this->createGroup('PS 3 kursas 6 grupė', 6, 'PS3k6g'));
+        $manager->persist($this->createGroup('Skaitiniai metodai', 0, 'SM'));
+        $manager->persist($this->createGroup('Skaitiniai metodai 1 grupė', 1, 'SM1g'));
+        $manager->persist($this->createGroup('PS testavimas 1 grupė', 1, 'PST1g'));
+        $manager->persist($this->createGroup('PS testavimas 2 grupė', 1, 'PST2g'));
+        $manager->persist($this->createGroup('Appsai', 0, 'APP'));
+        $manager->persist($this->createGroup('Appsai 1 grupė', 1, 'APP1g'));
+        $manager->persist($this->createGroup('Appsai 2 grupė', 2, 'APP2g'));
+        $manager->persist($this->createGroup('Kombinatorika', 0, 'KOM'));
+        $manager->persist($this->createGroup('Funkcinis programavimas', 0, 'FUN'));
+        $manager->persist($this->createGroup('Loginis programavimas', 0, 'LOG'));
+        $manager->persist($this->createGroup('Kodavimo teorija', 0, 'KOD'));
         $manager->flush();
     }
 
