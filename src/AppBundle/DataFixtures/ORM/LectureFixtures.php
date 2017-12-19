@@ -154,7 +154,7 @@ class LectureFixtures extends Fixture
                 'subjectRef' => 'SKOM',
                 'lecturerRef' => 'LGintarasSkersys',
                 'reference' => 'LKOMP',
-                'lectureType' => 'Pratybos'
+                'lectureType' => 'Laboratoriniai darbai'
             ],
             [
                 'groupRef' => 'KOD',
@@ -168,7 +168,7 @@ class LectureFixtures extends Fixture
                 'subjectRef' => 'SKOD',
                 'lecturerRef' => 'LGintarasSkersys',
                 'reference' => 'LKODP',
-                'lectureType' => 'Pratybos'
+                'lectureType' => 'Laboratoriniai darbai'
             ]
         ];
         foreach ($this::$lectures as $lecture) {
