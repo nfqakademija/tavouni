@@ -13,9 +13,17 @@ class LecturerFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createLecturer('Olga Štikonienė', 'UserOlga', 'LecturerOlga'));
-        $manager->persist($this->createLecturer('Antanas Mitašiūnas', 'UserAntanas', 'LecturerAntanas'));
-        $manager->persist($this->createLecturer('Linas Litvinas', 'UserLinas', 'LecturerLinas'));
+        foreach (UserFixtures::$lecturers as $lecturer) {
+            $manager->persist($this->createLecturer(
+                $lecturer['firstName'] . ' ' . $lecturer['lastName'],
+                'UL' . $lecturer['firstName'] . $lecturer['lastName'],
+                'L' . $lecturer['firstName'] . $lecturer['lastName']
+            ));
+        }
+
+//        $manager->persist($this->createLecturer('Olga Štikonienė', 'UserOlga', 'LecturerOlga'));
+//        $manager->persist($this->createLecturer('Antanas Mitašiūnas', 'UserAntanas', 'LecturerAntanas'));
+//        $manager->persist($this->createLecturer('Linas Litvinas', 'UserLinas', 'LecturerLinas'));
         $manager->flush();
     }
 
