@@ -58,7 +58,7 @@ class StudentController extends Controller
     {
         if ($this->isGranted('ROLE_STUDENT')) {
             if ($post === null) {
-                return new Response(null, Response::HTTP_BAD_REQUEST1);
+                return new Response(null, Response::HTTP_BAD_REQUEST);
             }
             $post->addSeenByStudent($this->getUser()->getStudent());
             $this->getDoctrine()->getManager()->flush();
