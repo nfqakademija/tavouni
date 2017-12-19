@@ -5,10 +5,10 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Normalizer;
 
 class UserFixtures extends Fixture
 {
+    public static $lecturers;
     /**
      * @param ObjectManager $manager
      */
@@ -57,7 +57,7 @@ class UserFixtures extends Fixture
     }
     private function loadLecturers(ObjectManager $manager)
     {
-        $lecturers = [
+        $this::$lecturers = [
             ['firstName' => 'Vytautas', 'lastName' => 'Valaitis'],
             ['firstName' => 'Vaidas', 'lastName' => 'Jusevičius'],
             ['firstName' => 'Viačiaslav', 'lastName' => 'Pozdniakov'],
@@ -73,7 +73,7 @@ class UserFixtures extends Fixture
             ['firstName' => 'Giedrius', 'lastName' => 'Graževičius'],
         ];
 
-        $this->persistPeople($manager, $lecturers, false);
+        $this->persistPeople($manager, $this::$lecturers, false);
     }
 
     private function persistPeople(ObjectManager $manager, array $people, bool $isStudents)
