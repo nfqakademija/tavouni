@@ -5,6 +5,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Normalizer;
 
 class UserFixtures extends Fixture
 {
@@ -79,7 +80,12 @@ class UserFixtures extends Fixture
     {
         foreach ($people as $person) {
             $manager->persist($this->createUser(
-                $person['firstName'] . '.' . $person['lastName'] . '@mif.stud.vu.lt',
+                /* normalizing string */
+                strtolower(iconv(
+                    'UTF-8',
+                    'ISO-8859-1//TRANSLIT//IGNORE',
+                    $person['firstName'] . '.' . $person['lastName'] . '@mif.stud.vu.lt'
+                )),
                 $isStudents ? 'ROLE_STUDENT' : 'ROLE_LECTURER',
                 'U' . ($isStudents ? 'S' : 'L') . $person['firstName'] . $person['lastName'],
                 strtolower($person['firstName'] . $person['lastName'])
