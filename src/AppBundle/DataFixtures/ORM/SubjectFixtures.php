@@ -13,18 +13,89 @@ class SubjectFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createSubject(
-            'Kompiuterių architektūra',
-            'Privalomas',
-            'KompArch',
-            'LecturerAntanas'
-        ));
-        $manager->persist($this->createSubject(
-            'Skaitiniai metodai',
-            'Pasirenkamasis',
-            'SkaitiniaiMetodai',
-            'LecturerOlga'
-        ));
+        $subjects = [
+            [
+                'name' => 'Skaitiniai metodai',
+                'type' => 'Pasirenkamasis',
+                'reference' => 'SSM',
+                'coordinatorRef' => 'LOlgaŠtikonienė'
+            ],
+            [
+                'name' => 'Programų sistemų projektavimas',
+                'type' => 'Privalomasis',
+                'reference' => 'SPSP',
+                'coordinatorRef' => 'LMindaugasPlukas'
+            ],
+            [
+                'name' => 'Programų sistemų testavimas',
+                'type' => 'Privalomasis',
+                'reference' => 'SPST',
+                'coordinatorRef' => 'LVytautasValaitis'
+            ],
+            [
+                'name' => 'Mobiliųjų aplikacijų kūrimas',
+                'type' => 'Pasirenkamasis',
+                'reference' => 'SAPP',
+                'coordinatorRef' => 'LMindaugasEglinskas'
+            ],
+            [
+                'name' => 'Žmogaus ir kompiuterio sąveika',
+                'type' => 'Privalomasis',
+                'reference' => 'SŽKS',
+                'coordinatorRef' => 'LKristinaLapin'
+            ],
+            [
+                'name' => 'Interneto technologijos',
+                'type' => 'Privalomasis',
+                'reference' => 'SIT',
+                'coordinatorRef' => 'LVaidasJusevičius'
+            ],
+            [
+                'name' => 'Funkcinis programavimas',
+                'type' => 'Pasirenkamasis',
+                'reference' => 'SFUN',
+                'coordinatorRef' => 'LViačiaslavPozdniakov'
+            ],
+            [
+                'name' => 'Loginis programavimas',
+                'type' => 'Pasirenkamasis',
+                'reference' => 'SLOG',
+                'coordinatorRef' => 'LViačiaslavPozdniakov'
+            ],
+            [
+                'name' => 'Kombinatorika',
+                'type' => 'Pasirenkamasis',
+                'reference' => 'SKOM',
+                'coordinatorRef' => 'LGintarasSkersys'
+            ],
+            [
+                'name' => 'Kodavimo teorija',
+                'type' => 'Pasirenkamasis',
+                'reference' => 'SKOD',
+                'coordinatorRef' => 'LGintarasSkersys'
+            ]
+        ];
+
+        foreach ($subjects as $subject){
+            $manager->persist($this->createSubject(
+                $subject['name'],
+                $subject['type'],
+                $subject['reference'],
+                $subject['coordinatorRef']
+            ));
+        }
+//        $manager->persist($this->createSubject(
+//            'Kompiuterių architektūra',
+//            'Privalomas',
+//            'KompArch',
+//            'LecturerAntanas'
+//        ));
+//        $manager->persist($this->createSubject(
+//            'Skaitiniai metodai',
+//            'Pasirenkamasis',
+//            'SkaitiniaiMetodai',
+//            'LecturerOlga'
+//        ));
         $manager->flush();
     }
 
