@@ -24,13 +24,21 @@
         $( function() {
             $( ".js-datepicker" ).datepicker();
         } );
-        $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+        $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15, 'minTime': '8:00am', 'maxTime': '8:00pm' });
         var $checkboxInput = $('#assignment_moreOptions');
         $checkboxInput.change(function() {
             if (this.checked) {
                 var assignmentEvent =
                     "<div class='form-group' id='assignmentEvent'>" +
                         "<div id='assignment_assignmentEvent'>" +
+                            "<div class='form-group'>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_start'>Start</label>" +
+                                "<input id='assignment_assignmentEvent_start' name='assignment[assignmentEvent][start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
+                            "</div>" +
+                            "<div class='form-group'>" +
+                                "<label class='control-label required' for='assignment_assignmentEvent_end'>End</label>" +
+                                "<input id='assignment_assignmentEvent_end' name='assignment[assignmentEvent][end]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
+                            "</div>" +
                             "<div class='form-group'>" +
                                 "<label class='control-label required' for='assignment_assignmentEvent_building'>Building</label>" +
                                 "<select id='assignment_assignmentEvent_building' name='assignment[assignmentEvent][building]' class='form-control'>";
@@ -45,23 +53,11 @@
                                 "<select id='assignment_assignmentEvent_room' name='assignment[assignmentEvent][room]' class='form-control'>"+
                                 "</select>" +
                             "</div>" +
-                            "<div class='form-group'>" +
-                                "<label class='control-label required' for='assignment_assignmentEvent_start'>Start</label>" +
-                                "<input id='assignment_assignmentEvent_start' name='assignment[assignmentEvent][start]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
-                            "</div>" +
-                            "<div class='form-group'>" +
-                                "<label class='control-label required' for='assignment_assignmentEvent_end'>End</label>" +
-                                "<input id='assignment_assignmentEvent_end' name='assignment[assignmentEvent][end]' required='required' class='js-timepicker form-control ui-timepicker-input' autocomplete='off' type='text'>" +
-                            "</div>" +
                         "</div>" +
                     "</div>";
                 $("#assignment").append(assignmentEvent);
                 addRooms();
-                $building = $('#assignment_assignmentEvent_building');
-                $building.change(function() {
-                    $("#assignment_assignmentEvent_room").empty();
-                    addRooms();
-                });
+                updateRooms();
                 $('.js-timepicker').timepicker({ 'timeFormat': 'H:i', 'step': 15, 'minTime': '8:00am', 'maxTime': '8:00pm' });
             }
             else {
@@ -69,7 +65,10 @@
                 item.parentNode.removeChild(item);
             }
         });
+        addRooms();
+        updateRooms();
         function addRooms() {
+            $("#assignment_assignmentEvent_room").empty();
             $building = $('#assignment_assignmentEvent_building');
             //var buildingName = ;
             {% for i, building in buildings %}
@@ -83,6 +82,13 @@
                     {% endfor %}
                 }
                 {% endfor %}
+        }
+        function updateRooms() {
+            $building = $('#assignment_assignmentEvent_building');
+            $building.change(function() {
+                $("#assignment_assignmentEvent_room").empty();
+                addRooms();
+            });
         }
     </script>
 {% endblock %}
