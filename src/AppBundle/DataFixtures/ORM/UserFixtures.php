@@ -24,78 +24,69 @@ class UserFixtures extends Fixture
     }
     private function loadStudents(ObjectManager $manager)
     {
-        $firstNames = [
-            'Ignas',
-            'Aurimas',
-            'Tadas',
-            'Vilius',
-            'Vytautas',
-            'Tomas',
-            'Martynas',
-            'Kasparas',
-            'Artūras',
-            'Deividas'
+        $students = [
+            ['firstName' => 'Ignas', 'lastName' => 'Zdanis'],
+            ['firstName' => 'Ignas', 'lastName' => 'Kvietkus'],
+            ['firstName' => 'Ignas', 'lastName' => 'Ivoška'],
+            ['firstName' => 'Aurimas', 'lastName' => 'Rimkus'],
+            ['firstName' => 'Tadas', 'lastName' => 'Adomaitis'],
+            ['firstName' => 'Vilius', 'lastName' => 'Žukauskas'],
+            ['firstName' => 'Tomas', 'lastName' => 'Ūselis'],
+            ['firstName' => 'Dovydas', 'lastName' => 'Skrebė'],
+            ['firstName' => 'Saulius', 'lastName' => 'Skliutas'],
+            ['firstName' => 'Andrius', 'lastName' => 'Paulauskas'],
+            ['firstName' => 'Lukas', 'lastName' => 'Andriejūnas'],
+            ['firstName' => 'Tomas', 'lastName' => 'Germanavičius'],
+            ['firstName' => 'Gerda', 'lastName' => 'Šimoliūnaitė'],
+            ['firstName' => 'Greta', 'lastName' => 'Mameniškytė'],
+            ['firstName' => 'Rytis', 'lastName' => 'Kaplūnas'],
+            ['firstName' => 'Domantas', 'lastName' => 'Pelaitis'],
+            ['firstName' => 'Domantas', 'lastName' => 'Jadenkus'],
+            ['firstName' => 'Domantas', 'lastName' => 'Lekavičius'],
+            ['firstName' => 'Lukas', 'lastName' => 'Valatka'],
+            ['firstName' => 'Solveiga', 'lastName' => 'Benediktavičiūtė'],
+            ['firstName' => 'Greta', 'lastName' => 'Griškaitytė'],
+            ['firstName' => 'Viktorija', 'lastName' => 'Kazokaitytė'],
+            ['firstName' => 'Reda', 'lastName' => 'Kviekutė'],
+            ['firstName' => 'Jovaras', 'lastName' => 'Ivoška'],
+            ['firstName' => 'Jurgita', 'lastName' => 'Paulauskaitė'],
         ];
 
-        $lastNames = [
-            'Zdanis',
-            'Rimkus',
-            'Adomaitis',
-            'Ivoška',
-            'Kvietkus',
-            'Žukauskas',
-            'Stumbrys',
-            'Ališauskas',
-            'Uždavinys',
-            'Rapalavičius'
-        ];
-
-        $this->persistPeople($manager, $firstNames, $lastNames, true);
+        $this->persistPeople($manager, $students, true);
     }
     private function loadLecturers(ObjectManager $manager)
     {
-        $firstNames = [
-            'Antanas',
-            'Linas',
-            'Jurgis',
-            'Jonas',
-            'Andrius',
-            'Giedrius',
-            'Julius',
-            'Rokas',
-            'Algirdas',
-            'Gediminas'
+        $lecturers = [
+            ['firstName' => 'Vytautas', 'lastName' => 'Valaitis'],
+            ['firstName' => 'Vaidas', 'lastName' => 'Jusevičius'],
+            ['firstName' => 'Viačiaslav', 'lastName' => 'Pozdniakov'],
+            ['firstName' => 'Mindaugas', 'lastName' => 'Plukas'],
+            ['firstName' => 'Kristina', 'lastName' => 'Lapin'],
+            ['firstName' => 'Tomas', 'lastName' => 'Tumasonis'],
+            ['firstName' => 'Justinas', 'lastName' => 'Marcinka'],
+            ['firstName' => 'Gintaras', 'lastName' => 'Skersys'],
+            ['firstName' => 'Olga', 'lastName' => 'Štikonienė'],
+            ['firstName' => 'Gailė', 'lastName' => 'Paukštaitė'],
+            ['firstName' => 'Mindaugas', 'lastName' => 'Eglinskas'],
+            ['firstName' => 'Mindaugas', 'lastName' => 'Karpinskas'],
+            ['firstName' => 'Giedrius', 'lastName' => 'Graževičius'],
         ];
 
-        $lastNames = [
-            'Zdanis',
-            'Rimkus',
-            'Adomaitis',
-            'Ivoška',
-            'Kvietkus',
-            'Žukauskas',
-            'Stumbrys',
-            'Ališauskas',
-            'Uždavinys',
-            'Rapalavičius'
-        ];
-
-        $this->persistPeople($manager, $firstNames, $lastNames, false);
+        $this->persistPeople($manager, $lecturers, false);
     }
 
-    private function persistPeople(ObjectManager $manager, array $firstNames, array $lastNames, bool $isStudents)
+    private function persistPeople(ObjectManager $manager, array $people, bool $isStudents)
     {
-        foreach ($firstNames as $firstName) {
-            foreach ($lastNames as $lastName) {
-                $manager->persist($this->createUser(
-                    $firstName . '.' . $lastName . '@mif.stud.vu.lt',
-                    $isStudents ? 'ROLE_STUDENT' : 'ROLE_LECTURER',
-                    'U' . ($isStudents ? 'S' : 'L') . $firstName . $lastName,
-                    strtolower($firstName . $lastName)
-                ));
-            }
+        foreach ($people as $person) {
+            $manager->persist($this->createUser(
+                $person['firstName'] . '.' . $person['lastName'] . '@mif.stud.vu.lt',
+                $isStudents ? 'ROLE_STUDENT' : 'ROLE_LECTURER',
+                'U' . ($isStudents ? 'S' : 'L') . $person['firstName'] . $person['lastName'],
+                strtolower($person['firstName'] . $person['lastName'])
+            ));
         }
     }
+
     private function createUser(string $username, string $role, string $reference, string $apiKey): User
     {
         $user = new User(
