@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Lecture;
 use AppBundle\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,15 +16,20 @@ class PostFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $generator = $this->container->get(Generator::class);
+        $references = $this->referenceRepository->getReferences();
+//        $referenceNames = $this->referenceRepository->getReferenceNames();
 
-        for ($i = 0; $i < 10; $i++) {
-            $post = new Post(
-                $generator->text(30),
-                $generator->text(250),
-                $this->getReference('KompArchTeor'),
-                $this->getReference('LecturerAntanas')
-            );
-            $manager->persist($post);
+        foreach (LectureFixtures::$lectures as $lecture) {
+            for ($i = 0; $i < 5; $i++) {
+
+                $post = new Post(
+                    $generator->text(30),
+                    $generator->text(250),
+                    $this->getReference($lecture['reference']),
+                    $this->getReference($lecture['lecturerRef'])
+                );
+                $manager->persist($post);
+            }
         }
         $manager->flush();
     }
