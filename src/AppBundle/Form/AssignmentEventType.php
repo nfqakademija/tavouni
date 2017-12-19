@@ -72,7 +72,7 @@ class AssignmentEventType extends AbstractType
         $builder->get('building')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $form = $event->getForm()->getParent();
             $form->add('room', ChoiceType::class, [
-                'choices' => $this->rooms,
+                'choices' => $form->get('building')->getData()->getRooms(),
                 'choice_label' => function ($room) {
                     /** @var Room $room */
                     return $room->getNo() . ' ' . $room->getBuilding()->getName();
