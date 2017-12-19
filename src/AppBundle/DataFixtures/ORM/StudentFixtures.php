@@ -143,6 +143,7 @@ class StudentFixtures extends Fixture
         $this->persistStudents($students, $manager);
         $manager->flush();
     }
+
     private function persistStudents(array $studentsWithGroups, ObjectManager $manager)
     {
         foreach ($studentsWithGroups as $student) {
@@ -164,7 +165,6 @@ class StudentFixtures extends Fixture
         $this->addReference($reference, $student);
         return $student;
     }
-
 
     public function getDependencies(): array
     {

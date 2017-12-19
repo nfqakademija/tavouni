@@ -15,7 +15,6 @@ class PostFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $generator = $this->container->get(Generator::class);
-        $references = $this->referenceRepository->getReferences();
 
         foreach (LectureFixtures::$lectures as $lecture) {
             for ($i = 0; $i < 5; $i++) {

@@ -5,7 +5,6 @@ namespace AppBundle\Twig;
 use AppBundle\Entity\User;
 use AppBundle\Repository\LectureRepository;
 use AppBundle\Repository\PostRepository;
-use AppBundle\ValueObject\MenuChild;
 use AppBundle\ValueObject\MenuItem;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;

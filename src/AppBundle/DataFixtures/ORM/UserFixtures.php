@@ -9,7 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 class UserFixtures extends Fixture
 {
     public static $lecturers;
-    
+
     /**
      * @param ObjectManager $manager
      */
@@ -17,13 +17,9 @@ class UserFixtures extends Fixture
     {
         $this->loadStudents($manager);
         $this->loadLecturers($manager);
-        $manager->persist($this->createUser('Ignas', 'ROLE_STUDENT', 'UserIgnas', 'ignas'));
-        $manager->persist($this->createUser('Aurimas', 'ROLE_STUDENT', 'UserAurimas', 'aurimas'));
-        $manager->persist($this->createUser('Antanas', 'ROLE_LECTURER', 'UserAntanas', 'antanas'));
-        $manager->persist($this->createUser('Olga', 'ROLE_LECTURER', 'UserOlga', 'olga'));
-        $manager->persist($this->createUser('Linas', 'ROLE_LECTURER', 'UserLinas', 'linas'));
         $manager->flush();
     }
+
     private function loadStudents(ObjectManager $manager)
     {
         $students = [
@@ -56,6 +52,7 @@ class UserFixtures extends Fixture
 
         $this->persistPeople($manager, $students, true);
     }
+
     private function loadLecturers(ObjectManager $manager)
     {
         $this::$lecturers = [
