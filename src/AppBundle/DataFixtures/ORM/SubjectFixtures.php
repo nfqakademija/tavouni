@@ -8,12 +8,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class SubjectFixtures extends Fixture
 {
+    public static $subjects;
+
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $subjects = [
+        $this::$subjects = [
             [
                 'name' => 'Skaitiniai metodai',
                 'type' => 'Pasirenkamasis',
@@ -76,7 +78,7 @@ class SubjectFixtures extends Fixture
             ]
         ];
 
-        foreach ($subjects as $subject) {
+        foreach ($this::$subjects as $subject) {
             $manager->persist($this->createSubject(
                 $subject['name'],
                 $subject['type'],

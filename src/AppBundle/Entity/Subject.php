@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -148,9 +149,9 @@ class Subject
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getAssignments(): ArrayCollection
+    public function getAssignments(): Collection
     {
         return $this->assignments;
     }
