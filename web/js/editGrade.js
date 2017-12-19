@@ -34,23 +34,25 @@ function callGradeAjax() {
             contentType:"application/json; charset=utf-8",
             async: true,
             success: function () {
-                showSuccessMessage();
+                showMessage($(".alert-success"));
                 changed = [];
                 $("#grade-submit").attr("disabled", true);
             },
             error: function (xhr, thrownError) {
+                showMessage($(".alert-danger"));
                 console.log(xhr.status);
                 console.log(thrownError);
                 console.log(xhr.responseText);
             }
         });
+    } else {
+      showMessage($(".alert-danger"));
     }
 }
 
-function showSuccessMessage() {
-    $(".alert").show();
-    $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+function showMessage(alert) {
+    alert.show();
+    alert.fadeTo(3000, 500).slideUp(500, function(){
         $(".alert-success").slideUp(500);
     });
 }
-
