@@ -8,12 +8,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LectureFixtures extends Fixture
 {
+    public static $lectures;
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $lectures = [
+        $this::$lectures = [
             [
                 'groupRef' => 'SM',
                 'subjectRef' => 'SSM',
@@ -169,7 +170,7 @@ class LectureFixtures extends Fixture
                 'lectureType' => 'Pratybos'
             ]
         ];
-        foreach ($lectures as $lecture) {
+        foreach ($this::$lectures as $lecture) {
             $manager->persist($this->createLecture(
                 $lecture['groupRef'],
                 $lecture['subjectRef'],

@@ -21,7 +21,6 @@ class PostFixtures extends Fixture
 
         foreach (LectureFixtures::$lectures as $lecture) {
             for ($i = 0; $i < 5; $i++) {
-
                 $post = new Post(
                     $generator->text(30),
                     $generator->text(250),
