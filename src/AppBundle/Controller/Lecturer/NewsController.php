@@ -29,6 +29,13 @@ class NewsController extends Controller
         if ($this->getUser()->getId() !== $lecture->getLecturer()->getUser()->getId()) {
             return new Response(null, Response::HTTP_FORBIDDEN);
         }
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addRouteItem('Pagrindinis', 'lecturer_index');
+        $lectureName = ($lecture->getGroup()->getNumber() !== 0) ?
+            $lecture->getSubject()->getName() . ' ' . $lecture->getGroup()->getNumber() . ' grupė' :
+            $lecture->getSubject()->getName()
+        ;
+        $breadcrumbs->addItem($lectureName);
         $posts = $postRepository->getLecturePosts($lecture->getId());
 
         return $this->render(':Lecturer/News:show_posts.html.twig', [
@@ -46,6 +53,16 @@ class NewsController extends Controller
         if ($this->getUser()->getId() !== $lecture->getLecturer()->getUser()->getId()) {
             return new Response(null, Response::HTTP_FORBIDDEN);
         }
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addRouteItem('Pagrindinis', 'lecturer_index');
+        $lectureName = ($lecture->getGroup()->getNumber() !== 0) ?
+            $lecture->getSubject()->getName() . ' ' . $lecture->getGroup()->getNumber() . ' grupė' :
+            $lecture->getSubject()->getName()
+        ;
+        $breadcrumbs->addRouteItem($lectureName, 'lecturer_show_posts', [
+            'lecture_id' => $lecture->getId()
+        ]);
+        $breadcrumbs->addItem('Pridėti naujieną');
         $form = $this->createForm(PostType::class, null, [
             'lecture' => $lecture,
             'author' => $this->getUser()->getLecturer()

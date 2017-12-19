@@ -10,6 +10,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PostType extends AbstractType
 {
@@ -29,15 +31,28 @@ class PostType extends AbstractType
         $this->author = $options['author'];
 
         $builder
-            ->add('title')
-            ->add('content', CKEditorType::class);
+            ->add('title', null, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 3, 'max' => 20]),
+                ],
+            ])
+            ->add('content', CKEditorType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'attr' => ['novalidate'=>'novalidate'],
             'data_class' => Post::class,
             'empty_data' => function (FormInterface $form) {
+                if (!$form->get('title')->getData() || !$form->get('content')->getData()) {
+                    return null;
+                }
                 return new Post(
                     $form->get('title')->getData(),
                     $form->get('content')->getData(),

@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Grades</h2>
+    {{ wo_render_breadcrumbs() }}
+    {% if students == null %}
+        <h4>Šioje grupėje nėra studentų</h4>
+    {% else %}
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -36,6 +39,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         Pažymių išsaugoti nepavyko
     </div>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

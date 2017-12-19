@@ -31,6 +31,12 @@ class SubjectController extends Controller
         if ($this->getUser()->getId() !== $subject->getCoordinator()->getUser()->getId()) {
             return new Response(null, Response::HTTP_FORBIDDEN);
         }
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addRouteItem('Pagrindinis', 'lecturer_index');
+        $breadcrumbs->addRouteItem($subject->getName(), 'lecturer_assignments', [
+            'subject_id' => $subject->getId()
+        ]);
+        //$breadcrumbs->addItem('Atsiskaitymai');
         $assignments = $assignmentRepository->getSubjectAssignments($subject->getId());
 
         return $this->render('Lecturer/Subjects/show_subject_assignments.html.twig', [
@@ -52,6 +58,13 @@ class SubjectController extends Controller
         if ($this->getUser()->getId() !== $subject->getCoordinator()->getUser()->getId()) {
             return new Response(null, Response::HTTP_FORBIDDEN);
         }
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addRouteItem('Pagrindinis', 'lecturer_index');
+        $breadcrumbs->addRouteItem($subject->getName(), 'lecturer_assignments', [
+            'subject_id' => $subject->getId()
+        ]);
+        //$breadcrumbs->addItem('Atsiskaitymai');
+        $breadcrumbs->addItem('Naujas atsiskaitymas');
         $rooms = $roomRepository->findAll();
         $buildings = $buildingRepository->findAll();
         $form = $this->createForm(AssignmentType::class, null, [
