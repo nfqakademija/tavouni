@@ -118,7 +118,7 @@ class AssignmentFixtures extends Fixture
             $this->getReference($roomRef)
         );
     }
-    
+
     public function getDependencies(): array
     {
         return [

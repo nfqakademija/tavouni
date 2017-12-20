@@ -23,9 +23,10 @@ class GradeFixtures extends Fixture
             /** @var Subject $realSubject */
             $realSubject = $this->getReference($subject['reference']);
             foreach ($realSubject->getAssignments() as $assignment) {
+                $isLater = $assignment->getDeadline() >= new \DateTime();
                 $students = $studentRepository->getSubjectStudents($assignment->getSubject()->getId());
                 foreach ($students as $student) {
-                    $manager->persist($this->createGrade($assignment, $student, random_int(1, 10)));
+                    $manager->persist($this->createGrade($assignment, $student, $isLater ? 0 : random_int(1, 10)));
                 }
             }
         }
