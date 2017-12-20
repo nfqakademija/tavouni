@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Assignment;
+use AppBundle\Entity\AssignmentEvent;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -40,13 +41,18 @@ class AssignmentFixtures extends Fixture
 
             if (random_int(0, 1)) {
                 $assignWeight = random_int(5, 30);
+                $randomDate = $this->getRandomDate(new \DateTime('2017-10-15'), new \DateTime('2017-11-28'));
+                $startTime = (clone $randomDate)->add(new \DateInterval('PT' . random_int(8, 18) . 'H'));
+                $assignmentEvent = $this->createAssignmentEvent($startTime, '205naug');
+                $manager->persist($assignmentEvent);
                 $manager->persist($this->createAssignment(
                     'Kontrolinis',
                     $subject['reference'],
                     $assignWeight,
                     $subject['reference'] . 'Kol',
-                    $this->getRandomDate(new \DateTime('2017-10-15'), new \DateTime('2017-11-28')),
-                    'Teorija'
+                    $randomDate,
+                    'Teorija',
+                    $assignmentEvent
                 ));
                 $weight -= $assignWeight;
             }
@@ -64,13 +70,18 @@ class AssignmentFixtures extends Fixture
                 $weight -= $assignWeight;
             }
 
+            $randomDate = $this->getRandomDate(new \DateTime('2018-01-02'), new \DateTime('2018-01-31'));
+            $startTime = (clone $randomDate)->add(new \DateInterval('PT' . random_int(8, 18) . 'H'));
+            $assignmentEvent = $this->createAssignmentEvent($startTime, '102naug');
+            $manager->persist($assignmentEvent);
             $manager->persist($this->createAssignment(
                 'Egzaminas',
                 $subject['reference'],
                 $weight,
                 $subject['reference'] . 'Egz',
-                $this->getRandomDate(new \DateTime('2018-01-02'), new \DateTime('2018-01-31')),
-                'Teorija'
+                $randomDate,
+                'Teorija',
+                $assignmentEvent
             ));
 
             $manager->flush();
@@ -83,20 +94,31 @@ class AssignmentFixtures extends Fixture
         int $weight,
         string $reference,
         \DateTime $date,
-        string $type
+        string $type,
+        AssignmentEvent $assignmentEvent = null
     ): Assignment {
         $assignment = new Assignment(
             $this->getReference($subjectRef),
             $weight,
             $name,
             $type,
-            $date
+            $date,
+            $assignmentEvent
         );
         $this->addReference($reference, $assignment);
 
         return $assignment;
     }
 
+    private function createAssignmentEvent(\DateTime $startTime, string $roomRef)
+    {
+        return new AssignmentEvent(
+            $startTime,
+            $startTime->add(new \DateInterval('PT2H')),
+            $this->getReference($roomRef)
+        );
+    }
+    
     public function getDependencies(): array
     {
         return [
