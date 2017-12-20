@@ -24,6 +24,7 @@ class PostFixtures extends Fixture
                     $this->getReference($lecture['reference']),
                     $this->getReference($lecture['lecturerRef'])
                 );
+                $post->setPublishedAt($generator->dateTimeBetween('-1 years'));
                 $manager->persist($post);
             }
         }

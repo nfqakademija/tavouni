@@ -14,9 +14,9 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ")->setParameter('lectureId', $lectureId)->getResult();
     }
 
-    public function getPostsForStudent(int $userId)
+    public function getPostsForStudent(int $userId, int $limit = 0)
     {
-        return $this->_em->createQuery("SELECT p, a, l, g, st, u, se, 
+        $query = $this->_em->createQuery("SELECT p, a, l, g, st, u, se, 
             CASE WHEN (st MEMBER OF p.seenByStudents) THEN 1 ELSE 0 END AS HIDDEN seen
             FROM AppBundle\Entity\Post p
             JOIN p.author a
@@ -28,6 +28,11 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             WHERE u.id = :userId
             GROUP BY p.id, a.id, l.id, g.id, st.id, u.id, se.id
             ORDER BY seen ASC, p.publishedAt DESC
-            ")->setParameter('userId', $userId)->setMaxResults(5)->getResult();
+            ")->setParameter('userId', $userId);
+        if ($limit !== 0) {
+            $query->setMaxResults($limit);
+        }
+
+        return $query->getResult();
     }
 }

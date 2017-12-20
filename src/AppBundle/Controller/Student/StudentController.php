@@ -26,9 +26,8 @@ class StudentController extends Controller
         AssignmentRepository $assignmentRepository,
         AssignmentsGroupFactory $assignmentsGroupFactory
     ): Response {
-    
         $id = $tokenStorage->getToken()->getUser()->getId();
-        $posts = $postRepository->getPostsForStudent($id);
+        $posts = $postRepository->getPostsForStudent($id, 5);
         $assignments = $assignmentRepository->getAssignmentsByStudent($id);
         $assignmentsGroups = $assignmentsGroupFactory->createAssignmentsGroupCollection($assignments);
 
